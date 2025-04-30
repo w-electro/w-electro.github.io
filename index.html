@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W For Electronic Services | Your Ultimate Digital Solutions Provider</title>
+    <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #4cbbb9;
+            --secondary-color: #2e9c9a;
+            --accent-color: #ff6347;
+            --light-color: #f5f5f5;
+            --dark-color: #212121;
+            --text-color: #333333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .logo span {
+            color: #fff;
+            font-size: 2.5rem;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Logo Styles */
+        .logo img {
+            height: 80px;
+            width: auto;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('/api/placeholder/1200/600') center/cover no-repeat;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            color: white;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Services Section */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .price-tag {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--text-color);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .service-img {
+            height: 200px;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .service-content {
+            padding: 20px;
+        }
+        
+        .service-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        .about-text h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+        
+        .value-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .value-icon {
+            background-color: var(--accent-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        
+        /* Testimonial Section */
+        .testimonials {
+            background-color: var(--light-color);
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 5rem;
+            color: var(--accent-color);
+            opacity: 0.2;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        
+        .client-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+            background-color: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .client-details h4 {
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+        
+        /* Contact Section */
+        .contact {
+            background-color: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .contact-info h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-right: 15px;
+        }
+        
+        .contact-form h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: white;
+            color: var(--primary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container logo-container">
+            <div class="logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIj48c3R5bGU+LnN0MHtmaWxsOiM0Y2JiYjl9LnN0MXtmaWxsOiNmZjYzNDd9LnN0MntmaWxsOiMzMzMzMzN9PC9zdHlsZT48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzgwIDEwMEwyMjAgNDAwbC00MCAyMDAgMjAwLTQwMHoiLz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTgwIDEwMEw0MjAgNDAwbC00MCAyMDAgMjAwLTQwMHoiLz48cGF0aCBjbGFzcz0ic3QxIiBkPSJNMzIwIDIwMEwxNjAgNTAwbC00MCAyMDAgMjAwLTQwMHoiLz48cGF0aCBjbGFzcz0ic3QxIiBkPSJNNTIwIDIwMEwzNjAgNTAwbC00MCAyMDAgMjAwLTQwMHoiLz48cGF0aCBjbGFzcz0ic3QyIiBkPSJNMzAwIDIyMEwxNDAgNTIwbC0yMCAxMDAgMTgwLTMwMHoiLz48cGF0aCBjbGFzcz0ic3QyIiBkPSJNNTAwIDIyMEwzNDAgNTIwbC0yMCAxMDAgMTgwLTMwMHoiLz48L3N2Zz4=" alt="W For Electronic Services Logo" style="height: 80px;">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">☰</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Your Ultimate Digital Solutions Provider</h1>
+            <p>We bridge the gap between complex governmental procedures and everyday citizens, offering comprehensive electronic services to simplify your life.</p>
+            <a href="#services" class="btn">Explore Our Services</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Comprehensive Services</h2>
+                <p>We offer a wide range of electronic services designed to simplify lives, enhance businesses, and support academic endeavors.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-img">🏦</div>
+                    <div class="service-content">
+                        <h3>Banking & Finance Solutions</h3>
+                        <p>We facilitate the opening of bank accounts across multiple financial institutions in Saudi Arabia, ensuring a smooth and paperless experience.</p>
+                        <p class="price-tag">25 SAR</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">📝</div>
+                    <div class="service-content">
+                        <h3>Qiyas Test Registration</h3>
+                        <p>Our specialists handle the complete registration process for Qiyas tests, making it simple and hassle-free.</p>
+                        <p class="price-tag">10 SAR</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">💼</div>
+                    <div class="service-content">
+                        <h3>E-Commerce Establishment</h3>
+                        <p>Comprehensive support in establishing e-commerce platforms, including all necessary documentation and setup.</p>
+                        <p class="price-tag">150 SAR</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">🎨</div>
+                    <div class="service-content">
+                        <h3>Brand Identity Design</h3>
+                        <p>Professional brand identity development including logo design, color schemes, and comprehensive brand guidelines.</p>
+                        <p class="price-tag">150 SAR</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">🎓</div>
+                    <div class="service-content">
+                        <h3>Graduation Projects</h3>
+                        <p>Support for graduation projects across various disciplines, from conceptualization and research to implementation.</p>
+                        <p class="price-tag">50-250 SAR</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">💻</div>
+                    <div class="service-content">
+                        <h3>Programming Projects</h3>
+                        <p>Expert guidance and development services for programming assignments and projects in various languages and frameworks.</p>
+                        <p class="price-tag">150 SAR</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">📄</div>
+                    <div class="service-content">
+                        <h3>Freelance Work Permit</h3>
+                        <p>Complete assistance in obtaining and issuing freelance work permits with all necessary documentation.</p>
+                        <p class="price-tag">15 SAR</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">📱</div>
+                    <div class="service-content">
+                        <h3>Absher & Civil Status Services</h3>
+                        <p>Assistance with various Absher services and civil status documentation requirements.</p>
+                        <p class="price-tag">20 SAR</p>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-img">📊</div>
+                    <div class="service-content">
+                        <h3>Hafiz Registration</h3>
+                        <p>Complete assistance with Hafiz program registration to help job seekers access employment benefits.</p>
+                        <p class="price-tag">20 SAR</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About W For Electronic Services</h2>
+                    <p>Established with a vision to bridge the gap between complex governmental procedures and everyday citizens, our company has grown into a comprehensive digital solutions provider in Saudi Arabia.</p>
+                    <p>We envision a future where digital transformation is accessible to everyone, regardless of their technical proficiency. Our mission is to empower individuals, businesses, and students by providing seamless, efficient, and affordable electronic services.</p>
+                    <h3>Our Core Values</h3>
+                    <div class="value-item">
+                        <div class="value-icon">★</div>
+                        <div>
+                            <h4>Excellence</h4>
+                            <p>We are committed to delivering services of the highest quality</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">☑</div>
+                        <div>
+                            <h4>Integrity</h4>
+                            <p>We operate with transparency and honesty in all our dealings</p>
+                        </div>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">💡</div>
+                        <div>
+                            <h4>Innovation</h4>
+                            <p>We continuously evolve to embrace new technologies and methods</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img src="/api/placeholder/500/500" alt="About W For Electronic Services" style="width:100%; border-radius:10px; box-shadow:var(--shadow)">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Client Success Stories</h2>
+                <p>Over the years, we have helped thousands of individuals navigate complex governmental procedures, assisted businesses, and supported students.</p>
+            </div>
+            <div class="testimonial-container">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>W For Electronic Services helped me establish my e-commerce platform with ease. Their team guided me through every step of the process, from registration to launching my online store. Highly recommended for entrepreneurs!</p>
+                    </div>
+                    <div class="client-info">
+                        <div class="client-avatar">AM</div>
+                        <div class="client-details">
+                            <h4>Ahmed M.</h4>
+                            <p>E-commerce Business Owner</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>As an international student, I struggled with academic translations and research papers. W For Electronic Services provided exceptional support for my graduation project, ensuring that my work met the highest academic standards.</p>
+                    </div>
+                    <div class="client-info">
+                        <div class="client-avatar">SF</div>
+                        <div class="client-details">
+                            <h4>Sara F.</h4>
+                            <p>University Student</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>Connect With Us</h2>
+                <p>We invite you to experience the difference that professional electronic services can make in your personal, business, or academic life.</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Get In Touch</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <p>+966 54 073 2077</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Saudi Arabia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">⏰</div>
+                        <div>
+                            <h4>Working Hours</h4>
+                            <p>Sunday - Thursday: 9:00 AM - 6:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>wforeelectronicservices@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <h4>Scan QR Code</h4>
+                            <img src="/api/placeholder/150/150" alt="WhatsApp QR Code" style="margin-top: 10px;">
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service">
+                                <option value="">Select a Service</option>
+                                <option value="banking">Banking & Finance Solutions</option>
+                                <option value="government">Government Services</option>
+                                <option value="business">Business Establishment</option>
+                                <option value="design">Design & Creative Services</option>
+                                <option value="academic">Academic Services</option>
+                                <option value="career">Career Services</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>W For Electronic Services</h3>
+                    <p>Where Digital Excellence Meets Personal Touch</p>
+                    <div class="social-links">
+                        <a href="#" class="social-icon">f</a>
+                        <a href="#" class="social-icon">t</a>
+                        <a href="#" class="social-icon">in</a>
+                        <a href="#" class="social-icon">ig</a>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA4MDAgODAwIj48c3R5bGU+LnN0MHtmaWxsOiM0Y2JiYjl9LnN0MXtmaWxsOiNmZjYzNDd9LnN0MntmaWxsOiMzMzMzMzN9PC9zdHlsZT48cGF0aCBjbGFzcz0ic3QwIiBkPSJNMzgwIDEwMEwyMjAgNDAwbC00MCAyMDAgMjAwLTQwMHoiLz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTgwIDEwMEw0MjAgNDAwbC00MCAyMDAgMjAwLTQwMHoiLz48cGF0aCBjbGFzcz0ic3QxIiBkPSJNMzIwIDIwMEwxNjAgNTAwbC00MCAyMDAgMjAwLTQwMHoiLz48cGF0aCBjbGFzcz0ic3QxIiBkPSJNNTIwIDIwMEwzNjAgNTAwbC00MCAyMDAgMjAwLTQwMHoiLz48cGF0aCBjbGFzcz0ic3QyIiBkPSJNMzAwIDIyMEwxNDAgNTIwbC0yMCAxMDAgMTgwLTMwMHoiLz48cGF0aCBjbGFzcz0ic3QyIiBkPSJNNTAwIDIyMEwzNDAgNTIwbC0yMCAxMDAgMTgwLTMwMHoiLz48L3N2Zz4=" alt="W For Electronic Services Logo" style="height: 60px;">
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Our Services</h3>
+                    <ul>
+                        <li><a href="#">Banking & Finance</a></li>
+                        <li><a href="#">Government Services</a></li>
+                        <li><a href="#">Business Establishment</a></li>
+                        <li><a href="#">Design & Creative</a></li>
+                        <li><a href="#">Academic Services</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 W For Electronic Services. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple mobile menu toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const nav = document.querySelector('nav ul');
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

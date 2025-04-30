@@ -1,212 +1,485 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
+<!--
+	Based on Astral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Customized for W For Electronic Services
+-->
 <html lang="ar" dir="rtl">
+	<head>
+		<title>خدمات W الإلكترونية</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* RTL Fixes and Custom Styles */
+			@media screen and (min-width: 736px) {
+				#main {
+					margin-right: 0;
+					margin-left: 375px;
+				}
+				#nav {
+					right: auto;
+					left: 0;
+				}
+				.row > * {
+					float: right;
+				}
+			}
+			/* Custom Arabic font */
+			@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+			body {
+				font-family: 'Cairo', sans-serif;
+			}
+			/* Custom colors to match your brand */
+			:root {
+				--primary-color: #4cbbb9;
+				--accent-color: #ff6347;
+			}
+			.panel {
+				background: #ffffff;
+			}
+			input[type="submit"], 
+			input[type="reset"], 
+			input[type="button"], 
+			button, 
+			.button {
+				background-color: var(--accent-color);
+			}
+			input[type="submit"]:hover, 
+			input[type="reset"]:hover, 
+			input[type="button"]:hover, 
+			button:hover, 
+			.button:hover {
+				background-color: #e55a40;
+			}
+			h1, h2, h3, h4, h5, h6 {
+				color: var(--primary-color);
+			}
+			a {
+				color: var(--primary-color);
+			}
+			/* Fix for RTL icons */
+			.icon:before {
+				float: right;
+				margin-left: 0.5em;
+			}
+			/* Custom service cards */
+			.service-card {
+				padding: 15px;
+				text-align: center;
+				border-radius: 8px;
+				background: #f8f8f8;
+				margin-bottom: 10px;
+				transition: transform 0.3s, box-shadow 0.3s;
+			}
+			.service-card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+			}
+			.service-card h3 {
+				margin-top: 10px;
+				font-size: 1.2em;
+				color: var(--primary-color);
+			}
+			.service-card p.price {
+				color: var(--accent-color);
+				font-weight: bold;
+				margin-top: 5px;
+			}
+			.service-icon {
+				font-size: 2.5em;
+				color: var(--primary-color);
+				margin-bottom: 10px;
+			}
+			/* Footer style */
+			#footer {
+				text-align: center;
+				padding: 2em 0;
+				color: rgba(255,255,255,0.5);
+			}
+			/* Mobile fixes */
+			@media screen and (max-width: 736px) {
+				#nav {
+					right: auto;
+					left: 0;
+				}
+			}
+		</style>
+	</head>
+	<body class="is-preload">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>خدمات W الإلكترونية</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Cairo', sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f5f7fa;
-      color: #333;
-    }
+		<!-- Wrapper-->
+			<div id="wrapper">
 
-    header {
-      background-color: #4cbbb9;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
+				<!-- Nav -->
+					<nav id="nav">
+						<a href="#" class="icon solid fa-home"><span>الرئيسية</span></a>
+						<a href="#services" class="icon solid fa-th-list"><span>خدماتنا</span></a>
+						<a href="#academic" class="icon solid fa-graduation-cap"><span>خدمات طلابية</span></a>
+						<a href="#about" class="icon solid fa-user"><span>من نحن</span></a>
+						<a href="#contact" class="icon solid fa-envelope"><span>تواصل معنا</span></a>
+					</nav>
 
-    header img {
-      max-width: 150px;
-      margin-bottom: 1rem;
-    }
+				<!-- Main -->
+					<div id="main">
 
-    header h1 {
-      font-size: 2.5rem;
-      margin: 0;
-    }
+						<!-- Home -->
+							<article id="home" class="panel intro">
+								<header>
+									<h1>خدمات W الإلكترونية</h1>
+									<p>حلولك الرقمية والإبداعية بضغطة زر</p>
+								</header>
+								<a href="#services" class="jumplink pic">
+									<span class="arrow icon solid fa-chevron-right"><span>استكشف خدماتنا</span></span>
+									<img src="wD.png" alt="W For Electronic Services Logo" />
+								</a>
+							</article>
 
-    section {
-      padding: 2rem 1rem;
-    }
+						<!-- General Services -->
+							<article id="services" class="panel">
+								<header>
+									<h2>خدمات عامة</h2>
+								</header>
+								<p>
+									نقدم مجموعة متنوعة من الخدمات الإلكترونية بجودة عالية وأسعار مناسبة. اختر الخدمة المناسبة واتصل بنا عبر الواتساب.
+								</p>
+								<section>
+									<div class="row">
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">🏦</div>
+												<h3>فتح حساب بنكي</h3>
+												<p>نقوم بتسهيل فتح حساب مصرفي بإجراءات سلسة</p>
+												<p class="price">25 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة فتح حساب بنكي" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">📝</div>
+												<h3>تسجيل اختبار قياس</h3>
+												<p>مساعدة في تسجيل اختبارات قياس بكل سهولة</p>
+												<p class="price">10 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تسجيل اختبار قياس" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">🛒</div>
+												<h3>إنشاء متجر إلكتروني</h3>
+												<p>تصميم وإنشاء متجر إلكتروني متكامل</p>
+												<p class="price">150 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة إنشاء متجر إلكتروني" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">📄</div>
+												<h3>إصدار وثيقة عمل حر</h3>
+												<p>مساعدة في استخراج وثائق العمل الحر</p>
+												<p class="price">15 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة إصدار وثيقة عمل حر" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">🆔</div>
+												<h3>خدمات أبشر والأحوال</h3>
+												<p>مساعدة في إنجاز معاملات أبشر والأحوال</p>
+												<p class="price">20 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمات أبشر والأحوال" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">💼</div>
+												<h3>تسجيل بحافز</h3>
+												<p>المساعدة في التسجيل ببرنامج حافز</p>
+												<p class="price">20 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تسجيل بحافز" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">📊</div>
+												<h3>فتح سجل تجاري</h3>
+												<p>مساعدة في فتح واستخراج سجل تجاري</p>
+												<p class="price">20 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة فتح سجل تجاري" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">🧾</div>
+												<h3>تقديم وظائف</h3>
+												<p>المساعدة في التقديم على الوظائف</p>
+												<p class="price">20 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تقديم وظائف" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+									</div>
+								</section>
+								<footer>
+									<a href="#design" class="button">خدمات التصميم</a>
+								</footer>
+							</article>
 
-    h2 {
-      color: #4cbbb9;
-      font-size: 1.8rem;
-      margin-top: 2rem;
-      border-right: 6px solid #ff6347;
-      padding-right: 1rem;
-    }
+						<!-- Design Services -->
+							<article id="design" class="panel">
+								<header>
+									<h2>خدمات التصميم</h2>
+								</header>
+								<p>
+									نقدم خدمات تصميم احترافية تناسب كافة الاحتياجات بأسعار مناسبة وجودة عالية.
+								</p>
+								<section>
+									<div class="row">
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">🖨️</div>
+												<h3>تصاميم وطباعة 3D</h3>
+												<p>تصميم وتنفيذ نماذج ثلاثية الأبعاد</p>
+												<p class="price">حسب الطلب</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصاميم وطباعة 3D" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">🎭</div>
+												<h3>تصميم هوية براند</h3>
+												<p>تصميم هوية بصرية متكاملة للعلامات التجارية</p>
+												<p class="price">150 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم هوية براند" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">📋</div>
+												<h3>تصميم منيو</h3>
+												<p>تصميم قوائم طعام احترافية للمطاعم والكافيهات</p>
+												<p class="price">50 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم منيو" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">🎉</div>
+												<h3>تصميم بطاقات تهنئة</h3>
+												<p>تصميم بطاقات للمناسبات والأعياد</p>
+												<p class="price">20 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم بطاقات تهنئة" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">📱</div>
+												<h3>تصاميم سوشال ميديا</h3>
+												<p>تصميم محتوى مرئي لمنصات التواصل الاجتماعي</p>
+												<p class="price">150 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصاميم سوشال ميديا" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">🎓</div>
+												<h3>تصميم كروت تخرج</h3>
+												<p>تصميم بطاقات تخرج مميزة</p>
+												<p class="price">20 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم كروت تخرج" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+									</div>
+								</section>
+								<footer>
+									<a href="#academic" class="button">خدمات طلابية</a>
+								</footer>
+							</article>
 
-    ul {
-      list-style: none;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1rem;
-      margin: 1rem 0;
-    }
+						<!-- Academic Services -->
+							<article id="academic" class="panel">
+								<header>
+									<h2>خدمات طلابية</h2>
+								</header>
+								<p>
+									نقدم خدمات أكاديمية متميزة لمساعدة الطلاب على تحقيق النجاح الدراسي.
+								</p>
+								<section>
+									<div class="row">
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">📚</div>
+												<h3>مشاريع تخرج</h3>
+												<p>مساعدة في إعداد وتنفيذ مشاريع التخرج</p>
+												<p class="price">50-250 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة مشاريع تخرج" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">💻</div>
+												<h3>مشاريع برمجة</h3>
+												<p>تنفيذ مشاريع البرمجة بمختلف اللغات</p>
+												<p class="price">150 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة مشاريع برمجة" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">📊</div>
+												<h3>عروض بوربوينت</h3>
+												<p>تصميم عروض تقديمية احترافية</p>
+												<p class="price">10 ريال للشريحة</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة عروض بوربوينت" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">🌐</div>
+												<h3>الترجمة الأكاديمية</h3>
+												<p>ترجمة النصوص والأبحاث الأكاديمية</p>
+												<p class="price">20 ريال للصفحة</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة الترجمة الأكاديمية" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">📝</div>
+												<h3>التلخيص والتوصيف</h3>
+												<p>تلخيص الكتب والمقالات الأكاديمية</p>
+												<p class="price">20 ريال</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة التلخيص والتوصيف" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+										<div class="col-4 col-6-medium col-12-small">
+											<div class="service-card">
+												<div class="service-icon">✍️</div>
+												<h3>كتابة مقالات</h3>
+												<p>كتابة مقالات أكاديمية متخصصة</p>
+												<p class="price">5 ريال للصفحة</p>
+												<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة كتابة مقالات" class="button small">طلب الخدمة</a>
+											</div>
+										</div>
+									</div>
+								</section>
+								<footer>
+									<a href="#about" class="button">من نحن</a>
+								</footer>
+							</article>
+							
+						<!-- About Us -->
+							<article id="about" class="panel">
+								<header>
+									<h2>من نحن</h2>
+								</header>
+								<p>
+									نحن فريق خدمات W الإلكترونية، نقدم لك حلولًا رقمية وتصميمية شاملة تساعدك في إنجاز معاملاتك بكل سهولة واحترافية. 
+									نسعى لتوفير الوقت والجهد بجودة عالية وأسعار مناسبة.
+								</p>
+								<h3>قيمنا الأساسية</h3>
+								<div class="row">
+									<div class="col-6 col-12-medium">
+										<ul>
+											<li><strong>التميز:</strong> نحن ملتزمون بتقديم خدمات ذات أعلى جودة</li>
+											<li><strong>النزاهة:</strong> نعمل بشفافية وأمانة في جميع تعاملاتنا</li>
+											<li><strong>الابتكار:</strong> نتطور باستمرار لتبني تقنيات وأساليب جديدة</li>
+										</ul>
+									</div>
+									<div class="col-6 col-12-medium">
+										<ul>
+											<li><strong>سهولة الوصول:</strong> نجعل العمليات الرقمية المعقدة بسيطة ومتاحة للجميع</li>
+											<li><strong>التركيز على العميل:</strong> نضع احتياجات عملائنا ورضاهم في صميم كل ما نقوم به</li>
+											<li><strong>الكفاءة:</strong> نقدر وقتك ونسعى جاهدين لتقديم الحلول بسرعة وفعالية</li>
+										</ul>
+									</div>
+								</div>
+								<footer>
+									<a href="#contact" class="button">تواصل معنا</a>
+								</footer>
+							</article>
 
-    ul li {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      padding: 1rem;
-      text-align: center;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-      cursor: pointer;
-    }
+						<!-- Contact -->
+							<article id="contact" class="panel">
+								<header>
+									<h2>تواصل معنا</h2>
+								</header>
+								<p>يسعدنا تلقي استفساراتكم وطلباتكم عبر قنوات التواصل التالية:</p>
+								
+								<div class="row">
+									<div class="col-6 col-12-medium">
+										<div class="service-card">
+											<div class="service-icon">📱</div>
+											<h3>واتساب</h3>
+											<p><a href="https://wa.me/966540732077">+966 54 073 2077</a></p>
+										</div>
+									</div>
+									<div class="col-6 col-12-medium">
+										<div class="service-card">
+											<div class="service-icon">📧</div>
+											<h3>البريد الإلكتروني</h3>
+											<p>wforelectrnoicservices@gmail.com</p>
+										</div>
+									</div>
+									<div class="col-6 col-12-medium">
+										<div class="service-card">
+											<div class="service-icon">📷</div>
+											<h3>انستغرام</h3>
+											<p><a href="https://instagram.com/wfor_es" target="_blank">@wfor_es</a></p>
+										</div>
+									</div>
+									<div class="col-6 col-12-medium">
+										<div class="service-card">
+											<div class="service-icon">🎥</div>
+											<h3>تيك توك</h3>
+											<p><a href="https://tiktok.com/@wforelectronicservices" target="_blank">@wforelectronicservices</a></p>
+										</div>
+									</div>
+								</div>
+								
+								<header>
+									<h3>أرسل لنا رسالة</h3>
+								</header>
+								<form action="#" method="post">
+									<div>
+										<div class="row">
+											<div class="col-6 col-12-medium">
+												<input type="text" name="name" placeholder="الاسم" />
+											</div>
+											<div class="col-6 col-12-medium">
+												<input type="text" name="email" placeholder="البريد الإلكتروني" />
+											</div>
+											<div class="col-12">
+												<input type="text" name="subject" placeholder="الموضوع" />
+											</div>
+											<div class="col-12">
+												<textarea name="message" placeholder="الرسالة" rows="6"></textarea>
+											</div>
+											<div class="col-12">
+												<input type="submit" value="إرسال الرسالة" />
+											</div>
+										</div>
+									</div>
+								</form>
+							</article>
 
-    ul li:hover {
-      transform: translateY(-5px);
-      background: #f0faff;
-    }
+					</div>
 
-    ul li a {
-      text-decoration: none;
-      color: #333;
-      display: block;
-    }
+				<!-- Footer -->
+					<div id="footer">
+						<ul class="copyright">
+							<li>&copy; جميع الحقوق محفوظة لخدمات W الإلكترونية 2025</li>
+						</ul>
+					</div>
 
-    .about,
-    .contact,
-    .reviews {
-      background: #ffffff;
-      padding: 2rem;
-      margin: 2rem 1rem;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    }
+			</div>
 
-    footer {
-      background-color: #ff6347;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
 
-    .social a {
-      color: #4cbbb9;
-      text-decoration: none;
-    }
-
-    .image-section {
-      margin: 2rem 1rem;
-      overflow-x: auto;
-    }
-
-    .image-section img {
-      max-width: 100%;
-      border-radius: 12px;
-      display: block;
-      margin: auto;
-    }
-
-    .scroll-indicator {
-      text-align: center;
-      font-size: 0.9rem;
-      color: #999;
-      margin-bottom: 1rem;
-    }
-
-    @media screen and (max-width: 600px) {
-      header h1 {
-        font-size: 1.8rem;
-      }
-
-      h2 {
-        font-size: 1.5rem;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <header>
-    <img src="wD.png" alt="W Logo">
-    <h1>خدمات W الإلكترونية</h1>
-    <p>حلولك الرقمية والإبداعية بضغطة زر</p>
-  </header>
-
-  <section class="about">
-    <h2>ℹ️ من نحن</h2>
-    <p>نحن فريق خدمات W الإلكترونية، نقدم لك حلولًا رقمية وتصميمية شاملة تساعدك في إنجاز معاملاتك بكل سهولة واحترافية. نسعى لتوفير الوقت والجهد بجودة عالية وأسعار مناسبة.</p>
-  </section>
-
-  <section>
-    <h2>📌 خدمات عامة</h2>
-    <ul>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة فتح حساب بنكي" target="_blank">🏦 فتح حساب بنكي</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تسجيل اختبار قياس" target="_blank">📝 تسجيل اختبار قياس</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة إنشاء متجر إلكتروني" target="_blank">🛒 انشاء متجر الكتروني</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة إصدار وثيقة عمل حر" target="_blank">📄 اصدار وثيقة عمل حر</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمات أبشر والأحوال" target="_blank">🆔 خدمات ابشر و الاحوال</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تسجيل بحافز" target="_blank">💼 تسجيل بحافز</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة فتح سجل تجاري" target="_blank">📊 فتح سجل تجاري</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تقديم وظائف" target="_blank">🧾 تقديم وظائف</a></li>
-    </ul>
-
-    <h2>🎨 خدمات التصميم</h2>
-    <ul>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصاميم وطباعة 3D" target="_blank">🖨️ تصاميم و طباعة 3D بجميع أنواعها</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم هوية براند" target="_blank">🎭 تصميم هوية براند</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم منيو" target="_blank">📋 تصميم منيو</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم بطاقات تهنئة" target="_blank">🎉 تصميم بطاقات تهنئة</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصاميم سوشال ميديا" target="_blank">📱 تصاميم سوشال ميديا</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم كروت تخرج" target="_blank">🎓 تصميم كروت تخرج</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم تايبوغرافي" target="_blank">🔠 تصميم تايبوغرافي</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصاميم قوالب كانفا" target="_blank">📌 تصاميم قوالب كانفا</a></li>
-    </ul>
-
-    <h2>🎓 خدمات طلابية</h2>
-    <ul>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة مشاريع تخرج" target="_blank">📚 مشاريع تخرج</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة مشاريع برمجة" target="_blank">💻 مشاريع برمجة</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة عروض بوربوينت" target="_blank">📊 عروض بوربوينت (برزنتيشن)</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة الترجمة الأكاديمية" target="_blank">🌐 الترجمة الأكاديمية</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة التلخيص والتوصيف" target="_blank">📝 التلخيص والتوصيف</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة كتابة مقالات" target="_blank">✍️ كتابة مقالات</a></li>
-      <li><a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة ملخصات" target="_blank">📄 ملخصات</a></li>
-    </ul>
-  </section>
-
-  <section class="image-section">
-    <div class="scroll-indicator">⬅️ اسحب لليسار لمشاهدة المزيد ➡️</div>
-    <img src="websitebanner.jpg" alt="خدمات التصميم و الطلب عبر واتساب">
-  </section>
-
-  <section class="contact">
-    <h2>📞 تواصل معنا</h2>
-    <p>رقم التواصل: <strong><a href="https://wa.me/966540732077">+966540732077</a></strong></p>
-    <p>البريد الإلكتروني: <strong>wforelectrnoicservices@gmail.com</strong></p>
-    <div class="social">
-      <p>📷 انستقرام: <a href="https://instagram.com/wfor_es" target="_blank">@wfor_es</a></p>
-      <p>🎥 تيك توك: <a href="https://tiktok.com/@wforelectronicservices" target="_blank">@wforelectronicservices</a></p>
-    </div>
-  </section>
-
-  <section class="reviews">
-    <h2>⭐ آراء العملاء</h2>
-    <ul>
-      <li>"خدمة ممتازة وسريعة! أنصح بها بشدة." - أحمد</li>
-      <li>"تم إنجاز طلبي بكل احترافية. شكراً لفريق W." - سارة</li>
-      <li>"أسعار مناسبة وتعامل راقٍ. بالتوفيق دائماً!" - نواف</li>
-    </ul>
-  </section>
-
-  <footer>
-    <p>© جميع الحقوق محفوظة لخدمات W الإلكترونية 2025</p>
-  </footer>
-
-</body>
-
+	</body>
 </html>

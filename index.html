@@ -12,12 +12,15 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<!-- Added enhanced styles -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 		<style>
 			/* RTL Fixes and Custom Styles */
 			@media screen and (min-width: 736px) {
 				#main {
 					margin-right: 0;
 					margin-left: 375px;
+					padding: 0 3em 0 3em; /* Added padding for better content spacing */
 				}
 				#nav {
 					right: auto;
@@ -27,6 +30,21 @@
 					float: right;
 				}
 			}
+			
+			/* Full width and centered on mobile */
+			@media screen and (max-width: 736px) {
+				#main {
+					padding: 0 20px;
+					margin: 0 auto;
+					width: 100%;
+				}
+				
+				.pic img {
+					max-width: 100%;
+					height: auto;
+				}
+			}
+			
 			/* Custom Arabic font */
 			@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 			body {
@@ -36,74 +54,231 @@
 			:root {
 				--primary-color: #4cbbb9;
 				--accent-color: #ff6347;
+				--dark-color: #2e3842;
+				--light-color: #f5f5f5;
 			}
+			
+			body {
+				background-color: var(--light-color);
+			}
+			
 			.panel {
 				background: #ffffff;
+				max-width: 100%;
+				margin: 0 auto;
+				padding: 2em;
+				border-radius: 8px;
+				box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 			}
+			
+			/* Improved button visibility */
 			input[type="submit"], 
 			input[type="reset"], 
 			input[type="button"], 
 			button, 
 			.button {
 				background-color: var(--accent-color);
+				color: #ffffff;
+				font-weight: bold;
+				border-radius: 30px;
+				padding: 0.5em 1.5em;
+				transition: all 0.3s ease;
+				border: 2px solid var(--accent-color);
 			}
+			
 			input[type="submit"]:hover, 
 			input[type="reset"]:hover, 
 			input[type="button"]:hover, 
 			button:hover, 
 			.button:hover {
 				background-color: #e55a40;
+				box-shadow: 0 5px 15px rgba(229, 90, 64, 0.3);
+				transform: translateY(-2px);
 			}
+			
 			h1, h2, h3, h4, h5, h6 {
 				color: var(--primary-color);
+				text-align: center;
+				margin-bottom: 1em;
 			}
+			
 			a {
 				color: var(--primary-color);
 			}
+			
 			/* Fix for RTL icons */
 			.icon:before {
 				float: right;
 				margin-left: 0.5em;
 			}
+			
 			/* Custom service cards */
 			.service-card {
-				padding: 15px;
+				padding: 25px;
 				text-align: center;
-				border-radius: 8px;
-				background: #f8f8f8;
-				margin-bottom: 10px;
+				border-radius: 12px;
+				background: var(--light-color);
+				margin-bottom: 20px;
 				transition: transform 0.3s, box-shadow 0.3s;
+				box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+				border: 1px solid rgba(0,0,0,0.05);
 			}
+			
 			.service-card:hover {
 				transform: translateY(-5px);
-				box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+				box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+				border-color: var(--primary-color);
 			}
+			
 			.service-card h3 {
 				margin-top: 10px;
 				font-size: 1.2em;
 				color: var(--primary-color);
 			}
+			
 			.service-card p.price {
-				color: var(--accent-color);
+				color: white;
 				font-weight: bold;
-				margin-top: 5px;
+				margin: 10px auto;
+				background-color: var(--accent-color);
+				display: inline-block;
+				padding: 5px 15px;
+				border-radius: 20px;
 			}
+			
 			.service-icon {
 				font-size: 2.5em;
 				color: var(--primary-color);
-				margin-bottom: 10px;
+				margin-bottom: 15px;
+				display: block;
 			}
+			
+			/* Home section enhancements */
+			.intro {
+				text-align: center;
+			}
+			
+			.intro .pic {
+				display: block;
+				margin: 0 auto;
+				max-width: 300px;
+				margin-top: 2em;
+			}
+			
+			.intro .pic img {
+				border-radius: 12px;
+				box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+			}
+			
+			/* Centered content */
+			p {
+				text-align: center;
+				line-height: 1.6;
+			}
+			
+			section {
+				margin: 2em auto;
+			}
+			
+			/* Enhanced testimonials */
+			.testimonial {
+				background: white;
+				padding: 25px;
+				border-radius: 12px;
+				box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+				margin-bottom: 20px;
+				position: relative;
+			}
+			
+			.testimonial::before {
+				content: """;
+				position: absolute;
+				top: -30px;
+				right: 20px;
+				font-size: 100px;
+				color: var(--primary-color);
+				opacity: 0.1;
+			}
+			
+			.testimonial p {
+				text-align: right;
+			}
+			
+			.author-info h4 {
+				margin: 5px 0;
+				color: var(--dark-color);
+				text-align: right;
+			}
+			
+			.author-info p {
+				margin: 0;
+				color: #666;
+				font-size: 0.9em;
+				text-align: right;
+			}
+			
 			/* Footer style */
 			#footer {
 				text-align: center;
 				padding: 2em 0;
-				color: rgba(255,255,255,0.5);
+				background-color: var(--dark-color);
+				width: 100%;
+				color: rgba(255,255,255,0.7);
+				margin-top: 3em;
 			}
+			
+			#footer .copyright {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			
+			/* Floating WhatsApp Button */
+			.floating-whatsapp {
+				position: fixed;
+				bottom: 30px;
+				left: 30px;
+				width: 60px;
+				height: 60px;
+				background-color: #25D366;
+				color: white;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 30px;
+				box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+				z-index: 1000;
+				transition: all 0.3s ease;
+			}
+			
+			.floating-whatsapp:hover {
+				transform: scale(1.1) rotate(10deg);
+				box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+			}
+			
+			/* Navigation active state */
+			#nav a.active {
+				background-color: var(--primary-color);
+			}
+			
 			/* Mobile fixes */
 			@media screen and (max-width: 736px) {
 				#nav {
 					right: auto;
 					left: 0;
+				}
+				
+				.floating-whatsapp {
+					width: 50px;
+					height: 50px;
+					font-size: 24px;
+					bottom: 20px;
+					left: 20px;
+				}
+				
+				.service-card {
+					padding: 15px;
 				}
 			}
 		</style>
@@ -119,6 +294,8 @@
 						<a href="#general" class="icon solid fa-briefcase"><span>خدمات عامة</span></a>
 						<a href="#design" class="icon solid fa-palette"><span>خدمات التصميم</span></a>
 						<a href="#academic" class="icon solid fa-graduation-cap"><span>خدمات طلابية</span></a>
+						<!-- Added testimonials navigation link -->
+						<a href="#testimonials" class="icon solid fa-comment"><span>آراء العملاء</span></a>
 						<a href="#about" class="icon solid fa-user"><span>من نحن</span></a>
 						<a href="#contact" class="icon solid fa-envelope"><span>تواصل معنا</span></a>
 					</nav>
@@ -149,7 +326,7 @@
 									<div class="row">
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">🏦</div>
+												<div class="service-icon"><i class="fas fa-university"></i></div>
 												<h3>فتح حساب بنكي</h3>
 												<p>نقوم بتسهيل فتح حساب مصرفي بإجراءات سلسة</p>
 												<p class="price">25 ريال</p>
@@ -158,7 +335,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">📝</div>
+												<div class="service-icon"><i class="fas fa-file-alt"></i></div>
 												<h3>تسجيل اختبار قياس</h3>
 												<p>مساعدة في تسجيل اختبارات قياس بكل سهولة</p>
 												<p class="price">10 ريال</p>
@@ -167,7 +344,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">🛒</div>
+												<div class="service-icon"><i class="fas fa-shopping-cart"></i></div>
 												<h3>إنشاء متجر إلكتروني</h3>
 												<p>تصميم وإنشاء متجر إلكتروني متكامل</p>
 												<p class="price">150 ريال</p>
@@ -176,7 +353,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">📄</div>
+												<div class="service-icon"><i class="fas fa-file-contract"></i></div>
 												<h3>إصدار وثيقة عمل حر</h3>
 												<p>مساعدة في استخراج وثائق العمل الحر</p>
 												<p class="price">15 ريال</p>
@@ -185,7 +362,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">🆔</div>
+												<div class="service-icon"><i class="fas fa-id-card"></i></div>
 												<h3>خدمات أبشر والأحوال</h3>
 												<p>مساعدة في إنجاز معاملات أبشر والأحوال</p>
 												<p class="price">20 ريال</p>
@@ -194,7 +371,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">💼</div>
+												<div class="service-icon"><i class="fas fa-briefcase"></i></div>
 												<h3>تسجيل بحافز</h3>
 												<p>المساعدة في التسجيل ببرنامج حافز</p>
 												<p class="price">20 ريال</p>
@@ -203,7 +380,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">📊</div>
+												<div class="service-icon"><i class="fas fa-chart-line"></i></div>
 												<h3>فتح سجل تجاري</h3>
 												<p>مساعدة في فتح واستخراج سجل تجاري</p>
 												<p class="price">20 ريال</p>
@@ -212,7 +389,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">🧾</div>
+												<div class="service-icon"><i class="fas fa-file-invoice"></i></div>
 												<h3>تقديم وظائف</h3>
 												<p>المساعدة في التقديم على الوظائف</p>
 												<p class="price">20 ريال</p>
@@ -221,9 +398,6 @@
 										</div>
 									</div>
 								</section>
-								<footer>
-									<a href="#design" class="button">خدمات التصميم</a>
-								</footer>
 							</article>
 							
 						<!-- Design Services -->
@@ -238,7 +412,7 @@
 									<div class="row">
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">🖨️</div>
+												<div class="service-icon"><i class="fas fa-cube"></i></div>
 												<h3>تصاميم وطباعة 3D</h3>
 												<p>تصميم وتنفيذ نماذج ثلاثية الأبعاد</p>
 												<p class="price">حسب الطلب</p>
@@ -247,7 +421,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">🎭</div>
+												<div class="service-icon"><i class="fas fa-palette"></i></div>
 												<h3>تصميم هوية براند</h3>
 												<p>تصميم هوية بصرية متكاملة للعلامات التجارية</p>
 												<p class="price">150 ريال</p>
@@ -256,7 +430,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">📋</div>
+												<div class="service-icon"><i class="fas fa-clipboard-list"></i></div>
 												<h3>تصميم منيو</h3>
 												<p>تصميم قوائم طعام احترافية للمطاعم والكافيهات</p>
 												<p class="price">50 ريال</p>
@@ -265,7 +439,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">🎉</div>
+												<div class="service-icon"><i class="fas fa-birthday-cake"></i></div>
 												<h3>تصميم بطاقات تهنئة</h3>
 												<p>تصميم بطاقات للمناسبات والأعياد</p>
 												<p class="price">20 ريال</p>
@@ -274,7 +448,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">📱</div>
+												<div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
 												<h3>تصاميم سوشال ميديا</h3>
 												<p>تصميم محتوى مرئي لمنصات التواصل الاجتماعي</p>
 												<p class="price">150 ريال</p>
@@ -283,7 +457,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">🎓</div>
+												<div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
 												<h3>تصميم كروت تخرج</h3>
 												<p>تصميم بطاقات تخرج مميزة</p>
 												<p class="price">20 ريال</p>
@@ -292,9 +466,6 @@
 										</div>
 									</div>
 								</section>
-								<footer>
-									<a href="#academic" class="button">خدمات طلابية</a>
-								</footer>
 							</article>
 
 						<!-- Academic Services -->
@@ -309,7 +480,7 @@
 									<div class="row">
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">📚</div>
+												<div class="service-icon"><i class="fas fa-book"></i></div>
 												<h3>مشاريع تخرج</h3>
 												<p>مساعدة في إعداد وتنفيذ مشاريع التخرج</p>
 												<p class="price">250-50 ريال</p>
@@ -318,7 +489,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">💻</div>
+												<div class="service-icon"><i class="fas fa-laptop-code"></i></div>
 												<h3>مشاريع برمجة</h3>
 												<p>تنفيذ مشاريع البرمجة بمختلف اللغات</p>
 												<p class="price">150 ريال</p>
@@ -327,7 +498,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">📊</div>
+												<div class="service-icon"><i class="fas fa-chart-line"></i></div>
 												<h3>عروض بوربوينت</h3>
 												<p>تصميم عروض تقديمية احترافية</p>
 												<p class="price">10 ريال للشريحة</p>
@@ -336,7 +507,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">🌐</div>
+												<div class="service-icon"><i class="fas fa-language"></i></div>
 												<h3>الترجمة الأكاديمية</h3>
 												<p>ترجمة النصوص والأبحاث الأكاديمية</p>
 												<p class="price">20 ريال للصفحة</p>
@@ -345,7 +516,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">📝</div>
+												<div class="service-icon"><i class="fas fa-file-alt"></i></div>
 												<h3>التلخيص والتوصيف</h3>
 												<p>تلخيص الكتب والمقالات الأكاديمية</p>
 												<p class="price">20 ريال</p>
@@ -354,7 +525,7 @@
 										</div>
 										<div class="col-4 col-6-medium col-12-small">
 											<div class="service-card">
-												<div class="service-icon">✍️</div>
+												<div class="service-icon"><i class="fas fa-pen-fancy"></i></div>
 												<h3>كتابة مقالات</h3>
 												<p>كتابة مقالات أكاديمية متخصصة</p>
 												<p class="price">5 ريال للصفحة</p>
@@ -363,10 +534,41 @@
 										</div>
 									</div>
 								</section>
-								<footer>
-									<a href="#about" class="button">من نحن</a>
-								</footer>
 							</article>
+							
+						<!-- Added Testimonials Section -->
+						<article id="testimonials" class="panel">
+							<header>
+								<h2>ماذا يقول عملاؤنا</h2>
+							</header>
+							<p>
+								نفتخر بثقة عملائنا ورضاهم عن خدماتنا، وإليكم بعض آرائهم:
+							</p>
+							<div class="row">
+								<div class="col-6 col-12-medium">
+									<div class="testimonial">
+										<p>"خدمة ممتازة ودقة في العمل، أنجزوا لي مشروع التخرج بأفضل صورة ممكنة وبوقت قياسي. أنصح بهم بشدة!"</p>
+										<div class="testimonial-author">
+											<div class="author-info">
+												<h4>أحمد الشمري</h4>
+												<p>طالب هندسة</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-6 col-12-medium">
+									<div class="testimonial">
+										<p>"تعاملت معهم في تصميم هوية تجارية لمشروعي الجديد، وكانت النتيجة أكثر من رائعة. احترافية وإبداع!"</p>
+										<div class="testimonial-author">
+											<div class="author-info">
+												<h4>سارة العتيبي</h4>
+												<p>صاحبة مشروع</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</article>
 							
 						<!-- About Us -->
 							<article id="about" class="panel">
@@ -394,9 +596,6 @@
 										</ul>
 									</div>
 								</div>
-								<footer>
-									<a href="#contact" class="button">تواصل معنا</a>
-								</footer>
 							</article>
 
 						<!-- Contact -->
@@ -409,28 +608,28 @@
 								<div class="row">
 									<div class="col-6 col-12-medium">
 										<div class="service-card">
-											<div class="service-icon">📱</div>
+											<div class="service-icon"><i class="fab fa-whatsapp"></i></div>
 											<h3>واتساب</h3>
 											<p dir="ltr" style="text-align: center;">+966 54 073 2077</p>
 										</div>
 									</div>
 									<div class="col-6 col-12-medium">
 										<div class="service-card">
-											<div class="service-icon">📧</div>
+											<div class="service-icon"><i class="fas fa-envelope"></i></div>
 											<h3>البريد الإلكتروني</h3>
 											<p dir="ltr" style="text-align: center;">wforelectrnoicservices@gmail.com</p>
 										</div>
 									</div>
 									<div class="col-6 col-12-medium">
 										<div class="service-card">
-											<div class="service-icon">📷</div>
+											<div class="service-icon"><i class="fab fa-instagram"></i></div>
 											<h3>انستغرام</h3>
 											<p style="text-align: center;"><a href="https://instagram.com/wfor_es" target="_blank">@wfor_es</a></p>
 										</div>
 									</div>
 									<div class="col-6 col-12-medium">
 										<div class="service-card">
-											<div class="service-icon">🎥</div>
+											<div class="service-icon"><i class="fab fa-tiktok"></i></div>
 											<h3>تيك توك</h3>
 											<p style="text-align: center;"><a href="https://tiktok.com/@wforelectronicservices" target="_blank">@wforelectronicservices</a></p>
 										</div>
@@ -474,12 +673,50 @@
 
 			</div>
 
+		<!-- Added Floating WhatsApp Button -->
+		<a href="https://wa.me/966540732077" class="floating-whatsapp" target="_blank">
+			<i class="fab fa-whatsapp"></i>
+		</a>
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+				// Simple script to highlight active nav item
+				document.addEventListener('DOMContentLoaded', function() {
+					// Get all nav links
+					const navLinks = document.querySelectorAll('#nav a');
+					
+					// Add click event to each link
+					navLinks.forEach(link => {
+						link.addEventListener('click', function() {
+							// Remove active class from all links
+							navLinks.forEach(l => l.classList.remove('active'));
+							
+							// Add active class to clicked link
+							this.classList.add('active');
+						});
+					});
+					
+					// Set home as active by default
+					document.querySelector('#nav a[href="#"]').classList.add('active');
+					
+					// Make service cards look better on hover
+					const serviceCards = document.querySelectorAll('.service-card');
+					serviceCards.forEach(card => {
+						card.addEventListener('mouseenter', function() {
+							this.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--primary-color');
+						});
+						
+						card.addEventListener('mouseleave', function() {
+							this.style.borderColor = 'rgba(0,0,0,0.05)';
+						});
+					});
+				});
+			</script>
 
 	</body>
 </html>

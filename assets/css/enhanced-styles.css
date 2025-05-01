@@ -1,0 +1,315 @@
+/* Add this to your existing CSS */
+:root {
+    --primary-color: #21a6b8;
+    --primary-gradient: linear-gradient(135deg, #21a6b8 0%, #127e8f 100%);
+    --accent-color: #ff6e42;
+    --accent-gradient: linear-gradient(135deg, #ff6e42 0%, #ff5722 100%);
+    --dark-color: #263238;
+    --light-gray: #f7f9fa;
+  }
+  
+  /* Background Effects */
+  body {
+    background: #f9f9f9;
+  }
+  
+  /* Modern particle background for hero */
+  .particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+  }
+  
+  /* Enhanced panel styling */
+  .panel {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: transform 0.5s, box-shadow 0.5s;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s forwards;
+  }
+  
+  /* Service Cards with 3D effect */
+  .service-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+    padding: 30px 20px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    z-index: 1;
+  }
+  
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-gradient);
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(33, 166, 184, 0.2);
+    color: white;
+  }
+  
+  .service-card:hover::before {
+    opacity: 1;
+  }
+  
+  .service-card:hover h3,
+  .service-card:hover p,
+  .service-card:hover .service-icon {
+    color: white;
+    transition: color 0.4s ease;
+  }
+  
+  .service-card:hover .price {
+    background: white;
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+  
+  .service-card:hover .button {
+    background: white;
+    color: var(--primary-color);
+  }
+  
+  /* Modern icons with gradient background */
+  .service-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--light-gray);
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: var(--primary-color);
+    transition: all 0.4s ease;
+  }
+  
+  .service-card:hover .service-icon {
+    background: rgba(255,255,255,0.2);
+    transform: scale(1.1) rotate(5deg);
+  }
+  
+  /* Animated buttons */
+  .button {
+    background: var(--accent-gradient);
+    border-radius: 30px;
+    padding: 0.8em 1.5em;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  
+  .button:hover {
+    background: white;
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 14px rgba(255, 110, 66, 0.2);
+  }
+  
+  /* Price tag stylish design */
+  p.price {
+    display: inline-block;
+    background: var(--light-gray);
+    color: var(--primary-color);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin: 10px 0;
+    transition: all 0.3s ease;
+  }
+  
+  /* Nav icon animations */
+  #nav a {
+    transition: all 0.3s ease;
+  }
+  
+  #nav a:hover {
+    transform: translateY(-5px);
+  }
+  
+  #nav a.active {
+    background: var(--primary-gradient);
+  }
+  
+  #nav a:before {
+    transition: all 0.3s ease;
+  }
+  
+  #nav a:hover:before {
+    transform: scale(1.2);
+  }
+  
+  /* Header animations */
+  .intro header h1 {
+    animation: fadeInDown 1s forwards;
+    opacity: 0;
+  }
+  
+  .intro header p {
+    animation: fadeInUp 1s 0.3s forwards;
+    opacity: 0;
+  }
+  
+  .pic img {
+    animation: zoomIn 1.2s 0.6s forwards;
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  
+  /* Floating action button for WhatsApp */
+  .floating-whatsapp {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 60px;
+    height: 60px;
+    background: var(--accent-gradient);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    box-shadow: 0 5px 15px rgba(255, 110, 66, 0.3);
+    z-index: 1000;
+    transition: all 0.3s;
+  }
+  
+  .floating-whatsapp:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 8px 25px rgba(255, 110, 66, 0.4);
+  }
+  
+  /* Modern footer */
+  #footer {
+    background: var(--dark-color);
+    padding: 40px 0;
+    margin-top: 50px;
+  }
+  
+  #footer .copyright {
+    color: rgba(255,255,255,0.7);
+  }
+  
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes zoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Testimonials section */
+  .testimonial {
+    background: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-top: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    position: relative;
+  }
+  
+  .testimonial::before {
+    content: '"';
+    position: absolute;
+    top: -30px;
+    left: 20px;
+    font-size: 100px;
+    color: var(--primary-color);
+    opacity: 0.1;
+    font-family: sans-serif;
+  }
+  
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .testimonial-author img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .author-info h4 {
+    margin: 0;
+    color: var(--dark-color);
+  }
+  
+  .author-info p {
+    margin: 0;
+    color: #888;
+    font-size: 0.9em;
+  }
+  
+  /* Mobile optimizations */
+  @media screen and (max-width: 736px) {
+    .service-card {
+      margin-bottom: 20px;
+    }
+    
+    #footer {
+      padding: 20px 0;
+    }
+    
+    .floating-whatsapp {
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      bottom: 20px;
+      left: 20px;
+    }
+  }

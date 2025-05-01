@@ -43,6 +43,23 @@
 					max-width: 100%;
 					height: auto;
 				}
+				
+				/* Fix for mobile nav overlap */
+				#wrapper {
+					padding-top: 45px; /* Add padding to prevent overlap */
+				}
+				
+				#nav {
+					position: fixed;
+					top: 0;
+					width: 100%;
+					height: 45px;
+					z-index: 10000;
+				}
+				
+				#nav a {
+					padding: 0.5em;
+				}
 			}
 			
 			/* Custom Arabic font */
@@ -81,9 +98,16 @@
 				color: #ffffff;
 				font-weight: bold;
 				border-radius: 30px;
-				padding: 0.5em 1.5em;
+				padding: 0.7em 1.7em; /* Increased padding for larger button */
 				transition: all 0.3s ease;
 				border: 2px solid var(--accent-color);
+				text-decoration: none !important; /* Remove underline */
+			}
+			
+			/* Explicitly remove underlines from all buttons */
+			a.button {
+				text-decoration: none !important;
+				border-bottom: none !important;
 			}
 			
 			input[type="submit"]:hover, 
@@ -94,6 +118,7 @@
 				background-color: #e55a40;
 				box-shadow: 0 5px 15px rgba(229, 90, 64, 0.3);
 				transform: translateY(-2px);
+				text-decoration: none !important; /* Remove underline on hover */
 			}
 			
 			h1, h2, h3, h4, h5, h6 {
@@ -217,14 +242,24 @@
 				text-align: right;
 			}
 			
-			/* Footer style */
+			/* Footer style - FIXED FULL WIDTH */
 			#footer {
 				text-align: center;
 				padding: 2em 0;
 				background-color: var(--dark-color);
-				width: 100%;
 				color: rgba(255,255,255,0.7);
 				margin-top: 3em;
+				position: relative;
+				margin-left: -375px; /* Negative margin to counteract the main content margin */
+				width: 100vw; /* Full viewport width */
+				box-sizing: border-box;
+			}
+			
+			@media screen and (max-width: 736px) {
+				#footer {
+					margin-left: 0;
+					width: 100%;
+				}
 			}
 			
 			#footer .copyright {
@@ -250,6 +285,7 @@
 				box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
 				z-index: 1000;
 				transition: all 0.3s ease;
+				text-decoration: none !important;
 			}
 			
 			.floating-whatsapp:hover {
@@ -280,6 +316,18 @@
 				.service-card {
 					padding: 15px;
 				}
+			}
+			
+			/* Global fix to all links to remove underline */
+			a {
+				text-decoration: none !important;
+			}
+			
+			/* Make sure the wrapper contains everything properly */
+			#wrapper {
+				position: relative;
+				width: 100%;
+				overflow-x: hidden; /* Prevent horizontal scroll */
 			}
 		</style>
 	</head>
@@ -536,18 +584,18 @@
 								</section>
 							</article>
 							
-						<!-- Added Testimonials Section -->
+						<!-- Added Testimonials Section with colloquial Arabic -->
 						<article id="testimonials" class="panel">
 							<header>
-								<h2>ماذا يقول عملاؤنا</h2>
+								<h2>آراء العملاء</h2>
 							</header>
 							<p>
-								نفتخر بثقة عملائنا ورضاهم عن خدماتنا، وإليكم بعض آرائهم:
+								هذا اللي يقوله عملاؤنا عن خدماتنا:
 							</p>
 							<div class="row">
 								<div class="col-6 col-12-medium">
 									<div class="testimonial">
-										<p>"خدمة ممتازة ودقة في العمل، أنجزوا لي مشروع التخرج بأفضل صورة ممكنة وبوقت قياسي. أنصح بهم بشدة!"</p>
+										<p>"والله ما قصرتوا معي! سويتوا لي مشروع التخرج بشكل مرة حلو وبسرعة كمان. الصراحة أنصح أي طالب يتعامل معكم، خدمتكم ممتازة ومافيها أي إزعاج!"</p>
 										<div class="testimonial-author">
 											<div class="author-info">
 												<h4>أحمد الشمري</h4>
@@ -558,7 +606,7 @@
 								</div>
 								<div class="col-6 col-12-medium">
 									<div class="testimonial">
-										<p>"تعاملت معهم في تصميم هوية تجارية لمشروعي الجديد، وكانت النتيجة أكثر من رائعة. احترافية وإبداع!"</p>
+										<p>"من جد أنا مرة مبسوطة بالشغل اللي سويتوه لي! طلبت تصميم هوية لمشروعي الجديد وطلع أحلى من اللي كنت أتوقعه. ما شاء الله عليكم مبدعين ومحترفين!"</p>
 										<div class="testimonial-author">
 											<div class="author-info">
 												<h4>سارة العتيبي</h4>

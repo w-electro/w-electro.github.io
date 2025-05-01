@@ -31,37 +31,6 @@
 				}
 			}
 			
-			/* Full width and centered on mobile */
-			@media screen and (max-width: 736px) {
-				#main {
-					padding: 0 20px;
-					margin: 0 auto;
-					width: 100%;
-				}
-				
-				.pic img {
-					max-width: 100%;
-					height: auto;
-				}
-				
-				/* Fix for mobile nav overlap */
-				#wrapper {
-					padding-top: 45px; /* Add padding to prevent overlap */
-				}
-				
-				#nav {
-					position: fixed;
-					top: 0;
-					width: 100%;
-					height: 45px;
-					z-index: 10000;
-				}
-				
-				#nav a {
-					padding: 0.5em;
-				}
-			}
-			
 			/* Custom Arabic font */
 			@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 			body {
@@ -255,13 +224,6 @@
 				box-sizing: border-box;
 			}
 			
-			@media screen and (max-width: 736px) {
-				#footer {
-					margin-left: 0;
-					width: 100%;
-				}
-			}
-			
 			#footer .copyright {
 				list-style: none;
 				padding: 0;
@@ -298,23 +260,68 @@
 				background-color: var(--primary-color);
 			}
 			
-			/* Mobile fixes */
+			/* MOBILE FIXES - IMPROVED */
 			@media screen and (max-width: 736px) {
+				body {
+					overflow-x: hidden;
+				}
+				
+				#wrapper {
+					padding-bottom: 45px; /* Add padding at bottom instead of top */
+					padding-top: 0;
+				}
+				
+				#main {
+					padding: 0 15px;
+					margin: 0;
+					width: 100%;
+				}
+				
 				#nav {
-					right: auto;
+					position: fixed;
+					bottom: 0;  /* Position at bottom instead of top */
 					left: 0;
+					top: auto; /* Override top positioning */
+					width: 100%;
+					height: 45px;
+					z-index: 10000;
+					display: flex;
+					justify-content: space-around;
+					background-color: var(--dark-color);
+				}
+				
+				#nav a {
+					width: 14%; /* 7 links at 14% each to fit */
+					padding: 0.5em 0;
+					font-size: 0.8em;
+					text-align: center;
+				}
+				
+				#nav a span {
+					display: none; /* Hide text on mobile */
+				}
+				
+				#nav a:before {
+					float: none;
+					margin: 0;
 				}
 				
 				.floating-whatsapp {
 					width: 50px;
 					height: 50px;
 					font-size: 24px;
-					bottom: 20px;
-					left: 20px;
+					bottom: 60px; /* Position above the nav bar */
+					left: 15px;
 				}
 				
 				.service-card {
 					padding: 15px;
+				}
+				
+				#footer {
+					margin-left: 0;
+					width: 100%;
+					margin-bottom: 45px; /* Space for navigation */
 				}
 			}
 			

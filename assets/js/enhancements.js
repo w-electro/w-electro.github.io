@@ -88,6 +88,14 @@ document.addEventListener('DOMContentLoaded', function() {
         priceTag.style.background = '#ffffff';
         priceTag.style.color = '#ff6e42';
       }
+      
+      // Change button color
+      const button = this.querySelector('.btn-primary');
+      if (button) {
+        button.style.background = '#ffffff';
+        button.style.color = '#ff6e42';
+        button.style.boxShadow = '0 5px 15px rgba(255, 110, 66, 0.3)';
+      }
     });
     
     card.addEventListener('mouseleave', function() {
@@ -107,6 +115,14 @@ document.addEventListener('DOMContentLoaded', function() {
       if (priceTag) {
         priceTag.style.background = '';
         priceTag.style.color = '';
+      }
+      
+      // Reset button
+      const button = this.querySelector('.btn-primary');
+      if (button) {
+        button.style.background = '';
+        button.style.color = '';
+        button.style.boxShadow = '';
       }
     });
   });
@@ -196,82 +212,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
   // Setup particles for hero section
   setupParticles();
-});
-
-// Function to set up particles
-function setupParticles() {
-  // Check if particles container already exists
-  if (!document.querySelector('.particles-container')) {
-    // Create particles container
-    const particlesContainer = document.createElement('div');
-    particlesContainer.className = 'particles-container';
-    
-    // Append to the home section
-    const homeSection = document.querySelector('#home');
-    if (homeSection) {
-      homeSection.appendChild(particlesContainer);
-      
-      // Create particles
-      for (let i = 0; i < 30; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        
-        // Random position and size
-        const size = Math.random() * 10 + 5;
-        const posX = Math.random() * 100;
-        const posY = Math.random() * 100;
-        const delay = Math.random() * 5;
-        const duration = Math.random() * 10 + 15;
-        const opacity = Math.random() * 0.3 + 0.1;
-        
-        // Set styles
-        particle.style.cssText = `
-          position: absolute;
-          width: ${size}px;
-          height: ${size}px;
-          background: rgba(33, 166, 184, ${opacity});
-          border-radius: 50%;
-          top: ${posY}%;
-          right: ${posX}%;
-          opacity: 0;
-          animation: float ${duration}s linear infinite;
-          animation-delay: ${delay}s;
-          z-index: -1;
-        `;
-        
-        particlesContainer.appendChild(particle);
-      }
-      
-      // Add animation keyframes if not already added
-      if (!document.querySelector('#particle-animation')) {
-        const styleSheet = document.createElement('style');
-        styleSheet.id = 'particle-animation';
-        styleSheet.textContent = `
-          @keyframes float {
-            0% {
-              transform: translateY(0) translateX(0) rotate(0);
-              opacity: 0;
-            }
-            10% {
-              opacity: 1;
-            }
-            90% {
-              opacity: 1;
-            }
-            100% {
-              transform: translateY(-300px) translateX(${Math.random() * 100 - 50}px) rotate(360deg);
-              opacity: 0;
-            }
-          }
-        `;
-        document.head.appendChild(styleSheet);
-      }
-    }
-  }
-}
-
-// Form validation
-document.addEventListener('DOMContentLoaded', function() {
+  
+  // Form validation
   const contactForm = document.querySelector('#contact form');
   
   if (contactForm) {
@@ -318,6 +260,78 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// Function to set up particles
+function setupParticles() {
+  // Check if particles container already exists
+  if (!document.querySelector('.particles-container')) {
+    // Create particles container
+    const particlesContainer = document.createElement('div');
+    particlesContainer.className = 'particles-container';
+    
+    // Append to the home section
+    const homeSection = document.querySelector('#home');
+    if (homeSection) {
+      homeSection.appendChild(particlesContainer);
+      
+      // Create particles
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random position and size
+        const size = Math.random() * 10 + 5;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 10 + 15;
+        const opacity = Math.random() * 0.3 + 0.1;
+        
+        // Set styles
+        particle.style.cssText = `
+          position: absolute;
+          width: ${size}px;
+          height: ${size}px;
+          background: rgba(255, 110, 66, ${opacity});
+          border-radius: 50%;
+          top: ${posY}%;
+          right: ${posX}%;
+          opacity: 0;
+          animation: float ${duration}s linear infinite;
+          animation-delay: ${delay}s;
+          z-index: -1;
+        `;
+        
+        particlesContainer.appendChild(particle);
+      }
+      
+      // Add animation keyframes if not already added
+      if (!document.querySelector('#particle-animation')) {
+        const styleSheet = document.createElement('style');
+        styleSheet.id = 'particle-animation';
+        styleSheet.textContent = `
+          @keyframes float {
+            0% {
+              transform: translateY(0) translateX(0) rotate(0);
+              opacity: 0;
+            }
+            10% {
+              opacity: 1;
+            }
+            90% {
+              opacity: 1;
+            }
+            100% {
+              transform: translateY(-300px) translateX(${Math.random() * 100 - 50}px) rotate(360deg);
+              opacity: 0;
+            }
+          }
+        `;
+        document.head.appendChild(styleSheet);
+      }
+    }
+  }
+}
+
 // Email validation helper function
 function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -346,3 +360,32 @@ function scrollToSection(sectionId) {
     });
   }
 }
+
+// Add structured data for SEO if not already present
+function addStructuredData() {
+  if (!document.querySelector('script[type="application/ld+json"]')) {
+    const organizationSchema = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "W للخدمات الإلكترونية",
+      "url": window.location.href,
+      "logo": window.location.origin + "/wD.png",
+      "description": "خدمات إلكترونية وطلابية مميزة في السعودية.",
+      "telephone": "+966 54 073 2077",
+      "email": "wforelectrnoicservices@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "SA",
+        "addressRegion": "المدينة المنورة"
+      }
+    };
+    
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.textContent = JSON.stringify(organizationSchema);
+    document.head.appendChild(script);
+  }
+}
+
+// Execute structured data addition after page load
+document.addEventListener('DOMContentLoaded', addStructuredData);

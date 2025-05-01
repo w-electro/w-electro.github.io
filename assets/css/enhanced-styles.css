@@ -1,4 +1,4 @@
-/* Enhanced styling for w-electro website */
+/* Enhanced styling for w-electro website - SEO Optimized */
 
 :root {
   --primary-color: #21a6b8;
@@ -63,7 +63,7 @@ header nav a::after {
   height: 2px;
   bottom: -3px;
   left: 0;
-  background-color: var(--primary-color);
+  background-color: var(--accent-color);
   transition: width 0.3s ease;
 }
 
@@ -73,6 +73,7 @@ header nav a:hover::after {
 
 header nav a.text-cyan-600::after {
   width: 100%;
+  background-color: var(--accent-color);
 }
 
 /* Section styling */
@@ -135,14 +136,8 @@ section.visible {
 
 .service-card:hover .price-tag {
   background: white;
-  color: var(--primary-color);
+  color: var(--accent-color);
   font-weight: bold;
-}
-
-.service-card:hover .btn-primary {
-  background: white;
-  color: var(--primary-color);
-  box-shadow: 0 5px 15px rgba(255,255,255,0.3);
 }
 
 /* Modern icons with gradient background */
@@ -182,11 +177,11 @@ section.visible {
   margin-right: auto;
 }
 
-/* Button styling */
+/* Updated Button styling - Orange Buttons */
 .btn-primary {
   display: inline-block;
   padding: 10px 20px;
-  background: linear-gradient(to right, var(--primary-color), #19889a);
+  background: linear-gradient(to right, var(--accent-color), #e85a35);
   color: white;
   border-radius: 50px;
   font-weight: bold;
@@ -198,12 +193,19 @@ section.visible {
   cursor: pointer;
   margin-top: auto;
   text-decoration: none;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 6px rgba(255, 110, 66, 0.2);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 7px 14px rgba(33, 166, 184, 0.2);
+  box-shadow: 0 7px 14px rgba(255, 110, 66, 0.3);
+  background: linear-gradient(to right, #ff8056, #ff5722);
+}
+
+.service-card:hover .btn-primary {
+  background: white;
+  color: var(--accent-color);
+  box-shadow: 0 5px 15px rgba(255, 110, 66, 0.3);
 }
 
 /* Floating action button for WhatsApp */
@@ -237,14 +239,14 @@ section.visible {
   right: 30px;
   width: 50px;
   height: 50px;
-  background: var(--primary-gradient);
+  background: var(--accent-gradient);
   color: white;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  box-shadow: 0 5px 15px rgba(33, 166, 184, 0.3);
+  box-shadow: 0 5px 15px rgba(255, 110, 66, 0.3);
   cursor: pointer;
   z-index: 1000;
   opacity: 0;
@@ -259,7 +261,7 @@ section.visible {
 
 #scrollToTop:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(33, 166, 184, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 110, 66, 0.4);
 }
 
 /* Footer styling */
@@ -275,11 +277,24 @@ footer a {
 
 footer a:hover {
   transform: translateY(-3px);
+  color: var(--accent-color) !important;
 }
 
 footer .container {
   position: relative;
   z-index: 1;
+}
+
+/* Form styling */
+input, textarea {
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 3px rgba(255, 110, 66, 0.15);
+  outline: none;
 }
 
 /* Animations */
@@ -343,19 +358,32 @@ footer .container {
 .delay-400 { animation-delay: 0.4s; }
 .delay-500 { animation-delay: 0.5s; }
 
-/* Form styling */
-input, textarea {
-  transition: all 0.3s ease;
-  border: 1px solid #e2e8f0;
+/* SEO Optimization Style Improvements */
+h1, h2, h3 {
+  color: #333;
 }
 
-input:focus, textarea:focus {
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(33, 166, 184, 0.15);
-  outline: none;
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-/* Responsive Fixes */
+a:hover {
+  color: var(--accent-color);
+}
+
+/* Internal links styling */
+.text-orange-500:hover {
+  text-decoration: underline;
+}
+
+/* Accessibility improvements */
+.service-icon[aria-label] {
+  position: relative;
+}
+
+/* Mobile and Responsive Optimizations */
 @media (max-width: 768px) {
   .service-card {
     margin-bottom: 20px;
@@ -389,6 +417,14 @@ input:focus, textarea:focus {
   
   header .container {
     padding: 0.5rem 1rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
   }
   
   .md\:hidden.mt-4.py-4 {
@@ -431,5 +467,45 @@ input:focus, textarea:focus {
   
   .service-card:hover .service-icon {
     transform: none;
+  }
+}
+
+/* Print styles for better SEO */
+@media print {
+  .particles-container,
+  .floating-whatsapp,
+  #scrollToTop,
+  .service-card::before {
+    display: none !important;
+  }
+  
+  body, html {
+    background: white !important;
+    font-size: 12pt;
+  }
+  
+  .service-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #ddd !important;
+  }
+  
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    font-style: italic;
+  }
+  
+  h1, h2, h3, h4 {
+    page-break-after: avoid;
+  }
+  
+  img {
+    max-width: 100% !important;
+  }
+  
+  @page {
+    margin: 2cm;
   }
 }

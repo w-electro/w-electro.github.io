@@ -5,6 +5,20 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		
+		<!-- Favicon and Meta Images -->
+		<link rel="icon" href="wD.png" type="image/png">
+		<link rel="apple-touch-icon" href="wD.png">
+		<link rel="shortcut icon" href="wD.png" type="image/png">
+		
+		<!-- Meta tags for social media sharing -->
+		<meta property="og:title" content="W للخدمات الإلكترونية - حلولك الرقمية والإبداعية">
+		<meta property="og:description" content="نقدم مجموعة متنوعة من الخدمات الإلكترونية العامة بجودة عالية وأسعار مناسبة.">
+		<meta property="og:image" content="wD.png">
+		<meta property="og:url" content="">
+		<meta property="og:type" content="website">
+		<meta property="og:site_name" content="W للخدمات الإلكترونية">
+		<meta name="twitter:card" content="summary_large_image">
+		
 		<!-- Tailwind CSS -->
 		<script src="https://cdn.tailwindcss.com"></script>
 		
@@ -44,6 +58,10 @@
 			/* Custom classes */
 			.service-card {
 				@apply bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-xl p-6 relative overflow-hidden border border-gray-100;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
 			}
 			
 			.service-card:hover {
@@ -60,6 +78,9 @@
 			
 			.price-tag {
 				@apply inline-block bg-orange-100 text-orange-600 px-4 py-1 rounded-full font-bold text-sm my-3;
+				display: block;
+				text-align: center;
+				margin: 0 auto;
 			}
 			
 			.service-card:hover .price-tag {
@@ -68,11 +89,31 @@
 			
 			.btn-primary {
 				@apply inline-block px-4 py-2 bg-gradient-to-r from-cyan-500 to-cyan-600 text-white rounded-full font-bold text-sm transition-all duration-300 hover:shadow-lg hover:from-cyan-600 hover:to-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-opacity-50;
+				margin-top: auto;
 			}
 			
 			/* Floating WhatsApp button */
 			.floating-whatsapp {
 				@apply fixed bottom-6 left-6 w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center text-2xl shadow-lg z-50 transition-all duration-300 hover:bg-green-600 hover:scale-110 hover:rotate-6 hover:shadow-xl;
+			}
+			
+			/* Particles container */
+			.particles-container {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				z-index: -1;
+				pointer-events: none;
+			}
+			
+			.particle {
+				position: absolute;
+				border-radius: 50%;
+				opacity: 0;
+				z-index: -1;
 			}
 			
 			/* Animations */
@@ -87,6 +128,23 @@
 				}
 			}
 			
+			@keyframes float {
+				0% {
+					transform: translateY(0) translateX(0) rotate(0);
+					opacity: 0;
+				}
+				10% {
+					opacity: 1;
+				}
+				90% {
+					opacity: 1;
+				}
+				100% {
+					transform: translateY(-300px) translateX(30px) rotate(360deg);
+					opacity: 0;
+				}
+			}
+			
 			.animate-fadeInUp {
 				animation: fadeInUp 0.5s ease-out forwards;
 			}
@@ -97,10 +155,52 @@
 			.delay-400 { animation-delay: 0.4s; }
 			.delay-500 { animation-delay: 0.5s; }
 			
+			/* Fix scroll to top button */
+			#scrollToTop {
+				opacity: 0;
+				visibility: hidden;
+				transition: opacity 0.3s, visibility 0.3s;
+			}
+			
+			#scrollToTop.visible {
+				opacity: 1;
+				visibility: visible;
+			}
+			
+			/* Mobile optimizations */
+			@media (max-width: 768px) {
+				.grid {
+					display: grid;
+					grid-template-columns: 1fr;
+					gap: 1rem;
+				}
+				
+				.service-card {
+					margin-bottom: 1rem;
+				}
+				
+				header .container {
+					padding: 0.5rem 1rem;
+				}
+				
+				.md\:hidden.mt-4.py-4 {
+					max-height: 80vh;
+					overflow-y: auto;
+				}
+			}
+			
 			@media (prefers-reduced-motion) {
 				.animate-fadeInUp {
 					animation: none;
 					opacity: 1;
+				}
+				
+				.service-card:hover {
+					transform: none;
+				}
+				
+				.service-card:hover .service-icon {
+					transform: none;
 				}
 			}
 		</style>
@@ -724,105 +824,6 @@
 		</button>
 		
 		<!-- JavaScript -->
-		<script>
-			// Show/hide scroll to top button
-			window.addEventListener('scroll', function() {
-				const scrollToTopBtn = document.getElementById('scrollToTop');
-				if (window.pageYOffset > 300) {
-					scrollToTopBtn.classList.remove('opacity-0', 'invisible');
-					scrollToTopBtn.classList.add('opacity-100', 'visible');
-				} else {
-					scrollToTopBtn.classList.remove('opacity-100', 'visible');
-					scrollToTopBtn.classList.add('opacity-0', 'invisible');
-				}
-			});
-			
-			// Scroll to top functionality
-			document.getElementById('scrollToTop').addEventListener('click', function() {
-				window.scrollTo({
-					top: 0,
-					behavior: 'smooth'
-				});
-			});
-			
-			// Highlight active navigation item based on scroll position
-			window.addEventListener('scroll', function() {
-				const sections = document.querySelectorAll('section[id]');
-				let scrollPosition = window.pageYOffset;
-				
-				sections.forEach(section => {
-					const sectionTop = section.offsetTop - 100;
-					const sectionHeight = section.offsetHeight;
-					const sectionId = section.getAttribute('id');
-					
-					if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-						document.querySelectorAll('.md\:flex a').forEach(item => {
-							item.classList.remove('text-cyan-600');
-							item.classList.add('text-gray-600');
-						});
-						
-						document.querySelectorAll('.md\:hidden a').forEach(item => {
-							item.classList.remove('text-cyan-600');
-							item.classList.add('text-gray-600');
-						});
-						
-						document.querySelector(`.md\:flex a[href="#${sectionId}"]`)?.classList.add('text-cyan-600');
-						document.querySelector(`.md\:hidden a[href="#${sectionId}"]`)?.classList.add('text-cyan-600');
-					}
-				});
-			});
-			
-			// Smooth scrolling for navigation links
-			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-				anchor.addEventListener('click', function(e) {
-					e.preventDefault();
-					
-					// Close mobile menu if open
-					if (window.innerWidth < 768) {
-						const mobileMenuButton = document.querySelector('button[aria-expanded="true"]');
-						if (mobileMenuButton) {
-							mobileMenuButton.click();
-						}
-					}
-					
-					const targetId = this.getAttribute('href');
-					if (targetId === '#') {
-						window.scrollTo({
-							top: 0,
-							behavior: 'smooth'
-						});
-					} else {
-						document.querySelector(targetId).scrollIntoView({
-							behavior: 'smooth'
-						});
-					}
-				});
-			});
-			
-			// Animation on scroll
-			document.addEventListener('DOMContentLoaded', function() {
-				const observerOptions = {
-					root: null,
-					rootMargin: '0px',
-					threshold: 0.1
-				};
-				
-				const observer = new IntersectionObserver((entries, observer) => {
-					entries.forEach(entry => {
-						if (entry.isIntersecting) {
-							entry.target.style.opacity = '1';
-							entry.target.style.transform = 'translateY(0)';
-							observer.unobserve(entry.target);
-						}
-					});
-				}, observerOptions);
-				
-				document.querySelectorAll('.animate-fadeInUp').forEach(el => {
-					el.style.opacity = '0';
-					el.style.transform = 'translateY(20px)';
-					observer.observe(el);
-				});
-			});
-		</script>
+		<script src="script.js"></script>
 	</body>
 </html>

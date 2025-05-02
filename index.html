@@ -5,6 +5,7 @@
 		<title>خدمات إلكترونية وطلابية | W للخدمات الإلكترونية - حلول ذكية للطلاب</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta http-equiv="Content-Language" content="ar" />
 		
 		<!-- SEO Meta Description -->
 		<meta name="description" content="موقع W للخدمات الإلكترونية يقدم خدمات إلكترونية مميزة تشمل الخدمات الطلابية، مثل التسجيل الجامعي، والطباعة، وتوفير حلول ذكية للطلاب.">
@@ -16,7 +17,7 @@
 		<link rel="icon" href="wD.png" type="image/png">
 		<link rel="apple-touch-icon" href="wD.png">
 		<link rel="shortcut icon" href="wD.png" type="image/png">
-		<link rel="canonical" href="https://your-website-url.com/">
+		<link rel="canonical" href="https://www.w-electro.com/">
 		
 		<!-- Meta tags for social media sharing - SEO Enhanced -->
 		<meta property="og:title" content="خدمات إلكترونية وطلابية | W للخدمات الإلكترونية">
@@ -84,208 +85,53 @@
 		}
 		</script>
 		
+		<!-- Inline styles for transparent orange buttons -->
 		<style>
-			/* Tailwind directives */
-			@tailwind base;
-			@tailwind components;
-			@tailwind utilities;
-			
-			/* RTL fixes */
-			html[dir="rtl"] {
-				text-align: right;
+			/* Force transparent orange buttons */
+			.btn-outline-orange, .btn-primary {
+				display: inline-block !important;
+				padding: 10px 20px !important;
+				background: transparent !important;
+				color: #ff6e42 !important;
+				border: 2px solid #ff6e42 !important;
+				border-radius: 50px !important;
+				font-weight: bold !important;
+				font-size: 0.9em !important;
+				transition: all 0.3s ease !important;
+				cursor: pointer !important;
+				text-decoration: none !important;
+				text-align: center !important;
 			}
 			
-			/* Custom Arabic font */
-			body {
-				font-family: 'Cairo', sans-serif;
+			.btn-outline-orange:hover, .btn-primary:hover {
+				background-color: rgba(255, 110, 66, 0.15) !important;
+				transform: translateY(-3px) !important;
+				box-shadow: 0 7px 14px rgba(255, 110, 66, 0.2) !important;
 			}
 			
-			/* Customize Tailwind theme */
-			:root {
-				--primary-color: #21a6b8;
-				--accent-color: #ff6e42;
-				--dark-color: #263238;
-				--light-color: #f8fafc;
+			.service-card:hover .btn-outline-orange, .service-card:hover .btn-primary {
+				color: #ffffff !important;
+				border-color: #ffffff !important;
+				background-color: transparent !important;
 			}
 			
-			/* Custom classes */
-			.service-card {
-				@apply bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-xl p-6 relative overflow-hidden border border-gray-100;
-				height: 100%;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-			
-			.service-card:hover {
-				@apply transform -translate-y-2;
-			}
-			
-			.service-icon {
-				@apply flex items-center justify-center w-16 h-16 rounded-full bg-cyan-100 text-cyan-600 text-2xl mb-4 mx-auto transition-all duration-300;
-			}
-			
-			.service-card:hover .service-icon {
-				@apply bg-cyan-600 text-white transform scale-110 rotate-3;
-			}
-			
-			.price-tag {
-				@apply inline-block bg-orange-100 text-orange-600 px-4 py-1 rounded-full font-bold text-sm my-3;
-				display: block;
-				text-align: center;
-				margin: 0 auto;
-			}
-			
-			.service-card:hover .price-tag {
-				@apply bg-white text-orange-500;
-			}
-			
-			.btn-primary {
-				@apply inline-block px-4 py-2 text-white rounded-full font-bold text-sm transition-all duration-300 focus:outline-none;
-				background: linear-gradient(to right, var(--accent-color), #e85a35);
-				margin-top: auto;
-				box-shadow: 0 4px 6px rgba(255, 110, 66, 0.2);
-			}
-			
-			.btn-primary:hover {
-				box-shadow: 0 7px 14px rgba(255, 110, 66, 0.3);
-				background: linear-gradient(to right, #ff8056, #ff5722);
-				transform: translateY(-3px);
-			}
-			
-			.service-card:hover .btn-primary {
-				background: white;
-				color: var(--accent-color);
-				box-shadow: 0 5px 15px rgba(255, 110, 66, 0.3);
-			}
-			
-			/* Floating WhatsApp button */
+			/* Fix floating buttons */
 			.floating-whatsapp {
-				@apply fixed bottom-6 left-6 w-14 h-14 bg-green-500 text-white rounded-full flex items-center justify-center text-2xl shadow-lg z-50 transition-all duration-300 hover:bg-green-600 hover:scale-110 hover:rotate-6 hover:shadow-xl;
+				background: transparent !important;
+				color: #ff6e42 !important;
+				border: 2px solid #ff6e42 !important;
 			}
 			
-			/* Particles container */
-			.particles-container {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				overflow: hidden;
-				z-index: -1;
-				pointer-events: none;
-			}
-			
-			.particle {
-				position: absolute;
-				border-radius: 50%;
-				opacity: 0;
-				z-index: -1;
-			}
-			
-			/* Animations */
-			@keyframes fadeInUp {
-				from {
-					opacity: 0;
-					transform: translateY(20px);
-				}
-				to {
-					opacity: 1;
-					transform: translateY(0);
-				}
-			}
-			
-			@keyframes float {
-				0% {
-					transform: translateY(0) translateX(0) rotate(0);
-					opacity: 0;
-				}
-				10% {
-					opacity: 1;
-				}
-				90% {
-					opacity: 1;
-				}
-				100% {
-					transform: translateY(-300px) translateX(30px) rotate(360deg);
-					opacity: 0;
-				}
-			}
-			
-			.animate-fadeInUp {
-				animation: fadeInUp 0.5s ease-out forwards;
-			}
-			
-			.delay-100 { animation-delay: 0.1s; }
-			.delay-200 { animation-delay: 0.2s; }
-			.delay-300 { animation-delay: 0.3s; }
-			.delay-400 { animation-delay: 0.4s; }
-			.delay-500 { animation-delay: 0.5s; }
-			
-			/* Fix scroll to top button */
 			#scrollToTop {
-				opacity: 0;
-				visibility: hidden;
-				transition: opacity 0.3s, visibility 0.3s;
-			}
-			
-			#scrollToTop.visible {
-				opacity: 1;
-				visibility: visible;
-			}
-			
-			/* Mobile optimizations */
-			@media (max-width: 768px) {
-				.grid {
-					display: grid;
-					grid-template-columns: 1fr;
-					gap: 1rem;
-				}
-				
-				.service-card {
-					margin-bottom: 1rem;
-				}
-				
-				header .container {
-					padding: 0.5rem 1rem;
-				}
-				
-				.md\:hidden.mt-4.py-4 {
-					max-height: 80vh;
-					overflow-y: auto;
-				}
-			}
-			
-			@media (prefers-reduced-motion) {
-				.animate-fadeInUp {
-					animation: none;
-					opacity: 1;
-				}
-				
-				.service-card:hover {
-					transform: none;
-				}
-				
-				.service-card:hover .service-icon {
-					transform: none;
-				}
+				background: transparent !important;
+				color: #ff6e42 !important;
+				border: 2px solid #ff6e42 !important;
 			}
 		</style>
 		
-		<!-- Tailwind Config -->
-		<script>
-			tailwind.config = {
-				theme: {
-					extend: {
-						colors: {
-							primary: '#21a6b8',
-							accent: '#ff6e42',
-							dark: '#263238',
-						},
-					},
-				},
-			}
-		</script>
+		
+		<!-- Custom Stylesheet -->
+		<link rel="stylesheet" href="enhanced-styles.css" />
 	</head>
 	<body class="bg-gray-50 text-gray-800">
 		<!-- Header/Navigation -->
@@ -350,7 +196,7 @@
 						
 						<div class="space-x-4 rtl:space-x-reverse">
 							<a href="#general" class="btn-primary">استكشف خدماتنا</a>
-							<a href="#contact" class="px-4 py-2 inline-block border border-orange-500 text-orange-600 rounded-full font-bold text-sm transition-all duration-300 hover:bg-orange-50">تواصل معنا</a>
+							<a href="#contact" class="btn-primary">تواصل معنا</a>
 						</div>
 					</div>
 					<div class="md:w-1/2 mt-12 md:mt-0 animate-fadeInUp delay-200">
@@ -760,7 +606,7 @@
 								<h3 class="text-xl font-semibold text-gray-800">واتساب</h3>
 								<p dir="ltr" class="text-gray-600">+966 54 073 2077</p>
 								<div class="mt-4">
-									<a href="https://wa.me/966540732077" class="inline-flex items-center justify-center px-4 py-2 bg-green-500 text-white rounded-full font-bold text-sm transition-all duration-300 hover:bg-green-600">
+									<a href="https://wa.me/966540732077" class="btn-primary">
 										<i class="fab fa-whatsapp mr-2"></i> مراسلة
 									</a>
 								</div>
@@ -774,7 +620,7 @@
 								<h3 class="text-xl font-semibold text-gray-800">البريد الإلكتروني</h3>
 								<p dir="ltr" class="text-gray-600 break-all">wforelectrnoicservices@gmail.com</p>
 								<div class="mt-4">
-									<a href="mailto:wforelectrnoicservices@gmail.com" class="inline-flex items-center justify-center px-4 py-2 bg-blue-500 text-white rounded-full font-bold text-sm transition-all duration-300 hover:bg-blue-600">
+									<a href="mailto:wforelectrnoicservices@gmail.com" class="btn-primary">
 										<i class="fas fa-envelope mr-2"></i> مراسلة
 									</a>
 								</div>
@@ -788,7 +634,7 @@
 								<h3 class="text-xl font-semibold text-gray-800">انستغرام</h3>
 								<p class="text-gray-600">@wfor_es</p>
 								<div class="mt-4">
-									<a href="https://instagram.com/wfor_es" target="_blank" class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-full font-bold text-sm transition-all duration-300 hover:from-pink-600 hover:to-purple-600">
+									<a href="https://instagram.com/wfor_es" target="_blank" class="btn-primary">
 										<i class="fab fa-instagram mr-2"></i> متابعة
 									</a>
 								</div>
@@ -802,7 +648,7 @@
 								<h3 class="text-xl font-semibold text-gray-800">تيك توك</h3>
 								<p class="text-gray-600">@wforelectronicservices</p>
 								<div class="mt-4">
-									<a href="https://tiktok.com/@wforelectronicservices" target="_blank" class="inline-flex items-center justify-center px-4 py-2 bg-black text-white rounded-full font-bold text-sm transition-all duration-300 hover:bg-gray-800">
+									<a href="https://tiktok.com/@wforelectronicservices" target="_blank" class="btn-primary">
 										<i class="fab fa-tiktok mr-2"></i> متابعة
 									</a>
 								</div>
@@ -880,16 +726,16 @@
 					<div class="text-center md:text-left">
 						<h4 class="text-lg font-semibold mb-4 text-center md:text-right">تواصل معنا</h4>
 						<div class="flex justify-center md:justify-end space-x-4 rtl:space-x-reverse">
-							<a href="https://wa.me/966540732077" class="bg-gray-800 hover:bg-green-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+							<a href="https://wa.me/966540732077" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
 								<i class="fab fa-whatsapp"></i>
 							</a>
-							<a href="mailto:wforelectrnoicservices@gmail.com" class="bg-gray-800 hover:bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+							<a href="mailto:wforelectrnoicservices@gmail.com" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
 								<i class="fas fa-envelope"></i>
 							</a>
-							<a href="https://instagram.com/wfor_es" class="bg-gray-800 hover:bg-pink-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+							<a href="https://instagram.com/wfor_es" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
 								<i class="fab fa-instagram"></i>
 							</a>
-							<a href="https://tiktok.com/@wforelectronicservices" class="bg-gray-800 hover:bg-black text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+							<a href="https://tiktok.com/@wforelectronicservices" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
 								<i class="fab fa-tiktok"></i>
 							</a>
 						</div>
@@ -902,13 +748,13 @@
 			</div>
 		</footer>
 		
-		<!-- Floating WhatsApp Button -->
+		<!-- Floating WhatsApp Button - Updated to match style -->
 		<a href="https://wa.me/966540732077" class="floating-whatsapp" target="_blank">
 			<i class="fab fa-whatsapp"></i>
 		</a>
 		
-		<!-- Scroll to top button -->
-		<button id="scrollToTop" class="fixed bottom-6 right-6 bg-orange-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-50 transition-all duration-300 hover:bg-orange-700 opacity-0 invisible">
+		<!-- Scroll to top button - Updated to match style -->
+		<button id="scrollToTop" class="fixed bottom-6 right-6 bg-transparent border-2 border-orange-500 text-orange-500 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-50 transition-all duration-300 hover:bg-orange-100 opacity-0 invisible">
 			<i class="fas fa-arrow-up"></i>
 		</button>
 		

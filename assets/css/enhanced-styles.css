@@ -177,35 +177,37 @@ section.visible {
   margin-right: auto;
 }
 
-/* Updated Button styling - Orange Buttons */
+/* UPDATED: Transparent Orange Button Style */
 .btn-primary {
   display: inline-block;
   padding: 10px 20px;
-  background: linear-gradient(to right, var(--accent-color), #e85a35);
-  color: white;
+  background: transparent;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
   border-radius: 50px;
   font-weight: bold;
-  text-transform: uppercase;
-  font-size: 0.8em;
-  letter-spacing: 1px;
+  font-size: 0.9em;
   transition: all 0.3s ease;
-  border: none;
   cursor: pointer;
   margin-top: auto;
   text-decoration: none;
-  box-shadow: 0 4px 6px rgba(255, 110, 66, 0.2);
+  text-align: center;
 }
 
 .btn-primary:hover {
+  background-color: rgba(255, 110, 66, 0.15);
   transform: translateY(-3px);
-  box-shadow: 0 7px 14px rgba(255, 110, 66, 0.3);
-  background: linear-gradient(to right, #ff8056, #ff5722);
+  box-shadow: 0 7px 14px rgba(255, 110, 66, 0.2);
 }
 
 .service-card:hover .btn-primary {
-  background: white;
-  color: var(--accent-color);
-  box-shadow: 0 5px 15px rgba(255, 110, 66, 0.3);
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.service-card:hover .btn-primary:hover {
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 /* Floating action button for WhatsApp */
@@ -215,21 +217,23 @@ section.visible {
   left: 30px;
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-  color: white;
+  background: transparent;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 5px 15px rgba(255, 110, 66, 0.2);
   z-index: 1000;
   transition: all 0.3s;
 }
 
 .floating-whatsapp:hover {
   transform: scale(1.1) rotate(10deg);
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+  background-color: rgba(255, 110, 66, 0.15);
+  box-shadow: 0 8px 25px rgba(255, 110, 66, 0.3);
 }
 
 /* Scroll to top button */
@@ -239,14 +243,15 @@ section.visible {
   right: 30px;
   width: 50px;
   height: 50px;
-  background: var(--accent-gradient);
-  color: white;
+  background: transparent;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 20px;
-  box-shadow: 0 5px 15px rgba(255, 110, 66, 0.3);
+  box-shadow: 0 5px 15px rgba(255, 110, 66, 0.1);
   cursor: pointer;
   z-index: 1000;
   opacity: 0;
@@ -260,8 +265,9 @@ section.visible {
 }
 
 #scrollToTop:hover {
+  background-color: rgba(255, 110, 66, 0.15);
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(255, 110, 66, 0.4);
+  box-shadow: 0 8px 25px rgba(255, 110, 66, 0.2);
 }
 
 /* Footer styling */
@@ -431,6 +437,11 @@ a:hover {
     max-height: 80vh;
     overflow-y: auto;
   }
+
+  .btn-primary {
+    padding: 8px 16px;
+    font-size: 0.85em;
+  }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
@@ -508,4 +519,23 @@ a:hover {
   @page {
     margin: 2cm;
   }
+}
+
+/* Special styling for contact social buttons */
+.service-card .inline-flex.items-center.justify-center {
+  display: inline-flex;
+  padding: 10px 20px;
+  background: transparent;
+  color: var(--accent-color);
+  border: 2px solid var(--accent-color);
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+.service-card .inline-flex.items-center.justify-center:hover {
+  background-color: rgba(255, 110, 66, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 7px 14px rgba(255, 110, 66, 0.2);
 }

@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Enhanced service cards hover effect
+  // Enhanced service cards hover effect - UPDATED for transparent orange buttons
   const serviceCards = document.querySelectorAll('.service-card');
   
   serviceCards.forEach(card => {
@@ -89,12 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
         priceTag.style.color = '#ff6e42';
       }
       
-      // Change button color
+      // Change button color for transparent buttons
       const button = this.querySelector('.btn-primary');
       if (button) {
-        button.style.background = '#ffffff';
-        button.style.color = '#ff6e42';
-        button.style.boxShadow = '0 5px 15px rgba(255, 110, 66, 0.3)';
+        button.style.background = 'transparent';
+        button.style.color = '#ffffff';
+        button.style.borderColor = '#ffffff';
       }
     });
     
@@ -117,12 +117,12 @@ document.addEventListener('DOMContentLoaded', function() {
         priceTag.style.color = '';
       }
       
-      // Reset button
+      // Reset button for transparent buttons
       const button = this.querySelector('.btn-primary');
       if (button) {
-        button.style.background = '';
-        button.style.color = '';
-        button.style.boxShadow = '';
+        button.style.background = 'transparent';
+        button.style.color = '#ff6e42';
+        button.style.borderColor = '#ff6e42';
       }
     });
   });
@@ -145,7 +145,79 @@ document.addEventListener('DOMContentLoaded', function() {
         behavior: 'smooth'
       });
     });
+  
+    // Add hover effect for transparent button
+    scrollToTopBtn.addEventListener('mouseenter', function() {
+      this.style.backgroundColor = 'rgba(255, 110, 66, 0.15)';
+      this.style.color = '#ff6e42';
+      this.style.transform = 'translateY(-5px)';
+      this.style.boxShadow = '0 8px 25px rgba(255, 110, 66, 0.2)';
+    });
+  
+    scrollToTopBtn.addEventListener('mouseleave', function() {
+      this.style.backgroundColor = 'transparent';
+      this.style.color = '#ff6e42';
+      this.style.transform = '';
+      this.style.boxShadow = '';
+    });
   }
+  
+  // Apply button styles to all elements with btn-primary class
+  const applyTransparentButtonStyles = function() {
+    const allButtons = document.querySelectorAll('.btn-primary');
+    
+    allButtons.forEach(button => {
+      // Apply default transparent orange style
+      button.style.backgroundColor = 'transparent';
+      button.style.color = '#ff6e42';
+      button.style.borderColor = '#ff6e42';
+      button.style.borderWidth = '2px';
+      button.style.borderRadius = '50px';
+      button.style.transition = 'all 0.3s ease';
+      
+      // Add hover event listeners if not in a service card
+      if (!button.closest('.service-card')) {
+        button.addEventListener('mouseenter', function() {
+          this.style.backgroundColor = 'rgba(255, 110, 66, 0.15)';
+          this.style.transform = 'translateY(-3px)';
+          this.style.boxShadow = '0 7px 14px rgba(255, 110, 66, 0.2)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+          this.style.backgroundColor = 'transparent';
+          this.style.transform = '';
+          this.style.boxShadow = '';
+        });
+      }
+    });
+    
+    // Update floating WhatsApp button
+    const whatsappButton = document.querySelector('.floating-whatsapp');
+    if (whatsappButton) {
+      whatsappButton.style.backgroundColor = 'transparent';
+      whatsappButton.style.color = '#ff6e42';
+      whatsappButton.style.borderColor = '#ff6e42';
+      whatsappButton.style.borderWidth = '2px';
+      
+      whatsappButton.addEventListener('mouseenter', function() {
+        this.style.backgroundColor = 'rgba(255, 110, 66, 0.15)';
+        this.style.transform = 'scale(1.1) rotate(10deg)';
+        this.style.boxShadow = '0 8px 25px rgba(255, 110, 66, 0.3)';
+      });
+      
+      whatsappButton.addEventListener('mouseleave', function() {
+        this.style.backgroundColor = 'transparent';
+        this.style.transform = '';
+        this.style.boxShadow = '';
+      });
+    }
+    
+    // Log success
+    console.log('Transparent button styles applied to', allButtons.length, 'buttons');
+  };
+  
+  // Run button style application on page load
+  applyTransparentButtonStyles();
   
   // Fix for scroll animations
   const animateOnScroll = function() {
@@ -286,7 +358,7 @@ function setupParticles() {
         const duration = Math.random() * 10 + 15;
         const opacity = Math.random() * 0.3 + 0.1;
         
-        // Set styles
+        // Set styles with orange color for particles
         particle.style.cssText = `
           position: absolute;
           width: ${size}px;
@@ -338,7 +410,7 @@ function validateEmail(email) {
   return re.test(String(email).toLowerCase());
 }
 
-// Function to handle scroll to section
+// Helper function for scroll to section
 function scrollToSection(sectionId) {
   const section = document.querySelector(sectionId);
   if (section) {
@@ -386,6 +458,7 @@ function addStructuredData() {
     document.head.appendChild(script);
   }
 }
+
 
 // Execute structured data addition after page load
 document.addEventListener('DOMContentLoaded', addStructuredData);

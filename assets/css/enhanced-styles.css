@@ -145,15 +145,18 @@ section.visible {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  float: none !important; /* This centers the icon */
   width: 64px;
   height: 64px;
   border-radius: 50%;
   background: #e6f7fa;
-  margin-bottom: 20px;
   font-size: 1.5em;
   color: var(--primary-color);
   transition: all 0.4s ease;
 }
+
 
 .service-card:hover .service-icon {
   background: rgba(255,255,255,0.2);

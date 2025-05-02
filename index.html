@@ -2,28 +2,28 @@
 <html lang="ar" dir="rtl">
 	<head>
 		<!-- SEO Optimized Title -->
-		<title>خدمات إلكترونية وطلابية | W للخدمات الإلكترونية - حلول ذكية للطلاب</title>
+		<title>خدمات إلكترونية مميزة | W للخدمات - حلول ذكية للطلاب</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 		<meta http-equiv="Content-Language" content="ar" />
 		
 		<!-- SEO Meta Description -->
-		<meta name="description" content="موقع W للخدمات الإلكترونية يقدم خدمات إلكترونية مميزة تشمل الخدمات الطلابية، مثل التسجيل الجامعي، والطباعة، وتوفير حلول ذكية للطلاب.">
-		<meta name="keywords" content="خدمات إلكترونية, خدمات طلابية, تسجيل جامعي, طباعة, تسجيل اختبار قياس, فتح حساب بنكي, إنشاء متجر إلكتروني">
+		<meta name="description" content="W للخدمات الإلكترونية يقدم خدمات تسجيل جامعي، طباعة، وحلول ذكية للطلاب. استمتع بخدمات إلكترونية مميزة الآن!">
+		<!-- Meta keywords removed as Google no longer uses it for ranking -->
 		<meta name="robots" content="index, follow">
 		<meta name="author" content="W للخدمات الإلكترونية">
 		
 		<!-- Favicon and Meta Images -->
 		<link rel="icon" href="wD.png" type="image/png">
+		<link rel="shortcut icon" href="wD.ico" type="image/x-icon">
 		<link rel="apple-touch-icon" href="wD.png">
-		<link rel="shortcut icon" href="wD.png" type="image/png">
 		<link rel="canonical" href="https://www.w-electro.com/">
 		
 		<!-- Meta tags for social media sharing - SEO Enhanced -->
-		<meta property="og:title" content="خدمات إلكترونية وطلابية | W للخدمات الإلكترونية">
-		<meta property="og:description" content="نقدم مجموعة متنوعة من الخدمات الإلكترونية والخدمات الطلابية بجودة عالية وأسعار مناسبة للطلاب والأفراد.">
-		<meta property="og:image" content="wD.png">
-		<meta property="og:url" content="">
+		<meta property="og:title" content="خدمات إلكترونية مميزة | W للخدمات">
+		<meta property="og:description" content="استمتع بخدمات تسجيل جامعي، طباعة، وحلول ذكية للطلاب من W للخدمات الإلكترونية.">
+		<meta property="og:image" content="https://www.w-electro.com/wD.png">
+		<meta property="og:url" content="https://www.w-electro.com/">
 		<meta property="og:type" content="website">
 		<meta property="og:site_name" content="W للخدمات الإلكترونية">
 		<meta name="twitter:card" content="summary_large_image">
@@ -40,15 +40,15 @@
 		<!-- Custom Arabic font -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" />
 		
-		<!-- Schema Markup for SEO -->
+		<!-- Enhanced Schema Markup for SEO -->
 		<script type="application/ld+json">
 		{
 			"@context": "https://schema.org",
 			"@type": "Organization",
 			"name": "W للخدمات الإلكترونية",
-			"url": "https://your-website-url.com",
-			"logo": "https://your-website-url.com/wD.png",
-			"description": "خدمات إلكترونية وطلابية مميزة في السعودية.",
+			"url": "https://www.w-electro.com/",
+			"logo": "https://www.w-electro.com/wD.png",
+			"description": "خدمات إلكترونية تشمل تسجيل جامعي، طباعة، وحلول ذكية للطلاب.",
 			"telephone": "+966 54 073 2077",
 			"email": "wforelectrnoicservices@gmail.com",
 			"address": {
@@ -72,7 +72,7 @@
 			"provider": {
 				"@type": "Organization",
 				"name": "W للخدمات الإلكترونية",
-				"url": "https://your-website-url.com"
+				"url": "https://www.w-electro.com/"
 			},
 			"areaServed": {
 				"@type": "Country",
@@ -115,6 +115,12 @@
 				background-color: transparent !important;
 			}
 			
+			.service-card:hover .btn-outline-orange:hover, .service-card:hover .btn-primary:hover {
+				background-color: rgba(255, 255, 255, 0.2) !important;
+				transform: translateY(-3px) !important;
+				box-shadow: 0 7px 14px rgba(255, 255, 255, 0.2) !important;
+			}
+			
 			/* Fix floating buttons */
 			.floating-whatsapp {
 				background: transparent !important;
@@ -127,8 +133,42 @@
 				color: #ff6e42 !important;
 				border: 2px solid #ff6e42 !important;
 			}
+
+			/* Breadcrumbs styling */
+			.breadcrumbs {
+				padding: 10px 0;
+				margin-bottom: 20px;
+				font-size: 0.9em;
+			}
+			
+			.breadcrumbs ol {
+				display: flex;
+				flex-wrap: wrap;
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			
+			.breadcrumbs li {
+				display: inline-flex;
+				align-items: center;
+			}
+			
+			.breadcrumbs li:not(:last-child)::after {
+				content: ">";
+				margin: 0 10px;
+				color: #ccc;
+			}
+			
+			.breadcrumbs a {
+				color: #ff6e42;
+				text-decoration: none;
+			}
+			
+			.breadcrumbs a:hover {
+				text-decoration: underline;
+			}
 		</style>
-		
 		
 		<!-- Custom Stylesheet -->
 		<link rel="stylesheet" href="enhanced-styles.css" />
@@ -181,13 +221,24 @@
 			</div>
 		</header>
 
+		<!-- Breadcrumbs for SEO -->
+		<nav class="breadcrumbs container mx-auto px-4" aria-label="breadcrumb">
+			<ol>
+				<li><a href="/">الرئيسية</a></li>
+				<li>خدماتنا</li>
+			</ol>
+		</nav>
+
 		<!-- Hero Section - SEO Optimized -->
 		<section id="home" class="py-16 md:py-24 bg-gradient-to-b from-cyan-50 to-white">
 			<div class="container mx-auto px-4">
 				<div class="flex flex-col md:flex-row items-center justify-between">
 					<div class="md:w-1/2 text-center md:text-right md:pr-10 animate-fadeInUp">
 						<!-- SEO Optimized H1 Tag -->
-						<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">أفضل خدمات إلكترونية وطلابية للطلاب في السعودية</h1>
+						<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">خدمات إلكترونية مميزة</h1>
+						
+						<!-- SEO Optimized Subtitle -->
+						<h2 class="text-2xl font-semibold text-gray-700 mb-3">حلول ذكية للطلاب والخدمات الطلابية</h2>
 						
 						<!-- SEO Optimized First Paragraph -->
 						<p class="text-xl text-gray-600 mb-8">
@@ -200,8 +251,8 @@
 						</div>
 					</div>
 					<div class="md:w-1/2 mt-12 md:mt-0 animate-fadeInUp delay-200">
-						<!-- SEO Optimized Image with Alt Text -->
-						<img src="wD.png" alt="W للخدمات الإلكترونية والطلابية في السعودية" class="w-80 h-80 mx-auto object-contain shadow-xl rounded-2xl transform -rotate-3 hover:rotate-0 transition-all duration-500">
+						<!-- SEO Optimized Image with Alt Text and Lazy Loading -->
+						<img src="wD.png" alt="W للخدمات الإلكترونية - خدمات طلابية وإلكترونية في السعودية" class="w-80 h-80 mx-auto object-contain shadow-xl rounded-2xl transform -rotate-3 hover:rotate-0 transition-all duration-500" loading="lazy">
 					</div>
 				</div>
 			</div>
@@ -696,7 +747,7 @@
 			</div>
 		</section>
 		
-		<!-- Footer -->
+		<!-- Footer with improved links for SEO -->
 		<footer class="bg-gray-900 text-white py-12">
 			<div class="container mx-auto px-4">
 				<div class="flex flex-col md:flex-row justify-between items-center">
@@ -719,6 +770,8 @@
 							<a href="#academic" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">خدمات طلابية</a>
 							<a href="#about" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">من نحن</a>
 							<a href="#contact" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">تواصل معنا</a>
+							<a href="/privacy-policy" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">سياسة الخصوصية</a>
+							<a href="/terms" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">الشروط والأحكام</a>
 						</div>
 					</div>
 					
@@ -749,12 +802,12 @@
 		</footer>
 		
 		<!-- Floating WhatsApp Button - Updated to match style -->
-		<a href="https://wa.me/966540732077" class="floating-whatsapp" target="_blank">
+		<a href="https://wa.me/966540732077" class="floating-whatsapp" target="_blank" aria-label="تواصل معنا عبر واتساب">
 			<i class="fab fa-whatsapp"></i>
 		</a>
 		
 		<!-- Scroll to top button - Updated to match style -->
-		<button id="scrollToTop" class="fixed bottom-6 right-6 bg-transparent border-2 border-orange-500 text-orange-500 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-50 transition-all duration-300 hover:bg-orange-100 opacity-0 invisible">
+		<button id="scrollToTop" class="fixed bottom-6 right-6 bg-transparent border-2 border-orange-500 text-orange-500 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-50 transition-all duration-300 hover:bg-orange-100 opacity-0 invisible" aria-label="العودة إلى أعلى الصفحة">
 			<i class="fas fa-arrow-up"></i>
 		</button>
 		

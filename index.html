@@ -40,48 +40,252 @@
 		<!-- Custom Arabic font -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" />
 		
-		<!-- Enhanced Schema Markup for SEO -->
+		<!-- 1. LocalBusiness Structured Data -->
 		<script type="application/ld+json">
 		{
-			"@context": "https://schema.org",
-			"@type": "Organization",
-			"name": "W للخدمات الإلكترونية",
-			"url": "https://www.w-electro.com/",
-			"logo": "https://www.w-electro.com/wD.png",
-			"description": "خدمات إلكترونية تشمل تسجيل جامعي، طباعة، وحلول ذكية للطلاب.",
-			"telephone": "+966 54 073 2077",
-			"email": "wforelectrnoicservices@gmail.com",
-			"address": {
-				"@type": "PostalAddress",
-				"addressCountry": "SA",
-				"addressRegion": "المدينة المنورة"
-			},
-			"sameAs": [
-				"https://instagram.com/wfor_es",
-				"https://tiktok.com/@wforelectronicservices"
-			]
+		  "@context": "https://schema.org",
+		  "@type": "LocalBusiness",
+		  "name": "W للخدمات الإلكترونية",
+		  "image": "https://www.w-electro.com/wD.png",
+		  "url": "https://www.w-electro.com/",
+		  "telephone": "+966 54 073 2077",
+		  "email": "wforelectronicservices@gmail.com",
+		  "address": {
+			"@type": "PostalAddress",
+			"addressRegion": "المدينة المنورة",
+			"addressCountry": "SA"
+		  },
+		  "geo": {
+			"@type": "GeoCoordinates",
+			"latitude": "24.4672",
+			"longitude": "39.6142"
+		  },
+		  "openingHoursSpecification": {
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": [
+			  "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday"
+			],
+			"opens": "09:00",
+			"closes": "18:00"
+		  },
+		  "sameAs": [
+			"https://instagram.com/wfor_es",
+			"https://tiktok.com/@wforelectronicservices",
+			"https://twitter.com/WFor_ES"
+		  ],
+		  "priceRange": "$$",
+		  "servesCuisine": "خدمات إلكترونية وطلابية"
 		}
 		</script>
-		
-		<!-- Additional Schema for Services -->
+
+		<!-- 2. Service Structured Data (for each main service category) -->
 		<script type="application/ld+json">
 		{
-			"@context": "https://schema.org",
-			"@type": "Service",
-			"serviceType": "خدمات إلكترونية وطلابية",
-			"provider": {
-				"@type": "Organization",
-				"name": "W للخدمات الإلكترونية",
-				"url": "https://www.w-electro.com/"
-			},
-			"areaServed": {
-				"@type": "Country",
-				"name": "المملكة العربية السعودية"
-			},
-			"offers": {
+		  "@context": "https://schema.org",
+		  "@type": "Service",
+		  "serviceType": "خدمات إلكترونية عامة",
+		  "provider": {
+			"@type": "LocalBusiness",
+			"name": "W للخدمات الإلكترونية",
+			"url": "https://www.w-electro.com/"
+		  },
+		  "areaServed": {
+			"@type": "Country",
+			"name": "المملكة العربية السعودية"
+		  },
+		  "hasOfferCatalog": {
+			"@type": "OfferCatalog",
+			"name": "خدمات إلكترونية عامة",
+			"itemListElement": [
+			  {
 				"@type": "Offer",
-				"priceCurrency": "SAR"
+				"itemOffered": {
+				  "@type": "Service",
+				  "name": "فتح حساب بنكي",
+				  "description": "نقوم بتسهيل فتح حساب مصرفي بإجراءات سلسة",
+				  "offers": {
+					"@type": "Offer",
+					"price": "25",
+					"priceCurrency": "SAR"
+				  }
+				}
+			  },
+			  {
+				"@type": "Offer",
+				"itemOffered": {
+				  "@type": "Service",
+				  "name": "تسجيل اختبار قياس",
+				  "description": "مساعدة في تسجيل اختبارات قياس بكل سهولة",
+				  "offers": {
+					"@type": "Offer",
+					"price": "10",
+					"priceCurrency": "SAR"
+				  }
+				}
+			  }
+			]
+		  }
+		}
+		</script>
+
+		<!-- 3. Service Structured Data for Design Services -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "Service",
+		  "serviceType": "خدمات التصميم الاحترافية",
+		  "provider": {
+			"@type": "LocalBusiness",
+			"name": "W للخدمات الإلكترونية",
+			"url": "https://www.w-electro.com/"
+		  },
+		  "areaServed": {
+			"@type": "Country",
+			"name": "المملكة العربية السعودية"
+		  },
+		  "hasOfferCatalog": {
+			"@type": "OfferCatalog",
+			"name": "خدمات التصميم الاحترافية",
+			"itemListElement": [
+			  {
+				"@type": "Offer",
+				"itemOffered": {
+				  "@type": "Service",
+				  "name": "تصاميم وطباعة 3D",
+				  "description": "تصميم وتنفيذ نماذج ثلاثية الأبعاد"
+				}
+			  },
+			  {
+				"@type": "Offer",
+				"itemOffered": {
+				  "@type": "Service",
+				  "name": "تصميم هوية براند",
+				  "description": "تصميم هوية بصرية متكاملة للعلامات التجارية"
+				}
+			  }
+			]
+		  }
+		}
+		</script>
+
+		<!-- 4. Service Structured Data for Academic Services -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "Service",
+		  "serviceType": "خدمات طلابية متميزة",
+		  "provider": {
+			"@type": "LocalBusiness",
+			"name": "W للخدمات الإلكترونية",
+			"url": "https://www.w-electro.com/"
+		  },
+		  "areaServed": {
+			"@type": "Country",
+			"name": "المملكة العربية السعودية"
+		  },
+		  "hasOfferCatalog": {
+			"@type": "OfferCatalog",
+			"name": "خدمات طلابية متميزة",
+			"itemListElement": [
+			  {
+				"@type": "Offer",
+				"itemOffered": {
+				  "@type": "Service",
+				  "name": "مشاريع تخرج",
+				  "description": "مساعدة في إعداد وتنفيذ مشاريع التخرج",
+				  "offers": {
+					"@type": "Offer",
+					"price": "50-250",
+					"priceCurrency": "SAR"
+				  }
+				}
+			  },
+			  {
+				"@type": "Offer",
+				"itemOffered": {
+				  "@type": "Service",
+				  "name": "مشاريع برمجة",
+				  "description": "تنفيذ مشاريع البرمجة بمختلف اللغات",
+				  "offers": {
+					"@type": "Offer",
+					"price": "150",
+					"priceCurrency": "SAR"
+				  }
+				}
+			  }
+			]
+		  }
+		}
+		</script>
+
+		<!-- 5. Breadcrumb Structured Data -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "BreadcrumbList",
+		  "itemListElement": [
+			{
+			  "@type": "ListItem",
+			  "position": 1,
+			  "name": "الرئيسية",
+			  "item": "https://www.w-electro.com/"
+			},
+			{
+			  "@type": "ListItem",
+			  "position": 2,
+			  "name": "خدماتنا",
+			  "item": "https://www.w-electro.com/#general"
 			}
+		  ]
+		}
+		</script>
+
+		<!-- 6. WebSite Structured Data -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "WebSite",
+		  "name": "W للخدمات الإلكترونية",
+		  "url": "https://www.w-electro.com/",
+		  "potentialAction": {
+			"@type": "SearchAction",
+			"target": "https://www.w-electro.com/search?q={search_term_string}",
+			"query-input": "required name=search_term_string"
+		  }
+		}
+		</script>
+
+		<!-- 7. FAQ Structured Data (for your services section) -->
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "FAQPage",
+		  "mainEntity": [
+			{
+			  "@type": "Question",
+			  "name": "ما هي طرق الدفع المتاحة؟",
+			  "acceptedAnswer": {
+				"@type": "Answer",
+				"text": "نقبل الدفع عبر التحويل البنكي، خدمات الدفع الإلكترونية، وأيضاً الدفع عند الاستلام لبعض الخدمات."
+			  }
+			},
+			{
+			  "@type": "Question",
+			  "name": "كم من الوقت تستغرق خدمة تصميم الهوية البصرية؟",
+			  "acceptedAnswer": {
+				"@type": "Answer",
+				"text": "تستغرق خدمة تصميم الهوية البصرية المتكاملة عادة من 5 إلى 7 أيام عمل، وذلك يعتمد على متطلبات المشروع والتعديلات المطلوبة."
+			  }
+			},
+			{
+			  "@type": "Question",
+			  "name": "هل يمكنني تعديل طلبي بعد تقديمه؟",
+			  "acceptedAnswer": {
+				"@type": "Answer",
+				"text": "نعم، يمكنك طلب التعديلات في أي وقت قبل الانتهاء من المشروع. بعض التعديلات قد تتطلب تكلفة إضافية حسب حجمها."
+			  }
+			}
+		  ]
 		}
 		</script>
 		
@@ -728,9 +932,9 @@
 									<i class="fas fa-envelope"></i>
 								</div>
 								<h3 class="text-xl font-semibold text-gray-800">البريد الإلكتروني</h3>
-								<p dir="ltr" class="text-gray-600 break-all">wforelectrnoicservices@gmail.com</p>
+								<p dir="ltr" class="text-gray-600 break-all">wforelectronicservices@gmail.com</p>
 								<div class="mt-4">
-									<a href="mailto:wforelectrnoicservices@gmail.com" class="btn-primary">
+									<a href="mailto:wforelectronicservices@gmail.com" class="btn-primary">
 										<i class="fas fa-envelope mr-2"></i> مراسلة
 									</a>
 								</div>
@@ -763,36 +967,53 @@
 									</a>
 								</div>
 							</div>
+                            
+                            <!-- Twitter/X Card -->
+                            <div class="service-card flex flex-col items-center">
+                                <div class="service-icon bg-blue-500 text-white">
+                                    <i class="fab fa-twitter"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-800">تويتر / إكس</h3>
+                                <p class="text-gray-600">@WFor_ES</p>
+                                <div class="mt-4">
+                                    <a href="https://twitter.com/WFor_ES" target="_blank" class="btn-primary">
+                                        <i class="fab fa-twitter mr-2"></i> متابعة
+                                    </a>
+                                </div>
+                            </div>
 						</div>
 					</div>
 					
-					<!-- Contact Form -->
+					<!-- Contact Form - Updated with Formspree Integration -->
 					<div class="animate-fadeInUp delay-200">
 						<div class="bg-white p-8 rounded-lg shadow-md">
 							<h3 class="text-xl font-semibold text-gray-800 mb-6 text-center">أرسل لنا رسالة</h3>
 							
-							<form action="#" method="post">
+							<form action="https://formspree.io/f/xnndpvww" method="POST">
 								<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
 									<div>
 										<label for="name" class="block text-sm font-medium text-gray-700 mb-1">الاسم</label>
-										<input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" placeholder="أدخل اسمك">
+										<input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" placeholder="أدخل اسمك" required>
 									</div>
 									
 									<div>
 										<label for="email" class="block text-sm font-medium text-gray-700 mb-1">البريد الإلكتروني</label>
-										<input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" placeholder="أدخل بريدك الإلكتروني">
+										<input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" placeholder="أدخل بريدك الإلكتروني" required>
 									</div>
 								</div>
 								
 								<div class="mb-4">
 									<label for="subject" class="block text-sm font-medium text-gray-700 mb-1">الموضوع</label>
-									<input type="text" id="subject" name="subject" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" placeholder="موضوع الرسالة">
+									<input type="text" id="subject" name="subject" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" placeholder="موضوع الرسالة" required>
 								</div>
 								
 								<div class="mb-6">
 									<label for="message" class="block text-sm font-medium text-gray-700 mb-1">الرسالة</label>
-									<textarea id="message" name="message" rows="6" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" placeholder="اكتب رسالتك هنا..."></textarea>
+									<textarea id="message" name="message" rows="6" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-orange-500 focus:border-orange-500" placeholder="اكتب رسالتك هنا..." required></textarea>
 								</div>
+                                
+                                <!-- Anti-spam honeypot field -->
+                                <input type="text" name="_gotcha" style="display:none">
 								
 								<div class="text-center">
 									<button type="submit" class="btn-primary px-8 py-3">
@@ -829,8 +1050,8 @@
 							<a href="#academic" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">خدمات طلابية</a>
 							<a href="#about" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">من نحن</a>
 							<a href="#contact" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">تواصل معنا</a>
-							<a href="/privacy-policy" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">سياسة الخصوصية</a>
-							<a href="/terms" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">الشروط والأحكام</a>
+							<a href="privacy-policy.html" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">سياسة الخصوصية</a>
+							<a href="terms-and-conditions.html" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">الشروط والأحكام</a>
 						</div>
 					</div>
 					
@@ -841,7 +1062,7 @@
 							<a href="https://wa.me/966540732077" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
 								<i class="fab fa-whatsapp"></i>
 							</a>
-							<a href="mailto:wforelectrnoicservices@gmail.com" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+							<a href="mailto:wforelectronicservices@gmail.com" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
 								<i class="fas fa-envelope"></i>
 							</a>
 							<a href="https://instagram.com/wfor_es" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
@@ -850,6 +1071,9 @@
 							<a href="https://tiktok.com/@wforelectronicservices" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
 								<i class="fab fa-tiktok"></i>
 							</a>
+                            <a href="https://twitter.com/WFor_ES" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                                <i class="fab fa-twitter"></i>
+                            </a>
 						</div>
 					</div>
 				</div>

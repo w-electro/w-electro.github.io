@@ -10,10 +10,18 @@ import json
 from google.cloud import vision
 from google.oauth2 import service_account
 
-# Initialize Google Vision client
-import json
-from google.cloud import vision
-from google.oauth2 import service_account
+# Load environment variables
+load_dotenv()
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Initialize Flask app
+app = Flask(__name__)
+
+# Enable CORS for your front-end domain
+CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
 # Set up Google Cloud credentials
 google_credentials_json = os.environ.get("GOOGLE_CREDENTIALS_JSON")
@@ -37,26 +45,6 @@ else:
         raise
 
 # Initialize vision client
-vision_client = vision.ImageAnnotatorClient(credentials=credentials)
-
-# Load environment variables
-load_dotenv()
-
-# Configure logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-# Initialize Flask app
-app = Flask(__name__)
-
-# Enable CORS for your front-end domain
-CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
-
-# Path to your Google Cloud credentials file - store this securely!
-GOOGLE_CREDENTIALS_PATH = os.environ.get("GOOGLE_CREDENTIALS_PATH", "D:\Secure\euphoric-effect-411201-f016c1b7d091.json")
-
-# Initialize Google Vision client
-credentials = service_account.Credentials.from_service_account_file(GOOGLE_CREDENTIALS_PATH)
 vision_client = vision.ImageAnnotatorClient(credentials=credentials)
 
 # Configure upload settings
@@ -114,7 +102,10 @@ def process_ocr():
                 content = image_file.read()
             
             image = vision.Image(content=content)
-            response = vision_client.text_detection(image=image)
+            response = vision_client.text_detection(
+                image=image,
+                image_context={"language_hints": ["ar"]}  # Add Arabic language hint
+            )
             
             if response.error.message:
                 raise Exception(f"API Error: {response.error.message}")
@@ -137,7 +128,6 @@ def process_ocr():
             )
             
             # Create a request for Google Cloud Vision
-            gcs_source = vision.GcsSource(uri=None)  # We're not using GCS here
             input_config = vision.InputConfig(
                 content=content,
                 mime_type='application/pdf'
@@ -148,11 +138,12 @@ def process_ocr():
                 batch_size=100  # Process up to 100 pages
             )
             
-            # Create the async request
+            # Create the async request with Arabic language hint
             async_request = vision.AsyncAnnotateFileRequest(
                 features=[feature],
                 input_config=input_config,
-                output_config=output_config
+                output_config=output_config,
+                context=vision.ImageContext(language_hints=["ar"])
             )
             
             # Make the request

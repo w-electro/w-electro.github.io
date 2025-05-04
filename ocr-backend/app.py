@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 import os
 import tempfile
@@ -119,44 +119,52 @@ def process_ocr():
             page_count = 1
                 
         elif extension.lower() == '.pdf':
-            # For PDFs, we'll use a simpler approach:
-            # 1. Just read the first page of the PDF as a single image
-            # 2. Process that image with Vision API
+            # For PDFs, convert all pages and process each one
             try:
                 # Import only when needed
                 from pdf2image import convert_from_path
                 
                 logger.info(f"Converting PDF to images: {file.filename}")
                 
-                # Convert PDF to images (only first page for testing)
-                images = convert_from_path(temp_file.name, 300, first_page=1, last_page=1)
+                # Convert all PDF pages to images
+                images = convert_from_path(temp_file.name, 300)
                 
                 if not images:
-                    return jsonify({"success": False, "error": "Failed to convert PDF to image"}), 500
+                    return jsonify({"success": False, "error": "Failed to convert PDF to images"}), 500
                 
-                # Process the first page
-                image = images[0]
-                img_byte_arr = io.BytesIO()
-                image.save(img_byte_arr, format='PNG')
-                img_byte_arr = img_byte_arr.getvalue()
+                extracted_text = ""
+                page_count = 0
                 
-                # Process with Vision API
-                vision_image = vision.Image(content=img_byte_arr)
-                response = vision_client.document_text_detection(
-                    image=vision_image,
-                    image_context={"language_hints": ["ar"]}
-                )
+                # Process each page
+                for i, image in enumerate(images):
+                    page_count += 1
+                    logger.info(f"Processing page {page_count}")
+                    
+                    # Convert PIL Image to bytes
+                    img_byte_arr = io.BytesIO()
+                    image.save(img_byte_arr, format='PNG')
+                    img_byte_arr = img_byte_arr.getvalue()
+                    
+                    # Process with Vision API
+                    vision_image = vision.Image(content=img_byte_arr)
+                    response = vision_client.document_text_detection(
+                        image=vision_image,
+                        image_context={"language_hints": ["ar"]}
+                    )
+                    
+                    if response.error.message:
+                        logger.error(f"Error on page {page_count}: {response.error.message}")
+                        continue
+                    
+                    # Extract text from response
+                    if response.full_text_annotation:
+                        page_text = response.full_text_annotation.text
+                        extracted_text += f"--- Page {page_count} ---\n\n{page_text}\n\n"
+                    else:
+                        extracted_text += f"--- Page {page_count} ---\n\nNo text detected on this page.\n\n"
                 
-                if response.error.message:
-                    raise Exception(f"API Error: {response.error.message}")
-                
-                # Extract text from response
-                if response.full_text_annotation:
-                    extracted_text = response.full_text_annotation.text
-                else:
+                if not extracted_text:
                     extracted_text = "No text detected in the PDF."
-                
-                page_count = 1
                 
             except Exception as e:
                 logger.error(f"Error processing PDF: {str(e)}")
@@ -166,7 +174,8 @@ def process_ocr():
         return jsonify({
             "success": True,
             "markdown": extracted_text,
-            "page_count": page_count
+            "page_count": page_count,
+            "file_name": os.path.splitext(file.filename)[0] + "_ocr.txt"
         }), 200
         
     except Exception as e:
@@ -177,6 +186,37 @@ def process_ocr():
         # Clean up temporary file
         if temp_file and os.path.exists(temp_file.name):
             os.unlink(temp_file.name)
+
+@app.route('/api/ocr-download', methods=['POST'])
+def process_ocr_download():
+    """
+    Process OCR on an uploaded file and return a downloadable file
+    """
+    # Get the result from the regular OCR process
+    result = process_ocr()
+    
+    # If it's not successful, return the error
+    if isinstance(result, tuple) and result[1] != 200:
+        return result
+        
+    # Get the data from the response
+    data = result[0].json
+    
+    if data["success"]:
+        # Create a temporary file with the extracted text
+        temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".txt", mode="w", encoding="utf-8")
+        temp_file.write(data["markdown"])
+        temp_file.close()
+        
+        # Return the file for download
+        return send_file(
+            temp_file.name,
+            as_attachment=True,
+            download_name=data["file_name"],
+            mimetype="text/plain"
+        )
+    else:
+        return jsonify(data), result[1]
 
 if __name__ == '__main__':
     # Get port from environment or default to 5000

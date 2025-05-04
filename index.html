@@ -1409,18 +1409,16 @@
             <div id="ocr-results" class="hidden">
                 <div class="border-t border-gray-200 pt-6 mt-6">
                     <h3 class="text-xl font-semibold text-cyan-600 mb-4 text-center">النتائج</h3>
-                    <div id="loading-indicator" class="text-center py-8 hidden">
+                    <div id="loading-indicator" class="text-center py-8">
                         <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600"></div>
                         <p class="mt-4 text-gray-600">جاري معالجة الملف...</p>
                     </div>
-                    <div id="result-content" class="bg-gray-50 p-6 rounded-lg">
-                        <div id="markdown-output" class="prose max-w-none rtl" dir="rtl"></div>
-                    </div>
-                    <div class="mt-4 flex justify-end">
+                    <div id="markdown-output" class="prose max-w-none rtl" dir="rtl"></div>
+                    <div class="mt-6 flex justify-center space-x-4 rtl:space-x-reverse">
                         <button id="copy-text" class="btn-outline-orange">
                             <i class="fas fa-copy ml-2"></i> نسخ النص
                         </button>
-                        <button id="download-text" class="btn-outline-orange ml-4">
+                        <button id="download-text" class="btn-outline-orange">
                             <i class="fas fa-download ml-2"></i> تحميل النص
                         </button>
                     </div>
@@ -1428,32 +1426,63 @@
             </div>
         </div>
         
-        <!-- OCR Feature Cards - Keep your existing feature cards here -->
+        <!-- OCR Service Information Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            <!-- OCR Feature Card 1 -->
+            <div class="service-card animate-fadeInUp delay-100">
+                <div class="service-icon" aria-label="دقة عالية في استخراج النصوص">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 text-center">دقة عالية</h3>
+                <p class="text-gray-600 text-center">يستخدم نظامنا أحدث تقنيات الذكاء الاصطناعي لاستخراج النصوص بدقة تصل إلى 99%</p>
+            </div>
+            
+            <!-- OCR Feature Card 2 -->
+            <div class="service-card animate-fadeInUp delay-200">
+                <div class="service-icon" aria-label="دعم متعدد اللغات">
+                    <i class="fas fa-language"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 text-center">متعدد اللغات</h3>
+                <p class="text-gray-600 text-center">يدعم النظام العديد من اللغات بما فيها العربية والإنجليزية والفرنسية وغيرها</p>
+            </div>
+            
+            <!-- OCR Feature Card 3 -->
+            <div class="service-card animate-fadeInUp delay-300">
+                <div class="service-icon" aria-label="سهولة الاستخدام">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-800 text-center">سهولة الاستخدام</h3>
+                <p class="text-gray-600 text-center">واجهة بسيطة وسهلة الاستخدام. قم برفع الملف واحصل على النص المستخرج في ثوانٍ</p>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- JavaScript for OCR functionality -->
+<!-- OCR JavaScript - add this before the closing body tag -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('ocr-form');
     const fileInput = document.getElementById('ocr-file');
-    const fileName = document.getElementById('file-name');
+    const fileNameElement = document.getElementById('file-name');
     const submitButton = document.getElementById('ocr-submit');
     const resultsSection = document.getElementById('ocr-results');
     const loadingIndicator = document.getElementById('loading-indicator');
-    const resultContent = document.getElementById('result-content');
     const markdownOutput = document.getElementById('markdown-output');
     const copyButton = document.getElementById('copy-text');
     const downloadButton = document.getElementById('download-text');
     
+    // File data for download
+    let extractedText = "";
+    let fileName = "";
+    
     // Handle file selection
     fileInput.addEventListener('change', function() {
         if (fileInput.files.length > 0) {
-            fileName.textContent = fileInput.files[0].name;
-            fileName.classList.remove('hidden');
+            fileNameElement.textContent = fileInput.files[0].name;
+            fileNameElement.classList.remove('hidden');
             submitButton.disabled = false;
         } else {
-            fileName.classList.add('hidden');
+            fileNameElement.classList.add('hidden');
             submitButton.disabled = true;
         }
     });
@@ -1470,47 +1499,96 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Show loading indicator
         loadingIndicator.classList.remove('hidden');
-        resultContent.classList.add('hidden');
         resultsSection.classList.remove('hidden');
+        markdownOutput.innerHTML = '';
         submitButton.disabled = true;
         
         // Send file to backend
         fetch('https://ocr-backend-service.onrender.com/api/ocr', {
-    method: 'POST',
-    body: formData
-})
+            method: 'POST',
+            body: formData
+        })
         .then(response => response.json())
         .then(data => {
             // Hide loading indicator
             loadingIndicator.classList.add('hidden');
-            resultContent.classList.remove('hidden');
             
             // Display result
             if (data.success) {
-                // Format the markdown content for proper display
-                const formattedText = data.markdown
-                    .replace(/\n/g, '<br>')
-                    .replace(/--- Page (\d+) ---/g, '<h3 class="text-lg font-bold mt-4 mb-2">صفحة $1</h3>');
+                // Store file info for download
+                extractedText = data.markdown;
+                fileName = data.file_name || `${file.name.split('.')[0]}_ocr.txt`;
                 
-                markdownOutput.innerHTML = formattedText;
+                // Replace the display with a success message
+                markdownOutput.innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">تم استخراج النص بنجاح!</h4>
+                        <p class="text-gray-600 mb-4">تم معالجة ${data.page_count} صفحة من الملف</p>
+                        <div class="mt-4">
+                            <button id="view-text-btn" class="btn-outline-orange">
+                                <i class="fas fa-eye ml-2"></i> عرض النص المستخرج
+                            </button>
+                        </div>
+                    </div>
+                `;
                 
-                // Add page count if available
-                if (data.page_count && data.page_count > 1) {
-                    const pageInfo = document.createElement('div');
-                    pageInfo.className = 'text-sm text-gray-500 mt-2 mb-4';
-                    pageInfo.textContent = `تم استخراج النص من ${data.page_count} صفحات`;
-                    markdownOutput.prepend(pageInfo);
-                }
+                // Add event listener to the view text button
+                document.getElementById('view-text-btn').addEventListener('click', function() {
+                    // Display the extracted text
+                    markdownOutput.innerHTML = `
+                        <div class="prose max-w-none mb-4">
+                            <h4 class="text-lg font-bold text-gray-800 mb-2">النص المستخرج:</h4>
+                            <pre class="bg-gray-100 p-4 rounded-lg whitespace-pre-wrap text-gray-800 text-right" dir="rtl" style="max-height: 400px; overflow-y: auto;">${extractedText}</pre>
+                        </div>
+                        <div class="text-center">
+                            <button id="hide-text-btn" class="btn-outline-orange">
+                                <i class="fas fa-eye-slash ml-2"></i> إخفاء النص
+                            </button>
+                        </div>
+                    `;
+                    
+                    // Add event listener to hide text button
+                    document.getElementById('hide-text-btn').addEventListener('click', function() {
+                        // Restore the success message
+                        markdownOutput.innerHTML = `
+                            <div class="text-center py-8">
+                                <i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
+                                <h4 class="text-xl font-bold text-gray-800 mb-2">تم استخراج النص بنجاح!</h4>
+                                <p class="text-gray-600 mb-4">تم معالجة ${data.page_count} صفحة من الملف</p>
+                                <div class="mt-4">
+                                    <button id="view-text-btn" class="btn-outline-orange">
+                                        <i class="fas fa-eye ml-2"></i> عرض النص المستخرج
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        
+                        // Re-add event listener
+                        document.getElementById('view-text-btn').addEventListener('click', arguments.callee.caller);
+                    });
+                });
             } else {
-                markdownOutput.innerHTML = `<p class="text-red-500">حدث خطأ: ${data.error}</p>`;
+                markdownOutput.innerHTML = `
+                    <div class="text-center py-8">
+                        <i class="fas fa-exclamation-circle text-red-500 text-5xl mb-4"></i>
+                        <h4 class="text-xl font-bold text-gray-800 mb-2">حدث خطأ</h4>
+                        <p class="text-red-500 mb-4">${data.error}</p>
+                    </div>
+                `;
             }
             
             submitButton.disabled = false;
         })
         .catch(error => {
             loadingIndicator.classList.add('hidden');
-            resultContent.classList.remove('hidden');
-            markdownOutput.innerHTML = '<p class="text-red-500">حدث خطأ أثناء معالجة الملف. يرجى المحاولة مرة أخرى.</p>';
+            markdownOutput.innerHTML = `
+                <div class="text-center py-8">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-5xl mb-4"></i>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">حدث خطأ في الاتصال</h4>
+                    <p class="text-red-500 mb-4">يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.</p>
+                </div>
+            `;
             submitButton.disabled = false;
             console.error('Error:', error);
         });
@@ -1518,8 +1596,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Copy text functionality
     copyButton.addEventListener('click', function() {
-        const text = markdownOutput.innerText;
-        navigator.clipboard.writeText(text).then(() => {
+        navigator.clipboard.writeText(extractedText).then(() => {
             const originalText = copyButton.innerHTML;
             copyButton.innerHTML = '<i class="fas fa-check ml-2"></i> تم النسخ';
             setTimeout(() => {
@@ -1530,12 +1607,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Download text functionality
     downloadButton.addEventListener('click', function() {
-        const text = markdownOutput.innerText;
-        const blob = new Blob([text], { type: 'text/plain' });
+        const blob = new Blob([extractedText], { type: 'text/plain;charset=utf-8' });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = 'extracted_text.txt';
+        a.download = fileName;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -1544,6 +1620,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add drag and drop functionality
     const dropArea = document.querySelector('.file-drop-area');
+    if (!dropArea) return; // Exit if the element doesn't exist
 
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
         dropArea.addEventListener(eventName, preventDefaults, false);
@@ -1578,8 +1655,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (files.length > 0) {
             fileInput.files = files;
-            fileName.textContent = files[0].name;
-            fileName.classList.remove('hidden');
+            fileNameElement.textContent = files[0].name;
+            fileNameElement.classList.remove('hidden');
             submitButton.disabled = false;
         }
     }

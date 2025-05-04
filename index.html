@@ -457,6 +457,63 @@
 				background-color: rgba(255, 255, 255, 0.2) !important;
 				color: #ffffff !important;
 			}
+            
+            /* OCR Section Styles */
+            .file-drop-area {
+                border: 2px dashed #e2e8f0;
+                border-radius: 0.5rem;
+                padding: 2rem;
+                text-align: center;
+                transition: all 0.3s ease;
+            }
+            
+            .file-drop-area:hover {
+                border-color: #0891b2;
+                background-color: rgba(8, 145, 178, 0.05);
+            }
+            
+            .prose {
+                color: #374151;
+                max-width: 65ch;
+                font-size: 1rem;
+                line-height: 1.75;
+            }
+            
+            .prose p {
+                margin-top: 1.25em;
+                margin-bottom: 1.25em;
+            }
+            
+            .prose h1, .prose h2, .prose h3, .prose h4 {
+                color: #111827;
+                font-weight: 600;
+                margin-top: 2em;
+                margin-bottom: 1em;
+            }
+            
+            .prose img {
+                margin-top: 2em;
+                margin-bottom: 2em;
+                border-radius: 0.375rem;
+            }
+            
+            .prose code {
+                color: #111827;
+                font-weight: 600;
+                font-size: 0.875em;
+            }
+            
+            .prose pre {
+                color: #e5e7eb;
+                background-color: #1f2937;
+                overflow-x: auto;
+                font-size: 0.875em;
+                line-height: 1.7142857;
+                margin-top: 1.7142857em;
+                margin-bottom: 1.7142857em;
+                border-radius: 0.375rem;
+                padding: 0.8571429em 1.1428571em;
+            }
 		</style>
 		
 		<!-- Custom Stylesheet -->
@@ -481,6 +538,7 @@
 						<a href="#general" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمات عامة</a>
 						<a href="#design" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمات التصميم</a>
 						<a href="#academic" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمات طلابية</a>
+						<a href="#ocr" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمة OCR</a>
 						<a href="#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">من نحن</a>
 						<a href="#contact" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">تواصل معنا</a>
 					</nav>
@@ -503,6 +561,7 @@
 						<a href="#general" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمات عامة</a>
 						<a href="#design" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمات التصميم</a>
 						<a href="#academic" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمات طلابية</a>
+						<a href="#ocr" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمة OCR</a>
 						<a href="#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">من نحن</a>
 						<a href="#contact" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">تواصل معنا</a>
 					</nav>
@@ -859,8 +918,149 @@
 			</div>
 		</section>
 		
+		<!-- OCR Service Section - NEW -->
+		<section id="ocr" class="py-16 bg-gray-50">
+			<div class="container mx-auto px-4">
+				<div class="text-center mb-16 animate-fadeInUp">
+					<h2 class="text-3xl font-bold text-gray-800 mb-4">خدمة استخراج النصوص من المستندات (OCR)</h2>
+					<p class="text-gray-600 max-w-2xl mx-auto">
+						اختبر خدمتنا المتطورة لاستخراج النصوص من الصور والمستندات باستخدام تقنية Mistral OCR. يمكنك استخراج النصوص من الصور والملفات بدقة عالية وسرعة فائقة.
+					</p>
+				</div>
+				
+				<div class="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto">
+					<div class="mb-8">
+						<h3 class="text-xl font-semibold text-cyan-600 mb-4 text-center">رفع ملف للمعالجة</h3>
+						
+						<form id="ocr-form" class="space-y-6">
+							<div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+								<input type="file" id="ocr-file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" />
+								<label for="ocr-file" class="cursor-pointer">
+									<i class="fas fa-cloud-upload-alt text-4xl text-cyan-500 mb-4 block"></i>
+									<p class="text-gray-700 font-medium">اسحب الملف هنا أو انقر للتحميل</p>
+									<p class="text-gray-500 text-sm mt-1">PDF, JPG, JPEG, PNG (الحد الأقصى: 10MB)</p>
+								</label>
+								<div id="file-name" class="mt-4 text-gray-700 font-medium hidden"></div>
+							</div>
+							
+							<div class="flex justify-center">
+								<button type="submit" id="ocr-submit" class="btn-primary px-8 py-3 disabled:opacity-50" disabled>
+									<i class="fas fa-magic ml-2"></i> استخراج النص
+								</button>
+							</div>
+						</form>
+					</div>
+					
+					<div id="ocr-results" class="hidden">
+						<div class="border-t border-gray-200 pt-6 mt-6">
+							<h3 class="text-xl font-semibold text-cyan-600 mb-4 text-center">النتائج</h3>
+							<div id="loading-indicator" class="text-center py-8 hidden">
+								<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600"></div>
+								<p class="mt-4 text-gray-600">جاري معالجة الملف...</p>
+							</div>
+							<div id="result-content" class="bg-gray-50 p-6 rounded-lg">
+								<div id="markdown-output" class="prose max-w-none"></div>
+							</div>
+							<div class="mt-4 flex justify-end">
+								<button id="copy-text" class="btn-outline-orange">
+									<i class="fas fa-copy ml-2"></i> نسخ النص
+								</button>
+								<button id="download-text" class="btn-outline-orange ml-4">
+									<i class="fas fa-download ml-2"></i> تحميل النص
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+                
+                <!-- OCR Service Information Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                    <!-- OCR Feature Card 1 -->
+                    <div class="service-card animate-fadeInUp delay-100">
+                        <div class="service-icon" aria-label="دقة عالية في استخراج النصوص">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 text-center">دقة عالية</h3>
+                        <p class="text-gray-600 text-center">يستخدم نظامنا أحدث تقنيات الذكاء الاصطناعي لاستخراج النصوص بدقة تصل إلى 99%</p>
+                    </div>
+                    
+                    <!-- OCR Feature Card 2 -->
+                    <div class="service-card animate-fadeInUp delay-200">
+                        <div class="service-icon" aria-label="دعم متعدد اللغات">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 text-center">متعدد اللغات</h3>
+                        <p class="text-gray-600 text-center">يدعم النظام العديد من اللغات بما فيها العربية والإنجليزية والفرنسية وغيرها</p>
+                    </div>
+                    
+                    <!-- OCR Feature Card 3 -->
+                    <div class="service-card animate-fadeInUp delay-300">
+                        <div class="service-icon" aria-label="سهولة الاستخدام">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 text-center">سهولة الاستخدام</h3>
+                        <p class="text-gray-600 text-center">واجهة بسيطة وسهلة الاستخدام. قم برفع الملف واحصل على النص المستخرج في ثوانٍ</p>
+                    </div>
+                </div>
+                
+                <!-- OCR Pricing Section -->
+                <div class="mt-16 text-center">
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-8">أسعار خدمة OCR</h3>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-8 max-w-2xl mx-auto">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Free Trial -->
+                            <div class="border border-gray-200 rounded-lg p-6 hover:border-cyan-500 transition-colors duration-300">
+                                <h4 class="text-xl font-bold text-cyan-600 mb-2">التجربة المجانية</h4>
+                                <p class="text-gray-500 mb-4">جرب الخدمة مجاناً</p>
+                                <p class="text-3xl font-bold text-gray-800 mb-6">0 <span class="text-lg">ريال</span></p>
+                                <ul class="text-right space-y-3 mb-8">
+                                    <li class="flex items-center justify-end">
+                                        <span class="text-gray-700">5 صفحات يومياً</span>
+                                        <i class="fas fa-check text-green-500 ml-2"></i>
+                                    </li>
+                                    <li class="flex items-center justify-end">
+                                        <span class="text-gray-700">دعم الصور والمستندات</span>
+                                        <i class="fas fa-check text-green-500 ml-2"></i>
+                                    </li>
+                                    <li class="flex items-center justify-end">
+                                        <span class="text-gray-700 line-through">دعم فني</span>
+                                        <i class="fas fa-times text-red-500 ml-2"></i>
+                                    </li>
+                                </ul>
+                                <a href="#" class="btn-primary w-full flex justify-center">ابدأ الآن</a>
+                            </div>
+                            
+                            <!-- Premium Plan -->
+                            <div class="bg-gradient-to-br from-cyan-50 to-blue-50 border-2 border-cyan-500 rounded-lg p-6 transform hover:scale-105 transition-transform duration-300">
+                                <div class="absolute -top-3 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-bold">الأكثر شيوعاً</div>
+                                <h4 class="text-xl font-bold text-cyan-600 mb-2">الباقة المتقدمة</h4>
+                                <p class="text-gray-500 mb-4">للاستخدام المكثف</p>
+                                <p class="text-3xl font-bold text-gray-800 mb-6">50 <span class="text-lg">ريال</span></p>
+                                <ul class="text-right space-y-3 mb-8">
+                                    <li class="flex items-center justify-end">
+                                        <span class="text-gray-700">استخدام غير محدود</span>
+                                        <i class="fas fa-check text-green-500 ml-2"></i>
+                                    </li>
+                                    <li class="flex items-center justify-end">
+                                        <span class="text-gray-700">دعم ملفات متعددة</span>
+                                        <i class="fas fa-check text-green-500 ml-2"></i>
+                                    </li>
+                                    <li class="flex items-center justify-end">
+                                        <span class="text-gray-700">دعم فني عبر الواتساب</span>
+                                        <i class="fas fa-check text-green-500 ml-2"></i>
+                                    </li>
+                                </ul>
+                                <a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاشتراك بباقة OCR المتقدمة" class="btn-primary w-full flex justify-center">اشترك الآن</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+		</section>
+		
 		<!-- About Us Section -->
-		<section id="about" class="py-16 bg-gray-50">
+		<section id="about" class="py-16 bg-white">
 			<div class="container mx-auto px-4">
 				<div class="text-center mb-12 animate-fadeInUp">
 					<h2 class="text-3xl font-bold text-gray-800 mb-4">من نحن</h2>
@@ -940,7 +1140,7 @@
 		</section>
 		
 		<!-- Contact Us Section -->
-		<section id="contact" class="py-16 bg-white">
+		<section id="contact" class="py-16 bg-gray-50">
 			<div class="container mx-auto px-4">
 				<div class="text-center mb-16 animate-fadeInUp">
 					<h2 class="text-3xl font-bold text-gray-800 mb-4">تواصل معنا</h2>
@@ -960,7 +1160,7 @@
 								<p dir="ltr" class="text-gray-600">+966 54 073 2077</p>
 								<div class="mt-4">
 									<a href="https://wa.me/966540732077" class="btn-primary">
-										<i class="fab fa-whatsapp mr-2"></i> مراسلة
+										<i class="fab fa-whatsapp ml-2"></i> مراسلة
 									</a>
 								</div>
 							</div>
@@ -974,7 +1174,7 @@
 								<p dir="ltr" class="text-gray-600 break-all">wforelectronicservices@gmail.com</p>
 								<div class="mt-4">
 									<a href="mailto:wforelectronicservices@gmail.com" class="btn-primary">
-										<i class="fas fa-envelope mr-2"></i> مراسلة
+										<i class="fas fa-envelope ml-2"></i> مراسلة
 									</a>
 								</div>
 							</div>
@@ -988,7 +1188,7 @@
 								<p class="text-gray-600">@wfor_es</p>
 								<div class="mt-4">
 									<a href="https://instagram.com/wfor_es" target="_blank" class="btn-primary">
-										<i class="fab fa-instagram mr-2"></i> متابعة
+										<i class="fab fa-instagram ml-2"></i> متابعة
 									</a>
 								</div>
 							</div>
@@ -1002,7 +1202,7 @@
 								<p class="text-gray-600">@wforelectronicservices</p>
 								<div class="mt-4">
 									<a href="https://tiktok.com/@wforelectronicservices" target="_blank" class="btn-primary">
-										<i class="fab fa-tiktok mr-2"></i> متابعة
+										<i class="fab fa-tiktok ml-2"></i> متابعة
 									</a>
 								</div>
 							</div>
@@ -1016,7 +1216,7 @@
                                 <p class="text-gray-600">@WFor_ES</p>
                                 <div class="mt-4">
                                     <a href="https://twitter.com/WFor_ES" target="_blank" class="btn-primary">
-                                        <i class="fab fa-twitter mr-2"></i> متابعة
+                                        <i class="fab fa-twitter ml-2"></i> متابعة
                                     </a>
                                 </div>
                             </div>
@@ -1030,7 +1230,7 @@
                                 <p class="text-gray-600">حائل، حي المصيف 55467</p>
                                 <div class="mt-4">
                                     <a href="https://maps.google.com/?q=Ha'il+City,+Al+Masyaf+55467,+Saudi+Arabia" target="_blank" class="btn-primary">
-                                        <i class="fas fa-directions mr-2"></i> الاتجاهات
+                                        <i class="fas fa-directions ml-2"></i> الاتجاهات
                                     </a>
                                 </div>
                             </div>
@@ -1101,6 +1301,7 @@
 							<a href="#general" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">خدمات عامة</a>
 							<a href="#design" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">خدمات التصميم</a>
 							<a href="#academic" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">خدمات طلابية</a>
+                            <a href="#ocr" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">خدمة OCR</a>
 							<a href="#about" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">من نحن</a>
 							<a href="#contact" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">تواصل معنا</a>
 							<a href="privacy-policy.html" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">سياسة الخصوصية</a>
@@ -1171,5 +1372,216 @@
 				});
 			});
 		</script>
-	</body>
-</html>
+        
+        <!-- OCR Service Section -->
+<section id="ocr" class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16 animate-fadeInUp">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">خدمة استخراج النصوص من المستندات (OCR)</h2>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                استخدم خدمتنا المتطورة لاستخراج النصوص من الصور والمستندات باستخدام تقنية Google Cloud Vision. تدعم اللغة العربية بشكل ممتاز وتحافظ على تنسيق النص الأصلي.
+            </p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-lg shadow-md max-w-3xl mx-auto">
+            <div class="mb-8">
+                <h3 class="text-xl font-semibold text-cyan-600 mb-4 text-center">رفع ملف للمعالجة</h3>
+                
+                <form id="ocr-form" class="space-y-6">
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center file-drop-area">
+                        <input type="file" id="ocr-file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" />
+                        <label for="ocr-file" class="cursor-pointer">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-cyan-500 mb-4 block"></i>
+                            <p class="text-gray-700 font-medium">اسحب الملف هنا أو انقر للتحميل</p>
+                            <p class="text-gray-500 text-sm mt-1">PDF, JPG, JPEG, PNG (الحد الأقصى: 10MB)</p>
+                        </label>
+                        <div id="file-name" class="mt-4 text-gray-700 font-medium hidden"></div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button type="submit" id="ocr-submit" class="btn-primary px-8 py-3 disabled:opacity-50" disabled>
+                            <i class="fas fa-magic ml-2"></i> استخراج النص
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="ocr-results" class="hidden">
+                <div class="border-t border-gray-200 pt-6 mt-6">
+                    <h3 class="text-xl font-semibold text-cyan-600 mb-4 text-center">النتائج</h3>
+                    <div id="loading-indicator" class="text-center py-8 hidden">
+                        <div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600"></div>
+                        <p class="mt-4 text-gray-600">جاري معالجة الملف...</p>
+                    </div>
+                    <div id="result-content" class="bg-gray-50 p-6 rounded-lg">
+                        <div id="markdown-output" class="prose max-w-none rtl" dir="rtl"></div>
+                    </div>
+                    <div class="mt-4 flex justify-end">
+                        <button id="copy-text" class="btn-outline-orange">
+                            <i class="fas fa-copy ml-2"></i> نسخ النص
+                        </button>
+                        <button id="download-text" class="btn-outline-orange ml-4">
+                            <i class="fas fa-download ml-2"></i> تحميل النص
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- OCR Feature Cards - Keep your existing feature cards here -->
+    </div>
+</section>
+
+<!-- JavaScript for OCR functionality -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('ocr-form');
+    const fileInput = document.getElementById('ocr-file');
+    const fileName = document.getElementById('file-name');
+    const submitButton = document.getElementById('ocr-submit');
+    const resultsSection = document.getElementById('ocr-results');
+    const loadingIndicator = document.getElementById('loading-indicator');
+    const resultContent = document.getElementById('result-content');
+    const markdownOutput = document.getElementById('markdown-output');
+    const copyButton = document.getElementById('copy-text');
+    const downloadButton = document.getElementById('download-text');
+    
+    // Handle file selection
+    fileInput.addEventListener('change', function() {
+        if (fileInput.files.length > 0) {
+            fileName.textContent = fileInput.files[0].name;
+            fileName.classList.remove('hidden');
+            submitButton.disabled = false;
+        } else {
+            fileName.classList.add('hidden');
+            submitButton.disabled = true;
+        }
+    });
+    
+    // Handle form submission
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (!fileInput.files.length) return;
+        
+        const file = fileInput.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+        
+        // Show loading indicator
+        loadingIndicator.classList.remove('hidden');
+        resultContent.classList.add('hidden');
+        resultsSection.classList.remove('hidden');
+        submitButton.disabled = true;
+        
+        // Send file to backend
+        fetch('https://your-service-name.onrender.com/api/ocr', {
+    method: 'POST',
+    body: formData
+})
+        .then(response => response.json())
+        .then(data => {
+            // Hide loading indicator
+            loadingIndicator.classList.add('hidden');
+            resultContent.classList.remove('hidden');
+            
+            // Display result
+            if (data.success) {
+                // Format the markdown content for proper display
+                const formattedText = data.markdown
+                    .replace(/\n/g, '<br>')
+                    .replace(/--- Page (\d+) ---/g, '<h3 class="text-lg font-bold mt-4 mb-2">صفحة $1</h3>');
+                
+                markdownOutput.innerHTML = formattedText;
+                
+                // Add page count if available
+                if (data.page_count && data.page_count > 1) {
+                    const pageInfo = document.createElement('div');
+                    pageInfo.className = 'text-sm text-gray-500 mt-2 mb-4';
+                    pageInfo.textContent = `تم استخراج النص من ${data.page_count} صفحات`;
+                    markdownOutput.prepend(pageInfo);
+                }
+            } else {
+                markdownOutput.innerHTML = `<p class="text-red-500">حدث خطأ: ${data.error}</p>`;
+            }
+            
+            submitButton.disabled = false;
+        })
+        .catch(error => {
+            loadingIndicator.classList.add('hidden');
+            resultContent.classList.remove('hidden');
+            markdownOutput.innerHTML = '<p class="text-red-500">حدث خطأ أثناء معالجة الملف. يرجى المحاولة مرة أخرى.</p>';
+            submitButton.disabled = false;
+            console.error('Error:', error);
+        });
+    });
+
+    // Copy text functionality
+    copyButton.addEventListener('click', function() {
+        const text = markdownOutput.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = copyButton.innerHTML;
+            copyButton.innerHTML = '<i class="fas fa-check ml-2"></i> تم النسخ';
+            setTimeout(() => {
+                copyButton.innerHTML = originalText;
+            }, 2000);
+        });
+    });
+
+    // Download text functionality
+    downloadButton.addEventListener('click', function() {
+        const text = markdownOutput.innerText;
+        const blob = new Blob([text], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'extracted_text.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+
+    // Add drag and drop functionality
+    const dropArea = document.querySelector('.file-drop-area');
+
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        dropArea.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, unhighlight, false);
+    });
+
+    function highlight() {
+        dropArea.classList.add('border-cyan-500', 'bg-cyan-50');
+    }
+
+    function unhighlight() {
+        dropArea.classList.remove('border-cyan-500', 'bg-cyan-50');
+    }
+
+    dropArea.addEventListener('drop', handleDrop, false);
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        
+        if (files.length > 0) {
+            fileInput.files = files;
+            fileName.textContent = files[0].name;
+            fileName.classList.remove('hidden');
+            submitButton.disabled = false;
+        }
+    }
+});
+</script>

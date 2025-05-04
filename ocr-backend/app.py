@@ -10,22 +10,34 @@ import json
 from google.cloud import vision
 from google.oauth2 import service_account
 
-# Get Google credentials - either from environment variable or fallback to file
-google_credentials_json = os.environ.get("GOOGLE_CREDENTIALS_JSON")
-if google_credentials_json:
-    # Parse JSON credentials from environment variable
-    info = json.loads(google_credentials_json)
-    credentials = service_account.Credentials.from_service_account_info(info)
-else:
-    # Fallback to file for local development
-    credentials_path = os.environ.get("GOOGLE_CREDENTIALS_PATH", "D:\Secure\euphoric-effect-411201-f016c1b7d091.json")
-    credentials = service_account.Credentials.from_service_account_file(credentials_path)
-
-vision_client = vision.ImageAnnotatorClient(credentials=credentials)
-
-# Google Cloud Vision imports
+# Initialize Google Vision client
+import json
 from google.cloud import vision
 from google.oauth2 import service_account
+
+# Set up Google Cloud credentials
+google_credentials_json = os.environ.get("GOOGLE_CREDENTIALS_JSON")
+if google_credentials_json:
+    # For production: use credentials from environment variable
+    try:
+        info = json.loads(google_credentials_json)
+        credentials = service_account.Credentials.from_service_account_info(info)
+        logger.info("Successfully loaded Google credentials from environment variable")
+    except Exception as e:
+        logger.error(f"Error parsing credentials from environment: {str(e)}")
+        raise
+else:
+    # For local development: fallback to file
+    try:
+        credentials_path = os.environ.get("GOOGLE_CREDENTIALS_PATH", "D:\Secure\euphoric-effect-411201-f016c1b7d091.json")
+        credentials = service_account.Credentials.from_service_account_file(credentials_path)
+        logger.info(f"Successfully loaded Google credentials from file: {credentials_path}")
+    except Exception as e:
+        logger.error(f"Error loading credentials from file: {str(e)}")
+        raise
+
+# Initialize vision client
+vision_client = vision.ImageAnnotatorClient(credentials=credentials)
 
 # Load environment variables
 load_dotenv()

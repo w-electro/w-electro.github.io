@@ -41,7 +41,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
 # Path to your Google Cloud credentials file - store this securely!
-GOOGLE_CREDENTIALS_PATH = os.environ.get("GOOGLE_CREDENTIALS_PATH", "path/to/your-credentials.json")
+GOOGLE_CREDENTIALS_PATH = os.environ.get("GOOGLE_CREDENTIALS_PATH", "D:\Secure\euphoric-effect-411201-f016c1b7d091.json")
 
 # Initialize Google Vision client
 credentials = service_account.Credentials.from_service_account_file(GOOGLE_CREDENTIALS_PATH)

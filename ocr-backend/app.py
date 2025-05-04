@@ -1,14 +1,13 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from werkzeug.utils import secure_filename
 import os
 import tempfile
 from dotenv import load_dotenv
 import logging
-import base64
 import json
 from google.cloud import vision
 from google.oauth2 import service_account
+import io
 
 # Load environment variables
 load_dotenv()
@@ -116,57 +115,58 @@ def process_ocr():
                 extracted_text = texts[0].description
             else:
                 extracted_text = "No text detected in the image."
+            
+            page_count = 1
                 
         elif extension.lower() == '.pdf':
-            # For PDFs, process each page
-            with open(temp_file.name, 'rb') as pdf_file:
-                content = pdf_file.read()
-            
-            # Create a feature to request text detection
-            feature = vision.Feature(
-                type_=vision.Feature.Type.DOCUMENT_TEXT_DETECTION
-            )
-            
-            # Create a request for Google Cloud Vision
-            input_config = vision.InputConfig(
-                content=content,
-                mime_type='application/pdf'
-            )
-            
-            # Configure where to save the results
-            output_config = vision.OutputConfig(
-                batch_size=100  # Process up to 100 pages
-            )
-            
-            # Create the async request with Arabic language hint
-            async_request = vision.AsyncAnnotateFileRequest(
-                features=[feature],
-                input_config=input_config,
-                output_config=output_config,
-            )
-            
-            # Make the request
-            operation = vision_client.async_batch_annotate_files(requests=[async_request])
-            response = operation.result(timeout=180)
-            
-            # Get the results
-            extracted_text = ""
-            page_count = 0
-            
-            for response_file in response.responses[0].responses:
-                if response_file.full_text_annotation:
-                    page_count += 1
-                    page_text = response_file.full_text_annotation.text
-                    extracted_text += f"--- Page {page_count} ---\n\n{page_text}\n\n"
-            
-            if not extracted_text:
-                extracted_text = "No text detected in the PDF."
+            # For PDFs, we'll use a simpler approach:
+            # 1. Just read the first page of the PDF as a single image
+            # 2. Process that image with Vision API
+            try:
+                # Import only when needed
+                from pdf2image import convert_from_path
+                
+                logger.info(f"Converting PDF to images: {file.filename}")
+                
+                # Convert PDF to images (only first page for testing)
+                images = convert_from_path(temp_file.name, 300, first_page=1, last_page=1)
+                
+                if not images:
+                    return jsonify({"success": False, "error": "Failed to convert PDF to image"}), 500
+                
+                # Process the first page
+                image = images[0]
+                img_byte_arr = io.BytesIO()
+                image.save(img_byte_arr, format='PNG')
+                img_byte_arr = img_byte_arr.getvalue()
+                
+                # Process with Vision API
+                vision_image = vision.Image(content=img_byte_arr)
+                response = vision_client.document_text_detection(
+                    image=vision_image,
+                    image_context={"language_hints": ["ar"]}
+                )
+                
+                if response.error.message:
+                    raise Exception(f"API Error: {response.error.message}")
+                
+                # Extract text from response
+                if response.full_text_annotation:
+                    extracted_text = response.full_text_annotation.text
+                else:
+                    extracted_text = "No text detected in the PDF."
+                
+                page_count = 1
+                
+            except Exception as e:
+                logger.error(f"Error processing PDF: {str(e)}")
+                return jsonify({"success": False, "error": f"Error processing PDF: {str(e)}"}), 500
         
         # Return the results
         return jsonify({
             "success": True,
             "markdown": extracted_text,
-            "page_count": page_count if extension.lower() == '.pdf' else 1
+            "page_count": page_count
         }), 200
         
     except Exception as e:

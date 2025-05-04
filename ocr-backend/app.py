@@ -143,7 +143,6 @@ def process_ocr():
                 features=[feature],
                 input_config=input_config,
                 output_config=output_config,
-                context=vision.ImageContext(language_hints=["ar"])
             )
             
             # Make the request

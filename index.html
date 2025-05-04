@@ -1475,7 +1475,7 @@ document.addEventListener('DOMContentLoaded', function() {
         submitButton.disabled = true;
         
         // Send file to backend
-        fetch('https://ocr-backend-service.onrender.com', {
+        fetch('https://ocr-backend-service.onrender.com/api/ocr', {
     method: 'POST',
     body: formData
 })

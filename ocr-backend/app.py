@@ -10,14 +10,14 @@ import json
 from google.cloud import vision
 from google.oauth2 import service_account
 
-# Instead of reading from a file, read from an environment variable
+# Get Google credentials - either from environment variable or fallback to file
 google_credentials_json = os.environ.get("GOOGLE_CREDENTIALS_JSON")
 if google_credentials_json:
     # Parse JSON credentials from environment variable
     info = json.loads(google_credentials_json)
     credentials = service_account.Credentials.from_service_account_info(info)
 else:
-    # Fall back to file for local development
+    # Fallback to file for local development
     credentials_path = os.environ.get("GOOGLE_CREDENTIALS_PATH", "D:\Secure\euphoric-effect-411201-f016c1b7d091.json")
     credentials = service_account.Credentials.from_service_account_file(credentials_path)
 

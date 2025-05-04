@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import logging
 import base64
 import json
+from google.cloud import vision
 from google.oauth2 import service_account
 
 # Instead of reading from a file, read from an environment variable

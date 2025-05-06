@@ -1,0 +1,2 @@
+OCR test file
+This file is for testing GitHub Pages deployment.

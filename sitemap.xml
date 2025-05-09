@@ -6,11 +6,46 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
-
 <url>
-  <loc>https://w-electro.com/</loc>
-  <lastmod>2025-05-01T19:07:50+00:00</lastmod>
+  <loc>https://www.w-electro.com/index.html</loc>
+  <lastmod>2025-05-06T00:00:00+00:00</lastmod>
+  <priority>1.0</priority>
 </url>
 
+<url>
+  <loc>https://www.w-electro.com/general-services.html</loc>
+  <lastmod>2025-05-06T00:00:00+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://www.w-electro.com/design-services.html</loc>
+  <lastmod>2025-05-06T00:00:00+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://www.w-electro.com/academic-services.html</loc>
+  <lastmod>2025-05-06T00:00:00+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://www.w-electro.com/ocr.html</loc>
+  <lastmod>2025-05-06T00:00:00+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+
+<url>
+  <loc>https://www.w-electro.com/privacy-policy.html</loc>
+  <lastmod>2025-05-06T00:00:00+00:00</lastmod>
+  <priority>0.7</priority>
+</url>
+
+<url>
+  <loc>https://www.w-electro.com/terms-and-conditions.html</loc>
+  <lastmod>2025-05-06T00:00:00+00:00</lastmod>
+  <priority>0.7</priority>
+</url>
 
 </urlset>

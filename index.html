@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 <html lang="ar" dir="rtl">
 	<head>
@@ -17,7 +18,6 @@
 		
 		<!-- SEO Meta Description -->
 		<meta name="description" content="W للخدمات الإلكترونية يقدم خدمات تسجيل جامعي، طباعة، وحلول ذكية للطلاب. استمتع بخدمات إلكترونية مميزة الآن!">
-		<!-- Meta keywords removed as Google no longer uses it for ranking -->
 		<meta name="robots" content="index, follow">
 		<meta name="author" content="W للخدمات الإلكترونية">
 		
@@ -36,19 +36,7 @@
 		<meta property="og:site_name" content="W للخدمات الإلكترونية">
 		<meta name="twitter:card" content="summary_large_image">
 		
-		<!-- Tailwind CSS -->
-		<script src="https://cdn.tailwindcss.com"></script>
-		
-		<!-- Alpine.js for interactivity -->
-		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-		
-		<!-- Font Awesome -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-		
-		<!-- Custom Arabic font -->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" />
-		
-		<!-- 1. LocalBusiness Structured Data - Updated with address -->
+		<!-- Structured Data -->
 		<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
@@ -89,7 +77,7 @@
 		}
 		</script>
 
-		<!-- 2. Service Structured Data (for each main service category) - Updated with address in provider -->
+		<!-- Service Structured Data -->
 		<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
@@ -147,7 +135,7 @@
 		}
 		</script>
 
-		<!-- 3. Service Structured Data for Design Services - Updated with address in provider -->
+		<!-- Design Services Structured Data -->
 		<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
@@ -195,7 +183,7 @@
 		}
 		</script>
 
-		<!-- 4. Service Structured Data for Academic Services - Updated with address in provider -->
+		<!-- Academic Services Structured Data -->
 		<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
@@ -253,7 +241,7 @@
 		}
 		</script>
 
-		<!-- 5. Breadcrumb Structured Data -->
+		<!-- Breadcrumb Structured Data -->
 		<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
@@ -275,7 +263,7 @@
 		}
 		</script>
 
-		<!-- 6. WebSite Structured Data -->
+		<!-- Website Structured Data -->
 		<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
@@ -290,7 +278,7 @@
 		}
 		</script>
 
-		<!-- 7. FAQ Structured Data (for your services section) -->
+		<!-- FAQ Structured Data -->
 		<script type="application/ld+json">
 		{
 		  "@context": "https://schema.org",
@@ -323,6 +311,18 @@
 		  ]
 		}
 		</script>
+		
+		<!-- Tailwind CSS -->
+		<script src="https://cdn.tailwindcss.com"></script>
+		
+		<!-- Alpine.js for interactivity -->
+		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+		
+		<!-- Custom Arabic font -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" />
 		
 		<!-- Inline styles with centered service icons -->
 		<style>
@@ -466,61 +466,73 @@
 				color: #ffffff !important;
 			}
             
-            /* OCR Section Styles */
-            .file-drop-area {
-                border: 2px dashed #e2e8f0;
-                border-radius: 0.5rem;
-                padding: 2rem;
-                text-align: center;
-                transition: all 0.3s ease;
+            /* Most Used Services Styles */
+            .services-scroll::-webkit-scrollbar {
+                height: 6px;
             }
             
-            .file-drop-area:hover {
-                border-color: #0891b2;
-                background-color: rgba(8, 145, 178, 0.05);
+            .services-scroll::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
             }
             
-            .prose {
-                color: #374151;
-                max-width: 65ch;
-                font-size: 1rem;
-                line-height: 1.75;
+            .services-scroll::-webkit-scrollbar-thumb {
+                background: #0891b2;
+                border-radius: 10px;
             }
             
-            .prose p {
-                margin-top: 1.25em;
-                margin-bottom: 1.25em;
+            .services-scroll::-webkit-scrollbar-thumb:hover {
+                background: #066d86;
             }
             
-            .prose h1, .prose h2, .prose h3, .prose h4 {
-                color: #111827;
-                font-weight: 600;
-                margin-top: 2em;
-                margin-bottom: 1em;
+            /* Scroll arrows indicator */
+            .scroll-arrow {
+                animation: bounceHorizontal 1.5s infinite;
             }
             
-            .prose img {
-                margin-top: 2em;
-                margin-bottom: 2em;
-                border-radius: 0.375rem;
+            @keyframes bounceHorizontal {
+                0%, 100% {
+                    transform: translateX(0);
+                }
+                50% {
+                    transform: translateX(10px);
+                }
             }
             
-            .prose code {
-                color: #111827;
-                font-weight: 600;
-                font-size: 0.875em;
+            /* Animation classes */
+            .animate-fadeInUp {
+                animation: fadeInUp 0.5s ease-out forwards;
             }
             
-            .prose pre {
-                color: #e5e7eb;
-                background-color: #1f2937;
-                overflow-x: auto;
-                font-size: 0.875em;
-                line-height: 1.7142857;
-                margin-top: 1.7142857em;
-                margin-bottom: 1.7142857em;
-                border-radius: 0.375rem;
-                padding: 0.8571429em 1.1428571em;
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .delay-100 {
+                animation-delay: 0.1s;
+            }
+            
+            .delay-200 {
+                animation-delay: 0.2s;
+            }
+            
+            .delay-300 {
+                animation-delay: 0.3s;
+            }
+            
+            .delay-400 {
+                animation-delay: 0.4s;
+            }
+            
+            .delay-500 {
+                animation-delay: 0.5s;
             }
 		</style>
 		
@@ -591,17 +603,12 @@
 		</nav>
 
 		<!-- Hero Section - SEO Optimized -->
-		<section id="home" class="py-16 md:py-24 bg-gradient-to-b from-cyan-50 to-white">
+		<section id="home" class="py-16 bg-gradient-to-b from-cyan-50 to-white">
 			<div class="container mx-auto px-4">
 				<div class="flex flex-col md:flex-row items-center justify-between">
 					<div class="md:w-1/2 text-center md:text-right md:pr-10 animate-fadeInUp">
-						<!-- SEO Optimized H1 Tag -->
 						<h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">خدمات إلكترونية مميزة</h1>
-						
-						<!-- SEO Optimized Subtitle -->
 						<h2 class="text-2xl font-semibold text-gray-700 mb-3">حلول ذكية للطلاب والخدمات الطلابية</h2>
-						
-						<!-- SEO Optimized First Paragraph -->
 						<p class="text-xl text-gray-600 mb-8">
 							نحن في <span class="text-cyan-600">W</span> نختص في تقديم خدمات إلكترونية متكاملة تشمل خدمات طلابية مثل الطباعة، التسجيل، والمساعدة في الإجراءات الأكاديمية، مما يسهل حياة الطالب الجامعي.
 						</p>
@@ -612,12 +619,110 @@
 						</div>
 					</div>
 					<div class="md:w-1/2 mt-12 md:mt-0 animate-fadeInUp delay-200">
-						<!-- SEO Optimized Image with Alt Text and Lazy Loading -->
 						<img src="wD.png" alt="W للخدمات الإلكترونية - خدمات طلابية وإلكترونية في السعودية" class="w-80 h-80 mx-auto object-contain shadow-xl rounded-2xl transform -rotate-3 hover:rotate-0 transition-all duration-500" loading="lazy">
 					</div>
 				</div>
 			</div>
 		</section>
+
+        <!-- Most Used Services Section -->
+        <section class="py-8 bg-white relative">
+            <div class="container mx-auto px-4">
+                <div class="mb-6 flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-gray-800">خدماتنا الأكثر طلباً</h2>
+                    <div class="hidden md:flex items-center gap-2 text-gray-500">
+                        <span>مرر للمزيد</span>
+                        <i class="fas fa-arrow-left scroll-arrow"></i>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <!-- Mobile scroll indicator -->
+                    <div class="md:hidden text-center text-gray-500 mb-4">
+                        <span>مرر للمزيد</span>
+                        <i class="fas fa-arrow-left scroll-arrow mr-2"></i>
+                    </div>
+                    
+                    <!-- Scrollable container -->
+                    <div class="services-scroll flex overflow-x-auto pb-6 gap-5 snap-x">
+                        <!-- Service 1 -->
+                        <div class="service-card flex-shrink-0 snap-start w-72 bg-white rounded-lg shadow-md p-6 border-t-4 border-cyan-500">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-chart-line text-cyan-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-800">عروض بوربوينت</h3>
+                            </div>
+                            <p class="text-gray-600 mb-5">تصميم عروض تقديمية احترافية وجذابة لمختلف الاحتياجات والمناسبات</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-cyan-600 font-bold">10 ريال / شريحة</span>
+                                <a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة عروض بوربوينت" class="btn-primary py-2 px-4 text-sm">طلب الخدمة</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 2 -->
+                        <div class="service-card flex-shrink-0 snap-start w-72 bg-white rounded-lg shadow-md p-6 border-t-4 border-cyan-500">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-file-alt text-cyan-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-800">OCR</h3>
+                            </div>
+                            <p class="text-gray-600 mb-5">استخراج النصوص من الصور والمستندات باستخدام تقنيات الذكاء الاصطناعي</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-cyan-600 font-bold">حسب الطلب</span>
+                                <a href="ocr" class="btn-primary py-2 px-4 text-sm">طلب الخدمة</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 3 -->
+                        <div class="service-card flex-shrink-0 snap-start w-72 bg-white rounded-lg shadow-md p-6 border-t-4 border-cyan-500">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-shopping-cart text-cyan-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-800">إنشاء متجر إلكتروني</h3>
+                            </div>
+                            <p class="text-gray-600 mb-5">تصميم وإنشاء متجر إلكتروني متكامل يناسب احتياجات مشروعك</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-cyan-600 font-bold">150 ريال</span>
+                                <a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة إنشاء متجر إلكتروني" class="btn-primary py-2 px-4 text-sm">طلب الخدمة</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 4 -->
+                        <div class="service-card flex-shrink-0 snap-start w-72 bg-white rounded-lg shadow-md p-6 border-t-4 border-cyan-500">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-pen-fancy text-cyan-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-800">كتابة مقالات</h3>
+                            </div>
+                            <p class="text-gray-600 mb-5">كتابة مقالات متخصصة بمحتوى عالي الجودة للمدونات والمواقع الإلكترونية</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-cyan-600 font-bold">5 ريال / صفحة</span>
+                                <a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة كتابة مقالات" class="btn-primary py-2 px-4 text-sm">طلب الخدمة</a>
+                            </div>
+                        </div>
+                        
+                        <!-- Service 5 -->
+                        <div class="service-card flex-shrink-0 snap-start w-72 bg-white rounded-lg shadow-md p-6 border-t-4 border-cyan-500">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-cyan-100 rounded-full flex items-center justify-center mr-4">
+                                    <i class="fas fa-chart-line text-cyan-600 text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold text-gray-800">فتح سجل تجاري</h3>
+                            </div>
+                            <p class="text-gray-600 mb-5">مساعدة في فتح واستخراج سجل تجاري لمشروعك بأسرع وقت وبدون تعقيدات</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-cyan-600 font-bold">20 ريال</span>
+                                <a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة فتح سجل تجاري" class="btn-primary py-2 px-4 text-sm">طلب الخدمة</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
 		<!-- Services Overview Section -->
 		<section class="py-16 bg-white">
@@ -694,7 +799,6 @@
 								نسعى لتوفير الوقت والجهد بجودة عالية وأسعار مناسبة.
 							</p>
                             
-                            <!-- About Us address information -->
                             <div class="mt-6 bg-cyan-50 p-4 rounded-lg">
                                 <h3 class="text-xl font-semibold text-cyan-600 mb-3">موقعنا</h3>
                                 <div class="flex items-center mt-3">
@@ -857,7 +961,7 @@
 						</div>
 					</div>
 					
-					<!-- Contact Form - Updated with Formspree Integration -->
+					<!-- Contact Form -->
 					<div class="animate-fadeInUp delay-200">
 						<div class="bg-white p-8 rounded-lg shadow-md">
 							<h3 class="text-xl font-semibold text-gray-800 mb-6 text-center">أرسل لنا رسالة</h3>
@@ -958,12 +1062,12 @@
 			</div>
 		</footer>
 		
-		<!-- Floating WhatsApp Button - Updated to match style -->
+		<!-- Floating WhatsApp Button -->
 		<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-24 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:bg-orange-100" target="_blank" aria-label="تواصل معنا عبر واتساب">
 			<i class="fab fa-whatsapp text-2xl"></i>
 		</a>
 		
-		<!-- Scroll to top button - Updated to match style -->
+		<!-- Scroll to top button -->
 		<button id="scrollToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-50 transition-all duration-300 hover:bg-orange-100 opacity-0 invisible" aria-label="العودة إلى أعلى الصفحة">
 			<i class="fas fa-arrow-up"></i>
 		</button>

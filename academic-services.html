@@ -12,7 +12,7 @@
 		<!-- SEO Optimized Title -->
 		<title>خدمات طلابية متميزة | W للخدمات الإلكترونية</title>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="Content-Language" content="ar" />
 		
 		<!-- SEO Meta Description -->
@@ -22,11 +22,11 @@
 		
 		<!-- Favicon and Meta Images -->
 		<link rel="icon" href="wD.png" type="image/png">
-		<link rel="shortcut icon" href="wD.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="wD.png" type="image/png">
 		<link rel="apple-touch-icon" href="wD.png">
 		<link rel="canonical" href="https://www.w-electro.com/academic-services">
 		
-		<!-- Meta tags for social media sharing - SEO Enhanced -->
+		<!-- Meta tags for social media sharing -->
 		<meta property="og:title" content="خدمات طلابية متميزة | W للخدمات">
 		<meta property="og:description" content="خدمات أكاديمية متميزة لمساعدة الطلاب على تحقيق النجاح الدراسي من W للخدمات الإلكترونية.">
 		<meta property="og:image" content="https://www.w-electro.com/wD.png">
@@ -35,72 +35,282 @@
 		<meta property="og:site_name" content="W للخدمات الإلكترونية">
 		<meta name="twitter:card" content="summary_large_image">
 		
+		<!-- Preload critical resources -->
+		<link rel="preload" href="wD.png" as="image" type="image/png">
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" as="style">
+		
+		<!-- Load Google Fonts -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap">
+		
+		<!-- Load Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		
 		<!-- Tailwind CSS -->
 		<script src="https://cdn.tailwindcss.com"></script>
 		
-		<!-- Alpine.js for interactivity -->
+		<!-- Alpine.js -->
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		
-		<!-- Font Awesome -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-		
-		<!-- Custom Arabic font -->
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" />
-		
-		<!-- Inline styles with centered service icons -->
+		<!-- Critical inline styles -->
 		<style>
-			/* Force transparent orange buttons */
-			.btn-outline-orange, .btn-primary {
-				display: inline-block !important;
-				padding: 10px 20px !important;
+			:root {
+				--primary-color: #0891b2;
+				--secondary-color: #ff6e42;
+				--success-color: #10b981;
+				--warning-color: #f59e0b;
+				--error-color: #ef4444;
+				--dark-color: #1f2937;
+				--light-color: #f8fafc;
+			}
+
+			/* Hide content until loaded */
+			.main-content {
+				opacity: 0;
+				visibility: hidden;
+				transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+			}
+
+			.main-content.loaded {
+				opacity: 1;
+				visibility: visible;
+			}
+
+			/* Loading Screen */
+			.loading-screen {
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #ff6e42 100%);
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				z-index: 9999;
+				transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+			}
+
+			.loading-screen.hidden {
+				opacity: 0;
+				visibility: hidden;
+			}
+
+			.loading-logo {
+				width: 120px;
+				height: 120px;
+				background: white;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+				margin-bottom: 2rem;
+				animation: pulse-scale 2s ease-in-out infinite;
+			}
+
+			.loading-logo img {
+				width: 80px;
+				height: 80px;
+				object-fit: contain;
+				border-radius: 50%;
+			}
+
+			.loading-text {
+				color: white;
+				font-size: 1.5rem;
+				font-weight: 700;
+				margin-bottom: 2rem;
+				text-align: center;
+				animation: fade-in-out 2s ease-in-out infinite;
+			}
+
+			.loading-spinner {
+				width: 50px;
+				height: 50px;
+				border: 4px solid rgba(255, 255, 255, 0.3);
+				border-top: 4px solid white;
+				border-radius: 50%;
+				animation: spin 1s linear infinite;
+			}
+
+			@keyframes pulse-scale {
+				0%, 100% { transform: scale(1); }
+				50% { transform: scale(1.05); }
+			}
+
+			@keyframes fade-in-out {
+				0%, 100% { opacity: 0.7; }
+				50% { opacity: 1; }
+			}
+
+			@keyframes spin {
+				0% { transform: rotate(0deg); }
+				100% { transform: rotate(360deg); }
+			}
+
+			/* Font loading */
+			body {
+				font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+				font-display: swap;
+			}
+
+			/* Enhanced Button Styles */
+			.btn-primary, .btn-outline-orange {
+				display: inline-flex !important;
+				align-items: center;
+				justify-content: center;
+				padding: 12px 24px !important;
 				background: transparent !important;
-				color: #ff6e42 !important;
-				border: 2px solid #ff6e42 !important;
+				color: var(--secondary-color) !important;
+				border: 2px solid var(--secondary-color) !important;
 				border-radius: 50px !important;
-				font-weight: bold !important;
-				font-size: 0.9em !important;
-				transition: all 0.3s ease !important;
+				font-weight: 600 !important;
+				font-size: 0.95rem !important;
+				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 				cursor: pointer !important;
 				text-decoration: none !important;
 				text-align: center !important;
-			}
-			
-			.btn-outline-orange:hover, .btn-primary:hover {
-				background-color: rgba(255, 110, 66, 0.15) !important;
-				transform: translateY(-3px) !important;
-				box-shadow: 0 7px 14px rgba(255, 110, 66, 0.2) !important;
-			}
-			
-			.service-card:hover .btn-outline-orange, .service-card:hover .btn-primary {
-				color: #ffffff !important;
-				border-color: #ffffff !important;
-				background-color: transparent !important;
-			}
-			
-			.service-card:hover .btn-outline-orange:hover, .service-card:hover .btn-primary:hover {
-				background-color: rgba(255, 255, 255, 0.2) !important;
-				transform: translateY(-3px) !important;
-				box-shadow: 0 7px 14px rgba(255, 255, 255, 0.2) !important;
-			}
-			
-			/* Fix floating buttons */
-			.floating-whatsapp {
-				background: transparent !important;
-				color: #ff6e42 !important;
-				border: 2px solid #ff6e42 !important;
-			}
-			
-			#scrollToTop {
-				background: transparent !important;
-				color: #ff6e42 !important;
-				border: 2px solid #ff6e42 !important;
+				position: relative;
+				overflow: hidden;
 			}
 
-			/* Breadcrumbs styling */
+			.btn-primary::before, .btn-outline-orange::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background: var(--secondary-color);
+				transform: translateX(-100%);
+				transition: transform 0.3s ease;
+				z-index: -1;
+			}
+			
+			.btn-primary:hover, .btn-outline-orange:hover {
+				color: white !important;
+				border-color: var(--secondary-color) !important;
+				transform: translateY(-2px) !important;
+				box-shadow: 0 10px 20px rgba(255, 110, 66, 0.3) !important;
+			}
+
+			.btn-primary:hover::before, .btn-outline-orange:hover::before {
+				transform: translateX(0);
+			}
+
+			/* Service Card Enhanced Styles */
+			.service-card {
+				background: white !important;
+				border-radius: 20px !important;
+				padding: 2.5rem !important;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+				text-align: center !important;
+				border: 1px solid rgba(8, 145, 178, 0.1);
+				position: relative;
+				overflow: hidden;
+			}
+
+			.service-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 4px;
+				background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+				transform: scaleX(0);
+				transition: transform 0.3s ease;
+			}
+			
+			.service-card:hover {
+				transform: translateY(-12px) !important;
+				box-shadow: 0 25px 50px rgba(8, 145, 178, 0.15) !important;
+				background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
+				color: white !important;
+			}
+
+			.service-card:hover::before {
+				transform: scaleX(1);
+			}
+			
+			.service-icon {
+				margin: 0 auto 1.5rem !important;
+				display: flex !important;
+				align-items: center !important;
+				justify-content: center !important;
+				width: 80px !important;
+				height: 80px !important;
+				background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%) !important;
+				color: var(--primary-color) !important;
+				border-radius: 50% !important;
+				font-size: 2rem !important;
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+				box-shadow: 0 4px 20px rgba(8, 145, 178, 0.1);
+			}
+			
+			.service-card:hover .service-icon {
+				background: white !important;
+				color: var(--primary-color) !important;
+				transform: scale(1.1) rotateY(180deg) !important;
+				box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
+			}
+			
+			.service-card:hover h3, 
+			.service-card:hover p,
+			.service-card:hover .price-tag {
+				color: white !important;
+			}
+
+			.service-card:hover .btn-primary,
+			.service-card:hover .btn-outline-orange {
+				color: var(--primary-color) !important;
+				border-color: white !important;
+				background: white !important;
+			}
+
+			.service-card:hover .btn-primary:hover,
+			.service-card:hover .btn-outline-orange:hover {
+				background: rgba(255, 255, 255, 0.9) !important;
+				transform: translateY(-3px) !important;
+			}
+			
+			.price-tag {
+				display: inline-flex !important;
+				align-items: center;
+				background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%) !important;
+				color: var(--primary-color) !important;
+				font-weight: 700 !important;
+				padding: 0.75rem 1.5rem !important;
+				border-radius: 50px !important;
+				margin-top: 1rem !important;
+				transition: all 0.3s ease !important;
+				font-size: 1.1rem;
+				gap: 0.5rem;
+			}
+
+			/* Floating Buttons */
+			.floating-whatsapp, #scrollToTop {
+				background: white !important;
+				color: var(--secondary-color) !important;
+				border: 2px solid var(--secondary-color) !important;
+				box-shadow: 0 8px 25px rgba(255, 110, 66, 0.3) !important;
+				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+			}
+
+			.floating-whatsapp:hover, #scrollToTop:hover {
+				background: var(--secondary-color) !important;
+				color: white !important;
+				transform: translateY(-3px) scale(1.05) !important;
+				box-shadow: 0 12px 35px rgba(255, 110, 66, 0.4) !important;
+			}
+
+			/* Breadcrumbs */
 			.breadcrumbs {
-				padding: 10px 0;
-				margin-bottom: 20px;
-				font-size: 0.9em;
+				padding: 1rem 0;
+				margin-bottom: 1rem;
+				font-size: 0.9rem;
 			}
 			
 			.breadcrumbs ol {
@@ -109,6 +319,7 @@
 				list-style: none;
 				padding: 0;
 				margin: 0;
+				align-items: center;
 			}
 			
 			.breadcrumbs li {
@@ -120,134 +331,173 @@
 				content: ">";
 				margin: 0 10px;
 				color: #ccc;
+				font-weight: bold;
 			}
 			
 			.breadcrumbs a {
-				color: #ff6e42;
+				color: var(--secondary-color);
 				text-decoration: none;
+				font-weight: 500;
+				transition: color 0.3s ease;
 			}
 			
 			.breadcrumbs a:hover {
+				color: var(--primary-color);
 				text-decoration: underline;
 			}
-			
-			/* Service Icon Centering Fix */
-			.service-icon {
-				margin: 0 auto !important;
-				display: flex !important;
-				align-items: center !important;
-				justify-content: center !important;
-				width: 70px !important;
-				height: 70px !important;
-				background-color: #f0f9ff !important;
-				color: #0891b2 !important;
-				border-radius: 50% !important;
-				font-size: 1.5rem !important;
-				margin-bottom: 1rem !important;
-				transition: all 0.3s ease !important;
+
+			/* Animation Classes */
+			.animate-fadeInUp {
+				animation: fadeInUp 0.8s ease-out forwards;
+				opacity: 0;
 			}
 			
-			.service-card {
-				background-color: #ffffff !important;
-				border-radius: 10px !important;
-				padding: 2rem !important;
-				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
-				transition: all 0.3s ease !important;
-				text-align: center !important;
-			}
-			
-			.service-card:hover {
-				transform: translateY(-10px) !important;
-				box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1) !important;
-				background: linear-gradient(135deg, #0891b2 0%, #ff6e42 100%) !important;
-				color: #ffffff !important;
-			}
-			
-			.service-card:hover .service-icon {
-				background-color: #ffffff !important;
-				color: #0891b2 !important;
-				transform: scale(1.1) !important;
-			}
-			
-			.service-card:hover h3, .service-card:hover p {
-				color: #ffffff !important;
-			}
-			
-			.price-tag {
-				display: inline-block !important;
-				background-color: #f0f9ff !important;
-				color: #0891b2 !important;
-				font-weight: bold !important;
-				padding: 0.5rem 1rem !important;
-				border-radius: 50px !important;
-				margin-top: 1rem !important;
-				transition: all 0.3s ease !important;
-			}
-			
-			.service-card:hover .price-tag {
-				background-color: rgba(255, 255, 255, 0.2) !important;
-				color: #ffffff !important;
+			@keyframes fadeInUp {
+				from {
+					opacity: 0;
+					transform: translateY(30px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
 			}
 
-            /* Testimonial Styles */
-            .testimonial-card {
-                background-color: #ffffff;
-                border-radius: 10px;
-                padding: 2rem;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-                text-align: center;
-                position: relative;
-            }
-            
-            .testimonial-card::before {
-                content: '\201C';
-                position: absolute;
-                top: 20px;
-                left: 20px;
-                font-size: 4rem;
-                color: #f0f9ff;
-                font-family: serif;
-                line-height: 1;
-            }
-            
-            .student-avatar {
-                width: 70px;
-                height: 70px;
-                border-radius: 50%;
-                margin: 0 auto 1rem;
-                object-fit: cover;
-            }
-            
-            .star-rating {
-                color: #ffc107;
-                font-size: 1.2rem;
-                margin-bottom: 1rem;
-            }
-            
-            /* FAQ Styles */
-            .faq-item {
-                border-bottom: 1px solid #e2e8f0;
-                padding-bottom: 1rem;
-                margin-bottom: 1rem;
-            }
-            
-            .faq-question {
-                font-weight: 600;
-                color: #1e293b;
-                cursor: pointer;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-            }
-            
-            .faq-answer {
-                margin-top: 1rem;
-                color: #64748b;
-            }
+			.animate-slideInRight {
+				animation: slideInRight 0.8s ease-out forwards;
+				opacity: 0;
+			}
+
+			@keyframes slideInRight {
+				from {
+					opacity: 0;
+					transform: translateX(50px);
+				}
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
+
+			.animate-slideInLeft {
+				animation: slideInLeft 0.8s ease-out forwards;
+				opacity: 0;
+			}
+
+			@keyframes slideInLeft {
+				from {
+					opacity: 0;
+					transform: translateX(-50px);
+				}
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
+
+			.animate-bounceIn {
+				animation: bounceIn 1s ease-out forwards;
+				opacity: 0;
+			}
+
+			@keyframes bounceIn {
+				0% {
+					opacity: 0;
+					transform: scale(0.3);
+				}
+				50% {
+					opacity: 1;
+					transform: scale(1.05);
+				}
+				70% {
+					transform: scale(0.9);
+				}
+				100% {
+					opacity: 1;
+					transform: scale(1);
+				}
+			}
+			
+			.delay-100 { animation-delay: 0.1s; }
+			.delay-200 { animation-delay: 0.2s; }
+			.delay-300 { animation-delay: 0.3s; }
+			.delay-400 { animation-delay: 0.4s; }
+			.delay-500 { animation-delay: 0.5s; }
+
+			/* FAQ Styles */
+			.faq-item {
+				background: white;
+				border-radius: 12px;
+				margin-bottom: 1rem;
+				box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+				overflow: hidden;
+				transition: all 0.3s ease;
+			}
+
+			.faq-item:hover {
+				box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+			}
+
+			.faq-question {
+				font-weight: 600;
+				color: #1e293b;
+				cursor: pointer;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 1.5rem;
+				transition: all 0.3s ease;
+			}
+
+			.faq-question:hover {
+				background-color: #f8fafc;
+			}
+
+			.faq-answer {
+				padding: 0 1.5rem 1.5rem 1.5rem;
+				color: #64748b;
+				line-height: 1.7;
+			}
+
+			/* Feature Cards */
+			.feature-card {
+				background: white;
+				border-radius: 16px;
+				padding: 2rem;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+				text-align: center;
+				transition: all 0.3s ease;
+				border: 1px solid rgba(8, 145, 178, 0.1);
+			}
+
+			.feature-card:hover {
+				transform: translateY(-5px);
+				box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+			}
+
+			/* Responsive */
+			@media (max-width: 768px) {
+				.service-icon {
+					width: 70px !important;
+					height: 70px !important;
+					font-size: 1.5rem !important;
+				}
+
+				.loading-logo {
+					width: 100px;
+					height: 100px;
+				}
+
+				.loading-logo img {
+					width: 70px;
+					height: 70px;
+				}
+
+				.loading-text {
+					font-size: 1.2rem;
+				}
+			}
 		</style>
-		
-		<!-- Custom Stylesheet -->
-		<link rel="stylesheet" href="enhanced-styles.css" />
 	</head>
 	<body>
 		<!-- Google Tag Manager (noscript) -->
@@ -255,411 +505,577 @@
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
 		
-		<!-- Header/Navigation -->
-		<header class="bg-white shadow-sm sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
-			<div class="container mx-auto px-4 py-4">
-				<div class="flex items-center justify-between">
-					<!-- Logo -->
-					<div class="flex items-center">
-						<a href="index" class="text-2xl font-bold text-primary">
-							<span class="text-cyan-600">W</span>
-							<span class="text-orange-500">للخدمات الإلكترونية</span>
-						</a>
+		<!-- Loading Screen -->
+		<div id="loadingScreen" class="loading-screen">
+			<div class="loading-logo">
+				<img src="wD.png" alt="W للخدمات الإلكترونية" />
+			</div>
+			<div class="loading-text">W للخدمات الإلكترونية</div>
+			<div class="loading-spinner"></div>
+		</div>
+		
+		<!-- Main Content -->
+		<div id="mainContent" class="main-content">
+			<!-- Header/Navigation -->
+			<header class="bg-white shadow-lg sticky top-0 z-50 backdrop-blur-sm bg-white/95" x-data="{ mobileMenuOpen: false }">
+				<div class="container mx-auto px-4 py-4">
+					<div class="flex items-center justify-between">
+						<!-- Logo -->
+						<div class="flex items-center">
+							<a href="index" class="text-2xl font-bold text-primary flex items-center gap-3">
+								<img src="wD.png" alt="W للخدمات الإلكترونية" class="w-10 h-10 rounded-full shadow-md" />
+								<span class="text-cyan-600">W</span>
+								<span class="text-orange-500">للخدمات الإلكترونية</span>
+							</a>
+						</div>
+						
+						<!-- Desktop Navigation -->
+						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse">
+							<a href="index" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+								الرئيسية
+								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+							</a>
+							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+								خدمات عامة
+								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+							</a>
+							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+								خدمات التصميم
+								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+							</a>
+							<a href="academic-services" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 relative group">
+								خدمات طلابية
+								<span class="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-600"></span>
+							</a>
+							<a href="ocr" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+								خدمة OCR
+								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+							</a>
+							<a href="index#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+								من نحن
+								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+							</a>
+							<a href="index#contact" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+								تواصل معنا
+								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+							</a>
+						</nav>
+						
+						<!-- Mobile menu button -->
+						<div class="md:hidden">
+							<button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600 p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="فتح القائمة">
+								<svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+									<path x-show="!mobileMenuOpen" fill-rule="evenodd" clip-rule="evenodd" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"></path>
+									<path x-show="mobileMenuOpen" fill-rule="evenodd" clip-rule="evenodd" d="M6 18L18 6M6 6l12 12"></path>
+								</svg>
+							</button>
+						</div>
 					</div>
 					
-					<!-- Desktop Navigation -->
-					<nav class="hidden md:flex space-x-8 rtl:space-x-reverse">
-						<a href="index" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">الرئيسية</a>
-						<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمات عامة</a>
-						<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمات التصميم</a>
-						<a href="academic-services" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200">خدمات طلابية</a>
-						<a href="ocr" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمة OCR</a>
-						<a href="index#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">من نحن</a>
-						<a href="index#contact" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">تواصل معنا</a>
-					</nav>
-					
-					<!-- Mobile menu button -->
-					<div class="md:hidden">
-						<button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600">
-							<svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-								<path x-show="!mobileMenuOpen" fill-rule="evenodd" clip-rule="evenodd" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"></path>
-								<path x-show="mobileMenuOpen" fill-rule="evenodd" clip-rule="evenodd" d="M6 18L18 6M6 6l12 12"></path>
-							</svg>
-						</button>
+					<!-- Mobile Navigation -->
+					<div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 py-4 border-t border-gray-200">
+						<nav class="flex flex-col space-y-3">
+							<a href="index" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">الرئيسية</a>
+							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات عامة</a>
+							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات التصميم</a>
+							<a href="academic-services" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 py-2 px-4 rounded-lg bg-cyan-50">خدمات طلابية</a>
+							<a href="ocr" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمة OCR</a>
+							<a href="index#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">من نحن</a>
+							<a href="index#contact" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">تواصل معنا</a>
+						</nav>
 					</div>
+				</div>
+			</header>
+
+			<!-- Breadcrumbs -->
+			<nav class="breadcrumbs container mx-auto px-4" aria-label="breadcrumb">
+				<ol>
+					<li><a href="index">الرئيسية</a></li>
+					<li>خدمات طلابية</li>
+				</ol>
+			</nav>
+
+			<!-- Hero Section -->
+			<section class="py-20 bg-gradient-to-br from-cyan-50 via-blue-50 to-orange-50 relative overflow-hidden">
+				<!-- Background decorations -->
+				<div class="absolute inset-0 opacity-10">
+					<div class="absolute top-20 right-20 w-64 h-64 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+					<div class="absolute bottom-20 left-20 w-64 h-64 bg-orange-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-300"></div>
 				</div>
 				
-				<!-- Mobile Navigation -->
-				<div x-show="mobileMenuOpen" class="md:hidden mt-4 py-4 border-t border-gray-200">
-					<nav class="flex flex-col space-y-3">
-						<a href="index" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">الرئيسية</a>
-						<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمات عامة</a>
-						<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمات التصميم</a>
-						<a href="academic-services" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200">خدمات طلابية</a>
-						<a href="ocr" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">خدمة OCR</a>
-						<a href="index#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">من نحن</a>
-						<a href="index#contact" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200">تواصل معنا</a>
-					</nav>
-				</div>
-			</div>
-		</header>
-
-		<!-- Breadcrumbs for SEO -->
-		<nav class="breadcrumbs container mx-auto px-4" aria-label="breadcrumb">
-			<ol>
-				<li><a href="index">الرئيسية</a></li>
-				<li>خدمات طلابية</li>
-			</ol>
-		</nav>
-
-		<!-- Academic Services Page Hero -->
-		<section class="py-16 bg-gradient-to-b from-cyan-50 to-white">
-			<div class="container mx-auto px-4">
-				<div class="text-center mb-16 animate-fadeInUp">
-					<h1 class="text-4xl font-bold text-gray-800 mb-4">خدمات طلابية متميزة</h1>
-					<p class="text-gray-600 max-w-2xl mx-auto text-lg">نقدم خدمات أكاديمية متميزة لمساعدة الطلاب على تحقيق النجاح الدراسي وتخطي التحديات الجامعية بكل سهولة.</p>
-				</div>
-			</div>
-		</section>
-
-		<!-- Academic Services Section -->
-		<section class="py-12 bg-white">
-			<div class="container mx-auto px-4">
-				<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-					<!-- Academic Service Card 1 -->
-					<div class="service-card animate-fadeInUp delay-100">
-						<div class="service-icon" aria-label="خدمات مشاريع التخرج للطلاب">
-							<i class="fas fa-book"></i>
+				<div class="container mx-auto px-4 relative z-10">
+					<div class="text-center mb-16 animate-fadeInUp">
+						<div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6 shadow-lg">
+							<i class="fas fa-graduation-cap text-cyan-500"></i>
+							<span class="text-gray-700 font-medium">خدمات طلابية متميزة</span>
 						</div>
-						<h3 class="text-xl font-semibold text-gray-800 text-center">مشاريع تخرج</h3>
-						<p class="text-gray-600 text-center">مساعدة في إعداد وتنفيذ مشاريع التخرج</p>
-						<p class="price-tag text-center mx-auto block">250-50 <img src="Riyal.png" alt="ريال" class="inline w-4 h-4" /></p>
-						<div class="text-center mt-4">
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة مشاريع تخرج" class="btn-primary">طلب الخدمة</a>
-						</div>
-					</div>
-					
-					<!-- Academic Service Card 2 -->
-					<div class="service-card animate-fadeInUp delay-200">
-						<div class="service-icon" aria-label="خدمات مشاريع البرمجة للطلاب">
-							<i class="fas fa-laptop-code"></i>
-						</div>
-						<h3 class="text-xl font-semibold text-gray-800 text-center">مشاريع برمجة</h3>
-						<p class="text-gray-600 text-center">تنفيذ مشاريع البرمجة بمختلف اللغات</p>
-						<p class="price-tag text-center mx-auto block">150 <img src="Riyal.png" alt="ريال" class="inline w-4 h-4" /></p>
-						<div class="text-center mt-4">
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة مشاريع برمجة" class="btn-primary">طلب الخدمة</a>
-						</div>
-					</div>
-					
-					<!-- Academic Service Card 3 -->
-					<div class="service-card animate-fadeInUp delay-300">
-						<div class="service-icon" aria-label="خدمة تصميم عروض تقديمية للطلاب">
-							<i class="fas fa-chart-line"></i>
-						</div>
-						<h3 class="text-xl font-semibold text-gray-800 text-center">عروض بوربوينت</h3>
-						<p class="text-gray-600 text-center">تصميم عروض تقديمية احترافية</p>
-						<p class="price-tag text-center mx-auto block">10 <img src="Riyal.png" alt="ريال" class="inline w-4 h-4" /> للشريحة</p>
-						<div class="text-center mt-4">
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة عروض بوربوينت" class="btn-primary">طلب الخدمة</a>
-						</div>
-					</div>
-					
-					<!-- Academic Service Card 4 -->
-					<div class="service-card animate-fadeInUp delay-100">
-						<div class="service-icon" aria-label="خدمة الترجمة الأكاديمية للطلاب">
-							<i class="fas fa-language"></i>
-						</div>
-						<h3 class="text-xl font-semibold text-gray-800 text-center">الترجمة الأكاديمية</h3>
-						<p class="text-gray-600 text-center">ترجمة النصوص والأبحاث الأكاديمية</p>
-						<p class="price-tag text-center mx-auto block">20 <img src="Riyal.png" alt="ريال" class="inline w-4 h-4" /> للصفحة</p>
-						<div class="text-center mt-4">
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة الترجمة الأكاديمية" class="btn-primary">طلب الخدمة</a>
-						</div>
-					</div>
-					
-					<!-- Academic Service Card 5 -->
-					<div class="service-card animate-fadeInUp delay-200">
-						<div class="service-icon" aria-label="خدمة تلخيص الكتب والمقالات الأكاديمية للطلاب">
-							<i class="fas fa-file-alt"></i>
-						</div>
-						<h3 class="text-xl font-semibold text-gray-800 text-center">التلخيص والتوصيف</h3>
-						<p class="text-gray-600 text-center">تلخيص الكتب والمقالات الأكاديمية</p>
-						<p class="price-tag text-center mx-auto block">20 <img src="Riyal.png" alt="ريال" class="inline w-4 h-4" /></p>
-						<div class="text-center mt-4">
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة التلخيص والتوصيف" class="btn-primary">طلب الخدمة</a>
-						</div>
-					</div>
-					
-					<!-- Academic Service Card 6 -->
-					<div class="service-card animate-fadeInUp delay-300">
-						<div class="service-icon" aria-label="خدمة كتابة مقالات أكاديمية للطلاب">
-							<i class="fas fa-pen-fancy"></i>
-						</div>
-						<h3 class="text-xl font-semibold text-gray-800 text-center">كتابة مقالات</h3>
-						<p class="text-gray-600 text-center">كتابة مقالات أكاديمية متخصصة</p>
-						<p class="price-tag text-center mx-auto block">5 <img src="Riyal.png" alt="ريال" class="inline w-4 h-4" /> للصفحة</p>
-						<div class="text-center mt-4">
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة كتابة مقالات" class="btn-primary">طلب الخدمة</a>
+						
+						<h1 class="text-4xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
+							خدمات طلابية 
+							<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">متميزة</span>
+						</h1>
+						
+						<p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+							نقدم خدمات أكاديمية متميزة لمساعدة الطلاب على تحقيق النجاح الدراسي وتخطي التحديات الجامعية بكل سهولة. 
+							فريقنا المتخصص هنا لدعمكم في رحلتكم التعليمية.
+						</p>
+						
+						<!-- Stats -->
+						<div class="grid grid-cols-3 gap-6 mt-12 max-w-md mx-auto">
+							<div class="text-center">
+								<div class="text-2xl lg:text-3xl font-bold text-cyan-600">6+</div>
+								<div class="text-gray-600 text-sm">خدمات أكاديمية</div>
+							</div>
+							<div class="text-center">
+								<div class="text-2xl lg:text-3xl font-bold text-orange-500">500+</div>
+								<div class="text-gray-600 text-sm">طالب راضي</div>
+							</div>
+							<div class="text-center">
+								<div class="text-2xl lg:text-3xl font-bold text-green-500">98%</div>
+								<div class="text-gray-600 text-sm">معدل النجاح</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-        
-        <!-- Why Choose Us Section -->
-        <section class="py-16 bg-gray-50">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-4">لماذا تختارنا؟</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">أسباب تجعلنا الخيار الأفضل لمساعدتك في مسيرتك الأكاديمية</p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Feature 1 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                        <div class="bg-cyan-100 p-4 inline-block rounded-full mb-4">
-                            <i class="fas fa-user-graduate text-3xl text-cyan-600"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">فريق متخصص</h3>
-                        <p class="text-gray-600">نمتلك فريق من المتخصصين والخبراء في مختلف المجالات الأكاديمية</p>
-                    </div>
-                    
-                    <!-- Feature 2 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                        <div class="bg-cyan-100 p-4 inline-block rounded-full mb-4">
-                            <i class="fas fa-clock text-3xl text-cyan-600"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">التسليم في الموعد</h3>
-                        <p class="text-gray-600">نلتزم بتسليم المشاريع والمهام في المواعيد المحددة مع ضمان الجودة</p>
-                    </div>
-                    
-                    <!-- Feature 3 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md text-center">
-                        <div class="bg-cyan-100 p-4 inline-block rounded-full mb-4">
-                            <i class="fas fa-lock text-3xl text-cyan-600"></i>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-800 mb-2">خصوصية وسرية</h3>
-                        <p class="text-gray-600">نحافظ على سرية وخصوصية كافة المعلومات والمشاريع الخاصة بعملائنا</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- FAQ Section -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-800 mb-4">الأسئلة الشائعة</h2>
-                    <p class="text-gray-600 max-w-2xl mx-auto">إجابات لأكثر الأسئلة شيوعاً حول خدماتنا الطلابية</p>
-                </div>
-                
-                <div class="max-w-3xl mx-auto" x-data="{selected:null}">
-                    <!-- FAQ Item 1 -->
-                    <div class="faq-item">
-                        <div class="faq-question" @click="selected !== 1 ? selected = 1 : selected = null">
-                            <span>كم يستغرق إنجاز مشروع التخرج؟</span>
-                            <i class="fas" :class="selected === 1 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                        </div>
-                        <div class="faq-answer" x-show="selected === 1">
-                            يعتمد وقت إنجاز مشروع التخرج على حجم المشروع وتعقيده، للمشاريع البسيطة نحتاج من يوم إلى أسبوع. نحن نحرص على تحديد موعد التسليم بدقة بعد دراسة متطلبات المشروع.
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 2 -->
-                    <div class="faq-item">
-                        <div class="faq-question" @click="selected !== 2 ? selected = 2 : selected = null">
-                            <span>هل تقدمون خدمات للمشاريع البرمجية باللغة الإنجليزية؟</span>
-                            <i class="fas" :class="selected === 2 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                        </div>
-                        <div class="faq-answer" x-show="selected === 2">
-                            نعم، نقدم خدمات المشاريع البرمجية باللغة العربية والإنجليزية، ونمتلك فريق متخصص في مختلف لغات البرمجة ويمكننا إنجاز مشاريع برمجية متنوعة سواء كانت تطبيقات ويب، تطبيقات موبايل، أو برامج سطح المكتب.
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 3 -->
-                    <div class="faq-item">
-                        <div class="faq-question" @click="selected !== 3 ? selected = 3 : selected = null">
-                            <span>هل يمكنني طلب تعديلات بعد استلام المشروع؟</span>
-                            <i class="fas" :class="selected === 3 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                        </div>
-                        <div class="faq-answer" x-show="selected === 3">
-                            نعم، نقدم خدمة التعديلات المجانية للمشاريع خلال فترة محددة بعد التسليم، وذلك لضمان رضا العميل التام عن المشروع. التعديلات البسيطة مجانية، أما التعديلات الجوهرية فقد تتطلب رسوماً إضافية يتم الاتفاق عليها مسبقاً.
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 4 -->
-                    <div class="faq-item">
-                        <div class="faq-question" @click="selected !== 4 ? selected = 4 : selected = null">
-                            <span>ما هي طرق الدفع المتاحة؟</span>
-                            <i class="fas" :class="selected === 4 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                        </div>
-                        <div class="faq-answer" x-show="selected === 4">
-                            نقبل مجموعة متنوعة من طرق الدفع بما في ذلك التحويل البنكي، مدى، ومدفوعات Apple Pay وSTC Pay، بالإضافة إلى خدمات الدفع الإلكترونية المختلفة. نوفر أيضاً خيار الدفع على دفعات للمشاريع الكبيرة.
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 5 -->
-                    <div class="faq-item">
-                        <div class="faq-question" @click="selected !== 5 ? selected = 5 : selected = null">
-                            <span>هل تضمنون سرية المعلومات والمشاريع؟</span>
-                            <i class="fas" :class="selected === 5 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-                        </div>
-                        <div class="faq-answer" x-show="selected === 5">
-                            نعم، نحن نلتزم بسياسة خصوصية صارمة ونضمن سرية جميع المعلومات والمشاريع الخاصة بعملائنا. لن يتم مشاركة أي معلومات أو استخدام المشاريع المقدمة لأي غرض آخر دون موافقة صريحة من العميل.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-		
-		<!-- Related Services Section -->
-		<section class="py-12 bg-gray-50">
-			<div class="container mx-auto px-4">
-				<div class="text-center mb-10">
-					<h2 class="text-3xl font-bold text-gray-800 mb-4">خدمات أخرى قد تهمك</h2>
-					<p class="text-gray-600 max-w-2xl mx-auto">اكتشف المزيد من خدماتنا المتميزة التي تناسب احتياجاتك</p>
+			</section>
+
+			<!-- Services Section -->
+			<section class="py-20 bg-white">
+				<div class="container mx-auto px-4">
+					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+						<!-- Academic Service Card 1 -->
+						<div class="service-card animate-fadeInUp delay-100">
+							<div class="service-icon" aria-label="خدمات مشاريع التخرج للطلاب">
+								<i class="fas fa-book"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">مشاريع تخرج</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed">مساعدة في إعداد وتنفيذ مشاريع التخرج بجودة عالية وضمان النجاح الأكاديمي</p>
+							<div class="price-tag mb-4">
+								250-50 
+								<img src="Riyal.png" alt="ريال" class="w-4 h-4" />
+							</div>
+							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة مشاريع تخرج" class="btn-primary">
+								<i class="fas fa-whatsapp ml-2"></i>
+								طلب الخدمة
+							</a>
+						</div>
+						
+						<!-- Academic Service Card 2 -->
+						<div class="service-card animate-fadeInUp delay-200">
+							<div class="service-icon" aria-label="خدمات مشاريع البرمجة للطلاب">
+								<i class="fas fa-laptop-code"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">مشاريع برمجة</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed">تنفيذ مشاريع البرمجة بمختلف اللغات للطلاب والمتخصصين مع ضمان الجودة</p>
+							<div class="price-tag mb-4">
+								150 
+								<img src="Riyal.png" alt="ريال" class="w-4 h-4" />
+							</div>
+							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة مشاريع برمجة" class="btn-primary">
+								<i class="fas fa-whatsapp ml-2"></i>
+								طلب الخدمة
+							</a>
+						</div>
+						
+						<!-- Academic Service Card 3 -->
+						<div class="service-card animate-fadeInUp delay-300">
+							<div class="service-icon" aria-label="خدمة تصميم عروض تقديمية للطلاب">
+								<i class="fas fa-chart-line"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">عروض بوربوينت</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed">تصميم عروض تقديمية احترافية وجذابة للطلاب والمناسبات الأكاديمية</p>
+							<div class="price-tag mb-4">
+								10 
+								<img src="Riyal.png" alt="ريال" class="w-4 h-4" /> للشريحة
+							</div>
+							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة عروض بوربوينت" class="btn-primary">
+								<i class="fas fa-whatsapp ml-2"></i>
+								طلب الخدمة
+							</a>
+						</div>
+						
+						<!-- Academic Service Card 4 -->
+						<div class="service-card animate-fadeInUp delay-100">
+							<div class="service-icon" aria-label="خدمة الترجمة الأكاديمية للطلاب">
+								<i class="fas fa-language"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">الترجمة الأكاديمية</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed">ترجمة النصوص والأبحاث الأكاديمية بدقة عالية ومراعاة المصطلحات العلمية</p>
+							<div class="price-tag mb-4">
+								20 
+								<img src="Riyal.png" alt="ريال" class="w-4 h-4" /> للصفحة
+							</div>
+							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة الترجمة الأكاديمية" class="btn-primary">
+								<i class="fas fa-whatsapp ml-2"></i>
+								طلب الخدمة
+							</a>
+						</div>
+						
+						<!-- Academic Service Card 5 -->
+						<div class="service-card animate-fadeInUp delay-200">
+							<div class="service-icon" aria-label="خدمة تلخيص الكتب والمقالات الأكاديمية للطلاب">
+								<i class="fas fa-file-alt"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">التلخيص والتوصيف</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed">تلخيص الكتب والمقالات الأكاديمية بطريقة منهجية واستخراج النقاط الرئيسية</p>
+							<div class="price-tag mb-4">
+								20 
+								<img src="Riyal.png" alt="ريال" class="w-4 h-4" />
+							</div>
+							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة التلخيص والتوصيف" class="btn-primary">
+								<i class="fas fa-whatsapp ml-2"></i>
+								طلب الخدمة
+							</a>
+						</div>
+						
+						<!-- Academic Service Card 6 -->
+						<div class="service-card animate-fadeInUp delay-300">
+							<div class="service-icon" aria-label="خدمة كتابة مقالات أكاديمية للطلاب">
+								<i class="fas fa-pen-fancy"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">كتابة مقالات</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed">كتابة مقالات أكاديمية متخصصة بأسلوب علمي ومراجع موثوقة</p>
+							<div class="price-tag mb-4">
+								5 
+								<img src="Riyal.png" alt="ريال" class="w-4 h-4" /> للصفحة
+							</div>
+							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة كتابة مقالات" class="btn-primary">
+								<i class="fas fa-whatsapp ml-2"></i>
+								طلب الخدمة
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<!-- Why Choose Us Section -->
+			<section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+				<div class="container mx-auto px-4">
+					<div class="text-center mb-16 animate-fadeInUp">
+						<h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">لماذا تختارنا؟</h2>
+						<p class="text-xl text-gray-600 max-w-3xl mx-auto">أسباب تجعلنا الخيار الأفضل لمساعدتك في مسيرتك الأكاديمية</p>
+					</div>
+					
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+						<!-- Feature 1 -->
+						<div class="feature-card animate-fadeInUp delay-100">
+							<div class="service-icon bg-cyan-100 text-cyan-600 mb-4">
+								<i class="fas fa-user-graduate"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">فريق متخصص</h3>
+							<p class="text-gray-600 leading-relaxed">نمتلك فريق من المتخصصين والخبراء في مختلف المجالات الأكاديمية لضمان أفضل النتائج</p>
+						</div>
+						
+						<!-- Feature 2 -->
+						<div class="feature-card animate-fadeInUp delay-200">
+							<div class="service-icon bg-orange-100 text-orange-600 mb-4">
+								<i class="fas fa-clock"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">التسليم في الموعد</h3>
+							<p class="text-gray-600 leading-relaxed">نلتزم بتسليم المشاريع والمهام في المواعيد المحددة مع ضمان الجودة العالية</p>
+						</div>
+						
+						<!-- Feature 3 -->
+						<div class="feature-card animate-fadeInUp delay-300">
+							<div class="service-icon bg-green-100 text-green-600 mb-4">
+								<i class="fas fa-lock"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">خصوصية وسرية</h3>
+							<p class="text-gray-600 leading-relaxed">نحافظ على سرية وخصوصية كافة المعلومات والمشاريع الخاصة بعملائنا الكرام</p>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<!-- FAQ Section -->
+			<section class="py-20 bg-white">
+				<div class="container mx-auto px-4">
+					<div class="text-center mb-16 animate-fadeInUp">
+						<h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">الأسئلة الشائعة</h2>
+						<p class="text-xl text-gray-600 max-w-3xl mx-auto">إجابات لأكثر الأسئلة شيوعاً حول خدماتنا الطلابية</p>
+					</div>
+					
+					<div class="max-w-4xl mx-auto" x-data="{selected:null}">
+						<!-- FAQ Item 1 -->
+						<div class="faq-item animate-fadeInUp delay-100">
+							<div class="faq-question" @click="selected !== 1 ? selected = 1 : selected = null">
+								<span>كم يستغرق إنجاز مشروع التخرج؟</span>
+								<i class="fas transition-transform duration-300" :class="selected === 1 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+							</div>
+							<div class="faq-answer" x-show="selected === 1" x-transition>
+								يعتمد وقت إنجاز مشروع التخرج على حجم المشروع وتعقيده، للمشاريع البسيطة نحتاج من يوم إلى أسبوع. نحن نحرص على تحديد موعد التسليم بدقة بعد دراسة متطلبات المشروع وضمان الجودة المطلوبة.
+							</div>
+						</div>
+						
+						<!-- FAQ Item 2 -->
+						<div class="faq-item animate-fadeInUp delay-200">
+							<div class="faq-question" @click="selected !== 2 ? selected = 2 : selected = null">
+								<span>هل تقدمون خدمات للمشاريع البرمجية باللغة الإنجليزية؟</span>
+								<i class="fas transition-transform duration-300" :class="selected === 2 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+							</div>
+							<div class="faq-answer" x-show="selected === 2" x-transition>
+								نعم، نقدم خدمات المشاريع البرمجية باللغة العربية والإنجليزية، ونمتلك فريق متخصص في مختلف لغات البرمجة ويمكننا إنجاز مشاريع برمجية متنوعة سواء كانت تطبيقات ويب، تطبيقات موبايل، أو برامج سطح المكتب.
+							</div>
+						</div>
+						
+						<!-- FAQ Item 3 -->
+						<div class="faq-item animate-fadeInUp delay-300">
+							<div class="faq-question" @click="selected !== 3 ? selected = 3 : selected = null">
+								<span>هل يمكنني طلب تعديلات بعد استلام المشروع؟</span>
+								<i class="fas transition-transform duration-300" :class="selected === 3 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+							</div>
+							<div class="faq-answer" x-show="selected === 3" x-transition>
+								نعم، نقدم خدمة التعديلات المجانية للمشاريع خلال فترة محددة بعد التسليم، وذلك لضمان رضا العميل التام عن المشروع. التعديلات البسيطة مجانية، أما التعديلات الجوهرية فقد تتطلب رسوماً إضافية يتم الاتفاق عليها مسبقاً.
+							</div>
+						</div>
+						
+						<!-- FAQ Item 4 -->
+						<div class="faq-item animate-fadeInUp delay-400">
+							<div class="faq-question" @click="selected !== 4 ? selected = 4 : selected = null">
+								<span>ما هي طرق الدفع المتاحة؟</span>
+								<i class="fas transition-transform duration-300" :class="selected === 4 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+							</div>
+							<div class="faq-answer" x-show="selected === 4" x-transition>
+								نقبل مجموعة متنوعة من طرق الدفع بما في ذلك التحويل البنكي، مدى، ومدفوعات Apple Pay وSTC Pay، بالإضافة إلى خدمات الدفع الإلكترونية المختلفة. نوفر أيضاً خيار الدفع على دفعات للمشاريع الكبيرة.
+							</div>
+						</div>
+						
+						<!-- FAQ Item 5 -->
+						<div class="faq-item animate-fadeInUp delay-500">
+							<div class="faq-question" @click="selected !== 5 ? selected = 5 : selected = null">
+								<span>هل تضمنون سرية المعلومات والمشاريع؟</span>
+								<i class="fas transition-transform duration-300" :class="selected === 5 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+							</div>
+							<div class="faq-answer" x-show="selected === 5" x-transition>
+								نعم، نحن نلتزم بسياسة خصوصية صارمة ونضمن سرية جميع المعلومات والمشاريع الخاصة بعملائنا. لن يتم مشاركة أي معلومات أو استخدام المشاريع المقدمة لأي غرض آخر دون موافقة صريحة من العميل.
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<!-- Related Services Section -->
+			<section class="py-20 bg-gradient-to-br from-gray-50 to-white">
+				<div class="container mx-auto px-4">
+					<div class="text-center mb-16 animate-fadeInUp">
+						<h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">خدمات أخرى قد تهمك</h2>
+						<p class="text-xl text-gray-600 max-w-3xl mx-auto">اكتشف المزيد من خدماتنا المتميزة التي تناسب احتياجاتك</p>
+					</div>
+					
+					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+						<!-- General Services Card -->
+						<div class="service-card animate-fadeInUp delay-100">
+							<div class="service-icon" aria-label="خدمات إلكترونية عامة">
+								<i class="fas fa-cogs"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">خدمات إلكترونية عامة</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed">مجموعة متنوعة من الخدمات الإلكترونية العامة بجودة عالية وأسعار مناسبة</p>
+							<a href="general-services" class="btn-primary">
+								<i class="fas fa-arrow-left ml-2"></i>
+								عرض التفاصيل
+							</a>
+						</div>
+						
+						<!-- Design Services Card -->
+						<div class="service-card animate-fadeInUp delay-200">
+							<div class="service-icon" aria-label="خدمات التصميم الاحترافية">
+								<i class="fas fa-paint-brush"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">خدمات التصميم</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed">خدمات تصميم احترافية تناسب كافة الاحتياجات الشخصية والتجارية والمؤسسية</p>
+							<a href="design-services" class="btn-primary">
+								<i class="fas fa-arrow-left ml-2"></i>
+								عرض التفاصيل
+							</a>
+						</div>
+						
+						<!-- OCR Service Card -->
+						<div class="service-card animate-fadeInUp delay-300">
+							<div class="service-icon" aria-label="خدمة استخراج النصوص من المستندات">
+								<i class="fas fa-file-alt"></i>
+							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">خدمة OCR</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed">استخراج النصوص من الصور والمستندات باستخدام تقنيات الذكاء الاصطناعي المتطورة</p>
+							<a href="ocr" class="btn-primary">
+								<i class="fas fa-arrow-left ml-2"></i>
+								عرض التفاصيل
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<!-- Contact CTA Section -->
+			<section class="py-20 bg-gradient-to-br from-cyan-500 via-blue-500 to-orange-500 text-white relative overflow-hidden">
+				<!-- Background Pattern -->
+				<div class="absolute inset-0 opacity-10">
+					<div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;><circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;2&quot; fill=&quot;white&quot;/></svg>'); background-size: 50px 50px;"></div>
 				</div>
 				
-				<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-					<!-- General Services Card -->
-					<div class="service-card animate-fadeInUp delay-100">
-						<div class="service-icon" aria-label="خدمات إلكترونية عامة">
-							<i class="fas fa-cogs"></i>
-						</div>
-						<h3 class="text-xl font-semibold text-gray-800 text-center">خدمات إلكترونية عامة</h3>
-						<p class="text-gray-600 text-center">مجموعة متنوعة من الخدمات الإلكترونية العامة بجودة عالية وأسعار مناسبة</p>
-						<div class="text-center mt-4">
-							<a href="general-services" class="btn-primary">عرض التفاصيل</a>
-						</div>
-					</div>
-					
-					<!-- Design Services Card -->
-					<div class="service-card animate-fadeInUp delay-200">
-						<div class="service-icon" aria-label="خدمات التصميم الاحترافية">
-							<i class="fas fa-paint-brush"></i>
-						</div>
-						<h3 class="text-xl font-semibold text-gray-800 text-center">خدمات التصميم</h3>
-						<p class="text-gray-600 text-center">خدمات تصميم احترافية تناسب كافة الاحتياجات الشخصية والتجارية</p>
-						<div class="text-center mt-4">
-							<a href="design-services" class="btn-primary">عرض التفاصيل</a>
-						</div>
-					</div>
-					
-					<!-- OCR Service Card -->
-					<div class="service-card animate-fadeInUp delay-300">
-						<div class="service-icon" aria-label="خدمة استخراج النصوص من المستندات">
-							<i class="fas fa-file-alt"></i>
-						</div>
-						<h3 class="text-xl font-semibold text-gray-800 text-center">خدمة OCR</h3>
-						<p class="text-gray-600 text-center">استخراج النصوص من الصور والمستندات باستخدام تقنيات الذكاء الاصطناعي</p>
-						<div class="text-center mt-4">
-							<a href="ocr" class="btn-primary">عرض التفاصيل</a>
+				<div class="container mx-auto px-4 text-center relative z-10">
+					<div class="animate-fadeInUp">
+						<h2 class="text-3xl lg:text-4xl font-bold mb-6">تواصل معنا للاستفسار أو طلب الخدمة</h2>
+						<p class="text-xl mb-12 max-w-3xl mx-auto leading-relaxed">
+							هل تحتاج إلى مساعدة في مشروعك الدراسي؟ نحن هنا للمساعدة. تواصل معنا الآن واحصل على الدعم الأكاديمي الذي تحتاجه!
+						</p>
+						<div class="flex flex-col sm:flex-row justify-center gap-6">
+							<a href="https://wa.me/966540732077" class="bg-white text-cyan-600 hover:bg-gray-100 px-8 py-4 rounded-full font-bold transition duration-300 transform hover:scale-105 shadow-lg">
+								<i class="fab fa-whatsapp ml-2 text-xl"></i> تواصل عبر واتساب
+							</a>
+							<a href="mailto:wforelectronicservices@gmail.com" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-cyan-600 px-8 py-4 rounded-full font-bold transition duration-300 transform hover:scale-105">
+								<i class="fas fa-envelope ml-2"></i> راسلنا عبر البريد
+							</a>
 						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-		
-		<!-- Contact CTA Section -->
-		<section class="py-16 bg-gradient-to-r from-cyan-500 to-orange-500 text-white">
-			<div class="container mx-auto px-4 text-center">
-				<h2 class="text-3xl font-bold mb-6">تواصل معنا للاستفسار أو طلب الخدمة</h2>
-				<p class="text-lg mb-8 max-w-2xl mx-auto">هل تحتاج إلى مساعدة في مشروعك الدراسي؟ نحن هنا للمساعدة. تواصل معنا الآن!</p>
-				<div class="flex flex-wrap justify-center gap-4">
-					<a href="https://wa.me/966540732077" class="bg-white text-cyan-600 hover:bg-gray-100 px-8 py-3 rounded-full font-bold transition duration-300">
-						<i class="fab fa-whatsapp ml-2"></i> تواصل عبر واتساب
-					</a>
-					<a href="mailto:wforelectronicservices@gmail.com" class="bg-transparent border-2 border-white text-white hover:bg-white hover:text-cyan-600 px-8 py-3 rounded-full font-bold transition duration-300">
-						<i class="fas fa-envelope ml-2"></i> راسلنا عبر البريد
-					</a>
-				</div>
-			</div>
-		</section>
-		
-		<!-- Footer -->
-		<footer class="bg-gray-900 text-white py-12">
-			<div class="container mx-auto px-4">
-				<div class="flex flex-col md:flex-row justify-between items-center">
-					<!-- Logo and Description -->
-					<div class="mb-8 md:mb-0 text-center md:text-right">
-						<h3 class="text-2xl font-bold mb-2">
-							<span class="text-cyan-400">W</span>
-							<span class="text-orange-400">للخدمات الإلكترونية</span>
-						</h3>
-						<p class="text-gray-400 max-w-md">حلول رقمية متكاملة لجميع احتياجاتك الإلكترونية والتصميمية بجودة عالية وأسعار مناسبة</p>
-					</div>
-					
-					<!-- Quick Links -->
-					<div class="mb-8 md:mb-0">
-						<h4 class="text-lg font-semibold mb-4 text-center md:text-right">روابط سريعة</h4>
-						<div class="flex flex-col space-y-2 items-center md:items-end">
-							<a href="index" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">الرئيسية</a>
-							<a href="general-services" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">خدمات عامة</a>
-							<a href="design-services" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">خدمات التصميم</a>
-							<a href="academic-services" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">خدمات طلابية</a>
-                            <a href="ocr" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">خدمة OCR</a>
-							<a href="index#about" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">من نحن</a>
-							<a href="index#contact" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">تواصل معنا</a>
-							<a href="privacy-policy" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">سياسة الخصوصية</a>
-							<a href="terms-and-conditions" class="text-gray-400 hover:text-orange-400 transition-colors duration-200">الشروط والأحكام</a>
+			</section>
+			
+			<!-- Footer -->
+			<footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+				<div class="container mx-auto px-4">
+					<div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+						<!-- Logo and Description -->
+						<div class="text-center lg:text-right">
+							<div class="flex items-center justify-center lg:justify-start gap-3 mb-4">
+								<img src="wD.png" alt="W للخدمات الإلكترونية" class="w-12 h-12 rounded-full shadow-lg" />
+								<h3 class="text-2xl lg:text-3xl font-bold">
+									<span class="text-cyan-400">W</span>
+									<span class="text-orange-400">للخدمات الإلكترونية</span>
+								</h3>
+							</div>
+							<p class="text-gray-300 leading-relaxed max-w-md mx-auto lg:mx-0">حلول أكاديمية متكاملة وخدمات طلابية متميزة بجودة عالية وأسعار مناسبة في حائل والمملكة العربية السعودية</p>
+						</div>
+						
+						<!-- Quick Links -->
+						<div class="text-center lg:text-right">
+							<h4 class="text-xl font-semibold mb-6 text-orange-400">روابط سريعة</h4>
+							<div class="grid grid-cols-2 gap-3">
+								<a href="index" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
+									<i class="fas fa-home text-sm"></i>
+									الرئيسية
+								</a>
+								<a href="general-services" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
+									<i class="fas fa-cogs text-sm"></i>
+									خدمات عامة
+								</a>
+								<a href="design-services" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
+									<i class="fas fa-paint-brush text-sm"></i>
+									خدمات التصميم
+								</a>
+								<a href="academic-services" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
+									<i class="fas fa-graduation-cap text-sm"></i>
+									خدمات طلابية
+								</a>
+								<a href="ocr" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
+									<i class="fas fa-file-alt text-sm"></i>
+									خدمة OCR
+								</a>
+								<a href="index#about" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
+									<i class="fas fa-info-circle text-sm"></i>
+									من نحن
+								</a>
+							</div>
+						</div>
+						
+						<!-- Contact Info -->
+						<div class="text-center lg:text-left">
+							<h4 class="text-xl font-semibold mb-6 text-cyan-400">تواصل معنا</h4>
+							<div class="space-y-4 mb-6">
+								<a href="https://wa.me/966540732077" class="flex items-center justify-center lg:justify-start gap-3 text-gray-300 hover:text-green-400 transition-colors">
+									<i class="fab fa-whatsapp text-lg"></i>
+									<span dir="ltr">+966 54 073 2077</span>
+								</a>
+								<a href="mailto:wforelectronicservices@gmail.com" class="flex items-center justify-center lg:justify-start gap-3 text-gray-300 hover:text-blue-400 transition-colors">
+									<i class="fas fa-envelope text-lg"></i>
+									<span class="text-sm">wforelectronicservices@gmail.com</span>
+								</a>
+							</div>
+							
+							<div class="flex justify-center lg:justify-start gap-4">
+								<a href="https://wa.me/966540732077" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110" aria-label="واتساب">
+									<i class="fab fa-whatsapp"></i>
+								</a>
+								<a href="mailto:wforelectronicservices@gmail.com" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110" aria-label="البريد الإلكتروني">
+									<i class="fas fa-envelope"></i>
+								</a>
+								<a href="https://instagram.com/wfor_es" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110" aria-label="انستغرام">
+									<i class="fab fa-instagram"></i>
+								</a>
+								<a href="https://tiktok.com/@wforelectronicservices" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110" aria-label="تيك توك">
+									<i class="fab fa-tiktok"></i>
+								</a>
+								<a href="https://twitter.com/WFor_ES" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110" aria-label="تويتر">
+									<i class="fab fa-twitter"></i>
+								</a>
+							</div>
 						</div>
 					</div>
 					
-					<!-- Social Media -->
-					<div class="text-center md:text-left">
-						<h4 class="text-lg font-semibold mb-4 text-center md:text-right">تواصل معنا</h4>
-						<div class="flex justify-center md:justify-end space-x-4 rtl:space-x-reverse">
-							<a href="https://wa.me/966540732077" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
-								<i class="fab fa-whatsapp"></i>
-							</a>
-							<a href="mailto:wforelectronicservices@gmail.com" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
-								<i class="fas fa-envelope"></i>
-							</a>
-							<a href="https://instagram.com/wfor_es" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
-								<i class="fab fa-instagram"></i>
-							</a>
-							<a href="https://tiktok.com/@wforelectronicservices" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
-								<i class="fab fa-tiktok"></i>
-							</a>
-                            <a href="https://twitter.com/WFor_ES" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-						</div>
+					<div class="border-t border-gray-700 mt-12 pt-8 text-center">
+						<p class="text-gray-400">&copy; جميع الحقوق محفوظة لخدمات W الإلكترونية 2025</p>
 					</div>
 				</div>
-				
-				<div class="border-t border-gray-800 mt-10 pt-6 text-center">
-					<p class="text-gray-500">&copy; جميع الحقوق محفوظة لخدمات W الإلكترونية 2025</p>
-				</div>
-			</div>
-		</footer>
-		
-		<!-- Floating WhatsApp Button -->
-		<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-24 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-lg z-50 hover:bg-orange-100" target="_blank" aria-label="تواصل معنا عبر واتساب">
-			<i class="fab fa-whatsapp text-2xl"></i>
-		</a>
-		
-		<!-- Scroll to top button -->
-		<button id="scrollToTop" class="fixed bottom-6 right-6 w-12 h-12 rounded-full flex items-center justify-center shadow-lg z-50 transition-all duration-300 hover:bg-orange-100 opacity-0 invisible" aria-label="العودة إلى أعلى الصفحة">
-			<i class="fas fa-arrow-up"></i>
-		</button>
+			</footer>
+			
+			<!-- Floating WhatsApp Button -->
+			<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-24 right-6 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50" target="_blank" aria-label="تواصل معنا عبر واتساب">
+				<i class="fab fa-whatsapp text-2xl"></i>
+			</a>
+			
+			<!-- Scroll to top button -->
+			<button id="scrollToTop" class="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 transition-all duration-300 opacity-0 invisible" aria-label="العودة إلى أعلى الصفحة">
+				<i class="fas fa-arrow-up text-xl"></i>
+			</button>
+		</div>
 		
 		<!-- JavaScript -->
 		<script>
-			// Scroll to top button functionality
+			// Loading screen and FOUC prevention
 			document.addEventListener('DOMContentLoaded', function() {
+				const loadingScreen = document.getElementById('loadingScreen');
+				const mainContent = document.getElementById('mainContent');
+				
+				// Minimum loading time
+				const minLoadTime = 2000;
+				const startTime = Date.now();
+				
+				// Wait for all resources to load
+				window.addEventListener('load', function() {
+					const loadTime = Date.now() - startTime;
+					const remainingTime = Math.max(0, minLoadTime - loadTime);
+					
+					setTimeout(function() {
+						loadingScreen.classList.add('hidden');
+						mainContent.classList.add('loaded');
+						
+						// Initialize scroll animations after loading
+						initScrollAnimations();
+					}, remainingTime);
+				});
+				
+				// Initialize scroll to top functionality
+				initScrollToTop();
+			});
+			
+			// Scroll to top button functionality
+			function initScrollToTop() {
 				const scrollToTopBtn = document.getElementById('scrollToTop');
 				
+				// Throttle scroll events for better performance
+				let lastScrollTime = 0;
 				window.addEventListener('scroll', function() {
-					if (window.pageYOffset > 300) {
-						scrollToTopBtn.classList.remove('opacity-0', 'invisible');
-						scrollToTopBtn.classList.add('opacity-100', 'visible');
-					} else {
-						scrollToTopBtn.classList.remove('opacity-100', 'visible');
-						scrollToTopBtn.classList.add('opacity-0', 'invisible');
+					const now = Date.now();
+					if (now - lastScrollTime > 100) {
+						lastScrollTime = now;
+						if (window.pageYOffset > 300) {
+							scrollToTopBtn.classList.remove('opacity-0', 'invisible');
+							scrollToTopBtn.classList.add('opacity-100', 'visible');
+						} else {
+							scrollToTopBtn.classList.remove('opacity-100', 'visible');
+							scrollToTopBtn.classList.add('opacity-0', 'invisible');
+						}
 					}
-				});
+				}, {passive: true});
 				
 				scrollToTopBtn.addEventListener('click', function() {
 					window.scrollTo({
@@ -667,6 +1083,51 @@
 						behavior: 'smooth'
 					});
 				});
+			}
+			
+			// Initialize scroll animations
+			function initScrollAnimations() {
+				// Intersection Observer for scroll animations
+				const observerOptions = {
+					threshold: 0.1,
+					rootMargin: '0px 0px -50px 0px'
+				};
+				
+				const observer = new IntersectionObserver(function(entries) {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) {
+							entry.target.style.opacity = '1';
+							entry.target.style.transform = 'none';
+						}
+					});
+				}, observerOptions);
+				
+				// Observe all animated elements
+				const animatedElements = document.querySelectorAll('.animate-fadeInUp, .animate-slideInLeft, .animate-slideInRight, .animate-bounceIn');
+				animatedElements.forEach(el => {
+					observer.observe(el);
+				});
+			}
+			
+			// Smooth scrolling for anchor links
+			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+				anchor.addEventListener('click', function (e) {
+					e.preventDefault();
+					const target = document.querySelector(this.getAttribute('href'));
+					if (target) {
+						target.scrollIntoView({
+							behavior: 'smooth',
+							block: 'start'
+						});
+					}
+				});
+			});
+			
+			// Preload critical images
+			const criticalImages = ['wD.png'];
+			criticalImages.forEach(src => {
+				const img = new Image();
+				img.src = src;
 			});
 		</script>
 	</body>

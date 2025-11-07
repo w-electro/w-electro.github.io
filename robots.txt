@@ -1,0 +1,27 @@
+# robots.txt for W للخدمات الإلكترونية
+# https://www.w-electro.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Disallow admin or backend directories if any
+Disallow: /ocr-backend/
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.w-electro.com/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

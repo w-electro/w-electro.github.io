@@ -676,29 +676,50 @@
 				}
 			}
 
-			/* Dark Mode Support */
+			/* Dark Mode Support - Improved softer colors */
 			[data-theme="dark"] {
-				--primary-color: #06b6d4;
+				--primary-color: #22d3ee;
 				--secondary-color: #fb923c;
-				--dark-color: #f8fafc;
-				--light-color: #1f2937;
+				--dark-color: #e5e7eb;
+				--light-color: #1e293b;
 			}
 
 			[data-theme="dark"] body {
-				background: #1f2937;
-				color: #f8fafc;
+				background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+				color: #e5e7eb;
 			}
 
 			[data-theme="dark"] .bg-white {
-				background: #374151 !important;
+				background: rgba(30, 41, 59, 0.8) !important;
+				backdrop-filter: blur(10px);
+			}
+
+			[data-theme="dark"] .bg-gray-50,
+			[data-theme="dark"] .bg-gray-100 {
+				background: rgba(15, 23, 42, 0.5) !important;
 			}
 
 			[data-theme="dark"] .text-gray-800 {
-				color: #f8fafc !important;
+				color: #e5e7eb !important;
 			}
 
 			[data-theme="dark"] .text-gray-600 {
-				color: #d1d5db !important;
+				color: #94a3b8 !important;
+			}
+
+			[data-theme="dark"] .text-gray-500 {
+				color: #64748b !important;
+			}
+
+			[data-theme="dark"] .border-gray-200,
+			[data-theme="dark"] .border-gray-100 {
+				border-color: rgba(51, 65, 85, 0.5) !important;
+			}
+
+			[data-theme="dark"] .shadow-lg,
+			[data-theme="dark"] .shadow-xl,
+			[data-theme="dark"] .shadow-2xl {
+				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
 			}
 
 			/* Dark Mode Toggle */
@@ -719,6 +740,16 @@
 			.dark-mode-toggle:hover {
 				transform: scale(1.05);
 				box-shadow: 0 6px 20px rgba(255, 110, 66, 0.3);
+			}
+
+			[data-theme="dark"] .dark-mode-toggle {
+				background: rgba(30, 41, 59, 0.9);
+				border-color: var(--primary-color);
+				color: #e5e7eb;
+			}
+
+			[data-theme="dark"] .dark-mode-toggle:hover {
+				box-shadow: 0 6px 20px rgba(34, 211, 238, 0.3);
 			}
 
 			/* Exit Intent Popup */
@@ -789,24 +820,6 @@
 				transform: translateY(0);
 			}
 
-			/* Social Proof Notifications */
-			.social-proof {
-				position: fixed;
-				bottom: 100px;
-				left: 20px;
-				background: white;
-				border-radius: 12px;
-				padding: 15px 20px;
-				box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-				z-index: 997;
-				max-width: 320px;
-				transform: translateX(-400px);
-				transition: transform 0.5s;
-			}
-
-			.social-proof.show {
-				transform: translateX(0);
-			}
 
 			/* Quick Actions Menu (Mobile) */
 			.quick-actions {
@@ -845,39 +858,6 @@
 				transition: transform 0.5s ease;
 			}
 
-			/* Portfolio Gallery */
-			.portfolio-item {
-				position: relative;
-				overflow: hidden;
-				border-radius: 16px;
-				cursor: pointer;
-			}
-
-			.portfolio-item img {
-				transition: transform 0.4s;
-			}
-
-			.portfolio-item:hover img {
-				transform: scale(1.1);
-			}
-
-			.portfolio-overlay {
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
-				background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-				opacity: 0;
-				transition: opacity 0.3s;
-				display: flex;
-				align-items: flex-end;
-				padding: 20px;
-			}
-
-			.portfolio-item:hover .portfolio-overlay {
-				opacity: 1;
-			}
 
 			/* Animated Counter */
 			.counter-number {
@@ -947,29 +927,6 @@
 				50% { opacity: 0.7; }
 			}
 
-			/* Lightbox for Portfolio */
-			.lightbox {
-				display: none;
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				background: rgba(0,0,0,0.9);
-				z-index: 9999;
-				align-items: center;
-				justify-content: center;
-			}
-
-			.lightbox.active {
-				display: flex;
-			}
-
-			.lightbox img {
-				max-width: 90%;
-				max-height: 90%;
-				border-radius: 12px;
-			}
 
 			/* Enhanced animations for new features */
 			.fade-in-up {
@@ -1044,19 +1001,6 @@
 				</div>
 			</div>
 
-			<!-- Social Proof Notification -->
-			<div class="social-proof" id="socialProof">
-				<div class="flex items-center gap-3">
-					<div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold">
-						<i class="fas fa-user"></i>
-					</div>
-					<div>
-						<p class="font-semibold text-gray-800 text-sm" id="proofName">أحمد من الرياض</p>
-						<p class="text-gray-600 text-xs" id="proofAction">طلب خدمة مشروع تخرج</p>
-						<p class="text-gray-500 text-xs">منذ 5 دقائق</p>
-					</div>
-				</div>
-			</div>
 
 			<!-- Quick Actions Menu (Mobile Only) -->
 			<div class="quick-actions">
@@ -1297,7 +1241,7 @@
 								</div>
 								<h3 class="text-xl font-semibold text-gray-800 mb-3">مشاريع تخرج</h3>
 								<p class="text-gray-600 mb-6 leading-relaxed">مساعدة في إعداد وتنفيذ مشاريع التخرج بجودة عالية وضمان النجاح الأكاديمي المتميز</p>
-								<div class="price-tag mb-4">50-250 ﷼</div>
+								<div class="price-tag mb-4">50-250 <img src="Riyal.png" alt="ريال" class="inline-block h-5 w-5 ml-1" /></div>
 								<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة مشاريع التخرج" class="btn-primary">
 									<i class="fab fa-whatsapp ml-2"></i>
 									طلب الخدمة
@@ -1311,7 +1255,7 @@
 								</div>
 								<h3 class="text-xl font-semibold text-gray-800 mb-3">عروض بوربوينت</h3>
 								<p class="text-gray-600 mb-6 leading-relaxed">تصميم عروض تقديمية احترافية وجذابة للطلاب والمناسبات الأكاديمية والمهنية</p>
-								<div class="price-tag mb-4">10 ﷼ / شريحة</div>
+								<div class="price-tag mb-4">10 <img src="Riyal.png" alt="ريال" class="inline-block h-5 w-5 mx-1" /> / شريحة</div>
 								<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة عروض بوربوينت" class="btn-primary">
 									<i class="fab fa-whatsapp ml-2"></i>
 									طلب الخدمة
@@ -1340,7 +1284,7 @@
 								</div>
 								<h3 class="text-xl font-semibold text-gray-800 mb-3">مشاريع برمجة</h3>
 								<p class="text-gray-600 mb-6 leading-relaxed">تنفيذ مشاريع البرمجة بمختلف اللغات للطلاب والمتخصصين مع ضمان الجودة</p>
-								<div class="price-tag mb-4">150 ﷼</div>
+								<div class="price-tag mb-4">150 <img src="Riyal.png" alt="ريال" class="inline-block h-5 w-5 ml-1" /></div>
 								<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة مشاريع برمجة" class="btn-primary">
 									<i class="fab fa-whatsapp ml-2"></i>
 									طلب الخدمة
@@ -1354,7 +1298,7 @@
 								</div>
 								<h3 class="text-xl font-semibold text-gray-800 mb-3">تسجيل جامعي</h3>
 								<p class="text-gray-600 mb-6 leading-relaxed">مساعدة في التسجيل الجامعي واختيار المقررات وحل مشاكل التسجيل بكفاءة</p>
-								<div class="price-tag mb-4">25 ﷼</div>
+								<div class="price-tag mb-4">25 <img src="Riyal.png" alt="ريال" class="inline-block h-5 w-5 ml-1" /></div>
 								<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة التسجيل الجامعي" class="btn-primary">
 									<i class="fab fa-whatsapp ml-2"></i>
 									طلب الخدمة
@@ -1541,90 +1485,6 @@
 				</div>
 			</section>
 
-			<!-- Portfolio Gallery Section -->
-			<section class="py-20 bg-white">
-				<div class="container mx-auto px-4">
-					<div class="text-center mb-16 animate-fadeInUp">
-						<h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">أعمالنا المميزة</h2>
-						<p class="text-xl text-gray-600">نماذج من مشاريعنا الناجحة</p>
-					</div>
-
-					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-						<!-- Portfolio Item 1 -->
-						<div class="portfolio-item">
-							<img src="wD.png" alt="مشروع تخرج" class="w-full h-64 object-cover rounded-2xl">
-							<div class="portfolio-overlay">
-								<div class="text-white">
-									<h4 class="font-bold text-xl mb-2">مشروع تخرج - تطبيق ذكي</h4>
-									<p class="text-sm opacity-90">تطبيق موبايل لإدارة المهام</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Portfolio Item 2 -->
-						<div class="portfolio-item">
-							<img src="wD.png" alt="تصميم لوجو" class="w-full h-64 object-cover rounded-2xl">
-							<div class="portfolio-overlay">
-								<div class="text-white">
-									<h4 class="font-bold text-xl mb-2">هوية بصرية كاملة</h4>
-									<p class="text-sm opacity-90">لوجو وبطاقات أعمال لشركة</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Portfolio Item 3 -->
-						<div class="portfolio-item">
-							<img src="wD.png" alt="عرض تقديمي" class="w-full h-64 object-cover rounded-2xl">
-							<div class="portfolio-overlay">
-								<div class="text-white">
-									<h4 class="font-bold text-xl mb-2">عرض بوربوينت احترافي</h4>
-									<p class="text-sm opacity-90">عرض تقديمي لمؤتمر تقني</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Portfolio Item 4 -->
-						<div class="portfolio-item">
-							<img src="wD.png" alt="موقع إلكتروني" class="w-full h-64 object-cover rounded-2xl">
-							<div class="portfolio-overlay">
-								<div class="text-white">
-									<h4 class="font-bold text-xl mb-2">متجر إلكتروني</h4>
-									<p class="text-sm opacity-90">منصة تجارة إلكترونية متكاملة</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Portfolio Item 5 -->
-						<div class="portfolio-item">
-							<img src="wD.png" alt="تصميم منيو" class="w-full h-64 object-cover rounded-2xl">
-							<div class="portfolio-overlay">
-								<div class="text-white">
-									<h4 class="font-bold text-xl mb-2">تصميم منيو مطعم</h4>
-									<p class="text-sm opacity-90">منيو رقمي وتقليدي جذاب</p>
-								</div>
-							</div>
-						</div>
-
-						<!-- Portfolio Item 6 -->
-						<div class="portfolio-item">
-							<img src="wD.png" alt="شهادة" class="w-full h-64 object-cover rounded-2xl">
-							<div class="portfolio-overlay">
-								<div class="text-white">
-									<h4 class="font-bold text-xl mb-2">شهادات تقدير</h4>
-									<p class="text-sm opacity-90">تصاميم شهادات احترافية</p>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="text-center mt-12">
-						<a href="https://wa.me/966540732077?text=السلام عليكم، أريد مشاهدة المزيد من أعمالكم" class="btn-primary text-lg px-8 py-4">
-							<i class="fas fa-images ml-2"></i>
-							شاهد المزيد من أعمالنا
-						</a>
-					</div>
-				</div>
-			</section>
 
 			<!-- Service Process Infographic -->
 			<section class="py-20 bg-gradient-to-br from-gray-50 to-white">
@@ -2191,11 +2051,24 @@
 				});
 			});
 
-			// Track scroll depth
+			// Optimized consolidated scroll handler with throttling
 			let scrollTracked = {25: false, 50: false, 75: false, 100: false};
-			window.addEventListener('scroll', function() {
-				const scrollPercent = Math.round((window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+			let lastScrollTime = 0;
+			let lastScroll = 0;
+			let stickyShown = false;
+			const stickyCTA = document.getElementById('stickyCTA');
 
+			window.addEventListener('scroll', function() {
+				const now = Date.now();
+				// Throttle to every 150ms for better performance
+				if (now - lastScrollTime < 150) return;
+				lastScrollTime = now;
+
+				const currentScroll = window.pageYOffset;
+				const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+				const scrollPercent = Math.round((currentScroll / scrollHeight) * 100);
+
+				// 1. Track scroll depth
 				Object.keys(scrollTracked).forEach(function(threshold) {
 					if (scrollPercent >= threshold && !scrollTracked[threshold]) {
 						scrollTracked[threshold] = true;
@@ -2205,6 +2078,25 @@
 						});
 					}
 				});
+
+				// 2. Show sticky CTA at 30%
+				if (scrollPercent > 30 && !stickyShown && stickyCTA) {
+					stickyCTA.classList.add('show');
+					stickyShown = true;
+					window.dataLayer.push({'event': 'sticky_cta_shown'});
+				}
+
+				// 3. Hide/show header on scroll direction
+				const header = document.querySelector('header');
+				if (header) {
+					if (currentScroll > lastScroll && currentScroll > 100) {
+						header.style.transform = 'translateY(-100%)';
+					} else {
+						header.style.transform = 'translateY(0)';
+					}
+				}
+
+				lastScroll = currentScroll;
 			}, {passive: true});
 
 			// Track page engagement time
@@ -2301,57 +2193,8 @@
 				});
 			});
 
-			// 3. Sticky CTA Bar
-			const stickyCTA = document.getElementById('stickyCTA');
-			let stickyShown = false;
+			// Sticky CTA and scroll tracking moved to consolidated scroll handler above
 
-			window.addEventListener('scroll', function() {
-				const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-
-				if (scrollPercent > 30 && !stickyShown) {
-					stickyCTA.classList.add('show');
-					stickyShown = true;
-
-					window.dataLayer.push({
-						'event': 'sticky_cta_shown'
-					});
-				}
-			}, {passive: true});
-
-			// 4. Social Proof Notifications
-			const socialProof = document.getElementById('socialProof');
-			const proofName = document.getElementById('proofName');
-			const proofAction = document.getElementById('proofAction');
-
-			const proofExamples = [
-				{ name: 'أحمد من الرياض', action: 'طلب خدمة مشروع تخرج' },
-				{ name: 'فاطمة من جدة', action: 'طلب خدمة تصميم لوجو' },
-				{ name: 'محمد من الدمام', action: 'طلب خدمة عروض بوربوينت' },
-				{ name: 'نورة من مكة', action: 'طلب خدمة تسجيل جامعي' },
-				{ name: 'خالد من المدينة', action: 'طلب خدمة برمجة مشروع' },
-				{ name: 'سارة من الخبر', action: 'طلب خدمة هوية بصرية' }
-			];
-
-			let currentProofIndex = 0;
-
-			function showSocialProof() {
-				const proof = proofExamples[currentProofIndex];
-				proofName.textContent = proof.name;
-				proofAction.textContent = proof.action;
-
-				socialProof.classList.add('show');
-
-				setTimeout(() => {
-					socialProof.classList.remove('show');
-				}, 5000);
-
-				currentProofIndex = (currentProofIndex + 1) % proofExamples.length;
-			}
-
-			// Show first notification after 5 seconds
-			setTimeout(showSocialProof, 5000);
-			// Then show every 15 seconds
-			setInterval(showSocialProof, 15000);
 
 			// 5. Testimonials Carousel
 			let currentTestimonial = 0;
@@ -2422,32 +2265,8 @@
 				statsObserver.observe(statsSection);
 			}
 
-			// 7. Portfolio Lightbox (Simple)
-			const portfolioItems = document.querySelectorAll('.portfolio-item');
-			portfolioItems.forEach(item => {
-				item.addEventListener('click', function() {
-					window.dataLayer.push({
-						'event': 'portfolio_item_click',
-						'item_title': this.querySelector('h4')?.textContent || 'Unknown'
-					});
-				});
-			});
 
-			// 8. Monitor Scroll for Sticky Elements
-			let lastScroll = 0;
-			window.addEventListener('scroll', function() {
-				const currentScroll = window.pageYOffset;
-
-				// Hide/show header on scroll
-				const header = document.querySelector('header');
-				if (currentScroll > lastScroll && currentScroll > 100) {
-					header.style.transform = 'translateY(-100%)';
-				} else {
-					header.style.transform = 'translateY(0)';
-				}
-
-				lastScroll = currentScroll;
-			}, {passive: true});
+			// Header hide/show moved to consolidated scroll handler above
 
 			// 9. Enhanced Form Tracking
 			const contactForm = document.querySelector('form');
@@ -2526,8 +2345,7 @@
 				console.log('✅ Microsoft Clarity: Active');
 				console.log('✅ Dark Mode: Ready');
 				console.log('✅ Exit Popup: Armed');
-				console.log('✅ Social Proof: Running');
-				console.log('✅ Testimonials: Auto-rotating');
+					console.log('✅ Testimonials: Auto-rotating');
 				console.log('🎉 Website fully optimized!');
 			});
 

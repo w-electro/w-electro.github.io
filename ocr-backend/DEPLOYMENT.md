@@ -56,7 +56,7 @@ gcloud run deploy w-electro-ocr \
   --allow-unauthenticated \
   --memory 1Gi \
   --cpu 1 \
-  --timeout 300 \
+  --timeout 600 \
   --max-instances 10 \
   --set-secrets=GOOGLE_CREDENTIALS_JSON=GOOGLE_CREDENTIALS_JSON:latest
 ```
@@ -78,7 +78,7 @@ gcloud run deploy w-electro-ocr \
   --allow-unauthenticated \
   --memory 1Gi \
   --cpu 1 \
-  --timeout 300 \
+  --timeout 600 \
   --max-instances 10 \
   --set-secrets=GOOGLE_CREDENTIALS_JSON=GOOGLE_CREDENTIALS_JSON:latest
 ```

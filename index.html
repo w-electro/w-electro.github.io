@@ -676,82 +676,6 @@
 				}
 			}
 
-			/* Dark Mode Support - Improved softer colors */
-			[data-theme="dark"] {
-				--primary-color: #22d3ee;
-				--secondary-color: #fb923c;
-				--dark-color: #e5e7eb;
-				--light-color: #1e293b;
-			}
-
-			[data-theme="dark"] body {
-				background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-				color: #e5e7eb;
-			}
-
-			[data-theme="dark"] .bg-white {
-				background: rgba(30, 41, 59, 0.8) !important;
-				backdrop-filter: blur(10px);
-			}
-
-			[data-theme="dark"] .bg-gray-50,
-			[data-theme="dark"] .bg-gray-100 {
-				background: rgba(15, 23, 42, 0.5) !important;
-			}
-
-			[data-theme="dark"] .text-gray-800 {
-				color: #e5e7eb !important;
-			}
-
-			[data-theme="dark"] .text-gray-600 {
-				color: #94a3b8 !important;
-			}
-
-			[data-theme="dark"] .text-gray-500 {
-				color: #64748b !important;
-			}
-
-			[data-theme="dark"] .border-gray-200,
-			[data-theme="dark"] .border-gray-100 {
-				border-color: rgba(51, 65, 85, 0.5) !important;
-			}
-
-			[data-theme="dark"] .shadow-lg,
-			[data-theme="dark"] .shadow-xl,
-			[data-theme="dark"] .shadow-2xl {
-				box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
-			}
-
-			/* Dark Mode Toggle */
-			.dark-mode-toggle {
-				position: fixed;
-				top: 100px;
-				left: 20px;
-				z-index: 999;
-				background: white;
-				border: 2px solid var(--secondary-color);
-				border-radius: 50px;
-				padding: 8px 16px;
-				cursor: pointer;
-				box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-				transition: all 0.3s;
-			}
-
-			.dark-mode-toggle:hover {
-				transform: scale(1.05);
-				box-shadow: 0 6px 20px rgba(255, 110, 66, 0.3);
-			}
-
-			[data-theme="dark"] .dark-mode-toggle {
-				background: rgba(30, 41, 59, 0.9);
-				border-color: var(--primary-color);
-				color: #e5e7eb;
-			}
-
-			[data-theme="dark"] .dark-mode-toggle:hover {
-				box-shadow: 0 6px 20px rgba(34, 211, 238, 0.3);
-			}
-
 			/* Exit Intent Popup */
 			.exit-popup {
 				position: fixed;
@@ -970,11 +894,6 @@
 		
 		<!-- Main Content -->
 		<div id="mainContent" class="main-content">
-			<!-- Dark Mode Toggle -->
-			<button class="dark-mode-toggle" id="darkModeToggle" aria-label="تبديل الوضع الليلي">
-				<span id="darkModeIcon">🌙</span>
-			</button>
-
 			<!-- Exit Intent Popup -->
 			<div class="exit-popup" id="exitPopup">
 				<div class="exit-popup-content">
@@ -2152,33 +2071,6 @@
 
 			// ==================== NEW FEATURES JavaScript ====================
 
-			// 1. Dark Mode Toggle
-			const darkModeToggle = document.getElementById('darkModeToggle');
-			const darkModeIcon = document.getElementById('darkModeIcon');
-			const htmlElement = document.documentElement;
-
-			// Check for saved theme preference
-			const savedTheme = localStorage.getItem('theme') || 'light';
-			if (savedTheme === 'dark') {
-				htmlElement.setAttribute('data-theme', 'dark');
-				darkModeIcon.textContent = '☀️';
-			}
-
-			darkModeToggle.addEventListener('click', function() {
-				const currentTheme = htmlElement.getAttribute('data-theme');
-				const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-				htmlElement.setAttribute('data-theme', newTheme);
-				darkModeIcon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-				localStorage.setItem('theme', newTheme);
-
-				// Track dark mode toggle
-				window.dataLayer.push({
-					'event': 'dark_mode_toggle',
-					'mode': newTheme
-				});
-			});
-
 			// 2. Exit Intent Popup
 			const exitPopup = document.getElementById('exitPopup');
 			let exitPopupShown = false;
@@ -2352,7 +2244,6 @@
 				console.log('🚀 W للخدمات الإلكترونية - All features loaded!');
 				console.log('✅ Live Chat: Active');
 				console.log('✅ Microsoft Clarity: Active');
-				console.log('✅ Dark Mode: Ready');
 				console.log('✅ Exit Popup: Armed');
 					console.log('✅ Testimonials: Auto-rotating');
 				console.log('🎉 Website fully optimized!');

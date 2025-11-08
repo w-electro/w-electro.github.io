@@ -1365,12 +1365,26 @@
 					markdownOutput.innerHTML = '';
 					submitButton.disabled = true;
 
-					// Send file to backend
+					// Update loading message for large files
+					const fileSizeMB = (file.size / (1024 * 1024)).toFixed(1);
+					const loadingText = document.querySelector('#loading-indicator p');
+					if (fileSizeMB > 5) {
+						loadingText.textContent = `جاري معالجة الملف... (\${fileSizeMB} MB - قد يستغرق عدة دقائق)`;
+					}
+
+					// Send file to backend with extended timeout (10 minutes)
+					const controller = new AbortController();
+					const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minutes
+
 					fetch(`${OCR_API_BASE_URL}/api/ocr`, {
 						method: 'POST',
-						body: formData
+						body: formData,
+						signal: controller.signal
 					})
-					.then(response => response.json())
+					.then(response => {
+						clearTimeout(timeoutId); // Clear the timeout
+						return response.json();
+					})
 					.then(data => {
 						// Hide loading indicator
 						loadingIndicator.classList.add('hidden');
@@ -1443,16 +1457,23 @@
 						submitButton.disabled = false;
 					})
 					.catch(error => {
+						clearTimeout(timeoutId); // Clear the timeout
 						loadingIndicator.classList.add('hidden');
+						
+						let errorMessage = 'يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
+						if (error.name === 'AbortError') {
+							errorMessage = 'انتهت مهلة المعالجة (10 دقائق). الملف كبير جداً أو يحتوي على صفحات كثيرة.';
+						}
+						
 						markdownOutput.innerHTML = `
 							<div class="text-center py-8">
 								<i class="fas fa-exclamation-triangle text-red-500 text-5xl mb-4"></i>
 								<h4 class="text-xl font-bold text-gray-800 mb-2">حدث خطأ في الاتصال</h4>
-								<p class="text-red-500 mb-4">يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.</p>
+								<p class="text-red-500 mb-4">${errorMessage}</p>
 							</div>
 						`;
 						submitButton.disabled = false;
-						console.error('Error:', error);
+						console.error('OCR Error:', error);
 					});
 				});
 

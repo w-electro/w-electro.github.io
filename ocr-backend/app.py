@@ -48,7 +48,7 @@ vision_client = vision.ImageAnnotatorClient(credentials=credentials)
 
 # Configure upload settings
 ALLOWED_EXTENSIONS = {'pdf', 'jpg', 'jpeg', 'png'}
-MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10MB
+MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50MB
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

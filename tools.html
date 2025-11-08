@@ -54,8 +54,14 @@
 		<!-- QRCode.js -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-		<!-- PDF-lib -->
-		<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+		<!-- PDF.js for rendering previews -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+	pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+</script>
+
+<!-- PDF-lib -->
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 		<!-- Critical inline styles -->
 		<style>
@@ -362,6 +368,20 @@
 				border: 1px solid rgba(8, 145, 178, 0.1);
 			}
 
+		/* Page Preview Cards */
+		.page-preview-card {
+			transition: all 0.3s ease;
+		}
+
+		.page-preview-card:has(.page-checkbox:checked) {
+			border-color: #0891b2;
+			background: linear-gradient(135deg, rgba(8, 145, 178, 0.05) 0%, rgba(8, 145, 178, 0.1) 100%);
+		}
+
+		.page-checkbox {
+			accent-color: #0891b2;
+		}
+
 			/* Responsive */
 			@media (max-width: 768px) {
 				.file-drop-area {
@@ -432,8 +452,8 @@
 								خدمات طلابية
 								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
 							</a>
-							<a href="ocr" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
-								خدمة OCR
+							<a href="tools" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+								أدوات مجانية
 								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
 							</a>
 							<a href="tools" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 relative group">
@@ -468,7 +488,7 @@
 							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات عامة</a>
 							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات التصميم</a>
 							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات طلابية</a>
-							<a href="ocr" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمة OCR</a>
+							<a href="tools" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">أدوات مجانية</a>
 							<a href="tools" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 py-2 px-4 rounded-lg bg-cyan-50">أدوات مجانية</a>
 							<a href="/#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">من نحن</a>
 							<a href="/#contact" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">تواصل معنا</a>
@@ -675,28 +695,44 @@
 								</div>
 							</div>
 
-							<!-- PDF Splitter -->
-							<div id="pdf-split-tool" class="pdf-subtool" style="display: none;">
-								<div class="space-y-6">
-									<div class="file-drop-area">
-										<input type="file" id="pdf-split-file" accept=".pdf" class="hidden" />
-										<label for="pdf-split-file" class="cursor-pointer">
-											<i class="fas fa-file-pdf text-5xl text-cyan-500 mb-4 block"></i>
-											<p class="text-gray-700 font-medium text-lg">اختر ملف PDF للتقسيم</p>
-											<p class="text-gray-500 text-sm mt-2">سيتم تقسيم الملف إلى صفحات منفصلة</p>
-										</label>
-										<div id="split-file-name" class="mt-4 text-gray-700 hidden"></div>
-									</div>
+						<!-- PDF Splitter -->
+						<div id="pdf-split-tool" class="pdf-subtool" style="display: none;">
+							<div class="space-y-6">
+								<div class="file-drop-area">
+									<input type="file" id="pdf-split-file" accept=".pdf" class="hidden" />
+									<label for="pdf-split-file" class="cursor-pointer">
+										<i class="fas fa-file-pdf text-5xl text-cyan-500 mb-4 block"></i>
+										<p class="text-gray-700 font-medium text-lg">اختر ملف PDF للتقسيم</p>
+										<p class="text-gray-500 text-sm mt-2">اختر الصفحات التي تريد تنزيلها</p>
+									</label>
+									<div id="split-file-name" class="mt-4 text-gray-700 hidden"></div>
+								</div>
 
-									<div class="flex justify-center">
-										<button onclick="splitPDF()" id="split-pdf-btn" class="btn-primary px-8 py-4 disabled:opacity-50" disabled>
-											<i class="fas fa-cut ml-2"></i> تقسيم الملف
+								<!-- Page Preview Grid -->
+								<div id="page-preview-container" class="hidden">
+									<div class="flex justify-center gap-4 mb-4">
+										<button onclick="selectAllPages()" class="btn-outline-orange px-6 py-2">
+											<i class="fas fa-check-square ml-2"></i> تحديد الكل
+										</button>
+										<button onclick="deselectAllPages()" class="btn-outline-orange px-6 py-2">
+											<i class="fas fa-square ml-2"></i> إلغاء تحديد الكل
 										</button>
 									</div>
-
-									<div id="split-status" class="text-center text-gray-600 hidden"></div>
+									<div id="page-previews" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-96 overflow-y-auto p-4 border border-gray-200 rounded-lg bg-gray-50"></div>
 								</div>
+
+								<div class="flex justify-center gap-4">
+									<button onclick="downloadSelectedPages()" id="download-selected-btn" class="btn-primary px-8 py-4 hidden">
+										<i class="fas fa-download ml-2"></i> تنزيل المحدد
+									</button>
+									<button onclick="downloadAllPages()" id="download-all-btn" class="btn-outline-orange px-8 py-4 hidden">
+										<i class="fas fa-download ml-2"></i> تنزيل الكل
+									</button>
+								</div>
+
+								<div id="split-status" class="text-center text-gray-600 hidden"></div>
 							</div>
+						</div>
 						</div>
 					</div>
 
@@ -782,9 +818,9 @@
 									<i class="fas fa-graduation-cap text-sm"></i>
 									خدمات طلابية
 								</a>
-								<a href="ocr" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
+								<a href="tools" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
 									<i class="fas fa-file-alt text-sm"></i>
-									خدمة OCR
+									أدوات مجانية
 								</a>
 								<a href="tools" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
 									<i class="fas fa-tools text-sm"></i>
@@ -1331,44 +1367,137 @@
 				}
 			}
 
-			// PDF Splitter
-			document.getElementById('pdf-split-file').addEventListener('change', function() {
+			// Global variable to store PDF document and pages
+			let loadedPdfDoc = null;
+			let pdfPageData = [];
+
+			// PDF Splitter - File selection
+			document.getElementById('pdf-split-file').addEventListener('change', async function() {
 				const file = this.files[0];
 				const fileNameDiv = document.getElementById('split-file-name');
-				const splitBtn = document.getElementById('split-pdf-btn');
+				const statusDiv = document.getElementById('split-status');
+				const previewContainer = document.getElementById('page-preview-container');
 
 				if (file) {
 					fileNameDiv.innerHTML = `<div class="flex items-center gap-2 justify-center"><i class="fas fa-file-pdf text-red-500"></i> ${file.name}</div>`;
 					fileNameDiv.classList.remove('hidden');
-					splitBtn.disabled = false;
+
+					// Load and preview PDF
+					statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري تحميل الصفحات...</p>';
+					statusDiv.classList.remove('hidden');
+
+					try {
+						const { PDFDocument } = PDFLib;
+						const arrayBuffer = await file.arrayBuffer();
+						loadedPdfDoc = await PDFDocument.load(arrayBuffer);
+
+						await generatePagePreviews(file);
+
+						statusDiv.classList.add('hidden');
+						previewContainer.classList.remove('hidden');
+						document.getElementById('download-selected-btn').classList.remove('hidden');
+						document.getElementById('download-all-btn').classList.remove('hidden');
+					} catch (error) {
+						console.error('PDF Load Error:', error);
+						statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء تحميل الملف</p>';
+					}
 				} else {
 					fileNameDiv.classList.add('hidden');
-					splitBtn.disabled = true;
+					previewContainer.classList.add('hidden');
+					document.getElementById('download-selected-btn').classList.add('hidden');
+					document.getElementById('download-all-btn').classList.add('hidden');
 				}
 			});
 
-			async function splitPDF() {
-				const file = document.getElementById('pdf-split-file').files[0];
-				const statusDiv = document.getElementById('split-status');
+			// Generate page previews using canvas
+			async function generatePagePreviews(file) {
+				const previewsDiv = document.getElementById('page-previews');
+				previewsDiv.innerHTML = '';
+				pdfPageData = [];
 
-				if (!file) {
-					alert('الرجاء اختيار ملف PDF');
+				const { getDocument } = pdfjsLib;
+				const arrayBuffer = await file.arrayBuffer();
+				const pdf = await getDocument({ data: arrayBuffer }).promise;
+				const numberOfPages = pdf.numPages;
+
+				for (let i = 1; i <= numberOfPages; i++) {
+					const page = await pdf.getPage(i);
+					const viewport = page.getViewport({ scale: 0.5 });
+
+					const canvas = document.createElement('canvas');
+					const context = canvas.getContext('2d');
+					canvas.width = viewport.width;
+					canvas.height = viewport.height;
+
+					await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+					// Create preview card
+					const pageCard = document.createElement('div');
+					pageCard.className = 'page-preview-card relative border-2 border-gray-200 rounded-lg p-2 cursor-pointer hover:border-cyan-500 transition-all';
+					pageCard.innerHTML = `
+						<input type="checkbox" id="page-${i}" class="page-checkbox absolute top-2 right-2 w-5 h-5 cursor-pointer z-10" checked />
+						<label for="page-${i}" class="cursor-pointer block">
+							<img src="${canvas.toDataURL()}" class="w-full rounded shadow-sm" />
+							<p class="text-center text-sm font-medium text-gray-700 mt-2">صفحة ${i}</p>
+						</label>
+					`;
+
+					previewsDiv.appendChild(pageCard);
+					pdfPageData.push({ pageNum: i, canvas: canvas });
+				}
+			}
+
+			// Select all pages
+			function selectAllPages() {
+				document.querySelectorAll('.page-checkbox').forEach(checkbox => {
+					checkbox.checked = true;
+				});
+			}
+
+			// Deselect all pages
+			function deselectAllPages() {
+				document.querySelectorAll('.page-checkbox').forEach(checkbox => {
+					checkbox.checked = false;
+				});
+			}
+
+			// Download selected pages
+			async function downloadSelectedPages() {
+				const selectedPages = [];
+				document.querySelectorAll('.page-checkbox:checked').forEach(checkbox => {
+					const pageNum = parseInt(checkbox.id.replace('page-', ''));
+					selectedPages.push(pageNum - 1); // Convert to 0-indexed
+				});
+
+				if (selectedPages.length === 0) {
+					alert('الرجاء اختيار صفحة واحدة على الأقل');
 					return;
 				}
 
-				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري تقسيم الملف...</p>';
+				await downloadPages(selectedPages);
+			}
+
+			// Download all pages
+			async function downloadAllPages() {
+				const allPages = [];
+				for (let i = 0; i < loadedPdfDoc.getPages().length; i++) {
+					allPages.push(i);
+				}
+				await downloadPages(allPages);
+			}
+
+			// Download specified pages
+			async function downloadPages(pageIndices) {
+				const statusDiv = document.getElementById('split-status');
+				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري تنزيل الصفحات...</p>';
 				statusDiv.classList.remove('hidden');
 
 				try {
 					const { PDFDocument } = PDFLib;
-					const arrayBuffer = await file.arrayBuffer();
-					const pdfDoc = await PDFDocument.load(arrayBuffer);
-					const numberOfPages = pdfDoc.getPages().length;
 
-					// Create a zip file (we'll just download individual files for simplicity)
-					for (let i = 0; i < numberOfPages; i++) {
+					for (const pageIndex of pageIndices) {
 						const newPdf = await PDFDocument.create();
-						const [copiedPage] = await newPdf.copyPages(pdfDoc, [i]);
+						const [copiedPage] = await newPdf.copyPages(loadedPdfDoc, [pageIndex]);
 						newPdf.addPage(copiedPage);
 
 						const pdfBytes = await newPdf.save();
@@ -1377,20 +1506,19 @@
 
 						const a = document.createElement('a');
 						a.href = url;
-						a.download = `page_${i + 1}.pdf`;
+						a.download = `page_${pageIndex + 1}.pdf`;
 						document.body.appendChild(a);
 						a.click();
 						document.body.removeChild(a);
 						URL.revokeObjectURL(url);
 
-						// Small delay between downloads
 						await new Promise(resolve => setTimeout(resolve, 100));
 					}
 
-					statusDiv.innerHTML = `<i class="fas fa-check-circle text-green-500 text-3xl"></i><p class="mt-2 text-green-600 font-bold">تم تقسيم ${numberOfPages} صفحة بنجاح!</p>`;
+					statusDiv.innerHTML = `<i class="fas fa-check-circle text-green-500 text-3xl"></i><p class="mt-2 text-green-600 font-bold">تم تنزيل ${pageIndices.length} صفحة بنجاح!</p>`;
 				} catch (error) {
-					console.error('PDF Split Error:', error);
-					statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء تقسيم الملف</p>';
+					console.error('PDF Download Error:', error);
+					statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء التنزيل</p>';
 				}
 			}
 

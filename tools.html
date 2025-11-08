@@ -10,13 +10,13 @@
 		<!-- End Google Tag Manager -->
 
 		<!-- SEO Optimized Title -->
-		<title>أدوات مجانية | W للخدمات الإلكترونية</title>
+		<title>الأدوات | W للخدمات الإلكترونية</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="Content-Language" content="ar" />
 
 		<!-- SEO Meta Description -->
-		<meta name="description" content="مجموعة من الأدوات المجانية المفيدة: استخراج النصوص OCR، مولد رمز QR، دمج وتقسيم PDF، وإزالة الخلفية من الصور - جميع الأدوات مفتوحة المصدر ومجانية تماماً">
+		<meta name="description" content="مجموعة من الأدوات المفيدة لتسهيل عملك اليومي: استخراج النصوص OCR، مولد رمز QR، أدوات PDF، وإزالة الخلفية من الصور">
 		<meta name="robots" content="index, follow">
 		<meta name="author" content="W للخدمات الإلكترونية">
 
@@ -27,8 +27,8 @@
 		<link rel="canonical" href="https://www.w-electro.com/tools">
 
 		<!-- Meta tags for social media sharing -->
-		<meta property="og:title" content="أدوات مجانية | W للخدمات الإلكترونية">
-		<meta property="og:description" content="مجموعة من الأدوات المجانية: OCR، مولد QR، أدوات PDF، وإزالة الخلفية">
+		<meta property="og:title" content="الأدوات | W للخدمات الإلكترونية">
+		<meta property="og:description" content="مجموعة من الأدوات المفيدة: OCR، مولد QR، أدوات PDF، وإزالة الخلفية">
 		<meta property="og:image" content="https://www.w-electro.com/wD.png">
 		<meta property="og:url" content="https://www.w-electro.com/tools">
 		<meta property="og:type" content="website">
@@ -50,12 +50,6 @@
 
 		<!-- Alpine.js -->
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-		<!-- QRCode.js -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-		<!-- PDF-lib -->
-		<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 		<!-- Critical inline styles -->
 		<style>
@@ -205,54 +199,84 @@
 				transform: translateX(0);
 			}
 
-			/* Tab Navigation */
-			.tab-button {
-				padding: 12px 24px;
-				border-radius: 12px;
-				font-weight: 600;
-				transition: all 0.3s ease;
-				border: 2px solid transparent;
+			/* Tool Card Styles */
+			.tool-card {
+				background: white !important;
+				border-radius: 16px !important;
+				padding: 2rem !important;
+				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+				text-align: center !important;
+				border: 1px solid rgba(8, 145, 178, 0.1);
+				position: relative;
+				overflow: hidden;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
 			}
 
-			.tab-button:hover {
-				background: rgba(8, 145, 178, 0.1);
+			.tool-card::before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 4px;
+				background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+				transform: scaleX(0);
+				transition: transform 0.3s ease;
 			}
 
-			.tab-button.active {
-				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+			.tool-card:hover {
+				transform: translateY(-12px) !important;
+				box-shadow: 0 25px 50px rgba(8, 145, 178, 0.15) !important;
+			}
+
+			.tool-card:hover::before {
+				transform: scaleX(1);
+			}
+
+			.tool-card.disabled {
+				opacity: 0.6;
+				cursor: not-allowed;
+			}
+
+			.tool-card.disabled:hover {
+				transform: none !important;
+			}
+
+			.tool-icon {
+				margin: 0 auto 1.5rem !important;
+				display: flex !important;
+				align-items: center !important;
+				justify-content: center !important;
+				width: 80px !important;
+				height: 80px !important;
+				background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%) !important;
+				color: var(--primary-color) !important;
+				border-radius: 50% !important;
+				font-size: 2rem !important;
+				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+				box-shadow: 0 4px 20px rgba(8, 145, 178, 0.1);
+			}
+
+			.tool-card:hover .tool-icon {
+				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+				color: white !important;
+				transform: scale(1.1) !important;
+				box-shadow: 0 8px 30px rgba(8, 145, 178, 0.3);
+			}
+
+			.coming-soon-badge {
+				display: inline-block;
+				background: linear-gradient(135deg, #f59e0b, #ff6e42);
 				color: white;
-				box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
-			}
-
-			.tool-content {
-				display: none;
-			}
-
-			.tool-content.active {
-				display: block;
-				animation: fadeIn 0.5s ease-in;
-			}
-
-			@keyframes fadeIn {
-				from { opacity: 0; transform: translateY(20px); }
-				to { opacity: 1; transform: translateY(0); }
-			}
-
-			/* File Drop Area */
-			.file-drop-area {
-				border: 2px dashed #e2e8f0;
-				border-radius: 16px;
-				padding: 3rem;
-				text-align: center;
-				transition: all 0.3s ease;
-				background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-			}
-
-			.file-drop-area:hover {
-				border-color: var(--primary-color);
-				background: linear-gradient(135deg, rgba(8, 145, 178, 0.05) 0%, rgba(8, 145, 178, 0.1) 100%);
-				transform: translateY(-2px);
-				box-shadow: 0 8px 25px rgba(8, 145, 178, 0.1);
+				padding: 0.5rem 1.25rem;
+				border-radius: 50px;
+				font-weight: 700;
+				font-size: 0.875rem;
+				margin-bottom: 1rem;
+				box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
 			}
 
 			/* Floating Buttons */
@@ -333,41 +357,8 @@
 			.delay-300 { animation-delay: 0.3s; }
 			.delay-400 { animation-delay: 0.4s; }
 
-			/* QR Code Canvas */
-			#qrcode {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				min-height: 256px;
-			}
-
-			/* Prose styles */
-			.prose {
-				color: #374151;
-				max-width: 65ch;
-				font-size: 1rem;
-				line-height: 1.75;
-			}
-
-			.prose pre {
-				color: #1f2937;
-				background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-				overflow-x: auto;
-				font-size: 0.875em;
-				line-height: 1.7142857;
-				margin-top: 1.7142857em;
-				margin-bottom: 1.7142857em;
-				border-radius: 12px;
-				padding: 1.5rem;
-				border: 1px solid rgba(8, 145, 178, 0.1);
-			}
-
 			/* Responsive */
 			@media (max-width: 768px) {
-				.file-drop-area {
-					padding: 2rem 1rem;
-				}
-
 				.loading-logo {
 					width: 100px;
 					height: 100px;
@@ -415,7 +406,7 @@
 						</div>
 
 						<!-- Desktop Navigation -->
-						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse">
+						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse items-center">
 							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
 								الرئيسية
 								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
@@ -432,14 +423,38 @@
 								خدمات طلابية
 								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
 							</a>
-							<a href="ocr" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
-								خدمة OCR
-								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
-							</a>
-							<a href="tools" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 relative group">
-								أدوات مجانية
-								<span class="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-600"></span>
-							</a>
+							<!-- Tools Dropdown -->
+							<div x-data="{ toolsOpen: false }" @mouseenter="toolsOpen = true" @mouseleave="toolsOpen = false" class="relative">
+								<a href="tools" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 relative group flex items-center gap-1">
+									الأدوات
+									<svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': toolsOpen}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+										<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+									</svg>
+									<span class="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-600"></span>
+								</a>
+
+								<div x-show="toolsOpen" x-transition class="absolute left-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+									<div class="py-2">
+										<a href="ocr" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors duration-200">
+											<i class="fas fa-file-text text-cyan-500"></i>
+											<span>استخراج النصوص (OCR)</span>
+										</a>
+										<a href="qr-generator" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors duration-200">
+											<i class="fas fa-qrcode text-cyan-500"></i>
+											<span>مولد رمز QR</span>
+										</a>
+										<a href="pdf-tools" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors duration-200">
+											<i class="fas fa-file-pdf text-cyan-500"></i>
+											<span>أدوات PDF</span>
+										</a>
+										<div class="flex items-center gap-3 px-4 py-3 text-sm text-gray-400 cursor-not-allowed">
+											<i class="fas fa-magic text-gray-300"></i>
+											<span>إزالة الخلفية</span>
+											<span class="mr-auto text-xs bg-gray-100 px-2 py-1 rounded">قريباً</span>
+										</div>
+									</div>
+								</div>
+							</div>
 							<a href="/#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
 								من نحن
 								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
@@ -468,8 +483,29 @@
 							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات عامة</a>
 							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات التصميم</a>
 							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات طلابية</a>
-							<a href="ocr" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمة OCR</a>
-							<a href="tools" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 py-2 px-4 rounded-lg bg-cyan-50">أدوات مجانية</a>
+							<!-- Tools Menu with Submenu -->
+							<div x-data="{ toolsSubmenuOpen: false }">
+								<button @click="toolsSubmenuOpen = !toolsSubmenuOpen" class="w-full text-right text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 py-2 px-4 rounded-lg bg-cyan-50 flex items-center justify-between">
+									<span>الأدوات</span>
+									<svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': toolsSubmenuOpen}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+										<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+									</svg>
+								</button>
+								<div x-show="toolsSubmenuOpen" x-transition class="pr-4 space-y-2 mt-2">
+									<a href="ocr" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-file-text text-cyan-500 ml-2"></i> استخراج النصوص (OCR)
+									</a>
+									<a href="qr-generator" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-qrcode text-cyan-500 ml-2"></i> مولد رمز QR
+									</a>
+									<a href="pdf-tools" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-file-pdf text-cyan-500 ml-2"></i> أدوات PDF
+									</a>
+									<div class="block text-gray-400 py-2 px-4 text-sm">
+										<i class="fas fa-magic text-gray-300 ml-2"></i> إزالة الخلفية <span class="text-xs">(قريباً)</span>
+									</div>
+								</div>
+							</div>
 							<a href="/#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">من نحن</a>
 							<a href="/#contact" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">تواصل معنا</a>
 						</nav>
@@ -481,7 +517,7 @@
 			<nav class="breadcrumbs container mx-auto px-4" aria-label="breadcrumb">
 				<ol>
 					<li><a href="/">الرئيسية</a></li>
-					<li>أدوات مجانية</li>
+					<li>الأدوات</li>
 				</ol>
 			</nav>
 
@@ -497,225 +533,75 @@
 					<div class="text-center mb-16 animate-fadeInUp">
 						<div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6 shadow-lg">
 							<i class="fas fa-tools text-cyan-500"></i>
-							<span class="text-gray-700 font-medium">أدوات مفتوحة المصدر ومجانية</span>
+							<span class="text-gray-700 font-medium">أدوات مفيدة ومجانية</span>
 						</div>
 
 						<h1 class="text-4xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
-							<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">أدوات مجانية</span>
+							<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">الأدوات</span>
 						</h1>
 
 						<p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-							مجموعة من الأدوات المجانية والمفيدة التي تساعدك في مهامك اليومية.
-							جميع الأدوات مفتوحة المصدر ومجانية تماماً للاستخدام الشخصي والتجاري.
+							مجموعة من الأدوات المفيدة لتسهيل عملك اليومي
 						</p>
 					</div>
 				</div>
 			</section>
 
-			<!-- Tools Section -->
+			<!-- Tools Grid Section -->
 			<section class="py-20 bg-white">
 				<div class="container mx-auto px-4">
-					<!-- Tab Navigation -->
-					<div class="flex flex-wrap justify-center gap-4 mb-12" dir="rtl">
-						<button class="tab-button active" onclick="switchTool('ocr')">
-							<i class="fas fa-file-alt ml-2"></i> استخراج النصوص (OCR)
-						</button>
-						<button class="tab-button" onclick="switchTool('qr')">
-							<i class="fas fa-qrcode ml-2"></i> مولد رمز QR
-						</button>
-						<button class="tab-button" onclick="switchTool('pdf')">
-							<i class="fas fa-file-pdf ml-2"></i> أدوات PDF
-						</button>
-						<button class="tab-button" onclick="switchTool('bg-remover')">
-							<i class="fas fa-image ml-2"></i> إزالة الخلفية
-						</button>
-					</div>
-
-					<!-- OCR Tool (FIRST/TOP) -->
-					<div id="ocr-tool" class="tool-content active">
-						<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-4xl mx-auto border border-gray-100">
-							<div class="text-center mb-8">
-								<h2 class="text-3xl font-bold text-cyan-600 mb-4">استخراج النصوص من المستندات</h2>
-								<p class="text-gray-600">ارفع ملف (صورة أو PDF) واحصل على النص المستخرج باستخدام تقنية Google Cloud Vision</p>
+					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+						<!-- Tool 1: OCR -->
+						<div class="tool-card animate-fadeInUp delay-100">
+							<div class="tool-icon">
+								<i class="fas fa-file-alt"></i>
 							</div>
-
-							<div class="mb-8">
-								<form id="ocr-form" class="space-y-6">
-									<div class="file-drop-area">
-										<input type="file" id="ocr-file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" />
-										<label for="ocr-file" class="cursor-pointer">
-											<i class="fas fa-cloud-upload-alt text-5xl text-cyan-500 mb-4 block"></i>
-											<p class="text-gray-700 font-medium text-lg">اسحب الملف هنا أو انقر للتحميل</p>
-											<p class="text-gray-500 text-sm mt-2">PDF, JPG, JPEG, PNG (الحد الأقصى: 50MB)</p>
-										</label>
-										<div id="file-name" class="mt-4 text-gray-700 font-medium hidden"></div>
-									</div>
-
-									<div class="flex justify-center">
-										<button type="submit" id="ocr-submit" class="btn-primary px-8 py-4 text-lg disabled:opacity-50" disabled>
-											<i class="fas fa-magic ml-2"></i> استخراج النص
-										</button>
-									</div>
-								</form>
-							</div>
-
-							<div id="ocr-results" class="hidden">
-								<div class="border-t border-gray-200 pt-8 mt-8">
-									<h3 class="text-xl font-semibold text-cyan-600 mb-6 text-center">النتائج</h3>
-									<div id="loading-indicator" class="text-center py-12">
-										<div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-600"></div>
-										<p class="mt-4 text-gray-600 text-lg">جاري معالجة الملف...</p>
-									</div>
-									<div id="markdown-output" class="prose max-w-none rtl" dir="rtl"></div>
-									<div class="mt-8 flex justify-center space-x-4 rtl:space-x-reverse">
-										<button id="copy-text" class="btn-outline-orange">
-											<i class="fas fa-copy ml-2"></i> نسخ النص
-										</button>
-										<button id="download-text" class="btn-outline-orange">
-											<i class="fas fa-download ml-2"></i> تحميل النص
-										</button>
-									</div>
-								</div>
-							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">استخراج النصوص (OCR)</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed flex-grow">استخرج النصوص من الصور والمستندات بدقة عالية</p>
+							<a href="ocr" class="btn-primary mt-auto">
+								<i class="fas fa-arrow-left ml-2"></i>
+								استخدم الأداة
+							</a>
 						</div>
-					</div>
 
-					<!-- QR Code Generator -->
-					<div id="qr-tool" class="tool-content">
-						<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-4xl mx-auto border border-gray-100">
-							<div class="text-center mb-8">
-								<h2 class="text-3xl font-bold text-cyan-600 mb-4">مولد رمز QR</h2>
-								<p class="text-gray-600">أنشئ رمز QR مخصص لأي نص أو رابط</p>
+						<!-- Tool 2: QR Generator -->
+						<div class="tool-card animate-fadeInUp delay-200">
+							<div class="tool-icon">
+								<i class="fas fa-qrcode"></i>
 							</div>
-
-							<div class="space-y-6">
-								<div>
-									<label class="block text-gray-700 font-medium mb-2">النص أو الرابط</label>
-									<input type="text" id="qr-text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="أدخل النص أو الرابط هنا" dir="rtl" />
-								</div>
-
-								<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-									<div>
-										<label class="block text-gray-700 font-medium mb-2">الحجم</label>
-										<select id="qr-size" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500">
-											<option value="128">صغير (128×128)</option>
-											<option value="256" selected>متوسط (256×256)</option>
-											<option value="512">كبير (512×512)</option>
-										</select>
-									</div>
-
-									<div>
-										<label class="block text-gray-700 font-medium mb-2">اللون</label>
-										<div class="flex items-center gap-4">
-											<input type="color" id="qr-color" value="#000000" class="w-16 h-12 border border-gray-300 rounded-lg cursor-pointer" />
-											<span class="text-gray-600">لون الرمز</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="flex justify-center">
-									<button onclick="generateQR()" class="btn-primary px-8 py-4">
-										<i class="fas fa-qrcode ml-2"></i> إنشاء رمز QR
-									</button>
-								</div>
-
-								<div id="qr-result" class="hidden mt-8">
-									<div class="border-t border-gray-200 pt-8">
-										<h3 class="text-xl font-semibold text-cyan-600 mb-6 text-center">رمز QR</h3>
-										<div id="qrcode" class="bg-white p-6 rounded-lg flex justify-center"></div>
-										<div class="flex justify-center mt-6">
-											<button onclick="downloadQR()" class="btn-outline-orange">
-												<i class="fas fa-download ml-2"></i> تحميل كصورة PNG
-											</button>
-										</div>
-									</div>
-								</div>
-							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">مولد رمز QR</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed flex-grow">أنشئ رموز QR مخصصة لأي نص أو رابط</p>
+							<a href="qr-generator" class="btn-primary mt-auto">
+								<i class="fas fa-arrow-left ml-2"></i>
+								استخدم الأداة
+							</a>
 						</div>
-					</div>
 
-					<!-- PDF Tools -->
-					<div id="pdf-tool" class="tool-content">
-						<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-4xl mx-auto border border-gray-100">
-							<div class="text-center mb-8">
-								<h2 class="text-3xl font-bold text-cyan-600 mb-4">أدوات PDF</h2>
-								<p class="text-gray-600">دمج أو تقسيم ملفات PDF</p>
+						<!-- Tool 3: PDF Tools -->
+						<div class="tool-card animate-fadeInUp delay-300">
+							<div class="tool-icon">
+								<i class="fas fa-file-pdf"></i>
 							</div>
-
-							<!-- PDF Sub-tabs -->
-							<div class="flex justify-center gap-4 mb-8">
-								<button class="tab-button active" onclick="switchPdfTool('merge')">
-									<i class="fas fa-object-group ml-2"></i> دمج PDF
-								</button>
-								<button class="tab-button" onclick="switchPdfTool('split')">
-									<i class="fas fa-cut ml-2"></i> تقسيم PDF
-								</button>
-							</div>
-
-							<!-- PDF Merger -->
-							<div id="pdf-merge-tool" class="pdf-subtool active">
-								<div class="space-y-6">
-									<div class="file-drop-area">
-										<input type="file" id="pdf-merge-files" accept=".pdf" multiple class="hidden" />
-										<label for="pdf-merge-files" class="cursor-pointer">
-											<i class="fas fa-file-pdf text-5xl text-cyan-500 mb-4 block"></i>
-											<p class="text-gray-700 font-medium text-lg">اختر ملفات PDF للدمج</p>
-											<p class="text-gray-500 text-sm mt-2">يمكنك اختيار عدة ملفات</p>
-										</label>
-										<div id="merge-file-list" class="mt-4 text-gray-700"></div>
-									</div>
-
-									<div class="flex justify-center">
-										<button onclick="mergePDFs()" id="merge-pdf-btn" class="btn-primary px-8 py-4 disabled:opacity-50" disabled>
-											<i class="fas fa-object-group ml-2"></i> دمج الملفات
-										</button>
-									</div>
-
-									<div id="merge-status" class="text-center text-gray-600 hidden"></div>
-								</div>
-							</div>
-
-							<!-- PDF Splitter -->
-							<div id="pdf-split-tool" class="pdf-subtool" style="display: none;">
-								<div class="space-y-6">
-									<div class="file-drop-area">
-										<input type="file" id="pdf-split-file" accept=".pdf" class="hidden" />
-										<label for="pdf-split-file" class="cursor-pointer">
-											<i class="fas fa-file-pdf text-5xl text-cyan-500 mb-4 block"></i>
-											<p class="text-gray-700 font-medium text-lg">اختر ملف PDF للتقسيم</p>
-											<p class="text-gray-500 text-sm mt-2">سيتم تقسيم الملف إلى صفحات منفصلة</p>
-										</label>
-										<div id="split-file-name" class="mt-4 text-gray-700 hidden"></div>
-									</div>
-
-									<div class="flex justify-center">
-										<button onclick="splitPDF()" id="split-pdf-btn" class="btn-primary px-8 py-4 disabled:opacity-50" disabled>
-											<i class="fas fa-cut ml-2"></i> تقسيم الملف
-										</button>
-									</div>
-
-									<div id="split-status" class="text-center text-gray-600 hidden"></div>
-								</div>
-							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">أدوات PDF</h3>
+							<p class="text-gray-600 mb-6 leading-relaxed flex-grow">دمج وتقسيم ملفات PDF بسهولة</p>
+							<a href="pdf-tools" class="btn-primary mt-auto">
+								<i class="fas fa-arrow-left ml-2"></i>
+								استخدم الأداة
+							</a>
 						</div>
-					</div>
 
-					<!-- Background Remover (Coming Soon) -->
-					<div id="bg-remover-tool" class="tool-content">
-						<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-4xl mx-auto border border-gray-100">
-							<div class="text-center">
-								<div class="mb-6">
-									<i class="fas fa-magic text-6xl text-gray-400"></i>
-								</div>
-								<h2 class="text-3xl font-bold text-gray-800 mb-4">إزالة الخلفية من الصور</h2>
-								<div class="inline-block bg-orange-100 text-orange-600 px-6 py-3 rounded-full text-xl font-bold mb-4">
-									قريباً
-								</div>
-								<p class="text-gray-600 text-lg max-w-2xl mx-auto">
-									نعمل حالياً على تطوير أداة إزالة الخلفية من الصور بتقنية الذكاء الاصطناعي.
-									ستكون متاحة قريباً!
-								</p>
+						<!-- Tool 4: Background Remover (Coming Soon) -->
+						<div class="tool-card disabled animate-fadeInUp delay-400">
+							<div class="tool-icon">
+								<i class="fas fa-magic"></i>
 							</div>
+							<h3 class="text-xl font-semibold text-gray-800 mb-3">إزالة الخلفية</h3>
+							<span class="coming-soon-badge">قريباً</span>
+							<p class="text-gray-600 mb-6 leading-relaxed flex-grow">إزالة خلفية الصور تلقائياً</p>
+							<button class="btn-primary mt-auto" disabled style="opacity: 0.5; cursor: not-allowed;">
+								<i class="fas fa-clock ml-2"></i>
+								قريباً
+							</button>
 						</div>
 					</div>
 				</div>
@@ -782,13 +668,9 @@
 									<i class="fas fa-graduation-cap text-sm"></i>
 									خدمات طلابية
 								</a>
-								<a href="ocr" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
-									<i class="fas fa-file-alt text-sm"></i>
-									خدمة OCR
-								</a>
 								<a href="tools" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
 									<i class="fas fa-tools text-sm"></i>
-									أدوات مجانية
+									الأدوات
 								</a>
 							</div>
 						</div>
@@ -846,16 +728,7 @@
 
 		<!-- JavaScript -->
 		<script>
-			// ========================================
-			// CONFIGURATION
-			// ========================================
-			const OCR_API_BASE_URL = 'https://w-electro-ocr-1079925492391.us-central1.run.app';
-
-			// ========================================
 			// PAGE INITIALIZATION
-			// ========================================
-
-			// Loading screen and FOUC prevention
 			document.addEventListener('DOMContentLoaded', function() {
 				const loadingScreen = document.getElementById('loadingScreen');
 				const mainContent = document.getElementById('mainContent');
@@ -928,7 +801,7 @@
 				}, observerOptions);
 
 				// Observe all animated elements
-				const animatedElements = document.querySelectorAll('.animate-fadeInUp, .animate-slideInLeft, .animate-slideInRight, .animate-bounceIn');
+				const animatedElements = document.querySelectorAll('.animate-fadeInUp');
 				animatedElements.forEach(el => {
 					observer.observe(el);
 				});
@@ -947,452 +820,6 @@
 					}
 				});
 			});
-
-			// ========================================
-			// TOOL SWITCHING
-			// ========================================
-
-			function switchTool(toolName) {
-				// Hide all tools
-				document.querySelectorAll('.tool-content').forEach(tool => {
-					tool.classList.remove('active');
-				});
-
-				// Show selected tool
-				document.getElementById(toolName + '-tool').classList.add('active');
-
-				// Update tab buttons
-				document.querySelectorAll('.tab-button').forEach(btn => {
-					btn.classList.remove('active');
-				});
-				event.target.classList.add('active');
-			}
-
-			function switchPdfTool(toolName) {
-				// Hide all PDF subtools
-				document.querySelectorAll('.pdf-subtool').forEach(tool => {
-					tool.style.display = 'none';
-				});
-
-				// Show selected PDF subtool
-				if (toolName === 'merge') {
-					document.getElementById('pdf-merge-tool').style.display = 'block';
-				} else {
-					document.getElementById('pdf-split-tool').style.display = 'block';
-				}
-
-				// Update tab buttons in PDF section
-				event.target.parentElement.querySelectorAll('.tab-button').forEach(btn => {
-					btn.classList.remove('active');
-				});
-				event.target.classList.add('active');
-			}
-
-			// ========================================
-			// OCR FUNCTIONALITY
-			// ========================================
-
-			document.addEventListener('DOMContentLoaded', function() {
-				const form = document.getElementById('ocr-form');
-				const fileInput = document.getElementById('ocr-file');
-				const fileNameElement = document.getElementById('file-name');
-				const submitButton = document.getElementById('ocr-submit');
-				const resultsSection = document.getElementById('ocr-results');
-				const loadingIndicator = document.getElementById('loading-indicator');
-				const markdownOutput = document.getElementById('markdown-output');
-				const copyButton = document.getElementById('copy-text');
-				const downloadButton = document.getElementById('download-text');
-
-				// File data for download
-				let extractedText = "";
-				let fileName = "";
-
-				// Handle file selection
-				fileInput.addEventListener('change', function() {
-					if (fileInput.files.length > 0) {
-						fileNameElement.textContent = fileInput.files[0].name;
-						fileNameElement.classList.remove('hidden');
-						submitButton.disabled = false;
-					} else {
-						fileNameElement.classList.add('hidden');
-						submitButton.disabled = true;
-					}
-				});
-
-				// Handle form submission
-				form.addEventListener('submit', function(e) {
-					e.preventDefault();
-
-					if (!fileInput.files.length) return;
-
-					const file = fileInput.files[0];
-					const formData = new FormData();
-					formData.append('file', file);
-
-					// Show loading indicator
-					loadingIndicator.classList.remove('hidden');
-					resultsSection.classList.remove('hidden');
-					markdownOutput.innerHTML = '';
-					submitButton.disabled = true;
-
-					// Send file to backend with extended timeout (10 minutes)
-					const controller = new AbortController();
-					const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minutes
-
-					fetch(`${OCR_API_BASE_URL}/api/ocr`, {
-						method: 'POST',
-						body: formData,
-						signal: controller.signal
-					})
-					.then(response => {
-						clearTimeout(timeoutId);
-						return response.json();
-					})
-					.then(data => {
-						// Hide loading indicator
-						loadingIndicator.classList.add('hidden');
-
-						// Display result
-						if (data.success) {
-							// Store file info for download
-							extractedText = data.markdown;
-							fileName = data.file_name || `${file.name.split('.')[0]}_ocr.txt`;
-
-							// Replace the display with a success message
-							markdownOutput.innerHTML = `
-								<div class="text-center py-8">
-									<i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
-									<h4 class="text-xl font-bold text-gray-800 mb-2">تم استخراج النص بنجاح!</h4>
-									<p class="text-gray-600 mb-4">تم معالجة ${data.page_count} صفحة من الملف</p>
-									<div class="mt-4">
-										<button id="view-text-btn" class="btn-outline-orange">
-											<i class="fas fa-eye ml-2"></i> عرض النص المستخرج
-										</button>
-									</div>
-								</div>
-							`;
-
-							// Add event listener to the view text button
-							document.getElementById('view-text-btn').addEventListener('click', function() {
-								// Display the extracted text
-								markdownOutput.innerHTML = `
-									<div class="prose max-w-none mb-4">
-										<h4 class="text-lg font-bold text-gray-800 mb-2">النص المستخرج:</h4>
-										<pre class="bg-gray-100 p-4 rounded-lg whitespace-pre-wrap text-gray-800 text-right" dir="rtl" style="max-height: 400px; overflow-y: auto;">${extractedText}</pre>
-									</div>
-									<div class="text-center">
-										<button id="hide-text-btn" class="btn-outline-orange">
-											<i class="fas fa-eye-slash ml-2"></i> إخفاء النص
-										</button>
-									</div>
-								`;
-
-								// Add event listener to hide text button
-								document.getElementById('hide-text-btn').addEventListener('click', function() {
-									// Restore the success message
-									markdownOutput.innerHTML = `
-										<div class="text-center py-8">
-											<i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
-											<h4 class="text-xl font-bold text-gray-800 mb-2">تم استخراج النص بنجاح!</h4>
-											<p class="text-gray-600 mb-4">تم معالجة ${data.page_count} صفحة من الملف</p>
-											<div class="mt-4">
-												<button id="view-text-btn" class="btn-outline-orange">
-													<i class="fas fa-eye ml-2"></i> عرض النص المستخرج
-												</button>
-											</div>
-										</div>
-									`;
-
-									// Re-add event listener
-									document.getElementById('view-text-btn').addEventListener('click', arguments.callee.caller);
-								});
-							});
-						} else {
-							markdownOutput.innerHTML = `
-								<div class="text-center py-8">
-									<i class="fas fa-exclamation-circle text-red-500 text-5xl mb-4"></i>
-									<h4 class="text-xl font-bold text-gray-800 mb-2">حدث خطأ</h4>
-									<p class="text-red-500 mb-4">${data.error}</p>
-								</div>
-							`;
-						}
-
-						submitButton.disabled = false;
-					})
-					.catch(error => {
-						clearTimeout(timeoutId);
-						loadingIndicator.classList.add('hidden');
-
-						let errorMessage = 'يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
-						if (error.name === 'AbortError') {
-							errorMessage = 'انتهت مهلة المعالجة (10 دقائق). الملف كبير جداً أو يحتوي على صفحات كثيرة.';
-						}
-
-						markdownOutput.innerHTML = `
-							<div class="text-center py-8">
-								<i class="fas fa-exclamation-triangle text-red-500 text-5xl mb-4"></i>
-								<h4 class="text-xl font-bold text-gray-800 mb-2">حدث خطأ في الاتصال</h4>
-								<p class="text-red-500 mb-4">${errorMessage}</p>
-							</div>
-						`;
-						submitButton.disabled = false;
-						console.error('OCR Error:', error);
-					});
-				});
-
-				// Copy text functionality
-				copyButton.addEventListener('click', function() {
-					navigator.clipboard.writeText(extractedText).then(() => {
-						const originalText = copyButton.innerHTML;
-						copyButton.innerHTML = '<i class="fas fa-check ml-2"></i> تم النسخ';
-						setTimeout(() => {
-							copyButton.innerHTML = originalText;
-						}, 2000);
-					});
-				});
-
-				// Download text functionality
-				downloadButton.addEventListener('click', function() {
-					const blob = new Blob([extractedText], { type: 'text/plain;charset=utf-8' });
-					const url = URL.createObjectURL(blob);
-					const a = document.createElement('a');
-					a.href = url;
-					a.download = fileName;
-					document.body.appendChild(a);
-					a.click();
-					document.body.removeChild(a);
-					URL.revokeObjectURL(url);
-				});
-
-				// Add drag and drop functionality
-				const dropArea = document.querySelector('.file-drop-area');
-				if (!dropArea) return;
-
-				['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-					dropArea.addEventListener(eventName, preventDefaults, false);
-				});
-
-				function preventDefaults(e) {
-					e.preventDefault();
-					e.stopPropagation();
-				}
-
-				['dragenter', 'dragover'].forEach(eventName => {
-					dropArea.addEventListener(eventName, highlight, false);
-				});
-
-				['dragleave', 'drop'].forEach(eventName => {
-					dropArea.addEventListener(eventName, unhighlight, false);
-				});
-
-				function highlight() {
-					dropArea.classList.add('border-cyan-500', 'bg-cyan-50');
-				}
-
-				function unhighlight() {
-					dropArea.classList.remove('border-cyan-500', 'bg-cyan-50');
-				}
-
-				dropArea.addEventListener('drop', handleDrop, false);
-
-				function handleDrop(e) {
-					const dt = e.dataTransfer;
-					const files = dt.files;
-
-					if (files.length > 0) {
-						fileInput.files = files;
-						fileNameElement.textContent = files[0].name;
-						fileNameElement.classList.remove('hidden');
-						submitButton.disabled = false;
-					}
-				}
-			});
-
-			// ========================================
-			// QR CODE GENERATOR
-			// ========================================
-
-			let qrCodeInstance = null;
-
-			function generateQR() {
-				const text = document.getElementById('qr-text').value;
-				const size = parseInt(document.getElementById('qr-size').value);
-				const color = document.getElementById('qr-color').value;
-
-				if (!text) {
-					alert('الرجاء إدخال نص أو رابط');
-					return;
-				}
-
-				// Clear previous QR code
-				const qrcodeContainer = document.getElementById('qrcode');
-				qrcodeContainer.innerHTML = '';
-
-				// Generate new QR code
-				qrCodeInstance = new QRCode(qrcodeContainer, {
-					text: text,
-					width: size,
-					height: size,
-					colorDark: color,
-					colorLight: "#ffffff",
-					correctLevel: QRCode.CorrectLevel.H
-				});
-
-				// Show result
-				document.getElementById('qr-result').classList.remove('hidden');
-			}
-
-			function downloadQR() {
-				const canvas = document.querySelector('#qrcode canvas');
-				if (!canvas) {
-					alert('الرجاء إنشاء رمز QR أولاً');
-					return;
-				}
-
-				// Convert canvas to blob and download
-				canvas.toBlob(function(blob) {
-					const url = URL.createObjectURL(blob);
-					const a = document.createElement('a');
-					a.href = url;
-					a.download = 'qrcode.png';
-					document.body.appendChild(a);
-					a.click();
-					document.body.removeChild(a);
-					URL.revokeObjectURL(url);
-				});
-			}
-
-			// ========================================
-			// PDF TOOLS
-			// ========================================
-
-			// PDF Merger
-			document.getElementById('pdf-merge-files').addEventListener('change', function() {
-				const files = this.files;
-				const fileList = document.getElementById('merge-file-list');
-				const mergeBtn = document.getElementById('merge-pdf-btn');
-
-				if (files.length > 0) {
-					let listHTML = '<div class="text-sm space-y-2">';
-					for (let i = 0; i < files.length; i++) {
-						listHTML += `<div class="flex items-center gap-2"><i class="fas fa-file-pdf text-red-500"></i> ${files[i].name}</div>`;
-					}
-					listHTML += '</div>';
-					fileList.innerHTML = listHTML;
-					mergeBtn.disabled = files.length < 2;
-				} else {
-					fileList.innerHTML = '';
-					mergeBtn.disabled = true;
-				}
-			});
-
-			async function mergePDFs() {
-				const files = document.getElementById('pdf-merge-files').files;
-				const statusDiv = document.getElementById('merge-status');
-
-				if (files.length < 2) {
-					alert('الرجاء اختيار ملفين على الأقل للدمج');
-					return;
-				}
-
-				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري دمج الملفات...</p>';
-				statusDiv.classList.remove('hidden');
-
-				try {
-					const { PDFDocument } = PDFLib;
-					const mergedPdf = await PDFDocument.create();
-
-					// Process each PDF file
-					for (let i = 0; i < files.length; i++) {
-						const arrayBuffer = await files[i].arrayBuffer();
-						const pdf = await PDFDocument.load(arrayBuffer);
-						const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-						copiedPages.forEach((page) => mergedPdf.addPage(page));
-					}
-
-					// Save merged PDF
-					const mergedPdfBytes = await mergedPdf.save();
-					const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
-					const url = URL.createObjectURL(blob);
-
-					// Download
-					const a = document.createElement('a');
-					a.href = url;
-					a.download = 'merged.pdf';
-					document.body.appendChild(a);
-					a.click();
-					document.body.removeChild(a);
-					URL.revokeObjectURL(url);
-
-					statusDiv.innerHTML = '<i class="fas fa-check-circle text-green-500 text-3xl"></i><p class="mt-2 text-green-600 font-bold">تم الدمج بنجاح!</p>';
-				} catch (error) {
-					console.error('PDF Merge Error:', error);
-					statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء دمج الملفات</p>';
-				}
-			}
-
-			// PDF Splitter
-			document.getElementById('pdf-split-file').addEventListener('change', function() {
-				const file = this.files[0];
-				const fileNameDiv = document.getElementById('split-file-name');
-				const splitBtn = document.getElementById('split-pdf-btn');
-
-				if (file) {
-					fileNameDiv.innerHTML = `<div class="flex items-center gap-2 justify-center"><i class="fas fa-file-pdf text-red-500"></i> ${file.name}</div>`;
-					fileNameDiv.classList.remove('hidden');
-					splitBtn.disabled = false;
-				} else {
-					fileNameDiv.classList.add('hidden');
-					splitBtn.disabled = true;
-				}
-			});
-
-			async function splitPDF() {
-				const file = document.getElementById('pdf-split-file').files[0];
-				const statusDiv = document.getElementById('split-status');
-
-				if (!file) {
-					alert('الرجاء اختيار ملف PDF');
-					return;
-				}
-
-				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري تقسيم الملف...</p>';
-				statusDiv.classList.remove('hidden');
-
-				try {
-					const { PDFDocument } = PDFLib;
-					const arrayBuffer = await file.arrayBuffer();
-					const pdfDoc = await PDFDocument.load(arrayBuffer);
-					const numberOfPages = pdfDoc.getPages().length;
-
-					// Create a zip file (we'll just download individual files for simplicity)
-					for (let i = 0; i < numberOfPages; i++) {
-						const newPdf = await PDFDocument.create();
-						const [copiedPage] = await newPdf.copyPages(pdfDoc, [i]);
-						newPdf.addPage(copiedPage);
-
-						const pdfBytes = await newPdf.save();
-						const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-						const url = URL.createObjectURL(blob);
-
-						const a = document.createElement('a');
-						a.href = url;
-						a.download = `page_${i + 1}.pdf`;
-						document.body.appendChild(a);
-						a.click();
-						document.body.removeChild(a);
-						URL.revokeObjectURL(url);
-
-						// Small delay between downloads
-						await new Promise(resolve => setTimeout(resolve, 100));
-					}
-
-					statusDiv.innerHTML = `<i class="fas fa-check-circle text-green-500 text-3xl"></i><p class="mt-2 text-green-600 font-bold">تم تقسيم ${numberOfPages} صفحة بنجاح!</p>`;
-				} catch (error) {
-					console.error('PDF Split Error:', error);
-					statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء تقسيم الملف</p>';
-				}
-			}
 
 			// Preload critical images
 			const criticalImages = ['wD.png'];

@@ -8,51 +8,58 @@
 		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 		})(window,document,'script','dataLayer','GTM-NH542DNT');</script>
 		<!-- End Google Tag Manager -->
-		
+
 		<!-- SEO Optimized Title -->
-		<title>خدمات التصميم للجميع | W للخدمات الإلكترونية - حلول تقنية بسيطة</title>
+		<title>أدوات PDF | الأدوات | W للخدمات الإلكترونية</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="Content-Language" content="ar" />
 
 		<!-- SEO Meta Description -->
-		<meta name="description" content="خدمات تصميم بسيطة ومفهومة للجميع - من التصاميم ثلاثية الأبعاد إلى الهوية البصرية وتصميم المنيو. نجعل التصميم سهلاً ومتاحاً للجميع في المملكة.">
-		<meta name="keywords" content="تصميم لوجو, هوية بصرية, تصميم منيو, كروت شخصية, شهادات, بوسترات, تصاميم 3D, خدمات تصميم, طباعة">
+		<meta name="description" content="أدوات PDF مجانية - دمج وتقسيم ملفات PDF بسهولة">
 		<meta name="robots" content="index, follow">
 		<meta name="author" content="W للخدمات الإلكترونية">
-		
+
 		<!-- Favicon and Meta Images -->
 		<link rel="icon" href="wD.png" type="image/png">
 		<link rel="shortcut icon" href="wD.png" type="image/png">
 		<link rel="apple-touch-icon" href="wD.png">
-		<link rel="canonical" href="https://www.w-electro.com/design-services">
-		
+		<link rel="canonical" href="https://www.w-electro.com/pdf-tools">
+
 		<!-- Meta tags for social media sharing -->
-		<meta property="og:title" content="خدمات التصميم للجميع | W للخدمات الإلكترونية">
-		<meta property="og:description" content="تصاميم بسيطة ومفهومة لجميع احتياجاتك - نجعل التصميم متاحاً وسهلاً للجميع بأسعار مناسبة.">
+		<meta property="og:title" content="أدوات PDF | الأدوات">
+		<meta property="og:description" content="أدوات PDF مجانية - دمج وتقسيم ملفات PDF">
 		<meta property="og:image" content="https://www.w-electro.com/wD.png">
-		<meta property="og:url" content="https://www.w-electro.com/design-services">
+		<meta property="og:url" content="https://www.w-electro.com/pdf-tools">
 		<meta property="og:type" content="website">
 		<meta property="og:site_name" content="W للخدمات الإلكترونية">
 		<meta name="twitter:card" content="summary_large_image">
-		
+
 		<!-- Preload critical resources -->
 		<link rel="preload" href="wD.png" as="image" type="image/png">
 		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" as="style">
-		
+
 		<!-- Load Google Fonts -->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap">
-		
-		<!-- Load Font Awesome from multiple CDNs for reliability -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.5.1/css/all.css" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-		
+
+		<!-- Load Font Awesome -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 		<!-- Tailwind CSS -->
 		<script src="https://cdn.tailwindcss.com"></script>
-		
+
 		<!-- Alpine.js -->
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-		
+
+		<!-- PDF.js for rendering previews -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+		<script>
+			pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+		</script>
+
+		<!-- PDF-lib -->
+		<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
 		<!-- Critical inline styles -->
 		<style>
 			:root {
@@ -189,7 +196,7 @@
 				transition: transform 0.3s ease;
 				z-index: -1;
 			}
-			
+
 			.btn-primary:hover, .btn-outline-orange:hover {
 				color: white !important;
 				border-color: var(--secondary-color) !important;
@@ -201,95 +208,40 @@
 				transform: translateX(0);
 			}
 
-			/* Service Card Enhanced Styles */
-			.service-card {
-				background: white !important;
-				border-radius: 20px !important;
-				padding: 2.5rem !important;
-				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
-				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-				text-align: center !important;
-				border: 1px solid rgba(8, 145, 178, 0.1);
-				position: relative;
-				overflow: hidden;
+			/* Tab Navigation */
+			.tab-button {
+				padding: 12px 24px;
+				border-radius: 12px;
+				font-weight: 600;
+				transition: all 0.3s ease;
+				border: 2px solid transparent;
 			}
 
-			.service-card::before {
-				content: '';
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 4px;
-				background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-				transform: scaleX(0);
-				transition: transform 0.3s ease;
-			}
-			
-			.service-card:hover {
-				transform: translateY(-12px) !important;
-				box-shadow: 0 25px 50px rgba(8, 145, 178, 0.15) !important;
-				background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
-				color: white !important;
+			.tab-button:hover {
+				background: rgba(8, 145, 178, 0.1);
 			}
 
-			.service-card:hover::before {
-				transform: scaleX(1);
-			}
-			
-			.service-icon {
-				margin: 0 auto 1.5rem !important;
-				display: flex !important;
-				align-items: center !important;
-				justify-content: center !important;
-				width: 80px !important;
-				height: 80px !important;
-				background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%) !important;
-				color: var(--primary-color) !important;
-				border-radius: 50% !important;
-				font-size: 2rem !important;
-				transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-				box-shadow: 0 4px 20px rgba(8, 145, 178, 0.1);
-			}
-			
-			.service-card:hover .service-icon {
-				background: white !important;
-				color: var(--primary-color) !important;
-				transform: scale(1.1) rotateY(180deg) !important;
-				box-shadow: 0 8px 30px rgba(255, 255, 255, 0.3);
-			}
-			
-			.service-card:hover h3, 
-			.service-card:hover p,
-			.service-card:hover .price-tag {
-				color: white !important;
+			.tab-button.active {
+				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+				color: white;
+				box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
 			}
 
-			.service-card:hover .btn-primary,
-			.service-card:hover .btn-outline-orange {
-				color: var(--primary-color) !important;
-				border-color: white !important;
-				background: white !important;
+			/* File Drop Area */
+			.file-drop-area {
+				border: 2px dashed #e2e8f0;
+				border-radius: 16px;
+				padding: 3rem;
+				text-align: center;
+				transition: all 0.3s ease;
+				background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 			}
 
-			.service-card:hover .btn-primary:hover,
-			.service-card:hover .btn-outline-orange:hover {
-				background: rgba(255, 255, 255, 0.9) !important;
-				transform: translateY(-3px) !important;
-			}
-			
-			.price-tag {
-				display: inline-flex !important;
-				align-items: center;
-				background: linear-gradient(135deg, #e0f2fe 0%, #b3e5fc 100%) !important;
-				color: var(--primary-color) !important;
-				font-weight: 700 !important;
-				padding: 0.75rem 1.5rem !important;
-				border-radius: 50px !important;
-				margin-top: 1rem !important;
-				transition: all 0.3s ease !important;
-				font-size: 1.1rem;
-				gap: 0.5rem;
+			.file-drop-area:hover {
+				border-color: var(--primary-color);
+				background: linear-gradient(135deg, rgba(8, 145, 178, 0.05) 0%, rgba(8, 145, 178, 0.1) 100%);
+				transform: translateY(-2px);
+				box-shadow: 0 8px 25px rgba(8, 145, 178, 0.1);
 			}
 
 			/* Floating Buttons */
@@ -314,7 +266,7 @@
 				margin-bottom: 1rem;
 				font-size: 0.9rem;
 			}
-			
+
 			.breadcrumbs ol {
 				display: flex;
 				flex-wrap: wrap;
@@ -323,26 +275,26 @@
 				margin: 0;
 				align-items: center;
 			}
-			
+
 			.breadcrumbs li {
 				display: inline-flex;
 				align-items: center;
 			}
-			
+
 			.breadcrumbs li:not(:last-child)::after {
 				content: ">";
 				margin: 0 10px;
 				color: #ccc;
 				font-weight: bold;
 			}
-			
+
 			.breadcrumbs a {
 				color: var(--secondary-color);
 				text-decoration: none;
 				font-weight: 500;
 				transition: color 0.3s ease;
 			}
-			
+
 			.breadcrumbs a:hover {
 				color: var(--primary-color);
 				text-decoration: underline;
@@ -353,7 +305,7 @@
 				animation: fadeInUp 0.8s ease-out forwards;
 				opacity: 0;
 			}
-			
+
 			@keyframes fadeInUp {
 				from {
 					opacity: 0;
@@ -365,107 +317,28 @@
 				}
 			}
 
-			.animate-slideInRight {
-				animation: slideInRight 0.8s ease-out forwards;
-				opacity: 0;
-			}
-
-			@keyframes slideInRight {
-				from {
-					opacity: 0;
-					transform: translateX(50px);
-				}
-				to {
-					opacity: 1;
-					transform: translateX(0);
-				}
-			}
-
-			.animate-slideInLeft {
-				animation: slideInLeft 0.8s ease-out forwards;
-				opacity: 0;
-			}
-
-			@keyframes slideInLeft {
-				from {
-					opacity: 0;
-					transform: translateX(-50px);
-				}
-				to {
-					opacity: 1;
-					transform: translateX(0);
-				}
-			}
-
-			.animate-bounceIn {
-				animation: bounceIn 1s ease-out forwards;
-				opacity: 0;
-			}
-
-			@keyframes bounceIn {
-				0% {
-					opacity: 0;
-					transform: scale(0.3);
-				}
-				50% {
-					opacity: 1;
-					transform: scale(1.05);
-				}
-				70% {
-					transform: scale(0.9);
-				}
-				100% {
-					opacity: 1;
-					transform: scale(1);
-				}
-			}
-			
 			.delay-100 { animation-delay: 0.1s; }
 			.delay-200 { animation-delay: 0.2s; }
 			.delay-300 { animation-delay: 0.3s; }
-			.delay-400 { animation-delay: 0.4s; }
-			.delay-500 { animation-delay: 0.5s; }
 
-			/* Process Steps */
-			.step-card {
-				background: white;
-				border-radius: 16px;
-				padding: 2rem;
-				box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-				text-align: center;
-				position: relative;
+			/* Page Preview Cards */
+			.page-preview-card {
 				transition: all 0.3s ease;
 			}
 
-			.step-card:hover {
-				transform: translateY(-5px);
-				box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+			.page-preview-card:has(.page-checkbox:checked) {
+				border-color: #0891b2;
+				background: linear-gradient(135deg, rgba(8, 145, 178, 0.05) 0%, rgba(8, 145, 178, 0.1) 100%);
 			}
 
-			.step-number {
-				position: absolute;
-				top: -20px;
-				left: 50%;
-				transform: translateX(-50%);
-				width: 40px;
-				height: 40px;
-				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-				color: white;
-				border-radius: 50%;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-weight: bold;
-				font-size: 1.2rem;
-				box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
+			.page-checkbox {
+				accent-color: #0891b2;
 			}
 
 			/* Responsive */
 			@media (max-width: 768px) {
-				.service-icon {
-					width: 70px !important;
-					height: 70px !important;
-					font-size: 1.5rem !important;
+				.file-drop-area {
+					padding: 2rem 1rem;
 				}
 
 				.loading-logo {
@@ -489,7 +362,7 @@
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NH542DNT"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
-		
+
 		<!-- Loading Screen -->
 		<div id="loadingScreen" class="loading-screen">
 			<div class="loading-logo">
@@ -498,7 +371,7 @@
 			<div class="loading-text">W للخدمات الإلكترونية</div>
 			<div class="loading-spinner"></div>
 		</div>
-		
+
 		<!-- Main Content -->
 		<div id="mainContent" class="main-content">
 			<!-- Header/Navigation -->
@@ -513,7 +386,7 @@
 								<span class="text-orange-500">للخدمات الإلكترونية</span>
 							</a>
 						</div>
-						
+
 						<!-- Desktop Navigation -->
 						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse items-center">
 							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
@@ -524,9 +397,9 @@
 								خدمات عامة
 								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
 							</a>
-							<a href="design-services" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 relative group">
+							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
 								خدمات التصميم
-								<span class="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-600"></span>
+								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
 							</a>
 							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
 								خدمات طلابية
@@ -534,12 +407,12 @@
 							</a>
 							<!-- Tools Dropdown -->
 							<div x-data="{ toolsOpen: false }" @mouseenter="toolsOpen = true" @mouseleave="toolsOpen = false" class="relative">
-								<a href="tools" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group flex items-center gap-1">
+								<a href="tools" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 relative group flex items-center gap-1">
 									الأدوات
 									<svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': toolsOpen}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
 										<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
 									</svg>
-									<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+									<span class="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-600"></span>
 								</a>
 
 								<div x-show="toolsOpen" x-transition class="absolute left-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
@@ -573,7 +446,7 @@
 								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
 							</a>
 						</nav>
-						
+
 						<!-- Mobile menu button -->
 						<div class="md:hidden">
 							<button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600 p-2 rounded-lg hover:bg-gray-100 transition-colors" aria-label="فتح القائمة">
@@ -584,17 +457,17 @@
 							</button>
 						</div>
 					</div>
-					
+
 					<!-- Mobile Navigation -->
 					<div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 py-4 border-t border-gray-200">
 						<nav class="flex flex-col space-y-3">
 							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">الرئيسية</a>
 							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات عامة</a>
-							<a href="design-services" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 py-2 px-4 rounded-lg bg-cyan-50">خدمات التصميم</a>
+							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات التصميم</a>
 							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات طلابية</a>
 							<!-- Tools Menu with Submenu -->
 							<div x-data="{ toolsSubmenuOpen: false }">
-								<button @click="toolsSubmenuOpen = !toolsSubmenuOpen" class="w-full text-right text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50 flex items-center justify-between">
+								<button @click="toolsSubmenuOpen = !toolsSubmenuOpen" class="w-full text-right text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 py-2 px-4 rounded-lg bg-cyan-50 flex items-center justify-between">
 									<span>الأدوات</span>
 									<svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': toolsSubmenuOpen}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
 										<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -626,258 +499,126 @@
 			<nav class="breadcrumbs container mx-auto px-4" aria-label="breadcrumb">
 				<ol>
 					<li><a href="/">الرئيسية</a></li>
-					<li>خدمات التصميم</li>
+					<li><a href="tools">الأدوات</a></li>
+					<li>أدوات PDF</li>
 				</ol>
 			</nav>
 
 			<!-- Hero Section -->
-			<section class="py-20 bg-gradient-to-br from-cyan-50 via-blue-50 to-orange-50 relative overflow-hidden">
-				<!-- Background decorations -->
+			<section class="py-16 bg-gradient-to-br from-cyan-50 via-blue-50 to-orange-50 relative overflow-hidden">
 				<div class="absolute inset-0 opacity-10">
 					<div class="absolute top-20 right-20 w-64 h-64 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
 					<div class="absolute bottom-20 left-20 w-64 h-64 bg-orange-500 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-300"></div>
 				</div>
-				
+
 				<div class="container mx-auto px-4 relative z-10">
-					<div class="text-center mb-16 animate-fadeInUp">
+					<div class="text-center animate-fadeInUp">
 						<div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6 shadow-lg">
-							<i class="fas fa-paint-brush text-cyan-500"></i>
-							<span class="text-gray-700 font-medium">خدمات تصميم احترافية</span>
+							<i class="fas fa-file-pdf text-cyan-500"></i>
+							<span class="text-gray-700 font-medium">أداة مجانية</span>
 						</div>
-						
-						<h1 class="text-4xl lg:text-6xl font-bold text-gray-800 mb-6 leading-tight">
-							خدمات التصميم 
-							<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">الاحترافية</span>
+
+						<h1 class="text-3xl lg:text-5xl font-bold text-gray-800 mb-4 leading-tight">
+							<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">أدوات PDF</span>
 						</h1>
-						
-						<p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-							نقدم خدمات تصميم بسيطة ومفهومة تناسب الجميع - من الأفراد إلى الشركات والمطاعم. نساعدك في تحقيق رؤيتك بطريقة سهلة وبأسعار مناسبة.
+
+						<p class="text-lg text-gray-600 max-w-2xl mx-auto">
+							دمج أو تقسيم ملفات PDF بسهولة
 						</p>
-						
-						<!-- Stats -->
-						<div class="grid grid-cols-3 gap-6 mt-12 max-w-md mx-auto">
-							<div class="text-center">
-								<div class="text-2xl lg:text-3xl font-bold text-cyan-600">6+</div>
-								<div class="text-gray-600 text-sm">خدمات تصميم</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- PDF Tools Section -->
+			<section class="py-20 bg-white">
+				<div class="container mx-auto px-4">
+					<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-4xl mx-auto border border-gray-100">
+						<!-- PDF Sub-tabs -->
+						<div class="flex justify-center gap-4 mb-8" dir="rtl">
+							<button class="tab-button active" onclick="switchPdfTool('merge')">
+								<i class="fas fa-object-group ml-2"></i> دمج PDF
+							</button>
+							<button class="tab-button" onclick="switchPdfTool('split')">
+								<i class="fas fa-cut ml-2"></i> تقسيم PDF
+							</button>
+						</div>
+
+						<!-- PDF Merger -->
+						<div id="pdf-merge-tool" class="pdf-subtool">
+							<div class="space-y-6">
+								<div class="file-drop-area">
+									<input type="file" id="pdf-merge-files" accept=".pdf" multiple class="hidden" />
+									<label for="pdf-merge-files" class="cursor-pointer">
+										<i class="fas fa-file-pdf text-5xl text-cyan-500 mb-4 block"></i>
+										<p class="text-gray-700 font-medium text-lg">اختر ملفات PDF للدمج</p>
+										<p class="text-gray-500 text-sm mt-2">يمكنك اختيار عدة ملفات</p>
+									</label>
+									<div id="merge-file-list" class="mt-4 text-gray-700"></div>
+								</div>
+
+								<div class="flex justify-center">
+									<button onclick="mergePDFs()" id="merge-pdf-btn" class="btn-primary px-8 py-4 disabled:opacity-50" disabled>
+										<i class="fas fa-object-group ml-2"></i> دمج الملفات
+									</button>
+								</div>
+
+								<div id="merge-status" class="text-center text-gray-600 hidden"></div>
 							</div>
-							<div class="text-center">
-								<div class="text-2xl lg:text-3xl font-bold text-orange-500">100%</div>
-								<div class="text-gray-600 text-sm">إبداع وجودة</div>
-							</div>
-							<div class="text-center">
-								<div class="text-2xl lg:text-3xl font-bold text-green-500">24/7</div>
-								<div class="text-gray-600 text-sm">دعم فني</div>
+						</div>
+
+						<!-- PDF Splitter -->
+						<div id="pdf-split-tool" class="pdf-subtool" style="display: none;">
+							<div class="space-y-6">
+								<div class="file-drop-area">
+									<input type="file" id="pdf-split-file" accept=".pdf" class="hidden" />
+									<label for="pdf-split-file" class="cursor-pointer">
+										<i class="fas fa-file-pdf text-5xl text-cyan-500 mb-4 block"></i>
+										<p class="text-gray-700 font-medium text-lg">اختر ملف PDF للتقسيم</p>
+										<p class="text-gray-500 text-sm mt-2">اختر الصفحات التي تريد تنزيلها</p>
+									</label>
+									<div id="split-file-name" class="mt-4 text-gray-700 hidden"></div>
+								</div>
+
+								<!-- Page Preview Grid -->
+								<div id="page-preview-container" class="hidden">
+									<div class="flex justify-center gap-4 mb-4">
+										<button onclick="selectAllPages()" class="btn-outline-orange px-6 py-2">
+											<i class="fas fa-check-square ml-2"></i> تحديد الكل
+										</button>
+										<button onclick="deselectAllPages()" class="btn-outline-orange px-6 py-2">
+											<i class="fas fa-square ml-2"></i> إلغاء تحديد الكل
+										</button>
+									</div>
+									<div id="page-previews" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-96 overflow-y-auto p-4 border border-gray-200 rounded-lg bg-gray-50"></div>
+								</div>
+
+								<div class="flex justify-center gap-4">
+									<button onclick="downloadSelectedPages()" id="download-selected-btn" class="btn-primary px-8 py-4 hidden">
+										<i class="fas fa-download ml-2"></i> تنزيل المحدد
+									</button>
+									<button onclick="downloadAllPages()" id="download-all-btn" class="btn-outline-orange px-8 py-4 hidden">
+										<i class="fas fa-download ml-2"></i> تنزيل الكل
+									</button>
+								</div>
+
+								<div id="split-status" class="text-center text-gray-600 hidden"></div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</section>
 
-			<!-- Services Section -->
-			<section class="py-20 bg-white">
-				<div class="container mx-auto px-4">
-					<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-						<!-- Design Service Card 1 -->
-						<div class="service-card animate-fadeInUp delay-100">
-							<div class="service-icon" aria-label="خدمة تصاميم وطباعة ثلاثية الأبعاد">
-								<i class="fas fa-cube"></i>
-							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">تصاميم وطباعة 3D</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed">تصميم وتنفيذ نماذج ثلاثية الأبعاد باستخدام أحدث التقنيات</p>
-							<div class="price-tag mb-4">حسب الطلب</div>
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصاميم وطباعة 3D" class="btn-primary">
-								<i class="fab fa-whatsapp ml-2"></i>
-								طلب الخدمة
-							</a>
-						</div>
-						
-						<!-- Design Service Card 2 -->
-						<div class="service-card animate-fadeInUp delay-200">
-							<div class="service-icon" aria-label="خدمة تصميم هوية بصرية متكاملة للعلامات التجارية">
-								<i class="fas fa-palette"></i>
-							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">تصميم هوية براند</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed">تصميم هوية بصرية متكاملة للعلامات التجارية بأسلوب عصري</p>
-							<div class="price-tag mb-4">حسب الطلب</div>
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم هوية براند" class="btn-primary">
-								<i class="fab fa-whatsapp ml-2"></i>
-								طلب الخدمة
-							</a>
-						</div>
-						
-						<!-- Design Service Card 3 -->
-						<div class="service-card animate-fadeInUp delay-300">
-							<div class="service-icon" aria-label="خدمة تصميم منيو للمطاعم والكافيهات">
-								<i class="fas fa-clipboard-list"></i>
-							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">تصميم منيو</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed">تصميم قوائم طعام احترافية للمطاعم والكافيهات بتصاميم جذابة</p>
-							<div class="price-tag mb-4">حسب الطلب</div>
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم منيو" class="btn-primary">
-								<i class="fab fa-whatsapp ml-2"></i>
-								طلب الخدمة
-							</a>
-						</div>
-						
-						<!-- Design Service Card 4 -->
-						<div class="service-card animate-fadeInUp delay-100">
-							<div class="service-icon" aria-label="خدمة تصميم بطاقات للمناسبات والأعياد">
-								<i class="fas fa-birthday-cake"></i>
-							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">تصميم بطاقات تهنئة</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed">تصميم بطاقات للمناسبات والأعياد بطرق إبداعية ومميزة</p>
-							<div class="price-tag mb-4">حسب الطلب</div>
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم بطاقات تهنئة" class="btn-primary">
-								<i class="fab fa-whatsapp ml-2"></i>
-								طلب الخدمة
-							</a>
-						</div>
-						
-						<!-- Design Service Card 5 -->
-						<div class="service-card animate-fadeInUp delay-200">
-							<div class="service-icon" aria-label="خدمة تصميم محتوى مرئي لمنصات التواصل الاجتماعي">
-								<i class="fas fa-mobile-alt"></i>
-							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">تصاميم سوشال ميديا</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed">تصميم محتوى مرئي لمنصات التواصل الاجتماعي بأحدث الاتجاهات</p>
-							<div class="price-tag mb-4">حسب الطلب</div>
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصاميم سوشال ميديا" class="btn-primary">
-								<i class="fab fa-whatsapp ml-2"></i>
-								طلب الخدمة
-							</a>
-						</div>
-						
-						<!-- Design Service Card 6 -->
-						<div class="service-card animate-fadeInUp delay-300">
-							<div class="service-icon" aria-label="خدمة تصميم بطاقات تخرج مميزة">
-								<i class="fas fa-graduation-cap"></i>
-							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">تصميم كروت تخرج</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed">تصميم بطاقات تخرج مميزة لتخليد ذكريات النجاح والتفوق</p>
-							<div class="price-tag mb-4">حسب الطلب</div>
-							<a href="https://wa.me/966540732077?text=السلام عليكم، أرغب في الاستفسار عن خدمة تصميم كروت تخرج" class="btn-primary">
-								<i class="fab fa-whatsapp ml-2"></i>
-								طلب الخدمة
-							</a>
-						</div>
-					</div>
-				</div>
-			</section>
-			
-			<!-- Design Process Section -->
-			<section class="py-20 bg-gradient-to-br from-gray-50 to-white">
-				<div class="container mx-auto px-4">
-					<div class="text-center mb-16 animate-fadeInUp">
-						<h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">عملية التصميم لدينا</h2>
-						<p class="text-xl text-gray-600 max-w-3xl mx-auto">نتبع منهجية احترافية في التصميم لضمان الحصول على نتائج تفوق توقعاتك</p>
-					</div>
-					
-					<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-						<!-- Step 1 -->
-						<div class="step-card animate-fadeInUp delay-100">
-							<div class="step-number">1</div>
-							<div class="service-icon bg-cyan-100 text-cyan-600 mb-4">
-								<i class="fas fa-comments"></i>
-							</div>
-							<h3 class="text-lg font-semibold text-gray-800 mb-2">الاستماع والفهم</h3>
-							<p class="text-gray-600">نبدأ بالاستماع إلى احتياجاتك وفهم متطلباتك بشكل دقيق</p>
-						</div>
-						
-						<!-- Step 2 -->
-						<div class="step-card animate-fadeInUp delay-200">
-							<div class="step-number">2</div>
-							<div class="service-icon bg-orange-100 text-orange-600 mb-4">
-								<i class="fas fa-search"></i>
-							</div>
-							<h3 class="text-lg font-semibold text-gray-800 mb-2">البحث والتخطيط</h3>
-							<p class="text-gray-600">نقوم بإجراء بحث شامل ووضع خطة تصميم تناسب احتياجاتك</p>
-						</div>
-						
-						<!-- Step 3 -->
-						<div class="step-card animate-fadeInUp delay-300">
-							<div class="step-number">3</div>
-							<div class="service-icon bg-green-100 text-green-600 mb-4">
-								<i class="fas fa-pencil-ruler"></i>
-							</div>
-							<h3 class="text-lg font-semibold text-gray-800 mb-2">التصميم والتنفيذ</h3>
-							<p class="text-gray-600">نقوم بتنفيذ التصميم بأعلى جودة مع الالتزام بالمعايير المهنية</p>
-						</div>
-						
-						<!-- Step 4 -->
-						<div class="step-card animate-fadeInUp delay-400">
-							<div class="step-number">4</div>
-							<div class="service-icon bg-purple-100 text-purple-600 mb-4">
-								<i class="fas fa-check-circle"></i>
-							</div>
-							<h3 class="text-lg font-semibold text-gray-800 mb-2">المراجعة والتسليم</h3>
-							<p class="text-gray-600">نراجع التصميم معك ونقوم بالتعديلات المطلوبة قبل التسليم النهائي</p>
-						</div>
-					</div>
-				</div>
-			</section>
-			
-			<!-- Related Services Section -->
-			<section class="py-20 bg-white">
-				<div class="container mx-auto px-4">
-					<div class="text-center mb-16 animate-fadeInUp">
-						<h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">خدمات أخرى قد تهمك</h2>
-						<p class="text-xl text-gray-600 max-w-3xl mx-auto">اكتشف المزيد من خدماتنا المتميزة التي تناسب احتياجاتك</p>
-					</div>
-					
-					<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-						<!-- General Services Card -->
-						<div class="service-card animate-fadeInUp delay-100">
-							<div class="service-icon" aria-label="خدمات إلكترونية عامة">
-								<i class="fas fa-cogs"></i>
-							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">خدمات إلكترونية عامة</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed">مجموعة متنوعة من الخدمات الإلكترونية العامة بجودة عالية وأسعار مناسبة</p>
-							<a href="general-services" class="btn-primary">
-								<i class="fas fa-arrow-left ml-2"></i>
-								عرض التفاصيل
-							</a>
-						</div>
-						
-						<!-- Academic Services Card -->
-						<div class="service-card animate-fadeInUp delay-200">
-							<div class="service-icon" aria-label="خدمات طلابية متميزة">
-								<i class="fas fa-graduation-cap"></i>
-							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">خدمات طلابية</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed">خدمات أكاديمية متميزة لمساعدة الطلاب على تحقيق النجاح الدراسي والتفوق</p>
-							<a href="academic-services" class="btn-primary">
-								<i class="fas fa-arrow-left ml-2"></i>
-								عرض التفاصيل
-							</a>
-						</div>
-						
-						<div class="service-card animate-fadeInUp delay-300">
-							<div class="service-icon" aria-label="خدمة استخراج النصوص من المستندات">
-								<i class="fas fa-file-alt"></i>
-							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">أدوات مجانية</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed">استخراج النصوص من الصور والمستندات باستخدام تقنيات الذكاء الاصطناعي المتطورة</p>
-							<a href="tools" class="btn-primary">
-								<i class="fas fa-arrow-left ml-2"></i>
-								عرض التفاصيل
-							</a>
-						</div>
-					</div>
-				</div>
-			</section>
-			
 			<!-- Contact CTA Section -->
 			<section class="py-20 bg-gradient-to-br from-cyan-500 via-blue-500 to-orange-500 text-white relative overflow-hidden">
-				<!-- Background Pattern -->
 				<div class="absolute inset-0 opacity-10">
 					<div class="absolute inset-0" style="background-image: url('data:image/svg+xml,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 100 100&quot;><circle cx=&quot;50&quot; cy=&quot;50&quot; r=&quot;2&quot; fill=&quot;white&quot;/></svg>'); background-size: 50px 50px;"></div>
 				</div>
-				
+
 				<div class="container mx-auto px-4 text-center relative z-10">
 					<div class="animate-fadeInUp">
-						<h2 class="text-3xl lg:text-4xl font-bold mb-6">تواصل معنا للاستفسار أو طلب الخدمة</h2>
+						<h2 class="text-3xl lg:text-4xl font-bold mb-6">تحتاج إلى مساعدة؟</h2>
 						<p class="text-xl mb-12 max-w-3xl mx-auto leading-relaxed">
-							هل تحتاج إلى تصميم احترافي لمشروعك؟ نحن هنا لمساعدتك. راسلنا الآن للحصول على استشارة مجانية.
+							نحن هنا لمساعدتك! تواصل معنا إذا كان لديك أي استفسار أو تحتاج إلى دعم.
 						</p>
 						<div class="flex flex-col sm:flex-row justify-center gap-6">
 							<a href="https://wa.me/966540732077" class="bg-white text-cyan-600 hover:bg-gray-100 px-8 py-4 rounded-full font-bold transition duration-300 transform hover:scale-105 shadow-lg">
@@ -890,7 +631,7 @@
 					</div>
 				</div>
 			</section>
-			
+
 			<!-- Footer -->
 			<footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
 				<div class="container mx-auto px-4">
@@ -904,9 +645,9 @@
 									<span class="text-orange-400">للخدمات الإلكترونية</span>
 								</h3>
 							</div>
-							<p class="text-gray-300 leading-relaxed max-w-md mx-auto lg:mx-0">حلول تقنية للجميع - تصاميم إبداعية وخدمات إلكترونية بطريقة بسيطة ومفهومة في المملكة العربية السعودية</p>
+							<p class="text-gray-300 leading-relaxed max-w-md mx-auto lg:mx-0">حلول ذكية متكاملة وأدوات مجانية بجودة عالية في المملكة العربية السعودية</p>
 						</div>
-						
+
 						<!-- Quick Links -->
 						<div class="text-center lg:text-right">
 							<h4 class="text-xl font-semibold mb-6 text-orange-400">روابط سريعة</h4>
@@ -928,24 +669,12 @@
 									خدمات طلابية
 								</a>
 								<a href="tools" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
-									<i class="fas fa-file-alt text-sm"></i>
-									أدوات مجانية
-								</a>
-								<a href="/#about" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
-									<i class="fas fa-info-circle text-sm"></i>
-									من نحن
-								</a>
-								<a href="terms-and-conditions.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
-									<i class="fas fa-file-contract text-sm"></i>
-									الشروط والأحكام
-								</a>
-								<a href="privacy-policy.html" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
-									<i class="fas fa-shield-alt text-sm"></i>
-									سياسة الخصوصية
+									<i class="fas fa-tools text-sm"></i>
+									الأدوات
 								</a>
 							</div>
 						</div>
-						
+
 						<!-- Contact Info -->
 						<div class="text-center lg:text-left">
 							<h4 class="text-xl font-semibold mb-6 text-cyan-400">تواصل معنا</h4>
@@ -959,7 +688,7 @@
 									<span class="text-sm">wforelectronicservices@gmail.com</span>
 								</a>
 							</div>
-							
+
 							<div class="flex justify-center lg:justify-start gap-4">
 								<a href="https://wa.me/966540732077" class="bg-transparent border-2 border-orange-500 text-orange-400 hover:bg-orange-500 hover:text-white w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110" aria-label="واتساب">
 									<i class="fab fa-whatsapp"></i>
@@ -979,57 +708,57 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="border-t border-gray-700 mt-12 pt-8 text-center">
 						<p class="text-gray-400">&copy; جميع الحقوق محفوظة لخدمات W الإلكترونية 2025</p>
 					</div>
 				</div>
 			</footer>
-			
+
 			<!-- Floating WhatsApp Button -->
 			<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-24 right-6 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50" target="_blank" aria-label="تواصل معنا عبر واتساب">
 				<i class="fab fa-whatsapp text-2xl"></i>
 			</a>
-			
+
 			<!-- Scroll to top button -->
 			<button id="scrollToTop" class="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 transition-all duration-300 opacity-0 invisible" aria-label="العودة إلى أعلى الصفحة">
 				<i class="fas fa-arrow-up text-xl"></i>
 			</button>
 		</div>
-		
+
 		<!-- JavaScript -->
 		<script>
-			// Loading screen and FOUC prevention
+			// PAGE INITIALIZATION
 			document.addEventListener('DOMContentLoaded', function() {
 				const loadingScreen = document.getElementById('loadingScreen');
 				const mainContent = document.getElementById('mainContent');
-				
+
 				// Minimum loading time
 				const minLoadTime = 2000;
 				const startTime = Date.now();
-				
+
 				// Wait for all resources to load
 				window.addEventListener('load', function() {
 					const loadTime = Date.now() - startTime;
 					const remainingTime = Math.max(0, minLoadTime - loadTime);
-					
+
 					setTimeout(function() {
 						loadingScreen.classList.add('hidden');
 						mainContent.classList.add('loaded');
-						
+
 						// Initialize scroll animations after loading
 						initScrollAnimations();
 					}, remainingTime);
 				});
-				
+
 				// Initialize scroll to top functionality
 				initScrollToTop();
 			});
-			
+
 			// Scroll to top button functionality
 			function initScrollToTop() {
 				const scrollToTopBtn = document.getElementById('scrollToTop');
-				
+
 				// Throttle scroll events for better performance
 				let lastScrollTime = 0;
 				window.addEventListener('scroll', function() {
@@ -1045,7 +774,7 @@
 						}
 					}
 				}, {passive: true});
-				
+
 				scrollToTopBtn.addEventListener('click', function() {
 					window.scrollTo({
 						top: 0,
@@ -1053,15 +782,14 @@
 					});
 				});
 			}
-			
+
 			// Initialize scroll animations
 			function initScrollAnimations() {
-				// Intersection Observer for scroll animations
 				const observerOptions = {
 					threshold: 0.1,
 					rootMargin: '0px 0px -50px 0px'
 				};
-				
+
 				const observer = new IntersectionObserver(function(entries) {
 					entries.forEach(entry => {
 						if (entry.isIntersecting) {
@@ -1070,14 +798,13 @@
 						}
 					});
 				}, observerOptions);
-				
-				// Observe all animated elements
-				const animatedElements = document.querySelectorAll('.animate-fadeInUp, .animate-slideInLeft, .animate-slideInRight, .animate-bounceIn');
+
+				const animatedElements = document.querySelectorAll('.animate-fadeInUp');
 				animatedElements.forEach(el => {
 					observer.observe(el);
 				});
 			}
-			
+
 			// Smooth scrolling for anchor links
 			document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 				anchor.addEventListener('click', function (e) {
@@ -1091,7 +818,242 @@
 					}
 				});
 			});
-			
+
+			// PDF TOOL SWITCHING
+			function switchPdfTool(toolName) {
+				// Hide all PDF subtools
+				document.querySelectorAll('.pdf-subtool').forEach(tool => {
+					tool.style.display = 'none';
+				});
+
+				// Show selected PDF subtool
+				if (toolName === 'merge') {
+					document.getElementById('pdf-merge-tool').style.display = 'block';
+				} else {
+					document.getElementById('pdf-split-tool').style.display = 'block';
+				}
+
+				// Update tab buttons in PDF section
+				event.target.parentElement.querySelectorAll('.tab-button').forEach(btn => {
+					btn.classList.remove('active');
+				});
+				event.target.classList.add('active');
+			}
+
+			// PDF MERGER
+			document.getElementById('pdf-merge-files').addEventListener('change', function() {
+				const files = this.files;
+				const fileList = document.getElementById('merge-file-list');
+				const mergeBtn = document.getElementById('merge-pdf-btn');
+
+				if (files.length > 0) {
+					let listHTML = '<div class="text-sm space-y-2">';
+					for (let i = 0; i < files.length; i++) {
+						listHTML += '<div class="flex items-center gap-2"><i class="fas fa-file-pdf text-red-500"></i> ' + files[i].name + '</div>';
+					}
+					listHTML += '</div>';
+					fileList.innerHTML = listHTML;
+					mergeBtn.disabled = files.length < 2;
+				} else {
+					fileList.innerHTML = '';
+					mergeBtn.disabled = true;
+				}
+			});
+
+			async function mergePDFs() {
+				const files = document.getElementById('pdf-merge-files').files;
+				const statusDiv = document.getElementById('merge-status');
+
+				if (files.length < 2) {
+					alert('الرجاء اختيار ملفين على الأقل للدمج');
+					return;
+				}
+
+				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري دمج الملفات...</p>';
+				statusDiv.classList.remove('hidden');
+
+				try {
+					const { PDFDocument } = PDFLib;
+					const mergedPdf = await PDFDocument.create();
+
+					// Process each PDF file
+					for (let i = 0; i < files.length; i++) {
+						const arrayBuffer = await files[i].arrayBuffer();
+						const pdf = await PDFDocument.load(arrayBuffer);
+						const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+						copiedPages.forEach((page) => mergedPdf.addPage(page));
+					}
+
+					// Save merged PDF
+					const mergedPdfBytes = await mergedPdf.save();
+					const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+					const url = URL.createObjectURL(blob);
+
+					// Download
+					const a = document.createElement('a');
+					a.href = url;
+					a.download = 'merged.pdf';
+					document.body.appendChild(a);
+					a.click();
+					document.body.removeChild(a);
+					URL.revokeObjectURL(url);
+
+					statusDiv.innerHTML = '<i class="fas fa-check-circle text-green-500 text-3xl"></i><p class="mt-2 text-green-600 font-bold">تم الدمج بنجاح!</p>';
+				} catch (error) {
+					console.error('PDF Merge Error:', error);
+					statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء دمج الملفات</p>';
+				}
+			}
+
+			// Global variable to store PDF document and pages
+			let loadedPdfDoc = null;
+			let pdfPageData = [];
+
+			// PDF Splitter - File selection
+			document.getElementById('pdf-split-file').addEventListener('change', async function() {
+				const file = this.files[0];
+				const fileNameDiv = document.getElementById('split-file-name');
+				const statusDiv = document.getElementById('split-status');
+				const previewContainer = document.getElementById('page-preview-container');
+
+				if (file) {
+					fileNameDiv.innerHTML = '<div class="flex items-center gap-2 justify-center"><i class="fas fa-file-pdf text-red-500"></i> ' + file.name + '</div>';
+					fileNameDiv.classList.remove('hidden');
+
+					// Load and preview PDF
+					statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري تحميل الصفحات...</p>';
+					statusDiv.classList.remove('hidden');
+
+					try {
+						const { PDFDocument } = PDFLib;
+						const arrayBuffer = await file.arrayBuffer();
+						loadedPdfDoc = await PDFDocument.load(arrayBuffer);
+
+						await generatePagePreviews(file);
+
+						statusDiv.classList.add('hidden');
+						previewContainer.classList.remove('hidden');
+						document.getElementById('download-selected-btn').classList.remove('hidden');
+						document.getElementById('download-all-btn').classList.remove('hidden');
+					} catch (error) {
+						console.error('PDF Load Error:', error);
+						statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء تحميل الملف</p>';
+					}
+				} else {
+					fileNameDiv.classList.add('hidden');
+					previewContainer.classList.add('hidden');
+					document.getElementById('download-selected-btn').classList.add('hidden');
+					document.getElementById('download-all-btn').classList.add('hidden');
+				}
+			});
+
+			// Generate page previews using canvas
+			async function generatePagePreviews(file) {
+				const previewsDiv = document.getElementById('page-previews');
+				previewsDiv.innerHTML = '';
+				pdfPageData = [];
+
+				const { getDocument } = pdfjsLib;
+				const arrayBuffer = await file.arrayBuffer();
+				const pdf = await getDocument({ data: arrayBuffer }).promise;
+				const numberOfPages = pdf.numPages;
+
+				for (let i = 1; i <= numberOfPages; i++) {
+					const page = await pdf.getPage(i);
+					const viewport = page.getViewport({ scale: 0.5 });
+
+					const canvas = document.createElement('canvas');
+					const context = canvas.getContext('2d');
+					canvas.width = viewport.width;
+					canvas.height = viewport.height;
+
+					await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+					// Create preview card
+					const pageCard = document.createElement('div');
+					pageCard.className = 'page-preview-card relative border-2 border-gray-200 rounded-lg p-2 cursor-pointer hover:border-cyan-500 transition-all';
+					pageCard.innerHTML = '<input type="checkbox" id="page-' + i + '" class="page-checkbox absolute top-2 right-2 w-5 h-5 cursor-pointer z-10" checked /><label for="page-' + i + '" class="cursor-pointer block"><img src="' + canvas.toDataURL() + '" class="w-full rounded shadow-sm" /><p class="text-center text-sm font-medium text-gray-700 mt-2">صفحة ' + i + '</p></label>';
+
+					previewsDiv.appendChild(pageCard);
+					pdfPageData.push({ pageNum: i, canvas: canvas });
+				}
+			}
+
+			// Select all pages
+			function selectAllPages() {
+				document.querySelectorAll('.page-checkbox').forEach(checkbox => {
+					checkbox.checked = true;
+				});
+			}
+
+			// Deselect all pages
+			function deselectAllPages() {
+				document.querySelectorAll('.page-checkbox').forEach(checkbox => {
+					checkbox.checked = false;
+				});
+			}
+
+			// Download selected pages
+			async function downloadSelectedPages() {
+				const selectedPages = [];
+				document.querySelectorAll('.page-checkbox:checked').forEach(checkbox => {
+					const pageNum = parseInt(checkbox.id.replace('page-', ''));
+					selectedPages.push(pageNum - 1); // Convert to 0-indexed
+				});
+
+				if (selectedPages.length === 0) {
+					alert('الرجاء اختيار صفحة واحدة على الأقل');
+					return;
+				}
+
+				await downloadPages(selectedPages);
+			}
+
+			// Download all pages
+			async function downloadAllPages() {
+				const allPages = [];
+				for (let i = 0; i < loadedPdfDoc.getPages().length; i++) {
+					allPages.push(i);
+				}
+				await downloadPages(allPages);
+			}
+
+			// Download specified pages
+			async function downloadPages(pageIndices) {
+				const statusDiv = document.getElementById('split-status');
+				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري تنزيل الصفحات...</p>';
+				statusDiv.classList.remove('hidden');
+
+				try {
+					const { PDFDocument } = PDFLib;
+
+					for (const pageIndex of pageIndices) {
+						const newPdf = await PDFDocument.create();
+						const [copiedPage] = await newPdf.copyPages(loadedPdfDoc, [pageIndex]);
+						newPdf.addPage(copiedPage);
+
+						const pdfBytes = await newPdf.save();
+						const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+						const url = URL.createObjectURL(blob);
+
+						const a = document.createElement('a');
+						a.href = url;
+						a.download = 'page_' + (pageIndex + 1) + '.pdf';
+						document.body.appendChild(a);
+						a.click();
+						document.body.removeChild(a);
+						URL.revokeObjectURL(url);
+
+						await new Promise(resolve => setTimeout(resolve, 100));
+					}
+
+					statusDiv.innerHTML = '<i class="fas fa-check-circle text-green-500 text-3xl"></i><p class="mt-2 text-green-600 font-bold">تم تنزيل ' + pageIndices.length + ' صفحة بنجاح!</p>';
+				} catch (error) {
+					console.error('PDF Download Error:', error);
+					statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء التنزيل</p>';
+				}
+			}
+
 			// Preload critical images
 			const criticalImages = ['wD.png'];
 			criticalImages.forEach(src => {

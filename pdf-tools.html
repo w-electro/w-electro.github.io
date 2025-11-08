@@ -388,7 +388,7 @@
 						</div>
 
 						<!-- Desktop Navigation -->
-						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse">
+						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse items-center">
 							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
 								الرئيسية
 								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
@@ -405,10 +405,38 @@
 								خدمات طلابية
 								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
 							</a>
-							<a href="tools" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 relative group">
-								الأدوات
-								<span class="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-600"></span>
-							</a>
+							<!-- Tools Dropdown -->
+							<div x-data="{ toolsOpen: false }" @mouseenter="toolsOpen = true" @mouseleave="toolsOpen = false" class="relative">
+								<a href="tools" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 relative group flex items-center gap-1">
+									الأدوات
+									<svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': toolsOpen}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+										<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+									</svg>
+									<span class="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-600"></span>
+								</a>
+
+								<div x-show="toolsOpen" x-transition class="absolute left-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+									<div class="py-2">
+										<a href="ocr" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors duration-200">
+											<i class="fas fa-file-text text-cyan-500"></i>
+											<span>استخراج النصوص (OCR)</span>
+										</a>
+										<a href="qr-generator" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors duration-200">
+											<i class="fas fa-qrcode text-cyan-500"></i>
+											<span>مولد رمز QR</span>
+										</a>
+										<a href="pdf-tools" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors duration-200">
+											<i class="fas fa-file-pdf text-cyan-500"></i>
+											<span>أدوات PDF</span>
+										</a>
+										<div class="flex items-center gap-3 px-4 py-3 text-sm text-gray-400 cursor-not-allowed">
+											<i class="fas fa-magic text-gray-300"></i>
+											<span>إزالة الخلفية</span>
+											<span class="mr-auto text-xs bg-gray-100 px-2 py-1 rounded">قريباً</span>
+										</div>
+									</div>
+								</div>
+							</div>
 							<a href="/#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
 								من نحن
 								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
@@ -437,7 +465,29 @@
 							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات عامة</a>
 							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات التصميم</a>
 							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات طلابية</a>
-							<a href="tools" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 py-2 px-4 rounded-lg bg-cyan-50">الأدوات</a>
+							<!-- Tools Menu with Submenu -->
+							<div x-data="{ toolsSubmenuOpen: false }">
+								<button @click="toolsSubmenuOpen = !toolsSubmenuOpen" class="w-full text-right text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 py-2 px-4 rounded-lg bg-cyan-50 flex items-center justify-between">
+									<span>الأدوات</span>
+									<svg class="w-4 h-4 transition-transform duration-200" :class="{'rotate-180': toolsSubmenuOpen}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+										<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+									</svg>
+								</button>
+								<div x-show="toolsSubmenuOpen" x-transition class="pr-4 space-y-2 mt-2">
+									<a href="ocr" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-file-text text-cyan-500 ml-2"></i> استخراج النصوص (OCR)
+									</a>
+									<a href="qr-generator" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-qrcode text-cyan-500 ml-2"></i> مولد رمز QR
+									</a>
+									<a href="pdf-tools" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-file-pdf text-cyan-500 ml-2"></i> أدوات PDF
+									</a>
+									<div class="block text-gray-400 py-2 px-4 text-sm">
+										<i class="fas fa-magic text-gray-300 ml-2"></i> إزالة الخلفية <span class="text-xs">(قريباً)</span>
+									</div>
+								</div>
+							</div>
 							<a href="/#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">من نحن</a>
 							<a href="/#contact" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">تواصل معنا</a>
 						</nav>

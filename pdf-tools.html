@@ -10,13 +10,13 @@
 		<!-- End Google Tag Manager -->
 
 		<!-- SEO Optimized Title -->
-		<title>استخراج النصوص من المستندات | OCR | W للخدمات الإلكترونية</title>
+		<title>أدوات PDF | الأدوات | W للخدمات الإلكترونية</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="Content-Language" content="ar" />
 
 		<!-- SEO Meta Description -->
-		<meta name="description" content="أداة استخراج النصوص OCR مجانية - استخرج النصوص من الصور والمستندات بدقة عالية باستخدام تقنية Google Cloud Vision">
+		<meta name="description" content="أدوات PDF مجانية - دمج وتقسيم ملفات PDF بسهولة">
 		<meta name="robots" content="index, follow">
 		<meta name="author" content="W للخدمات الإلكترونية">
 
@@ -24,13 +24,13 @@
 		<link rel="icon" href="wD.png" type="image/png">
 		<link rel="shortcut icon" href="wD.png" type="image/png">
 		<link rel="apple-touch-icon" href="wD.png">
-		<link rel="canonical" href="https://www.w-electro.com/ocr">
+		<link rel="canonical" href="https://www.w-electro.com/pdf-tools">
 
 		<!-- Meta tags for social media sharing -->
-		<meta property="og:title" content="استخراج النصوص من المستندات | OCR">
-		<meta property="og:description" content="أداة OCR مجانية لاستخراج النصوص من الصور والمستندات">
+		<meta property="og:title" content="أدوات PDF | الأدوات">
+		<meta property="og:description" content="أدوات PDF مجانية - دمج وتقسيم ملفات PDF">
 		<meta property="og:image" content="https://www.w-electro.com/wD.png">
-		<meta property="og:url" content="https://www.w-electro.com/ocr">
+		<meta property="og:url" content="https://www.w-electro.com/pdf-tools">
 		<meta property="og:type" content="website">
 		<meta property="og:site_name" content="W للخدمات الإلكترونية">
 		<meta name="twitter:card" content="summary_large_image">
@@ -50,6 +50,15 @@
 
 		<!-- Alpine.js -->
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+		<!-- PDF.js for rendering previews -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+		<script>
+			pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+		</script>
+
+		<!-- PDF-lib -->
+		<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 		<!-- Critical inline styles -->
 		<style>
@@ -199,6 +208,25 @@
 				transform: translateX(0);
 			}
 
+			/* Tab Navigation */
+			.tab-button {
+				padding: 12px 24px;
+				border-radius: 12px;
+				font-weight: 600;
+				transition: all 0.3s ease;
+				border: 2px solid transparent;
+			}
+
+			.tab-button:hover {
+				background: rgba(8, 145, 178, 0.1);
+			}
+
+			.tab-button.active {
+				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+				color: white;
+				box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
+			}
+
 			/* File Drop Area */
 			.file-drop-area {
 				border: 2px dashed #e2e8f0;
@@ -293,25 +321,18 @@
 			.delay-200 { animation-delay: 0.2s; }
 			.delay-300 { animation-delay: 0.3s; }
 
-			/* Prose styles */
-			.prose {
-				color: #374151;
-				max-width: 65ch;
-				font-size: 1rem;
-				line-height: 1.75;
+			/* Page Preview Cards */
+			.page-preview-card {
+				transition: all 0.3s ease;
 			}
 
-			.prose pre {
-				color: #1f2937;
-				background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-				overflow-x: auto;
-				font-size: 0.875em;
-				line-height: 1.7142857;
-				margin-top: 1.7142857em;
-				margin-bottom: 1.7142857em;
-				border-radius: 12px;
-				padding: 1.5rem;
-				border: 1px solid rgba(8, 145, 178, 0.1);
+			.page-preview-card:has(.page-checkbox:checked) {
+				border-color: #0891b2;
+				background: linear-gradient(135deg, rgba(8, 145, 178, 0.05) 0%, rgba(8, 145, 178, 0.1) 100%);
+			}
+
+			.page-checkbox {
+				accent-color: #0891b2;
 			}
 
 			/* Responsive */
@@ -429,7 +450,7 @@
 				<ol>
 					<li><a href="/">الرئيسية</a></li>
 					<li><a href="tools">الأدوات</a></li>
-					<li>استخراج النصوص</li>
+					<li>أدوات PDF</li>
 				</ol>
 			</nav>
 
@@ -443,61 +464,94 @@
 				<div class="container mx-auto px-4 relative z-10">
 					<div class="text-center animate-fadeInUp">
 						<div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6 shadow-lg">
-							<i class="fas fa-file-alt text-cyan-500"></i>
+							<i class="fas fa-file-pdf text-cyan-500"></i>
 							<span class="text-gray-700 font-medium">أداة مجانية</span>
 						</div>
 
 						<h1 class="text-3xl lg:text-5xl font-bold text-gray-800 mb-4 leading-tight">
-							<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">استخراج النصوص من المستندات</span>
+							<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">أدوات PDF</span>
 						</h1>
 
 						<p class="text-lg text-gray-600 max-w-2xl mx-auto">
-							ارفع ملف (صورة أو PDF) واحصل على النص المستخرج باستخدام تقنية Google Cloud Vision
+							دمج أو تقسيم ملفات PDF بسهولة
 						</p>
 					</div>
 				</div>
 			</section>
 
-			<!-- OCR Tool Section -->
+			<!-- PDF Tools Section -->
 			<section class="py-20 bg-white">
 				<div class="container mx-auto px-4">
 					<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-4xl mx-auto border border-gray-100">
-						<div class="mb-8">
-							<form id="ocr-form" class="space-y-6">
+						<!-- PDF Sub-tabs -->
+						<div class="flex justify-center gap-4 mb-8" dir="rtl">
+							<button class="tab-button active" onclick="switchPdfTool('merge')">
+								<i class="fas fa-object-group ml-2"></i> دمج PDF
+							</button>
+							<button class="tab-button" onclick="switchPdfTool('split')">
+								<i class="fas fa-cut ml-2"></i> تقسيم PDF
+							</button>
+						</div>
+
+						<!-- PDF Merger -->
+						<div id="pdf-merge-tool" class="pdf-subtool">
+							<div class="space-y-6">
 								<div class="file-drop-area">
-									<input type="file" id="ocr-file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" />
-									<label for="ocr-file" class="cursor-pointer">
-										<i class="fas fa-cloud-upload-alt text-5xl text-cyan-500 mb-4 block"></i>
-										<p class="text-gray-700 font-medium text-lg">اسحب الملف هنا أو انقر للتحميل</p>
-										<p class="text-gray-500 text-sm mt-2">PDF, JPG, JPEG, PNG (الحد الأقصى: 50MB)</p>
+									<input type="file" id="pdf-merge-files" accept=".pdf" multiple class="hidden" />
+									<label for="pdf-merge-files" class="cursor-pointer">
+										<i class="fas fa-file-pdf text-5xl text-cyan-500 mb-4 block"></i>
+										<p class="text-gray-700 font-medium text-lg">اختر ملفات PDF للدمج</p>
+										<p class="text-gray-500 text-sm mt-2">يمكنك اختيار عدة ملفات</p>
 									</label>
-									<div id="file-name" class="mt-4 text-gray-700 font-medium hidden"></div>
+									<div id="merge-file-list" class="mt-4 text-gray-700"></div>
 								</div>
 
 								<div class="flex justify-center">
-									<button type="submit" id="ocr-submit" class="btn-primary px-8 py-4 text-lg disabled:opacity-50" disabled>
-										<i class="fas fa-magic ml-2"></i> استخراج النص
+									<button onclick="mergePDFs()" id="merge-pdf-btn" class="btn-primary px-8 py-4 disabled:opacity-50" disabled>
+										<i class="fas fa-object-group ml-2"></i> دمج الملفات
 									</button>
 								</div>
-							</form>
+
+								<div id="merge-status" class="text-center text-gray-600 hidden"></div>
+							</div>
 						</div>
 
-						<div id="ocr-results" class="hidden">
-							<div class="border-t border-gray-200 pt-8 mt-8">
-								<h3 class="text-xl font-semibold text-cyan-600 mb-6 text-center">النتائج</h3>
-								<div id="loading-indicator" class="text-center py-12">
-									<div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-600"></div>
-									<p class="mt-4 text-gray-600 text-lg">جاري معالجة الملف...</p>
+						<!-- PDF Splitter -->
+						<div id="pdf-split-tool" class="pdf-subtool" style="display: none;">
+							<div class="space-y-6">
+								<div class="file-drop-area">
+									<input type="file" id="pdf-split-file" accept=".pdf" class="hidden" />
+									<label for="pdf-split-file" class="cursor-pointer">
+										<i class="fas fa-file-pdf text-5xl text-cyan-500 mb-4 block"></i>
+										<p class="text-gray-700 font-medium text-lg">اختر ملف PDF للتقسيم</p>
+										<p class="text-gray-500 text-sm mt-2">اختر الصفحات التي تريد تنزيلها</p>
+									</label>
+									<div id="split-file-name" class="mt-4 text-gray-700 hidden"></div>
 								</div>
-								<div id="markdown-output" class="prose max-w-none rtl" dir="rtl"></div>
-								<div class="mt-8 flex justify-center space-x-4 rtl:space-x-reverse">
-									<button id="copy-text" class="btn-outline-orange">
-										<i class="fas fa-copy ml-2"></i> نسخ النص
+
+								<!-- Page Preview Grid -->
+								<div id="page-preview-container" class="hidden">
+									<div class="flex justify-center gap-4 mb-4">
+										<button onclick="selectAllPages()" class="btn-outline-orange px-6 py-2">
+											<i class="fas fa-check-square ml-2"></i> تحديد الكل
+										</button>
+										<button onclick="deselectAllPages()" class="btn-outline-orange px-6 py-2">
+											<i class="fas fa-square ml-2"></i> إلغاء تحديد الكل
+										</button>
+									</div>
+									<div id="page-previews" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-h-96 overflow-y-auto p-4 border border-gray-200 rounded-lg bg-gray-50"></div>
+								</div>
+
+								<div class="flex justify-center gap-4">
+									<button onclick="downloadSelectedPages()" id="download-selected-btn" class="btn-primary px-8 py-4 hidden">
+										<i class="fas fa-download ml-2"></i> تنزيل المحدد
 									</button>
-									<button id="download-text" class="btn-outline-orange">
-										<i class="fas fa-download ml-2"></i> تحميل النص
+									<button onclick="downloadAllPages()" id="download-all-btn" class="btn-outline-orange px-8 py-4 hidden">
+										<i class="fas fa-download ml-2"></i> تنزيل الكل
 									</button>
 								</div>
+
+								<div id="split-status" class="text-center text-gray-600 hidden"></div>
 							</div>
 						</div>
 					</div>
@@ -624,16 +678,7 @@
 
 		<!-- JavaScript -->
 		<script>
-			// ========================================
-			// CONFIGURATION
-			// ========================================
-			const OCR_API_BASE_URL = 'https://w-electro-ocr-1079925492391.us-central1.run.app';
-
-			// ========================================
 			// PAGE INITIALIZATION
-			// ========================================
-
-			// Loading screen and FOUC prevention
 			document.addEventListener('DOMContentLoaded', function() {
 				const loadingScreen = document.getElementById('loadingScreen');
 				const mainContent = document.getElementById('mainContent');
@@ -690,7 +735,6 @@
 
 			// Initialize scroll animations
 			function initScrollAnimations() {
-				// Intersection Observer for scroll animations
 				const observerOptions = {
 					threshold: 0.1,
 					rootMargin: '0px 0px -50px 0px'
@@ -705,8 +749,7 @@
 					});
 				}, observerOptions);
 
-				// Observe all animated elements
-				const animatedElements = document.querySelectorAll('.animate-fadeInUp, .animate-slideInLeft, .animate-slideInRight, .animate-bounceIn');
+				const animatedElements = document.querySelectorAll('.animate-fadeInUp');
 				animatedElements.forEach(el => {
 					observer.observe(el);
 				});
@@ -726,225 +769,240 @@
 				});
 			});
 
-			// ========================================
-			// OCR FUNCTIONALITY
-			// ========================================
+			// PDF TOOL SWITCHING
+			function switchPdfTool(toolName) {
+				// Hide all PDF subtools
+				document.querySelectorAll('.pdf-subtool').forEach(tool => {
+					tool.style.display = 'none';
+				});
 
-			document.addEventListener('DOMContentLoaded', function() {
-				const form = document.getElementById('ocr-form');
-				const fileInput = document.getElementById('ocr-file');
-				const fileNameElement = document.getElementById('file-name');
-				const submitButton = document.getElementById('ocr-submit');
-				const resultsSection = document.getElementById('ocr-results');
-				const loadingIndicator = document.getElementById('loading-indicator');
-				const markdownOutput = document.getElementById('markdown-output');
-				const copyButton = document.getElementById('copy-text');
-				const downloadButton = document.getElementById('download-text');
+				// Show selected PDF subtool
+				if (toolName === 'merge') {
+					document.getElementById('pdf-merge-tool').style.display = 'block';
+				} else {
+					document.getElementById('pdf-split-tool').style.display = 'block';
+				}
 
-				// File data for download
-				let extractedText = "";
-				let fileName = "";
+				// Update tab buttons in PDF section
+				event.target.parentElement.querySelectorAll('.tab-button').forEach(btn => {
+					btn.classList.remove('active');
+				});
+				event.target.classList.add('active');
+			}
 
-				// Handle file selection
-				fileInput.addEventListener('change', function() {
-					if (fileInput.files.length > 0) {
-						fileNameElement.textContent = fileInput.files[0].name;
-						fileNameElement.classList.remove('hidden');
-						submitButton.disabled = false;
-					} else {
-						fileNameElement.classList.add('hidden');
-						submitButton.disabled = true;
+			// PDF MERGER
+			document.getElementById('pdf-merge-files').addEventListener('change', function() {
+				const files = this.files;
+				const fileList = document.getElementById('merge-file-list');
+				const mergeBtn = document.getElementById('merge-pdf-btn');
+
+				if (files.length > 0) {
+					let listHTML = '<div class="text-sm space-y-2">';
+					for (let i = 0; i < files.length; i++) {
+						listHTML += '<div class="flex items-center gap-2"><i class="fas fa-file-pdf text-red-500"></i> ' + files[i].name + '</div>';
 					}
-				});
+					listHTML += '</div>';
+					fileList.innerHTML = listHTML;
+					mergeBtn.disabled = files.length < 2;
+				} else {
+					fileList.innerHTML = '';
+					mergeBtn.disabled = true;
+				}
+			});
 
-				// Handle form submission
-				form.addEventListener('submit', function(e) {
-					e.preventDefault();
+			async function mergePDFs() {
+				const files = document.getElementById('pdf-merge-files').files;
+				const statusDiv = document.getElementById('merge-status');
 
-					if (!fileInput.files.length) return;
+				if (files.length < 2) {
+					alert('الرجاء اختيار ملفين على الأقل للدمج');
+					return;
+				}
 
-					const file = fileInput.files[0];
-					const formData = new FormData();
-					formData.append('file', file);
+				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري دمج الملفات...</p>';
+				statusDiv.classList.remove('hidden');
 
-					// Show loading indicator
-					loadingIndicator.classList.remove('hidden');
-					resultsSection.classList.remove('hidden');
-					markdownOutput.innerHTML = '';
-					submitButton.disabled = true;
+				try {
+					const { PDFDocument } = PDFLib;
+					const mergedPdf = await PDFDocument.create();
 
-					// Send file to backend with extended timeout (10 minutes)
-					const controller = new AbortController();
-					const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minutes
+					// Process each PDF file
+					for (let i = 0; i < files.length; i++) {
+						const arrayBuffer = await files[i].arrayBuffer();
+						const pdf = await PDFDocument.load(arrayBuffer);
+						const copiedPages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+						copiedPages.forEach((page) => mergedPdf.addPage(page));
+					}
 
-					fetch(`${OCR_API_BASE_URL}/api/ocr`, {
-						method: 'POST',
-						body: formData,
-						signal: controller.signal
-					})
-					.then(response => {
-						clearTimeout(timeoutId);
-						return response.json();
-					})
-					.then(data => {
-						// Hide loading indicator
-						loadingIndicator.classList.add('hidden');
-
-						// Display result
-						if (data.success) {
-							// Store file info for download
-							extractedText = data.markdown;
-							fileName = data.file_name || `${file.name.split('.')[0]}_ocr.txt`;
-
-							// Replace the display with a success message
-							markdownOutput.innerHTML = `
-								<div class="text-center py-8">
-									<i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
-									<h4 class="text-xl font-bold text-gray-800 mb-2">تم استخراج النص بنجاح!</h4>
-									<p class="text-gray-600 mb-4">تم معالجة ${data.page_count} صفحة من الملف</p>
-									<div class="mt-4">
-										<button id="view-text-btn" class="btn-outline-orange">
-											<i class="fas fa-eye ml-2"></i> عرض النص المستخرج
-										</button>
-									</div>
-								</div>
-							`;
-
-							// Add event listener to the view text button
-							document.getElementById('view-text-btn').addEventListener('click', function() {
-								// Display the extracted text
-								markdownOutput.innerHTML = `
-									<div class="prose max-w-none mb-4">
-										<h4 class="text-lg font-bold text-gray-800 mb-2">النص المستخرج:</h4>
-										<pre class="bg-gray-100 p-4 rounded-lg whitespace-pre-wrap text-gray-800 text-right" dir="rtl" style="max-height: 400px; overflow-y: auto;">${extractedText}</pre>
-									</div>
-									<div class="text-center">
-										<button id="hide-text-btn" class="btn-outline-orange">
-											<i class="fas fa-eye-slash ml-2"></i> إخفاء النص
-										</button>
-									</div>
-								`;
-
-								// Add event listener to hide text button
-								document.getElementById('hide-text-btn').addEventListener('click', function() {
-									// Restore the success message
-									markdownOutput.innerHTML = `
-										<div class="text-center py-8">
-											<i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
-											<h4 class="text-xl font-bold text-gray-800 mb-2">تم استخراج النص بنجاح!</h4>
-											<p class="text-gray-600 mb-4">تم معالجة ${data.page_count} صفحة من الملف</p>
-											<div class="mt-4">
-												<button id="view-text-btn" class="btn-outline-orange">
-													<i class="fas fa-eye ml-2"></i> عرض النص المستخرج
-												</button>
-											</div>
-										</div>
-									`;
-
-									// Re-add event listener
-									document.getElementById('view-text-btn').addEventListener('click', arguments.callee.caller);
-								});
-							});
-						} else {
-							markdownOutput.innerHTML = `
-								<div class="text-center py-8">
-									<i class="fas fa-exclamation-circle text-red-500 text-5xl mb-4"></i>
-									<h4 class="text-xl font-bold text-gray-800 mb-2">حدث خطأ</h4>
-									<p class="text-red-500 mb-4">${data.error}</p>
-								</div>
-							`;
-						}
-
-						submitButton.disabled = false;
-					})
-					.catch(error => {
-						clearTimeout(timeoutId);
-						loadingIndicator.classList.add('hidden');
-
-						let errorMessage = 'يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
-						if (error.name === 'AbortError') {
-							errorMessage = 'انتهت مهلة المعالجة (10 دقائق). الملف كبير جداً أو يحتوي على صفحات كثيرة.';
-						}
-
-						markdownOutput.innerHTML = `
-							<div class="text-center py-8">
-								<i class="fas fa-exclamation-triangle text-red-500 text-5xl mb-4"></i>
-								<h4 class="text-xl font-bold text-gray-800 mb-2">حدث خطأ في الاتصال</h4>
-								<p class="text-red-500 mb-4">${errorMessage}</p>
-							</div>
-						`;
-						submitButton.disabled = false;
-						console.error('OCR Error:', error);
-					});
-				});
-
-				// Copy text functionality
-				copyButton.addEventListener('click', function() {
-					navigator.clipboard.writeText(extractedText).then(() => {
-						const originalText = copyButton.innerHTML;
-						copyButton.innerHTML = '<i class="fas fa-check ml-2"></i> تم النسخ';
-						setTimeout(() => {
-							copyButton.innerHTML = originalText;
-						}, 2000);
-					});
-				});
-
-				// Download text functionality
-				downloadButton.addEventListener('click', function() {
-					const blob = new Blob([extractedText], { type: 'text/plain;charset=utf-8' });
+					// Save merged PDF
+					const mergedPdfBytes = await mergedPdf.save();
+					const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
 					const url = URL.createObjectURL(blob);
+
+					// Download
 					const a = document.createElement('a');
 					a.href = url;
-					a.download = fileName;
+					a.download = 'merged.pdf';
 					document.body.appendChild(a);
 					a.click();
 					document.body.removeChild(a);
 					URL.revokeObjectURL(url);
-				});
 
-				// Add drag and drop functionality
-				const dropArea = document.querySelector('.file-drop-area');
-				if (!dropArea) return;
-
-				['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-					dropArea.addEventListener(eventName, preventDefaults, false);
-				});
-
-				function preventDefaults(e) {
-					e.preventDefault();
-					e.stopPropagation();
+					statusDiv.innerHTML = '<i class="fas fa-check-circle text-green-500 text-3xl"></i><p class="mt-2 text-green-600 font-bold">تم الدمج بنجاح!</p>';
+				} catch (error) {
+					console.error('PDF Merge Error:', error);
+					statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء دمج الملفات</p>';
 				}
+			}
 
-				['dragenter', 'dragover'].forEach(eventName => {
-					dropArea.addEventListener(eventName, highlight, false);
-				});
+			// Global variable to store PDF document and pages
+			let loadedPdfDoc = null;
+			let pdfPageData = [];
 
-				['dragleave', 'drop'].forEach(eventName => {
-					dropArea.addEventListener(eventName, unhighlight, false);
-				});
+			// PDF Splitter - File selection
+			document.getElementById('pdf-split-file').addEventListener('change', async function() {
+				const file = this.files[0];
+				const fileNameDiv = document.getElementById('split-file-name');
+				const statusDiv = document.getElementById('split-status');
+				const previewContainer = document.getElementById('page-preview-container');
 
-				function highlight() {
-					dropArea.classList.add('border-cyan-500', 'bg-cyan-50');
-				}
+				if (file) {
+					fileNameDiv.innerHTML = '<div class="flex items-center gap-2 justify-center"><i class="fas fa-file-pdf text-red-500"></i> ' + file.name + '</div>';
+					fileNameDiv.classList.remove('hidden');
 
-				function unhighlight() {
-					dropArea.classList.remove('border-cyan-500', 'bg-cyan-50');
-				}
+					// Load and preview PDF
+					statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري تحميل الصفحات...</p>';
+					statusDiv.classList.remove('hidden');
 
-				dropArea.addEventListener('drop', handleDrop, false);
+					try {
+						const { PDFDocument } = PDFLib;
+						const arrayBuffer = await file.arrayBuffer();
+						loadedPdfDoc = await PDFDocument.load(arrayBuffer);
 
-				function handleDrop(e) {
-					const dt = e.dataTransfer;
-					const files = dt.files;
+						await generatePagePreviews(file);
 
-					if (files.length > 0) {
-						fileInput.files = files;
-						fileNameElement.textContent = files[0].name;
-						fileNameElement.classList.remove('hidden');
-						submitButton.disabled = false;
+						statusDiv.classList.add('hidden');
+						previewContainer.classList.remove('hidden');
+						document.getElementById('download-selected-btn').classList.remove('hidden');
+						document.getElementById('download-all-btn').classList.remove('hidden');
+					} catch (error) {
+						console.error('PDF Load Error:', error);
+						statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء تحميل الملف</p>';
 					}
+				} else {
+					fileNameDiv.classList.add('hidden');
+					previewContainer.classList.add('hidden');
+					document.getElementById('download-selected-btn').classList.add('hidden');
+					document.getElementById('download-all-btn').classList.add('hidden');
 				}
 			});
+
+			// Generate page previews using canvas
+			async function generatePagePreviews(file) {
+				const previewsDiv = document.getElementById('page-previews');
+				previewsDiv.innerHTML = '';
+				pdfPageData = [];
+
+				const { getDocument } = pdfjsLib;
+				const arrayBuffer = await file.arrayBuffer();
+				const pdf = await getDocument({ data: arrayBuffer }).promise;
+				const numberOfPages = pdf.numPages;
+
+				for (let i = 1; i <= numberOfPages; i++) {
+					const page = await pdf.getPage(i);
+					const viewport = page.getViewport({ scale: 0.5 });
+
+					const canvas = document.createElement('canvas');
+					const context = canvas.getContext('2d');
+					canvas.width = viewport.width;
+					canvas.height = viewport.height;
+
+					await page.render({ canvasContext: context, viewport: viewport }).promise;
+
+					// Create preview card
+					const pageCard = document.createElement('div');
+					pageCard.className = 'page-preview-card relative border-2 border-gray-200 rounded-lg p-2 cursor-pointer hover:border-cyan-500 transition-all';
+					pageCard.innerHTML = '<input type="checkbox" id="page-' + i + '" class="page-checkbox absolute top-2 right-2 w-5 h-5 cursor-pointer z-10" checked /><label for="page-' + i + '" class="cursor-pointer block"><img src="' + canvas.toDataURL() + '" class="w-full rounded shadow-sm" /><p class="text-center text-sm font-medium text-gray-700 mt-2">صفحة ' + i + '</p></label>';
+
+					previewsDiv.appendChild(pageCard);
+					pdfPageData.push({ pageNum: i, canvas: canvas });
+				}
+			}
+
+			// Select all pages
+			function selectAllPages() {
+				document.querySelectorAll('.page-checkbox').forEach(checkbox => {
+					checkbox.checked = true;
+				});
+			}
+
+			// Deselect all pages
+			function deselectAllPages() {
+				document.querySelectorAll('.page-checkbox').forEach(checkbox => {
+					checkbox.checked = false;
+				});
+			}
+
+			// Download selected pages
+			async function downloadSelectedPages() {
+				const selectedPages = [];
+				document.querySelectorAll('.page-checkbox:checked').forEach(checkbox => {
+					const pageNum = parseInt(checkbox.id.replace('page-', ''));
+					selectedPages.push(pageNum - 1); // Convert to 0-indexed
+				});
+
+				if (selectedPages.length === 0) {
+					alert('الرجاء اختيار صفحة واحدة على الأقل');
+					return;
+				}
+
+				await downloadPages(selectedPages);
+			}
+
+			// Download all pages
+			async function downloadAllPages() {
+				const allPages = [];
+				for (let i = 0; i < loadedPdfDoc.getPages().length; i++) {
+					allPages.push(i);
+				}
+				await downloadPages(allPages);
+			}
+
+			// Download specified pages
+			async function downloadPages(pageIndices) {
+				const statusDiv = document.getElementById('split-status');
+				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري تنزيل الصفحات...</p>';
+				statusDiv.classList.remove('hidden');
+
+				try {
+					const { PDFDocument } = PDFLib;
+
+					for (const pageIndex of pageIndices) {
+						const newPdf = await PDFDocument.create();
+						const [copiedPage] = await newPdf.copyPages(loadedPdfDoc, [pageIndex]);
+						newPdf.addPage(copiedPage);
+
+						const pdfBytes = await newPdf.save();
+						const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+						const url = URL.createObjectURL(blob);
+
+						const a = document.createElement('a');
+						a.href = url;
+						a.download = 'page_' + (pageIndex + 1) + '.pdf';
+						document.body.appendChild(a);
+						a.click();
+						document.body.removeChild(a);
+						URL.revokeObjectURL(url);
+
+						await new Promise(resolve => setTimeout(resolve, 100));
+					}
+
+					statusDiv.innerHTML = '<i class="fas fa-check-circle text-green-500 text-3xl"></i><p class="mt-2 text-green-600 font-bold">تم تنزيل ' + pageIndices.length + ' صفحة بنجاح!</p>';
+				} catch (error) {
+					console.error('PDF Download Error:', error);
+					statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء التنزيل</p>';
+				}
+			}
 
 			// Preload critical images
 			const criticalImages = ['wD.png'];

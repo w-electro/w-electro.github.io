@@ -10,13 +10,13 @@
 		<!-- End Google Tag Manager -->
 
 		<!-- SEO Optimized Title -->
-		<title>استخراج النصوص من المستندات | OCR | W للخدمات الإلكترونية</title>
+		<title>مولد رمز QR | الأدوات | W للخدمات الإلكترونية</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta http-equiv="Content-Language" content="ar" />
 
 		<!-- SEO Meta Description -->
-		<meta name="description" content="أداة استخراج النصوص OCR مجانية - استخرج النصوص من الصور والمستندات بدقة عالية باستخدام تقنية Google Cloud Vision">
+		<meta name="description" content="أداة مجانية لإنشاء رموز QR مخصصة - أنشئ رموز QR لأي نص أو رابط بألوان وأحجام مختلفة">
 		<meta name="robots" content="index, follow">
 		<meta name="author" content="W للخدمات الإلكترونية">
 
@@ -24,13 +24,13 @@
 		<link rel="icon" href="wD.png" type="image/png">
 		<link rel="shortcut icon" href="wD.png" type="image/png">
 		<link rel="apple-touch-icon" href="wD.png">
-		<link rel="canonical" href="https://www.w-electro.com/ocr">
+		<link rel="canonical" href="https://www.w-electro.com/qr-generator">
 
 		<!-- Meta tags for social media sharing -->
-		<meta property="og:title" content="استخراج النصوص من المستندات | OCR">
-		<meta property="og:description" content="أداة OCR مجانية لاستخراج النصوص من الصور والمستندات">
+		<meta property="og:title" content="مولد رمز QR | الأدوات">
+		<meta property="og:description" content="أداة مجانية لإنشاء رموز QR مخصصة">
 		<meta property="og:image" content="https://www.w-electro.com/wD.png">
-		<meta property="og:url" content="https://www.w-electro.com/ocr">
+		<meta property="og:url" content="https://www.w-electro.com/qr-generator">
 		<meta property="og:type" content="website">
 		<meta property="og:site_name" content="W للخدمات الإلكترونية">
 		<meta name="twitter:card" content="summary_large_image">
@@ -50,6 +50,9 @@
 
 		<!-- Alpine.js -->
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+		<!-- QRCode.js -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 		<!-- Critical inline styles -->
 		<style>
@@ -199,23 +202,6 @@
 				transform: translateX(0);
 			}
 
-			/* File Drop Area */
-			.file-drop-area {
-				border: 2px dashed #e2e8f0;
-				border-radius: 16px;
-				padding: 3rem;
-				text-align: center;
-				transition: all 0.3s ease;
-				background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-			}
-
-			.file-drop-area:hover {
-				border-color: var(--primary-color);
-				background: linear-gradient(135deg, rgba(8, 145, 178, 0.05) 0%, rgba(8, 145, 178, 0.1) 100%);
-				transform: translateY(-2px);
-				box-shadow: 0 8px 25px rgba(8, 145, 178, 0.1);
-			}
-
 			/* Floating Buttons */
 			.floating-whatsapp, #scrollToTop {
 				background: white !important;
@@ -293,33 +279,16 @@
 			.delay-200 { animation-delay: 0.2s; }
 			.delay-300 { animation-delay: 0.3s; }
 
-			/* Prose styles */
-			.prose {
-				color: #374151;
-				max-width: 65ch;
-				font-size: 1rem;
-				line-height: 1.75;
-			}
-
-			.prose pre {
-				color: #1f2937;
-				background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-				overflow-x: auto;
-				font-size: 0.875em;
-				line-height: 1.7142857;
-				margin-top: 1.7142857em;
-				margin-bottom: 1.7142857em;
-				border-radius: 12px;
-				padding: 1.5rem;
-				border: 1px solid rgba(8, 145, 178, 0.1);
+			/* QR Code Canvas */
+			#qrcode {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				min-height: 256px;
 			}
 
 			/* Responsive */
 			@media (max-width: 768px) {
-				.file-drop-area {
-					padding: 2rem 1rem;
-				}
-
 				.loading-logo {
 					width: 100px;
 					height: 100px;
@@ -429,7 +398,7 @@
 				<ol>
 					<li><a href="/">الرئيسية</a></li>
 					<li><a href="tools">الأدوات</a></li>
-					<li>استخراج النصوص</li>
+					<li>مولد رمز QR</li>
 				</ol>
 			</nav>
 
@@ -443,60 +412,65 @@
 				<div class="container mx-auto px-4 relative z-10">
 					<div class="text-center animate-fadeInUp">
 						<div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full mb-6 shadow-lg">
-							<i class="fas fa-file-alt text-cyan-500"></i>
+							<i class="fas fa-qrcode text-cyan-500"></i>
 							<span class="text-gray-700 font-medium">أداة مجانية</span>
 						</div>
 
 						<h1 class="text-3xl lg:text-5xl font-bold text-gray-800 mb-4 leading-tight">
-							<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">استخراج النصوص من المستندات</span>
+							<span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">مولد رمز QR</span>
 						</h1>
 
 						<p class="text-lg text-gray-600 max-w-2xl mx-auto">
-							ارفع ملف (صورة أو PDF) واحصل على النص المستخرج باستخدام تقنية Google Cloud Vision
+							أنشئ رمز QR مخصص لأي نص أو رابط
 						</p>
 					</div>
 				</div>
 			</section>
 
-			<!-- OCR Tool Section -->
+			<!-- QR Generator Tool Section -->
 			<section class="py-20 bg-white">
 				<div class="container mx-auto px-4">
 					<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-4xl mx-auto border border-gray-100">
-						<div class="mb-8">
-							<form id="ocr-form" class="space-y-6">
-								<div class="file-drop-area">
-									<input type="file" id="ocr-file" accept=".pdf,.jpg,.jpeg,.png" class="hidden" />
-									<label for="ocr-file" class="cursor-pointer">
-										<i class="fas fa-cloud-upload-alt text-5xl text-cyan-500 mb-4 block"></i>
-										<p class="text-gray-700 font-medium text-lg">اسحب الملف هنا أو انقر للتحميل</p>
-										<p class="text-gray-500 text-sm mt-2">PDF, JPG, JPEG, PNG (الحد الأقصى: 50MB)</p>
-									</label>
-									<div id="file-name" class="mt-4 text-gray-700 font-medium hidden"></div>
+						<div class="space-y-6">
+							<div>
+								<label class="block text-gray-700 font-medium mb-2">النص أو الرابط</label>
+								<input type="text" id="qr-text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="أدخل النص أو الرابط هنا" dir="rtl" />
+							</div>
+
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+								<div>
+									<label class="block text-gray-700 font-medium mb-2">الحجم</label>
+									<select id="qr-size" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500">
+										<option value="128">صغير (128×128)</option>
+										<option value="256" selected>متوسط (256×256)</option>
+										<option value="512">كبير (512×512)</option>
+									</select>
 								</div>
 
-								<div class="flex justify-center">
-									<button type="submit" id="ocr-submit" class="btn-primary px-8 py-4 text-lg disabled:opacity-50" disabled>
-										<i class="fas fa-magic ml-2"></i> استخراج النص
-									</button>
+								<div>
+									<label class="block text-gray-700 font-medium mb-2">اللون</label>
+									<div class="flex items-center gap-4">
+										<input type="color" id="qr-color" value="#000000" class="w-16 h-12 border border-gray-300 rounded-lg cursor-pointer" />
+										<span class="text-gray-600">لون الرمز</span>
+									</div>
 								</div>
-							</form>
-						</div>
+							</div>
 
-						<div id="ocr-results" class="hidden">
-							<div class="border-t border-gray-200 pt-8 mt-8">
-								<h3 class="text-xl font-semibold text-cyan-600 mb-6 text-center">النتائج</h3>
-								<div id="loading-indicator" class="text-center py-12">
-									<div class="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-600"></div>
-									<p class="mt-4 text-gray-600 text-lg">جاري معالجة الملف...</p>
-								</div>
-								<div id="markdown-output" class="prose max-w-none rtl" dir="rtl"></div>
-								<div class="mt-8 flex justify-center space-x-4 rtl:space-x-reverse">
-									<button id="copy-text" class="btn-outline-orange">
-										<i class="fas fa-copy ml-2"></i> نسخ النص
-									</button>
-									<button id="download-text" class="btn-outline-orange">
-										<i class="fas fa-download ml-2"></i> تحميل النص
-									</button>
+							<div class="flex justify-center">
+								<button onclick="generateQR()" class="btn-primary px-8 py-4">
+									<i class="fas fa-qrcode ml-2"></i> إنشاء رمز QR
+								</button>
+							</div>
+
+							<div id="qr-result" class="hidden mt-8">
+								<div class="border-t border-gray-200 pt-8">
+									<h3 class="text-xl font-semibold text-cyan-600 mb-6 text-center">رمز QR</h3>
+									<div id="qrcode" class="bg-white p-6 rounded-lg flex justify-center"></div>
+									<div class="flex justify-center mt-6">
+										<button onclick="downloadQR()" class="btn-outline-orange">
+											<i class="fas fa-download ml-2"></i> تحميل كصورة PNG
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -624,16 +598,7 @@
 
 		<!-- JavaScript -->
 		<script>
-			// ========================================
-			// CONFIGURATION
-			// ========================================
-			const OCR_API_BASE_URL = 'https://w-electro-ocr-1079925492391.us-central1.run.app';
-
-			// ========================================
 			// PAGE INITIALIZATION
-			// ========================================
-
-			// Loading screen and FOUC prevention
 			document.addEventListener('DOMContentLoaded', function() {
 				const loadingScreen = document.getElementById('loadingScreen');
 				const mainContent = document.getElementById('mainContent');
@@ -690,7 +655,6 @@
 
 			// Initialize scroll animations
 			function initScrollAnimations() {
-				// Intersection Observer for scroll animations
 				const observerOptions = {
 					threshold: 0.1,
 					rootMargin: '0px 0px -50px 0px'
@@ -705,8 +669,7 @@
 					});
 				}, observerOptions);
 
-				// Observe all animated elements
-				const animatedElements = document.querySelectorAll('.animate-fadeInUp, .animate-slideInLeft, .animate-slideInRight, .animate-bounceIn');
+				const animatedElements = document.querySelectorAll('.animate-fadeInUp');
 				animatedElements.forEach(el => {
 					observer.observe(el);
 				});
@@ -726,225 +689,56 @@
 				});
 			});
 
-			// ========================================
-			// OCR FUNCTIONALITY
-			// ========================================
+			// QR CODE GENERATOR
+			let qrCodeInstance = null;
 
-			document.addEventListener('DOMContentLoaded', function() {
-				const form = document.getElementById('ocr-form');
-				const fileInput = document.getElementById('ocr-file');
-				const fileNameElement = document.getElementById('file-name');
-				const submitButton = document.getElementById('ocr-submit');
-				const resultsSection = document.getElementById('ocr-results');
-				const loadingIndicator = document.getElementById('loading-indicator');
-				const markdownOutput = document.getElementById('markdown-output');
-				const copyButton = document.getElementById('copy-text');
-				const downloadButton = document.getElementById('download-text');
+			function generateQR() {
+				const text = document.getElementById('qr-text').value;
+				const size = parseInt(document.getElementById('qr-size').value);
+				const color = document.getElementById('qr-color').value;
 
-				// File data for download
-				let extractedText = "";
-				let fileName = "";
+				if (!text) {
+					alert('الرجاء إدخال نص أو رابط');
+					return;
+				}
 
-				// Handle file selection
-				fileInput.addEventListener('change', function() {
-					if (fileInput.files.length > 0) {
-						fileNameElement.textContent = fileInput.files[0].name;
-						fileNameElement.classList.remove('hidden');
-						submitButton.disabled = false;
-					} else {
-						fileNameElement.classList.add('hidden');
-						submitButton.disabled = true;
-					}
+				// Clear previous QR code
+				const qrcodeContainer = document.getElementById('qrcode');
+				qrcodeContainer.innerHTML = '';
+
+				// Generate new QR code
+				qrCodeInstance = new QRCode(qrcodeContainer, {
+					text: text,
+					width: size,
+					height: size,
+					colorDark: color,
+					colorLight: "#ffffff",
+					correctLevel: QRCode.CorrectLevel.H
 				});
 
-				// Handle form submission
-				form.addEventListener('submit', function(e) {
-					e.preventDefault();
+				// Show result
+				document.getElementById('qr-result').classList.remove('hidden');
+			}
 
-					if (!fileInput.files.length) return;
+			function downloadQR() {
+				const canvas = document.querySelector('#qrcode canvas');
+				if (!canvas) {
+					alert('الرجاء إنشاء رمز QR أولاً');
+					return;
+				}
 
-					const file = fileInput.files[0];
-					const formData = new FormData();
-					formData.append('file', file);
-
-					// Show loading indicator
-					loadingIndicator.classList.remove('hidden');
-					resultsSection.classList.remove('hidden');
-					markdownOutput.innerHTML = '';
-					submitButton.disabled = true;
-
-					// Send file to backend with extended timeout (10 minutes)
-					const controller = new AbortController();
-					const timeoutId = setTimeout(() => controller.abort(), 600000); // 10 minutes
-
-					fetch(`${OCR_API_BASE_URL}/api/ocr`, {
-						method: 'POST',
-						body: formData,
-						signal: controller.signal
-					})
-					.then(response => {
-						clearTimeout(timeoutId);
-						return response.json();
-					})
-					.then(data => {
-						// Hide loading indicator
-						loadingIndicator.classList.add('hidden');
-
-						// Display result
-						if (data.success) {
-							// Store file info for download
-							extractedText = data.markdown;
-							fileName = data.file_name || `${file.name.split('.')[0]}_ocr.txt`;
-
-							// Replace the display with a success message
-							markdownOutput.innerHTML = `
-								<div class="text-center py-8">
-									<i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
-									<h4 class="text-xl font-bold text-gray-800 mb-2">تم استخراج النص بنجاح!</h4>
-									<p class="text-gray-600 mb-4">تم معالجة ${data.page_count} صفحة من الملف</p>
-									<div class="mt-4">
-										<button id="view-text-btn" class="btn-outline-orange">
-											<i class="fas fa-eye ml-2"></i> عرض النص المستخرج
-										</button>
-									</div>
-								</div>
-							`;
-
-							// Add event listener to the view text button
-							document.getElementById('view-text-btn').addEventListener('click', function() {
-								// Display the extracted text
-								markdownOutput.innerHTML = `
-									<div class="prose max-w-none mb-4">
-										<h4 class="text-lg font-bold text-gray-800 mb-2">النص المستخرج:</h4>
-										<pre class="bg-gray-100 p-4 rounded-lg whitespace-pre-wrap text-gray-800 text-right" dir="rtl" style="max-height: 400px; overflow-y: auto;">${extractedText}</pre>
-									</div>
-									<div class="text-center">
-										<button id="hide-text-btn" class="btn-outline-orange">
-											<i class="fas fa-eye-slash ml-2"></i> إخفاء النص
-										</button>
-									</div>
-								`;
-
-								// Add event listener to hide text button
-								document.getElementById('hide-text-btn').addEventListener('click', function() {
-									// Restore the success message
-									markdownOutput.innerHTML = `
-										<div class="text-center py-8">
-											<i class="fas fa-check-circle text-green-500 text-5xl mb-4"></i>
-											<h4 class="text-xl font-bold text-gray-800 mb-2">تم استخراج النص بنجاح!</h4>
-											<p class="text-gray-600 mb-4">تم معالجة ${data.page_count} صفحة من الملف</p>
-											<div class="mt-4">
-												<button id="view-text-btn" class="btn-outline-orange">
-													<i class="fas fa-eye ml-2"></i> عرض النص المستخرج
-												</button>
-											</div>
-										</div>
-									`;
-
-									// Re-add event listener
-									document.getElementById('view-text-btn').addEventListener('click', arguments.callee.caller);
-								});
-							});
-						} else {
-							markdownOutput.innerHTML = `
-								<div class="text-center py-8">
-									<i class="fas fa-exclamation-circle text-red-500 text-5xl mb-4"></i>
-									<h4 class="text-xl font-bold text-gray-800 mb-2">حدث خطأ</h4>
-									<p class="text-red-500 mb-4">${data.error}</p>
-								</div>
-							`;
-						}
-
-						submitButton.disabled = false;
-					})
-					.catch(error => {
-						clearTimeout(timeoutId);
-						loadingIndicator.classList.add('hidden');
-
-						let errorMessage = 'يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.';
-						if (error.name === 'AbortError') {
-							errorMessage = 'انتهت مهلة المعالجة (10 دقائق). الملف كبير جداً أو يحتوي على صفحات كثيرة.';
-						}
-
-						markdownOutput.innerHTML = `
-							<div class="text-center py-8">
-								<i class="fas fa-exclamation-triangle text-red-500 text-5xl mb-4"></i>
-								<h4 class="text-xl font-bold text-gray-800 mb-2">حدث خطأ في الاتصال</h4>
-								<p class="text-red-500 mb-4">${errorMessage}</p>
-							</div>
-						`;
-						submitButton.disabled = false;
-						console.error('OCR Error:', error);
-					});
-				});
-
-				// Copy text functionality
-				copyButton.addEventListener('click', function() {
-					navigator.clipboard.writeText(extractedText).then(() => {
-						const originalText = copyButton.innerHTML;
-						copyButton.innerHTML = '<i class="fas fa-check ml-2"></i> تم النسخ';
-						setTimeout(() => {
-							copyButton.innerHTML = originalText;
-						}, 2000);
-					});
-				});
-
-				// Download text functionality
-				downloadButton.addEventListener('click', function() {
-					const blob = new Blob([extractedText], { type: 'text/plain;charset=utf-8' });
+				// Convert canvas to blob and download
+				canvas.toBlob(function(blob) {
 					const url = URL.createObjectURL(blob);
 					const a = document.createElement('a');
 					a.href = url;
-					a.download = fileName;
+					a.download = 'qrcode.png';
 					document.body.appendChild(a);
 					a.click();
 					document.body.removeChild(a);
 					URL.revokeObjectURL(url);
 				});
-
-				// Add drag and drop functionality
-				const dropArea = document.querySelector('.file-drop-area');
-				if (!dropArea) return;
-
-				['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-					dropArea.addEventListener(eventName, preventDefaults, false);
-				});
-
-				function preventDefaults(e) {
-					e.preventDefault();
-					e.stopPropagation();
-				}
-
-				['dragenter', 'dragover'].forEach(eventName => {
-					dropArea.addEventListener(eventName, highlight, false);
-				});
-
-				['dragleave', 'drop'].forEach(eventName => {
-					dropArea.addEventListener(eventName, unhighlight, false);
-				});
-
-				function highlight() {
-					dropArea.classList.add('border-cyan-500', 'bg-cyan-50');
-				}
-
-				function unhighlight() {
-					dropArea.classList.remove('border-cyan-500', 'bg-cyan-50');
-				}
-
-				dropArea.addEventListener('drop', handleDrop, false);
-
-				function handleDrop(e) {
-					const dt = e.dataTransfer;
-					const files = dt.files;
-
-					if (files.length > 0) {
-						fileInput.files = files;
-						fileNameElement.textContent = files[0].name;
-						fileNameElement.classList.remove('hidden');
-						submitButton.disabled = false;
-					}
-				}
-			});
+			}
 
 			// Preload critical images
 			const criticalImages = ['wD.png'];

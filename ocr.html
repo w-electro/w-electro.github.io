@@ -1217,6 +1217,17 @@
 		
 		<!-- JavaScript -->
 		<script>
+			// ========================================
+			// CONFIGURATION
+			// ========================================
+			// TODO: After deploying to Google Cloud Run, replace this URL with your Cloud Run service URL
+			// Example: https://w-electro-ocr-xxxxxxxxx-uc.a.run.app
+			const OCR_API_BASE_URL = 'https://YOUR-CLOUD-RUN-URL.run.app';
+
+			// ========================================
+			// PAGE INITIALIZATION
+			// ========================================
+
 			// Loading screen and FOUC prevention
 			document.addEventListener('DOMContentLoaded', function() {
 				const loadingScreen = document.getElementById('loadingScreen');
@@ -1353,9 +1364,9 @@
 					resultsSection.classList.remove('hidden');
 					markdownOutput.innerHTML = '';
 					submitButton.disabled = true;
-					
+
 					// Send file to backend
-					fetch('https://ocr-backend-service.onrender.com/api/ocr', {
+					fetch(`${OCR_API_BASE_URL}/api/ocr`, {
 						method: 'POST',
 						body: formData
 					})

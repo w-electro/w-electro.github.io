@@ -54,7 +54,7 @@ gcloud run deploy w-electro-ocr \
   --platform managed \
   --region us-central1 \
   --allow-unauthenticated \
-  --memory 1Gi \
+  --memory 4Gi \
   --cpu 1 \
   --timeout 600 \
   --max-instances 10 \
@@ -76,7 +76,7 @@ gcloud run deploy w-electro-ocr \
   --platform managed \
   --region us-central1 \
   --allow-unauthenticated \
-  --memory 1Gi \
+  --memory 4Gi \
   --cpu 1 \
   --timeout 600 \
   --max-instances 10 \

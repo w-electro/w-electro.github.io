@@ -19,6 +19,10 @@ logger = logging.getLogger(__name__)
 # Initialize Flask app
 app = Flask(__name__)
 
+# Configure upload settings
+MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50MB
+app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
+
 # Enable CORS for your front-end domain
 CORS(app, resources={r"/api/*": {"origins": "*"}}, supports_credentials=True)
 
@@ -46,9 +50,8 @@ else:
 # Initialize vision client
 vision_client = vision.ImageAnnotatorClient(credentials=credentials)
 
-# Configure upload settings
+# Allowed file extensions
 ALLOWED_EXTENSIONS = {'pdf', 'jpg', 'jpeg', 'png'}
-MAX_CONTENT_LENGTH = 50 * 1024 * 1024  # 50MB
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS

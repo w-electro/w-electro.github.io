@@ -1365,12 +1365,6 @@
 					markdownOutput.innerHTML = '';
 					submitButton.disabled = true;
 
-					// Update loading message for large files
-					const fileSizeMB = (file.size / (1024 * 1024)).toFixed(1);
-					const loadingText = document.querySelector('#loading-indicator p');
-					if (fileSizeMB > 5) {
-						loadingText.textContent = `جاري معالجة الملف... (\${fileSizeMB} MB - قد يستغرق عدة دقائق)`;
-					}
 
 					// Send file to backend with extended timeout (10 minutes)
 					const controller = new AbortController();

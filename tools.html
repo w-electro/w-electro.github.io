@@ -477,8 +477,8 @@
 					</div>
 
 					<!-- Mobile Navigation -->
-					<div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 py-4 border-t border-gray-200">
-						<nav class="flex flex-col space-y-3">
+					<div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 py-4 border-t border-gray-200 relative z-[60] max-h-[calc(100vh-200px)] overflow-y-auto">
+						<nav class="flex flex-col space-y-3 pb-32">
 							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">الرئيسية</a>
 							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات عامة</a>
 							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات التصميم</a>
@@ -550,58 +550,171 @@
 			<!-- Tools Grid Section -->
 			<section class="py-20 bg-white">
 				<div class="container mx-auto px-4">
-					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-						<!-- Tool 1: OCR -->
-						<div class="tool-card animate-fadeInUp delay-100">
-							<div class="tool-icon">
-								<i class="fas fa-file-alt"></i>
+					<!-- Image Tools -->
+					<div class="mb-16">
+						<h2 class="text-3xl font-bold text-gray-800 mb-8 text-center"><span class="text-cyan-600">🖼️</span> أدوات الصور</h2>
+						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-compress"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">ضاغط الصور</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">ضغط الصور وتقليل الحجم مع الحفاظ على الجودة</p>
+								<a href="image-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
 							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">استخراج النصوص (OCR)</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed flex-grow">استخرج النصوص من الصور والمستندات بدقة عالية</p>
-							<a href="ocr" class="btn-primary mt-auto">
-								<i class="fas fa-arrow-left ml-2"></i>
-								استخدم الأداة
-							</a>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-exchange-alt"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">محول صيغ الصور</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">تحويل بين PNG، JPG، WebP</p>
+								<a href="image-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-expand"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">تغيير حجم الصور</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">تعديل أبعاد الصور بسهولة</p>
+								<a href="image-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-magic"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">إزالة الخلفية</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">إزالة خلفية الصور تلقائياً</p>
+								<a href="image-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
 						</div>
+					</div>
 
-						<!-- Tool 2: QR Generator -->
-						<div class="tool-card animate-fadeInUp delay-200">
-							<div class="tool-icon">
-								<i class="fas fa-qrcode"></i>
+					<!-- PDF Tools -->
+					<div class="mb-16">
+						<h2 class="text-3xl font-bold text-gray-800 mb-8 text-center"><span class="text-cyan-600">📄</span> أدوات PDF</h2>
+						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-object-group"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">دمج PDF</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">دمج ملفات PDF متعددة في ملف واحد</p>
+								<a href="pdf-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
 							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">مولد رمز QR</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed flex-grow">أنشئ رموز QR مخصصة لأي نص أو رابط</p>
-							<a href="qr-generator" class="btn-primary mt-auto">
-								<i class="fas fa-arrow-left ml-2"></i>
-								استخدم الأداة
-							</a>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-cut"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">تقسيم PDF</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">استخراج صفحات من ملفات PDF</p>
+								<a href="pdf-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-images"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">PDF إلى صور</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">تحويل صفحات PDF إلى صور</p>
+								<a href="pdf-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-file-pdf"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">صور إلى PDF</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">تحويل الصور إلى ملف PDF</p>
+								<a href="pdf-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
 						</div>
+					</div>
 
-						<!-- Tool 3: PDF Tools -->
-						<div class="tool-card animate-fadeInUp delay-300">
-							<div class="tool-icon">
-								<i class="fas fa-file-pdf"></i>
+					<!-- Text Tools -->
+					<div class="mb-16">
+						<h2 class="text-3xl font-bold text-gray-800 mb-8 text-center"><span class="text-cyan-600">📝</span> أدوات النصوص</h2>
+						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-calculator"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">عداد الكلمات</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">عد الكلمات، الأحرف، والجمل</p>
+								<a href="text-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
 							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">أدوات PDF</h3>
-							<p class="text-gray-600 mb-6 leading-relaxed flex-grow">دمج وتقسيم ملفات PDF بسهولة</p>
-							<a href="pdf-tools" class="btn-primary mt-auto">
-								<i class="fas fa-arrow-left ml-2"></i>
-								استخدم الأداة
-							</a>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-text-height"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">محول حالة النص</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">تحويل بين أحرف كبيرة وصغيرة</p>
+								<a href="text-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-code"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">منسق JSON</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">تنسيق وضغط JSON</p>
+								<a href="text-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-key"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">مشفر Base64</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">تشفير وفك تشفير Base64</p>
+								<a href="text-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
 						</div>
+					</div>
 
-						<!-- Tool 4: Background Remover (Coming Soon) -->
-						<div class="tool-card disabled animate-fadeInUp delay-400">
-							<div class="tool-icon">
-								<i class="fas fa-magic"></i>
+					<!-- Security Tools -->
+					<div class="mb-16">
+						<h2 class="text-3xl font-bold text-gray-800 mb-8 text-center"><span class="text-cyan-600">🔐</span> أدوات الأمان</h2>
+						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-shield-alt"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">مولد كلمات المرور</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">إنشاء كلمات مرور قوية وآمنة</p>
+								<a href="security-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
 							</div>
-							<h3 class="text-xl font-semibold text-gray-800 mb-3">إزالة الخلفية</h3>
-							<span class="coming-soon-badge">قريباً</span>
-							<p class="text-gray-600 mb-6 leading-relaxed flex-grow">إزالة خلفية الصور تلقائياً</p>
-							<button class="btn-primary mt-auto" disabled style="opacity: 0.5; cursor: not-allowed;">
-								<i class="fas fa-clock ml-2"></i>
-								قريباً
-							</button>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-hashtag"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">مولد الهاش</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">MD5, SHA-1, SHA-256, SHA-512</p>
+								<a href="security-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-link"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">مشفر URL</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">تشفير وفك تشفير URL</p>
+								<a href="security-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Design Tools -->
+					<div class="mb-16">
+						<h2 class="text-3xl font-bold text-gray-800 mb-8 text-center"><span class="text-cyan-600">🎨</span> أدوات التصميم</h2>
+						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-palette"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">منتقي الألوان</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">اختر الألوان بصيغ HEX, RGB, HSL</p>
+								<a href="design-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-fill-drip"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">مولد التدرجات</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">إنشاء تدرجات CSS مع معاينة مباشرة</p>
+								<a href="design-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-square"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">مولد الظلال</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">تصميم ظلال CSS مع معاينة</p>
+								<a href="design-tools" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Code Tools -->
+					<div class="mb-16">
+						<h2 class="text-3xl font-bold text-gray-800 mb-8 text-center"><span class="text-cyan-600">📱</span> أدوات الأكواد والرموز</h2>
+						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-file-text"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">استخراج النصوص OCR</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">استخرج النصوص من الصور والمستندات</p>
+								<a href="ocr" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-qrcode"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">مولد وماسح QR</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">أنشئ وامسح رموز QR</p>
+								<a href="qr-generator" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
+							<div class="tool-card animate-fadeInUp">
+								<div class="tool-icon"><i class="fas fa-barcode"></i></div>
+								<h3 class="text-xl font-semibold text-gray-800 mb-3">مولد الباركود</h3>
+								<p class="text-gray-600 mb-6 leading-relaxed flex-grow">أنشئ باركود بصيغ متنوعة</p>
+								<a href="barcode-generator" class="btn-primary mt-auto"><i class="fas fa-arrow-left ml-2"></i>استخدم الأداة</a>
+							</div>
 						</div>
 					</div>
 				</div>

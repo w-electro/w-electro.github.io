@@ -53,6 +53,8 @@
 
 		<!-- QRCode.js -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+		<!-- HTML5 QRCode Scanner -->
+		<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
 
 		<!-- Critical inline styles -->
 		<style>
@@ -287,6 +289,31 @@
 				min-height: 256px;
 			}
 
+			/* Tab Navigation */
+			.tab-button {
+				padding: 12px 24px;
+				border-radius: 12px;
+				font-weight: 600;
+				transition: all 0.3s ease;
+				border: 2px solid transparent;
+			}
+
+			.tab-button:hover {
+				background: rgba(8, 145, 178, 0.1);
+			}
+
+			.tab-button.active {
+				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+				color: white;
+				box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);
+			}
+
+			#qr-reader {
+				border-radius: 12px;
+				overflow: hidden;
+				border: 2px solid #e2e8f0;
+			}
+
 			/* Responsive */
 			@media (max-width: 768px) {
 				.loading-logo {
@@ -407,8 +434,8 @@
 					</div>
 
 					<!-- Mobile Navigation -->
-					<div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 py-4 border-t border-gray-200">
-						<nav class="flex flex-col space-y-3">
+					<div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 py-4 border-t border-gray-200 relative z-[60] max-h-[calc(100vh-200px)] overflow-y-auto">
+						<nav class="flex flex-col space-y-3 pb-32">
 							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">الرئيسية</a>
 							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات عامة</a>
 							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات التصميم</a>
@@ -477,49 +504,91 @@
 				</div>
 			</section>
 
-			<!-- QR Generator Tool Section -->
+			<!-- QR Tools Section -->
 			<section class="py-20 bg-white">
 				<div class="container mx-auto px-4">
 					<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-4xl mx-auto border border-gray-100">
-						<div class="space-y-6">
-							<div>
-								<label class="block text-gray-700 font-medium mb-2">النص أو الرابط</label>
-								<input type="text" id="qr-text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="أدخل النص أو الرابط هنا" dir="rtl" />
-							</div>
+						<!-- Tabs -->
+						<div class="flex justify-center gap-4 mb-8" dir="rtl">
+							<button class="tab-button active" onclick="switchTool('generator')">
+								<i class="fas fa-qrcode ml-2"></i> مولد QR
+							</button>
+							<button class="tab-button" onclick="switchTool('scanner')">
+								<i class="fas fa-camera ml-2"></i> ماسح QR
+							</button>
+						</div>
 
-							<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<!-- QR Generator -->
+						<div id="tool-generator" class="tool-content">
+							<div class="space-y-6">
 								<div>
-									<label class="block text-gray-700 font-medium mb-2">الحجم</label>
-									<select id="qr-size" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500">
-										<option value="128">صغير (128×128)</option>
-										<option value="256" selected>متوسط (256×256)</option>
-										<option value="512">كبير (512×512)</option>
-									</select>
+									<label class="block text-gray-700 font-medium mb-2">النص أو الرابط</label>
+									<input type="text" id="qr-text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="أدخل النص أو الرابط هنا" dir="rtl" />
 								</div>
 
-								<div>
-									<label class="block text-gray-700 font-medium mb-2">اللون</label>
-									<div class="flex items-center gap-4">
-										<input type="color" id="qr-color" value="#000000" class="w-16 h-12 border border-gray-300 rounded-lg cursor-pointer" />
-										<span class="text-gray-600">لون الرمز</span>
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">الحجم</label>
+										<select id="qr-size" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500">
+											<option value="128">صغير (128×128)</option>
+											<option value="256" selected>متوسط (256×256)</option>
+											<option value="512">كبير (512×512)</option>
+										</select>
+									</div>
+
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">اللون</label>
+										<div class="flex items-center gap-4">
+											<input type="color" id="qr-color" value="#000000" class="w-16 h-12 border border-gray-300 rounded-lg cursor-pointer" />
+											<span class="text-gray-600">لون الرمز</span>
+										</div>
+									</div>
+								</div>
+
+								<div class="flex justify-center">
+									<button onclick="generateQR()" class="btn-primary px-8 py-4">
+										<i class="fas fa-qrcode ml-2"></i> إنشاء رمز QR
+									</button>
+								</div>
+
+								<div id="qr-result" class="hidden mt-8">
+									<div class="border-t border-gray-200 pt-8">
+										<h3 class="text-xl font-semibold text-cyan-600 mb-6 text-center">رمز QR</h3>
+										<div id="qrcode" class="bg-white p-6 rounded-lg flex justify-center"></div>
+										<div class="flex justify-center mt-6">
+											<button onclick="downloadQR()" class="btn-outline-orange">
+												<i class="fas fa-download ml-2"></i> تحميل كصورة PNG
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>
+						</div>
 
-							<div class="flex justify-center">
-								<button onclick="generateQR()" class="btn-primary px-8 py-4">
-									<i class="fas fa-qrcode ml-2"></i> إنشاء رمز QR
-								</button>
-							</div>
-
-							<div id="qr-result" class="hidden mt-8">
-								<div class="border-t border-gray-200 pt-8">
-									<h3 class="text-xl font-semibold text-cyan-600 mb-6 text-center">رمز QR</h3>
-									<div id="qrcode" class="bg-white p-6 rounded-lg flex justify-center"></div>
-									<div class="flex justify-center mt-6">
-										<button onclick="downloadQR()" class="btn-outline-orange">
-											<i class="fas fa-download ml-2"></i> تحميل كصورة PNG
-										</button>
+						<!-- QR Scanner -->
+						<div id="tool-scanner" class="tool-content hidden">
+							<div class="space-y-6">
+								<div id="qr-reader" class="w-full"></div>
+								<div class="flex flex-wrap justify-center gap-3">
+									<button onclick="startScanner()" id="start-scan-btn" class="btn-primary px-8 py-4">
+										<i class="fas fa-camera ml-2"></i> بدء المسح
+									</button>
+									<button onclick="stopScanner()" id="stop-scan-btn" class="btn-primary px-8 py-4 hidden">
+										<i class="fas fa-stop ml-2"></i> إيقاف المسح
+									</button>
+								</div>
+								<div id="scan-result" class="hidden">
+									<div class="bg-green-50 border-2 border-green-200 rounded-lg p-6">
+										<h3 class="text-xl font-semibold text-green-600 mb-4 text-center">النتيجة</h3>
+										<p id="scan-result-text" class="text-gray-700 text-center break-all font-mono bg-white p-4 rounded border border-green-200" dir="auto"></p>
+										<div class="flex justify-center gap-3 mt-4">
+											<button onclick="copyResult()" class="btn-outline-orange">
+												<i class="fas fa-copy ml-2"></i> نسخ النتيجة
+											</button>
+											<button onclick="openResult()" class="btn-outline-orange">
+												<i class="fas fa-external-link-alt ml-2"></i> فتح الرابط
+											</button>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -788,6 +857,91 @@
 					document.body.removeChild(a);
 					URL.revokeObjectURL(url);
 				});
+			}
+
+			// Tool switching
+			function switchTool(toolName) {
+				document.querySelectorAll('.tool-content').forEach(t => t.classList.add('hidden'));
+				document.getElementById('tool-' + toolName).classList.remove('hidden');
+				document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+				event.target.closest('.tab-button').classList.add('active');
+
+				// Stop scanner if switching away from scanner
+				if (toolName !== 'scanner' && html5QrCode) {
+					stopScanner();
+				}
+			}
+
+			// QR SCANNER
+			let html5QrCode = null;
+			let lastResult = '';
+
+			function startScanner() {
+				const readerElement = document.getElementById('qr-reader');
+
+				if (!html5QrCode) {
+					html5QrCode = new Html5Qrcode("qr-reader");
+				}
+
+				const config = { fps: 10, qrbox: { width: 250, height: 250 } };
+
+				html5QrCode.start(
+					{ facingMode: "environment" },
+					config,
+					onScanSuccess,
+					onScanError
+				).then(() => {
+					document.getElementById('start-scan-btn').classList.add('hidden');
+					document.getElementById('stop-scan-btn').classList.remove('hidden');
+				}).catch(err => {
+					alert('خطأ في بدء المسح. تأكد من السماح باستخدام الكاميرا.');
+					console.error(err);
+				});
+			}
+
+			function stopScanner() {
+				if (html5QrCode) {
+					html5QrCode.stop().then(() => {
+						document.getElementById('start-scan-btn').classList.remove('hidden');
+						document.getElementById('stop-scan-btn').classList.add('hidden');
+					}).catch(err => {
+						console.error(err);
+					});
+				}
+			}
+
+			function onScanSuccess(decodedText, decodedResult) {
+				if (decodedText !== lastResult) {
+					lastResult = decodedText;
+					document.getElementById('scan-result-text').textContent = decodedText;
+					document.getElementById('scan-result').classList.remove('hidden');
+
+					// Auto-stop after successful scan
+					stopScanner();
+				}
+			}
+
+			function onScanError(errorMessage) {
+				// Silent error handling for continuous scanning
+			}
+
+			function copyResult() {
+				const text = document.getElementById('scan-result-text').textContent;
+				navigator.clipboard.writeText(text).then(() => {
+					const btn = event.target.closest('button');
+					const original = btn.innerHTML;
+					btn.innerHTML = '<i class="fas fa-check ml-2"></i>تم النسخ!';
+					setTimeout(() => btn.innerHTML = original, 2000);
+				});
+			}
+
+			function openResult() {
+				const text = document.getElementById('scan-result-text').textContent;
+				if (text.startsWith('http://') || text.startsWith('https://')) {
+					window.open(text, '_blank');
+				} else {
+					alert('النص المسح ليس رابط URL');
+				}
 			}
 
 			// Preload critical images

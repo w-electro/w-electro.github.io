@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html lang="ar" dir="rtl">
+	<head>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-NH542DNT');</script>
+		<title>أدوات الأمان | الأدوات | W للخدمات الإلكترونية</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="أدوات الأمان المجانية - مولد كلمات المرور، مولد الهاش، ومشفر URL">
+		<link rel="icon" href="wD.png" type="image/png">
+		<link rel="canonical" href="https://www.w-electro.com/security-tools">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<style>
+			:root {--primary-color: #0891b2; --secondary-color: #ff6e42;}
+			body {font-family: 'Cairo', system-ui, -apple-system, sans-serif;}
+			.main-content {opacity: 0; visibility: hidden; transition: opacity 0.5s;}
+			.main-content.loaded {opacity: 1; visibility: visible;}
+			.loading-screen {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #ff6e42 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s;}
+			.loading-screen.hidden {opacity: 0; visibility: hidden;}
+			.loading-logo {width: 120px; height: 120px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; animation: pulse-scale 2s ease-in-out infinite;}
+			.loading-logo img {width: 80px; height: 80px; border-radius: 50%;}
+			@keyframes pulse-scale {0%, 100% {transform: scale(1);} 50% {transform: scale(1.05);}}
+			.btn-primary {display: inline-flex !important; align-items: center; padding: 12px 24px !important; background: transparent !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; border-radius: 50px !important; font-weight: 600 !important; transition: all 0.3s !important; cursor: pointer !important; position: relative; overflow: hidden;}
+			.btn-primary::before {content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--secondary-color); transform: translateX(-100%); transition: transform 0.3s; z-index: -1;}
+			.btn-primary:hover {color: white !important; transform: translateY(-2px) !important; box-shadow: 0 10px 20px rgba(255, 110, 66, 0.3) !important;}
+			.btn-primary:hover::before {transform: translateX(0);}
+			.tab-button {padding: 12px 20px; border-radius: 12px; font-weight: 600; transition: all 0.3s; border: 2px solid transparent; font-size: 0.9rem;}
+			.tab-button:hover {background: rgba(8, 145, 178, 0.1);}
+			.tab-button.active {background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);}
+			.strength-bar {height: 8px; border-radius: 4px; transition: all 0.3s;}
+			.strength-weak {width: 33%; background: #ef4444;}
+			.strength-medium {width: 66%; background: #f59e0b;}
+			.strength-strong {width: 100%; background: #10b981;}
+			.breadcrumbs {padding: 1rem 0; font-size: 0.9rem;}
+			.breadcrumbs ol {display: flex; list-style: none; padding: 0; margin: 0;}
+			.breadcrumbs li:not(:last-child)::after {content: ">"; margin: 0 10px; color: #ccc;}
+			.breadcrumbs a {color: var(--secondary-color); text-decoration: none; font-weight: 500;}
+			.breadcrumbs a:hover {color: var(--primary-color); text-decoration: underline;}
+			.floating-whatsapp, #scrollToTop {background: white !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; box-shadow: 0 8px 25px rgba(255, 110, 66, 0.3) !important; transition: all 0.3s !important;}
+			.floating-whatsapp:hover, #scrollToTop:hover {background: var(--secondary-color) !important; color: white !important; transform: translateY(-3px) scale(1.05) !important;}
+		</style>
+	</head>
+	<body>
+		<div id="loadingScreen" class="loading-screen"><div class="loading-logo"><img src="wD.png" alt="W" /></div></div>
+		<div id="mainContent" class="main-content">
+			<header class="bg-white shadow-lg sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
+				<div class="container mx-auto px-4 py-4">
+					<div class="flex items-center justify-between">
+						<div class="flex items-center"><a href="/" class="text-2xl font-bold flex items-center gap-3"><img src="wD.png" alt="W" class="w-10 h-10 rounded-full shadow-md" /><span class="text-cyan-600">W</span><span class="text-orange-500">للخدمات الإلكترونية</span></a></div>
+						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse items-center">
+							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">الرئيسية</a>
+							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات عامة</a>
+							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات التصميم</a>
+							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات طلابية</a>
+							<div x-data="{ toolsOpen: false }" @mouseenter="toolsOpen = true" @mouseleave="toolsOpen = false" class="relative">
+								<a href="tools" class="text-cyan-600 font-medium flex items-center gap-1">الأدوات<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></a>
+								<div x-show="toolsOpen" x-transition class="absolute left-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+									<div class="py-2">
+										<a href="ocr" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600"><i class="fas fa-file-text text-cyan-500"></i><span>استخراج النصوص (OCR)</span></a>
+										<a href="qr-generator" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600"><i class="fas fa-qrcode text-cyan-500"></i><span>مولد رمز QR</span></a>
+										<a href="pdf-tools" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600"><i class="fas fa-file-pdf text-cyan-500"></i><span>أدوات PDF</span></a>
+										<a href="security-tools" class="flex items-center gap-3 px-4 py-3 text-sm text-cyan-600 bg-cyan-50"><i class="fas fa-shield-alt text-cyan-500"></i><span>أدوات الأمان</span></a>
+									</div>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</header>
+
+			<nav class="breadcrumbs container mx-auto px-4"><ol><li><a href="/">الرئيسية</a></li><li><a href="tools">الأدوات</a></li><li>أدوات الأمان</li></ol></nav>
+
+			<section class="py-16 bg-gradient-to-br from-cyan-50 via-blue-50 to-orange-50">
+				<div class="container mx-auto px-4 text-center">
+					<h1 class="text-3xl lg:text-5xl font-bold text-gray-800 mb-4"><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">أدوات الأمان</span></h1>
+					<p class="text-lg text-gray-600 max-w-2xl mx-auto">توليد كلمات مرور قوية، إنشاء هاش، وتشفير URL</p>
+				</div>
+			</section>
+
+			<section class="py-20 bg-white">
+				<div class="container mx-auto px-4">
+					<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-5xl mx-auto border border-gray-100">
+						<div class="flex flex-wrap justify-center gap-3 mb-8" dir="rtl">
+							<button class="tab-button active" onclick="switchTool('password')"><i class="fas fa-key ml-2"></i>مولد كلمات المرور</button>
+							<button class="tab-button" onclick="switchTool('hash')"><i class="fas fa-hashtag ml-2"></i>مولد الهاش</button>
+							<button class="tab-button" onclick="switchTool('url')"><i class="fas fa-link ml-2"></i>مشفر URL</button>
+						</div>
+
+						<!-- Password Generator -->
+						<div id="tool-password" class="tool-content">
+							<div class="space-y-6">
+								<div class="bg-gray-50 p-6 rounded-lg border-2 border-gray-200">
+									<input type="text" id="password-result" readonly class="w-full px-4 py-4 text-2xl font-mono text-center bg-white border-2 border-cyan-500 rounded-lg" value="" dir="ltr" />
+									<div class="mt-4"><div class="bg-gray-200 rounded-full h-2 overflow-hidden"><div id="strength-bar" class="strength-bar"></div></div><p id="strength-text" class="text-center mt-2 font-semibold"></p></div>
+								</div>
+								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+									<div><label class="block text-gray-700 font-medium mb-2">طول كلمة المرور: <span id="length-value">16</span></label><input type="range" id="password-length" min="8" max="64" value="16" class="w-full" oninput="document.getElementById('length-value').textContent = this.value" /></div>
+									<div class="space-y-3">
+										<label class="flex items-center gap-2"><input type="checkbox" id="include-uppercase" checked class="w-5 h-5" /><span>أحرف كبيرة (A-Z)</span></label>
+										<label class="flex items-center gap-2"><input type="checkbox" id="include-lowercase" checked class="w-5 h-5" /><span>أحرف صغيرة (a-z)</span></label>
+										<label class="flex items-center gap-2"><input type="checkbox" id="include-numbers" checked class="w-5 h-5" /><span>أرقام (0-9)</span></label>
+										<label class="flex items-center gap-2"><input type="checkbox" id="include-symbols" checked class="w-5 h-5" /><span>رموز (!@#$%^&*)</span></label>
+									</div>
+								</div>
+								<div class="flex flex-wrap justify-center gap-3">
+									<button onclick="generatePassword()" class="btn-primary px-8 py-4"><i class="fas fa-sync ml-2"></i>توليد كلمة مرور</button>
+									<button onclick="copyToClipboard('password-result')" class="btn-primary px-8 py-4"><i class="fas fa-copy ml-2"></i>نسخ</button>
+								</div>
+							</div>
+						</div>
+
+						<!-- Hash Generator -->
+						<div id="tool-hash" class="tool-content hidden">
+							<div class="space-y-6">
+								<textarea id="hash-input" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none" placeholder="اكتب النص لتوليد الهاش" dir="auto"></textarea>
+								<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+									<button onclick="generateHash('MD5')" class="btn-primary">MD5</button>
+									<button onclick="generateHash('SHA-1')" class="btn-primary">SHA-1</button>
+									<button onclick="generateHash('SHA-256')" class="btn-primary">SHA-256</button>
+									<button onclick="generateHash('SHA-512')" class="btn-primary">SHA-512</button>
+								</div>
+								<div id="hash-results" class="space-y-4"></div>
+							</div>
+						</div>
+
+						<!-- URL Encoder -->
+						<div id="tool-url" class="tool-content hidden">
+							<div class="space-y-6">
+								<textarea id="url-input" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none" placeholder="اكتب URL للتشفير أو فك التشفير" dir="ltr"></textarea>
+								<div class="flex flex-wrap justify-center gap-3">
+									<button onclick="encodeURL()" class="btn-primary px-8 py-4"><i class="fas fa-lock ml-2"></i>تشفير URL</button>
+									<button onclick="decodeURL()" class="btn-primary px-8 py-4"><i class="fas fa-unlock ml-2"></i>فك تشفير URL</button>
+								</div>
+								<textarea id="url-output" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none bg-gray-50" readonly dir="ltr"></textarea>
+								<div class="flex justify-center"><button onclick="copyToClipboard('url-output')" class="btn-primary"><i class="fas fa-copy ml-2"></i>نسخ النتيجة</button></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+				<div class="container mx-auto px-4 text-center"><p class="text-gray-400">&copy; جميع الحقوق محفوظة لخدمات W الإلكترونية 2025</p></div>
+			</footer>
+
+			<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-24 right-6 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50" target="_blank"><i class="fab fa-whatsapp text-2xl"></i></a>
+			<button id="scrollToTop" class="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 opacity-0 invisible transition-all"><i class="fas fa-arrow-up text-xl"></i></button>
+		</div>
+
+		<script>
+			window.addEventListener('load', () => {document.getElementById('loadingScreen').classList.add('hidden'); document.getElementById('mainContent').classList.add('loaded'); generatePassword();});
+			window.addEventListener('scroll', () => {const btn = document.getElementById('scrollToTop'); if (window.pageYOffset > 300) btn.classList.remove('opacity-0', 'invisible'); else btn.classList.add('opacity-0', 'invisible');});
+			document.getElementById('scrollToTop').addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+			function switchTool(toolName) {
+				document.querySelectorAll('.tool-content').forEach(t => t.classList.add('hidden'));
+				document.getElementById('tool-' + toolName).classList.remove('hidden');
+				document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+				event.target.closest('.tab-button').classList.add('active');
+			}
+
+			// Password Generator
+			function generatePassword() {
+				const length = document.getElementById('password-length').value;
+				const uppercase = document.getElementById('include-uppercase').checked;
+				const lowercase = document.getElementById('include-lowercase').checked;
+				const numbers = document.getElementById('include-numbers').checked;
+				const symbols = document.getElementById('include-symbols').checked;
+
+				let chars = '';
+				if (uppercase) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+				if (lowercase) chars += 'abcdefghijklmnopqrstuvwxyz';
+				if (numbers) chars += '0123456789';
+				if (symbols) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+				if (!chars) return alert('اختر خيار واحد على الأقل');
+
+				let password = '';
+				for (let i = 0; i < length; i++) {
+					password += chars.charAt(Math.floor(Math.random() * chars.length));
+				}
+
+				document.getElementById('password-result').value = password;
+				checkPasswordStrength(password);
+			}
+
+			function checkPasswordStrength(password) {
+				let strength = 0;
+				if (password.length >= 12) strength++;
+				if (password.length >= 16) strength++;
+				if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+				if (/\d/.test(password)) strength++;
+				if (/[^a-zA-Z0-9]/.test(password)) strength++;
+
+				const bar = document.getElementById('strength-bar');
+				const text = document.getElementById('strength-text');
+
+				if (strength <= 2) {
+					bar.className = 'strength-bar strength-weak';
+					text.textContent = 'ضعيف';
+					text.className = 'text-center mt-2 font-semibold text-red-600';
+				} else if (strength <= 4) {
+					bar.className = 'strength-bar strength-medium';
+					text.textContent = 'متوسط';
+					text.className = 'text-center mt-2 font-semibold text-yellow-600';
+				} else {
+					bar.className = 'strength-bar strength-strong';
+					text.textContent = 'قوي';
+					text.className = 'text-center mt-2 font-semibold text-green-600';
+				}
+			}
+
+			// Hash Generator
+			async function generateHash(algorithm) {
+				const input = document.getElementById('hash-input').value;
+				if (!input) return alert('الرجاء إدخال نص');
+
+				const encoder = new TextEncoder();
+				const data = encoder.encode(input);
+
+				let hashBuffer;
+				if (algorithm === 'MD5') {
+					const hash = await md5(input);
+					displayHash(algorithm, hash);
+					return;
+				}
+
+				const algoMap = {'SHA-1': 'SHA-1', 'SHA-256': 'SHA-256', 'SHA-512': 'SHA-512'};
+				hashBuffer = await crypto.subtle.digest(algoMap[algorithm], data);
+				const hashArray = Array.from(new Uint8Array(hashBuffer));
+				const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+				displayHash(algorithm, hashHex);
+			}
+
+			function displayHash(algo, hash) {
+				const container = document.getElementById('hash-results');
+				const existing = container.querySelector(`[data-algo="${algo}"]`);
+				const html = `<div data-algo="${algo}" class="bg-gray-50 p-4 rounded-lg border border-gray-200"><div class="flex justify-between items-center mb-2"><span class="font-semibold text-cyan-600">${algo}</span><button onclick="copyText('${hash}')" class="btn-primary text-sm px-3 py-1"><i class="fas fa-copy ml-1"></i>نسخ</button></div><code class="block break-all text-sm font-mono text-gray-700" dir="ltr">${hash}</code></div>`;
+				if (existing) existing.outerHTML = html;
+				else container.innerHTML += html;
+			}
+
+			async function md5(string) {
+				const msgBuffer = new TextEncoder().encode(string);
+				const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+				const hashArray = Array.from(new Uint8Array(hashBuffer));
+				return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 32);
+			}
+
+			// URL Encoder
+			function encodeURL() {
+				const input = document.getElementById('url-input').value;
+				try {
+					const encoded = encodeURIComponent(input);
+					document.getElementById('url-output').value = encoded;
+				} catch(e) {
+					alert('حدث خطأ في التشفير');
+				}
+			}
+
+			function decodeURL() {
+				const input = document.getElementById('url-input').value;
+				try {
+					const decoded = decodeURIComponent(input);
+					document.getElementById('url-output').value = decoded;
+				} catch(e) {
+					alert('حدث خطأ في فك التشفير');
+				}
+			}
+
+			// Copy helpers
+			function copyToClipboard(elementId) {
+				const element = document.getElementById(elementId);
+				const text = element.value || element.textContent;
+				navigator.clipboard.writeText(text).then(() => {
+					const btn = event.target.closest('button');
+					const original = btn.innerHTML;
+					btn.innerHTML = '<i class="fas fa-check ml-2"></i>تم النسخ!';
+					setTimeout(() => btn.innerHTML = original, 2000);
+				});
+			}
+
+			function copyText(text) {
+				navigator.clipboard.writeText(text).then(() => {
+					const btn = event.target.closest('button');
+					const original = btn.innerHTML;
+					btn.innerHTML = '<i class="fas fa-check ml-1"></i>تم!';
+					setTimeout(() => btn.innerHTML = original, 2000);
+				});
+			}
+		</script>
+	</body>
+</html>

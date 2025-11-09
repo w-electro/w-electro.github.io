@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html lang="ar" dir="rtl">
+	<head>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-NH542DNT');</script>
+		<title>مولد الباركود | الأدوات | W للخدمات الإلكترونية</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="مولد باركود مجاني - أنشئ رموز باركود بصيغ متنوعة مثل Code128, EAN, UPC">
+		<link rel="icon" href="wD.png" type="image/png">
+		<link rel="canonical" href="https://www.w-electro.com/barcode-generator">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+		<style>
+			:root {--primary-color: #0891b2; --secondary-color: #ff6e42;}
+			body {font-family: 'Cairo', system-ui, -apple-system, sans-serif;}
+			.main-content {opacity: 0; visibility: hidden; transition: opacity 0.5s;}
+			.main-content.loaded {opacity: 1; visibility: visible;}
+			.loading-screen {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #ff6e42 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s;}
+			.loading-screen.hidden {opacity: 0; visibility: hidden;}
+			.loading-logo {width: 120px; height: 120px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; animation: pulse-scale 2s ease-in-out infinite;}
+			.loading-logo img {width: 80px; height: 80px; border-radius: 50%;}
+			@keyframes pulse-scale {0%, 100% {transform: scale(1);} 50% {transform: scale(1.05);}}
+			.btn-primary {display: inline-flex !important; align-items: center; padding: 12px 24px !important; background: transparent !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; border-radius: 50px !important; font-weight: 600 !important; transition: all 0.3s !important; cursor: pointer !important; position: relative; overflow: hidden;}
+			.btn-primary::before {content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--secondary-color); transform: translateX(-100%); transition: transform 0.3s; z-index: -1;}
+			.btn-primary:hover {color: white !important; transform: translateY(-2px) !important; box-shadow: 0 10px 20px rgba(255, 110, 66, 0.3) !important;}
+			.btn-primary:hover::before {transform: translateX(0);}
+			.breadcrumbs {padding: 1rem 0; font-size: 0.9rem;}
+			.breadcrumbs ol {display: flex; list-style: none; padding: 0; margin: 0;}
+			.breadcrumbs li:not(:last-child)::after {content: ">"; margin: 0 10px; color: #ccc;}
+			.breadcrumbs a {color: var(--secondary-color); text-decoration: none; font-weight: 500;}
+			.breadcrumbs a:hover {color: var(--primary-color); text-decoration: underline;}
+			.floating-whatsapp, #scrollToTop {background: white !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; box-shadow: 0 8px 25px rgba(255, 110, 66, 0.3) !important; transition: all 0.3s !important;}
+			.floating-whatsapp:hover, #scrollToTop:hover {background: var(--secondary-color) !important; color: white !important; transform: translateY(-3px) scale(1.05) !important;}
+			#barcode-canvas {max-width: 100%; height: auto;}
+		</style>
+	</head>
+	<body>
+		<div id="loadingScreen" class="loading-screen"><div class="loading-logo"><img src="wD.png" alt="W" /></div></div>
+		<div id="mainContent" class="main-content">
+			<header class="bg-white shadow-lg sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
+				<div class="container mx-auto px-4 py-4">
+					<div class="flex items-center justify-between">
+						<div class="flex items-center"><a href="/" class="text-2xl font-bold flex items-center gap-3"><img src="wD.png" alt="W" class="w-10 h-10 rounded-full shadow-md" /><span class="text-cyan-600">W</span><span class="text-orange-500">للخدمات الإلكترونية</span></a></div>
+						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse items-center">
+							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">الرئيسية</a>
+							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات عامة</a>
+							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات التصميم</a>
+							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات طلابية</a>
+							<div x-data="{ toolsOpen: false }" @mouseenter="toolsOpen = true" @mouseleave="toolsOpen = false" class="relative">
+								<a href="tools" class="text-cyan-600 font-medium flex items-center gap-1">الأدوات<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></a>
+								<div x-show="toolsOpen" x-transition class="absolute left-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+									<div class="py-2">
+										<a href="ocr" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600"><i class="fas fa-file-text text-cyan-500"></i><span>استخراج النصوص (OCR)</span></a>
+										<a href="qr-generator" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600"><i class="fas fa-qrcode text-cyan-500"></i><span>مولد رمز QR</span></a>
+										<a href="pdf-tools" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600"><i class="fas fa-file-pdf text-cyan-500"></i><span>أدوات PDF</span></a>
+										<a href="barcode-generator" class="flex items-center gap-3 px-4 py-3 text-sm text-cyan-600 bg-cyan-50"><i class="fas fa-barcode text-cyan-500"></i><span>مولد الباركود</span></a>
+									</div>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</header>
+
+			<nav class="breadcrumbs container mx-auto px-4"><ol><li><a href="/">الرئيسية</a></li><li><a href="tools">الأدوات</a></li><li>مولد الباركود</li></ol></nav>
+
+			<section class="py-16 bg-gradient-to-br from-cyan-50 via-blue-50 to-orange-50">
+				<div class="container mx-auto px-4 text-center">
+					<h1 class="text-3xl lg:text-5xl font-bold text-gray-800 mb-4"><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">مولد الباركود</span></h1>
+					<p class="text-lg text-gray-600 max-w-2xl mx-auto">أنشئ رموز باركود بصيغ متنوعة</p>
+				</div>
+			</section>
+
+			<section class="py-20 bg-white">
+				<div class="container mx-auto px-4">
+					<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-4xl mx-auto border border-gray-100">
+						<div class="space-y-6">
+							<div><label class="block text-gray-700 font-medium mb-2">النص أو الرقم</label><input type="text" id="barcode-text" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="أدخل النص أو الرقم" dir="ltr" /></div>
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+								<div><label class="block text-gray-700 font-medium mb-2">نوع الباركود</label><select id="barcode-format" class="w-full px-4 py-3 border border-gray-300 rounded-lg"><option value="CODE128" selected>Code 128</option><option value="CODE39">Code 39</option><option value="EAN13">EAN-13</option><option value="UPC">UPC</option><option value="ITF14">ITF-14</option><option value="MSI">MSI</option><option value="pharmacode">Pharmacode</option></select></div>
+								<div><label class="block text-gray-700 font-medium mb-2">العرض</label><input type="number" id="barcode-width" value="2" min="1" max="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg" /></div>
+							</div>
+							<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+								<div><label class="block text-gray-700 font-medium mb-2">الارتفاع (px)</label><input type="number" id="barcode-height" value="100" min="50" max="300" class="w-full px-4 py-3 border border-gray-300 rounded-lg" /></div>
+								<div class="flex items-center gap-2"><input type="checkbox" id="display-value" checked class="w-5 h-5" /><label for="display-value" class="text-gray-700 font-medium">عرض النص أسفل الباركود</label></div>
+							</div>
+							<div class="flex justify-center"><button onclick="generateBarcode()" class="btn-primary px-8 py-4"><i class="fas fa-barcode ml-2"></i>إنشاء باركود</button></div>
+							<div id="barcode-result" class="hidden mt-8">
+								<div class="border-t border-gray-200 pt-8">
+									<h3 class="text-xl font-semibold text-cyan-600 mb-6 text-center">الباركود</h3>
+									<div class="bg-white p-6 rounded-lg border border-gray-200 flex justify-center"><svg id="barcode-canvas"></svg></div>
+									<div class="flex justify-center gap-3 mt-6">
+										<button onclick="downloadBarcode()" class="btn-primary"><i class="fas fa-download ml-2"></i>تحميل PNG</button>
+										<button onclick="downloadBarcodeSVG()" class="btn-primary"><i class="fas fa-download ml-2"></i>تحميل SVG</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+				<div class="container mx-auto px-4 text-center"><p class="text-gray-400">&copy; جميع الحقوق محفوظة لخدمات W الإلكترونية 2025</p></div>
+			</footer>
+
+			<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-24 right-6 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50" target="_blank"><i class="fab fa-whatsapp text-2xl"></i></a>
+			<button id="scrollToTop" class="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 opacity-0 invisible transition-all"><i class="fas fa-arrow-up text-xl"></i></button>
+		</div>
+
+		<script>
+			window.addEventListener('load', () => {document.getElementById('loadingScreen').classList.add('hidden'); document.getElementById('mainContent').classList.add('loaded');});
+			window.addEventListener('scroll', () => {const btn = document.getElementById('scrollToTop'); if (window.pageYOffset > 300) btn.classList.remove('opacity-0', 'invisible'); else btn.classList.add('opacity-0', 'invisible');});
+			document.getElementById('scrollToTop').addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+			function generateBarcode() {
+				const text = document.getElementById('barcode-text').value;
+				const format = document.getElementById('barcode-format').value;
+				const width = document.getElementById('barcode-width').value;
+				const height = document.getElementById('barcode-height').value;
+				const displayValue = document.getElementById('display-value').checked;
+
+				if (!text) return alert('الرجاء إدخال نص أو رقم');
+
+				try {
+					JsBarcode("#barcode-canvas", text, {
+						format: format,
+						width: width,
+						height: height,
+						displayValue: displayValue,
+						margin: 10
+					});
+					document.getElementById('barcode-result').classList.remove('hidden');
+				} catch (error) {
+					alert('خطأ: ' + error.message + '\nتأكد من صحة البيانات المدخلة للنوع المحدد.');
+				}
+			}
+
+			function downloadBarcode() {
+				const svg = document.getElementById('barcode-canvas');
+				const canvas = document.createElement('canvas');
+				const ctx = canvas.getContext('2d');
+				const data = (new XMLSerializer()).serializeToString(svg);
+				const img = new Image();
+
+				img.onload = function() {
+					canvas.width = img.width;
+					canvas.height = img.height;
+					ctx.drawImage(img, 0, 0);
+					canvas.toBlob(blob => {
+						const url = URL.createObjectURL(blob);
+						const a = document.createElement('a');
+						a.href = url;
+						a.download = 'barcode.png';
+						a.click();
+						URL.revokeObjectURL(url);
+					});
+				};
+				img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(data)));
+			}
+
+			function downloadBarcodeSVG() {
+				const svg = document.getElementById('barcode-canvas');
+				const data = (new XMLSerializer()).serializeToString(svg);
+				const blob = new Blob([data], {type: 'image/svg+xml'});
+				const url = URL.createObjectURL(blob);
+				const a = document.createElement('a');
+				a.href = url;
+				a.download = 'barcode.svg';
+				a.click();
+				URL.revokeObjectURL(url);
+			}
+		</script>
+	</body>
+</html>

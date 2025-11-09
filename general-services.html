@@ -552,8 +552,8 @@
 					</div>
 					
 					<!-- Mobile Navigation -->
-					<div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 py-4 border-t border-gray-200">
-						<nav class="flex flex-col space-y-3">
+					<div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 py-4 border-t border-gray-200 relative z-[60] max-h-[calc(100vh-200px)] overflow-y-auto">
+						<nav class="flex flex-col space-y-3 pb-32">
 							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">الرئيسية</a>
 							<a href="general-services" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 py-2 px-4 rounded-lg bg-cyan-50">خدمات عامة</a>
 							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات التصميم</a>

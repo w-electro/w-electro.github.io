@@ -459,8 +459,8 @@
 					</div>
 
 					<!-- Mobile Navigation -->
-					<div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 py-4 border-t border-gray-200">
-						<nav class="flex flex-col space-y-3">
+					<div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 py-4 border-t border-gray-200 relative z-[60] max-h-[calc(100vh-200px)] overflow-y-auto">
+						<nav class="flex flex-col space-y-3 pb-32">
 							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">الرئيسية</a>
 							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات عامة</a>
 							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات التصميم</a>
@@ -534,12 +534,18 @@
 				<div class="container mx-auto px-4">
 					<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-4xl mx-auto border border-gray-100">
 						<!-- PDF Sub-tabs -->
-						<div class="flex justify-center gap-4 mb-8" dir="rtl">
+						<div class="flex flex-wrap justify-center gap-3 mb-8" dir="rtl">
 							<button class="tab-button active" onclick="switchPdfTool('merge')">
 								<i class="fas fa-object-group ml-2"></i> دمج PDF
 							</button>
 							<button class="tab-button" onclick="switchPdfTool('split')">
 								<i class="fas fa-cut ml-2"></i> تقسيم PDF
+							</button>
+							<button class="tab-button" onclick="switchPdfTool('pdf2img')">
+								<i class="fas fa-images ml-2"></i> PDF إلى صور
+							</button>
+							<button class="tab-button" onclick="switchPdfTool('img2pdf')">
+								<i class="fas fa-file-pdf ml-2"></i> صور إلى PDF
 							</button>
 						</div>
 
@@ -602,6 +608,42 @@
 								</div>
 
 								<div id="split-status" class="text-center text-gray-600 hidden"></div>
+							</div>
+						</div>
+
+						<!-- PDF to Images -->
+						<div id="pdf-pdf2img-tool" class="pdf-subtool" style="display: none;">
+							<div class="space-y-6">
+								<div class="file-drop-area">
+									<input type="file" id="pdf2img-file" accept=".pdf" class="hidden" />
+									<label for="pdf2img-file" class="cursor-pointer">
+										<i class="fas fa-file-pdf text-5xl text-cyan-500 mb-4 block"></i>
+										<p class="text-gray-700 font-medium text-lg">اختر ملف PDF لتحويله إلى صور</p>
+										<p class="text-gray-500 text-sm mt-2">سيتم تحويل كل صفحة إلى صورة منفصلة</p>
+									</label>
+									<div id="pdf2img-name" class="mt-4 text-gray-700 hidden"></div>
+								</div>
+								<div><label class="block text-gray-700 font-medium mb-2">جودة الصور</label><select id="pdf2img-quality" class="w-full px-4 py-3 border border-gray-300 rounded-lg"><option value="1">عالية (1.0)</option><option value="1.5" selected>جيدة جداً (1.5)</option><option value="2">متوسطة (2.0)</option></select></div>
+								<div class="flex justify-center"><button onclick="convertPdfToImages()" id="pdf2img-btn" class="btn-primary px-8 py-4" disabled><i class="fas fa-images ml-2"></i>تحويل إلى صور</button></div>
+								<div id="pdf2img-status" class="text-center text-gray-600 hidden"></div>
+								<div id="pdf2img-result" class="hidden"><div id="pdf2img-previews" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div><div class="flex justify-center mt-6"><button onclick="downloadAllImages()" class="btn-primary"><i class="fas fa-download ml-2"></i>تحميل جميع الصور</button></div></div>
+							</div>
+						</div>
+
+						<!-- Images to PDF -->
+						<div id="pdf-img2pdf-tool" class="pdf-subtool" style="display: none;">
+							<div class="space-y-6">
+								<div class="file-drop-area">
+									<input type="file" id="img2pdf-files" accept="image/*" multiple class="hidden" />
+									<label for="img2pdf-files" class="cursor-pointer">
+										<i class="fas fa-images text-5xl text-cyan-500 mb-4 block"></i>
+										<p class="text-gray-700 font-medium text-lg">اختر الصور لتحويلها إلى PDF</p>
+										<p class="text-gray-500 text-sm mt-2">يمكنك اختيار صور متعددة</p>
+									</label>
+									<div id="img2pdf-list" class="mt-4"></div>
+								</div>
+								<div class="flex justify-center"><button onclick="convertImagesToPdf()" id="img2pdf-btn" class="btn-primary px-8 py-4" disabled><i class="fas fa-file-pdf ml-2"></i>إنشاء PDF</button></div>
+								<div id="img2pdf-status" class="text-center text-gray-600 hidden"></div>
 							</div>
 						</div>
 					</div>
@@ -1051,6 +1093,144 @@
 				} catch (error) {
 					console.error('PDF Download Error:', error);
 					statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء التنزيل</p>';
+				}
+			}
+
+			// PDF to Images file handler
+			document.getElementById('pdf2img-file').addEventListener('change', function() {
+				const file = this.files[0];
+				const btn = document.getElementById('pdf2img-btn');
+				if (file) {
+					document.getElementById('pdf2img-name').innerHTML = '<i class="fas fa-file-pdf text-red-500"></i> ' + file.name;
+					document.getElementById('pdf2img-name').classList.remove('hidden');
+					btn.disabled = false;
+				} else {
+					btn.disabled = true;
+				}
+			});
+
+			// Convert PDF to Images
+			async function convertPdfToImages() {
+				const file = document.getElementById('pdf2img-file').files[0];
+				const scale = parseFloat(document.getElementById('pdf2img-quality').value);
+				const statusDiv = document.getElementById('pdf2img-status');
+
+				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري تحويل PDF إلى صور...</p>';
+				statusDiv.classList.remove('hidden');
+
+				try {
+					const arrayBuffer = await file.arrayBuffer();
+					const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+					const previews = document.getElementById('pdf2img-previews');
+					previews.innerHTML = '';
+					window.pdfImages = [];
+
+					for (let i = 1; i <= pdf.numPages; i++) {
+						const page = await pdf.getPage(i);
+						const viewport = page.getViewport({ scale });
+						const canvas = document.createElement('canvas');
+						const context = canvas.getContext('2d');
+						canvas.width = viewport.width;
+						canvas.height = viewport.height;
+
+						await page.render({ canvasContext: context, viewport }).promise;
+
+						const imgData = canvas.toDataURL('image/png');
+						window.pdfImages.push({ data: imgData, num: i });
+
+						previews.innerHTML += `<div class="border rounded-lg p-3"><img src="${imgData}" class="w-full rounded shadow-sm mb-2" /><p class="text-sm text-center text-gray-600">صفحة ${i}</p><button onclick="downloadSingleImage(${i-1})" class="btn-primary w-full mt-2 text-sm py-2"><i class="fas fa-download ml-1"></i>تحميل</button></div>`;
+					}
+
+					statusDiv.classList.add('hidden');
+					document.getElementById('pdf2img-result').classList.remove('hidden');
+				} catch (error) {
+					console.error(error);
+					statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء التحويل</p>';
+				}
+			}
+
+			function downloadSingleImage(index) {
+				const img = window.pdfImages[index];
+				const a = document.createElement('a');
+				a.href = img.data;
+				a.download = `page_${img.num}.png`;
+				a.click();
+			}
+
+			function downloadAllImages() {
+				window.pdfImages.forEach(img => {
+					setTimeout(() => {
+						const a = document.createElement('a');
+						a.href = img.data;
+						a.download = `page_${img.num}.png`;
+						a.click();
+					}, img.num * 200);
+				});
+			}
+
+			// Images to PDF file handler
+			document.getElementById('img2pdf-files').addEventListener('change', function() {
+				const files = this.files;
+				const list = document.getElementById('img2pdf-list');
+				const btn = document.getElementById('img2pdf-btn');
+
+				if (files.length > 0) {
+					let html = '<div class="grid grid-cols-2 md:grid-cols-3 gap-3 mt-4">';
+					for (let file of files) {
+						const url = URL.createObjectURL(file);
+						html += `<div class="border rounded p-2"><img src="${url}" class="w-full h-32 object-cover rounded" /><p class="text-xs text-center mt-1 truncate">${file.name}</p></div>`;
+					}
+					html += '</div><p class="text-center mt-3 text-gray-600">عدد الصور: ${files.length}</p>';
+					list.innerHTML = html;
+					btn.disabled = false;
+				} else {
+					list.innerHTML = '';
+					btn.disabled = true;
+				}
+			});
+
+			// Convert Images to PDF
+			async function convertImagesToPdf() {
+				const files = document.getElementById('img2pdf-files').files;
+				const statusDiv = document.getElementById('img2pdf-status');
+
+				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري إنشاء PDF...</p>';
+				statusDiv.classList.remove('hidden');
+
+				try {
+					const { PDFDocument } = PDFLib;
+					const pdfDoc = await PDFDocument.create();
+
+					for (let file of files) {
+						const arrayBuffer = await file.arrayBuffer();
+						let img;
+
+						if (file.type === 'image/png') {
+							img = await pdfDoc.embedPng(arrayBuffer);
+						} else if (file.type === 'image/jpeg' || file.type === 'image/jpg') {
+							img = await pdfDoc.embedJpg(arrayBuffer);
+						} else {
+							continue;
+						}
+
+						const page = pdfDoc.addPage([img.width, img.height]);
+						page.drawImage(img, { x: 0, y: 0, width: img.width, height: img.height });
+					}
+
+					const pdfBytes = await pdfDoc.save();
+					const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+					const url = URL.createObjectURL(blob);
+
+					const a = document.createElement('a');
+					a.href = url;
+					a.download = 'images-combined.pdf';
+					a.click();
+					URL.revokeObjectURL(url);
+
+					statusDiv.innerHTML = '<i class="fas fa-check-circle text-green-500 text-3xl"></i><p class="mt-2 text-green-600 font-bold">تم إنشاء PDF بنجاح!</p>';
+				} catch (error) {
+					console.error(error);
+					statusDiv.innerHTML = '<i class="fas fa-exclamation-circle text-red-500 text-3xl"></i><p class="mt-2 text-red-600">حدث خطأ أثناء الإنشاء</p>';
 				}
 			}
 

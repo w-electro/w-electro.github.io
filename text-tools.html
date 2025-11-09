@@ -1,0 +1,297 @@
+<!DOCTYPE HTML>
+<html lang="ar" dir="rtl">
+	<head>
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-NH542DNT');</script>
+		<title>أدوات النصوص | الأدوات | W للخدمات الإلكترونية</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="أدوات النصوص المجانية - عداد الكلمات، محول حالة النص، منسق JSON، ومشفر Base64">
+		<link rel="icon" href="wD.png" type="image/png">
+		<link rel="canonical" href="https://www.w-electro.com/text-tools">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<style>
+			:root {--primary-color: #0891b2; --secondary-color: #ff6e42;}
+			body {font-family: 'Cairo', system-ui, -apple-system, sans-serif;}
+			.main-content {opacity: 0; visibility: hidden; transition: opacity 0.5s;}
+			.main-content.loaded {opacity: 1; visibility: visible;}
+			.loading-screen {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #ff6e42 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s;}
+			.loading-screen.hidden {opacity: 0; visibility: hidden;}
+			.loading-logo {width: 120px; height: 120px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; animation: pulse-scale 2s ease-in-out infinite;}
+			.loading-logo img {width: 80px; height: 80px; border-radius: 50%;}
+			@keyframes pulse-scale {0%, 100% {transform: scale(1);} 50% {transform: scale(1.05);}}
+			.btn-primary {display: inline-flex !important; align-items: center; padding: 12px 24px !important; background: transparent !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; border-radius: 50px !important; font-weight: 600 !important; transition: all 0.3s !important; cursor: pointer !important; position: relative; overflow: hidden;}
+			.btn-primary::before {content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--secondary-color); transform: translateX(-100%); transition: transform 0.3s; z-index: -1;}
+			.btn-primary:hover {color: white !important; transform: translateY(-2px) !important; box-shadow: 0 10px 20px rgba(255, 110, 66, 0.3) !important;}
+			.btn-primary:hover::before {transform: translateX(0);}
+			.tab-button {padding: 12px 20px; border-radius: 12px; font-weight: 600; transition: all 0.3s; border: 2px solid transparent; font-size: 0.9rem;}
+			.tab-button:hover {background: rgba(8, 145, 178, 0.1);}
+			.tab-button.active {background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);}
+			.stat-card {background: linear-gradient(135deg, rgba(8, 145, 178, 0.1), rgba(8, 145, 178, 0.05)); border-radius: 12px; padding: 1.5rem; text-align: center; border: 2px solid rgba(8, 145, 178, 0.2);}
+			.breadcrumbs {padding: 1rem 0; font-size: 0.9rem;}
+			.breadcrumbs ol {display: flex; list-style: none; padding: 0; margin: 0;}
+			.breadcrumbs li:not(:last-child)::after {content: ">"; margin: 0 10px; color: #ccc;}
+			.breadcrumbs a {color: var(--secondary-color); text-decoration: none; font-weight: 500;}
+			.breadcrumbs a:hover {color: var(--primary-color); text-decoration: underline;}
+			.floating-whatsapp, #scrollToTop {background: white !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; box-shadow: 0 8px 25px rgba(255, 110, 66, 0.3) !important; transition: all 0.3s !important;}
+			.floating-whatsapp:hover, #scrollToTop:hover {background: var(--secondary-color) !important; color: white !important; transform: translateY(-3px) scale(1.05) !important;}
+			textarea {font-family: 'Cairo', monospace !important;}
+			.json-key {color: #0891b2; font-weight: 600;}
+			.json-string {color: #10b981;}
+			.json-number {color: #f59e0b;}
+			.json-boolean {color: #ef4444;}
+		</style>
+	</head>
+	<body>
+		<div id="loadingScreen" class="loading-screen"><div class="loading-logo"><img src="wD.png" alt="W" /></div></div>
+		<div id="mainContent" class="main-content">
+			<header class="bg-white shadow-lg sticky top-0 z-50" x-data="{ mobileMenuOpen: false }">
+				<div class="container mx-auto px-4 py-4">
+					<div class="flex items-center justify-between">
+						<div class="flex items-center"><a href="/" class="text-2xl font-bold flex items-center gap-3"><img src="wD.png" alt="W" class="w-10 h-10 rounded-full shadow-md" /><span class="text-cyan-600">W</span><span class="text-orange-500">للخدمات الإلكترونية</span></a></div>
+						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse items-center">
+							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">الرئيسية</a>
+							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات عامة</a>
+							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات التصميم</a>
+							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات طلابية</a>
+							<div x-data="{ toolsOpen: false }" @mouseenter="toolsOpen = true" @mouseleave="toolsOpen = false" class="relative">
+								<a href="tools" class="text-cyan-600 font-medium flex items-center gap-1">الأدوات<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" /></svg></a>
+								<div x-show="toolsOpen" x-transition class="absolute left-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
+									<div class="py-2">
+										<a href="ocr" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600"><i class="fas fa-file-text text-cyan-500"></i><span>استخراج النصوص (OCR)</span></a>
+										<a href="qr-generator" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600"><i class="fas fa-qrcode text-cyan-500"></i><span>مولد رمز QR</span></a>
+										<a href="pdf-tools" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600"><i class="fas fa-file-pdf text-cyan-500"></i><span>أدوات PDF</span></a>
+										<a href="text-tools" class="flex items-center gap-3 px-4 py-3 text-sm text-cyan-600 bg-cyan-50"><i class="fas fa-font text-cyan-500"></i><span>أدوات النصوص</span></a>
+									</div>
+								</div>
+							</div>
+						</nav>
+					</div>
+				</div>
+			</header>
+
+			<nav class="breadcrumbs container mx-auto px-4"><ol><li><a href="/">الرئيسية</a></li><li><a href="tools">الأدوات</a></li><li>أدوات النصوص</li></ol></nav>
+
+			<section class="py-16 bg-gradient-to-br from-cyan-50 via-blue-50 to-orange-50">
+				<div class="container mx-auto px-4 text-center">
+					<h1 class="text-3xl lg:text-5xl font-bold text-gray-800 mb-4"><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">أدوات النصوص</span></h1>
+					<p class="text-lg text-gray-600 max-w-2xl mx-auto">عد الكلمات، تحويل حالة النص، تنسيق JSON، وتشفير Base64</p>
+				</div>
+			</section>
+
+			<section class="py-20 bg-white">
+				<div class="container mx-auto px-4">
+					<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-5xl mx-auto border border-gray-100">
+						<div class="flex flex-wrap justify-center gap-3 mb-8" dir="rtl">
+							<button class="tab-button active" onclick="switchTool('counter')"><i class="fas fa-calculator ml-2"></i>عداد الكلمات</button>
+							<button class="tab-button" onclick="switchTool('case')"><i class="fas fa-text-height ml-2"></i>محول حالة النص</button>
+							<button class="tab-button" onclick="switchTool('json')"><i class="fas fa-code ml-2"></i>منسق JSON</button>
+							<button class="tab-button" onclick="switchTool('base64')"><i class="fas fa-key ml-2"></i>مشفر Base64</button>
+						</div>
+
+						<!-- Word Counter -->
+						<div id="tool-counter" class="tool-content">
+							<div class="space-y-6">
+								<textarea id="counter-text" rows="10" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none" placeholder="اكتب أو الصق النص هنا..." dir="auto" oninput="updateWordCount()"></textarea>
+								<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+									<div class="stat-card"><i class="fas fa-font text-3xl text-cyan-500 mb-2"></i><p class="text-2xl font-bold text-gray-800" id="char-count">0</p><p class="text-sm text-gray-600">حرف</p></div>
+									<div class="stat-card"><i class="fas fa-align-left text-3xl text-cyan-500 mb-2"></i><p class="text-2xl font-bold text-gray-800" id="word-count">0</p><p class="text-sm text-gray-600">كلمة</p></div>
+									<div class="stat-card"><i class="fas fa-paragraph text-3xl text-cyan-500 mb-2"></i><p class="text-2xl font-bold text-gray-800" id="sentence-count">0</p><p class="text-sm text-gray-600">جملة</p></div>
+									<div class="stat-card"><i class="fas fa-clock text-3xl text-cyan-500 mb-2"></i><p class="text-2xl font-bold text-gray-800" id="read-time">0</p><p class="text-sm text-gray-600">دقيقة قراءة</p></div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Case Converter -->
+						<div id="tool-case" class="tool-content hidden">
+							<div class="space-y-6">
+								<textarea id="case-text" rows="10" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none" placeholder="اكتب أو الصق النص هنا..." dir="auto"></textarea>
+								<div class="flex flex-wrap justify-center gap-3">
+									<button onclick="convertCase('upper')" class="btn-primary"><i class="fas fa-arrow-up ml-2"></i>أحرف كبيرة</button>
+									<button onclick="convertCase('lower')" class="btn-primary"><i class="fas fa-arrow-down ml-2"></i>أحرف صغيرة</button>
+									<button onclick="convertCase('title')" class="btn-primary"><i class="fas fa-heading ml-2"></i>عنوان</button>
+									<button onclick="convertCase('sentence')" class="btn-primary"><i class="fas fa-paragraph ml-2"></i>جملة</button>
+								</div>
+								<textarea id="case-result" rows="10" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none bg-gray-50" readonly dir="auto"></textarea>
+								<div class="flex justify-center"><button onclick="copyToClipboard('case-result')" class="btn-primary"><i class="fas fa-copy ml-2"></i>نسخ النتيجة</button></div>
+							</div>
+						</div>
+
+						<!-- JSON Formatter -->
+						<div id="tool-json" class="tool-content hidden">
+							<div class="space-y-6">
+								<textarea id="json-input" rows="10" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none font-mono" placeholder='{"name": "مثال", "value": 123}' dir="ltr"></textarea>
+								<div class="flex flex-wrap justify-center gap-3">
+									<button onclick="formatJSON()" class="btn-primary"><i class="fas fa-indent ml-2"></i>تنسيق JSON</button>
+									<button onclick="minifyJSON()" class="btn-primary"><i class="fas fa-compress ml-2"></i>ضغط JSON</button>
+									<button onclick="validateJSON()" class="btn-primary"><i class="fas fa-check ml-2"></i>التحقق من الصحة</button>
+								</div>
+								<div id="json-error" class="hidden bg-red-50 border border-red-200 rounded-lg p-4 text-red-600"></div>
+								<div id="json-output-container" class="hidden">
+									<pre id="json-output" class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-gray-50 overflow-x-auto" dir="ltr"></pre>
+									<div class="flex justify-center mt-4"><button onclick="copyToClipboard('json-output')" class="btn-primary"><i class="fas fa-copy ml-2"></i>نسخ النتيجة</button></div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Base64 Encoder -->
+						<div id="tool-base64" class="tool-content hidden">
+							<div class="space-y-6">
+								<textarea id="base64-input" rows="8" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none" placeholder="اكتب النص للتشفير أو فك التشفير" dir="auto"></textarea>
+								<div class="flex flex-wrap justify-center gap-3">
+									<button onclick="encodeBase64()" class="btn-primary"><i class="fas fa-lock ml-2"></i>تشفير إلى Base64</button>
+									<button onclick="decodeBase64()" class="btn-primary"><i class="fas fa-unlock ml-2"></i>فك تشفير Base64</button>
+								</div>
+								<textarea id="base64-output" rows="8" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none bg-gray-50" readonly dir="ltr"></textarea>
+								<div class="flex justify-center"><button onclick="copyToClipboard('base64-output')" class="btn-primary"><i class="fas fa-copy ml-2"></i>نسخ النتيجة</button></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+				<div class="container mx-auto px-4 text-center"><p class="text-gray-400">&copy; جميع الحقوق محفوظة لخدمات W الإلكترونية 2025</p></div>
+			</footer>
+
+			<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-24 right-6 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50" target="_blank"><i class="fab fa-whatsapp text-2xl"></i></a>
+			<button id="scrollToTop" class="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 opacity-0 invisible transition-all"><i class="fas fa-arrow-up text-xl"></i></button>
+		</div>
+
+		<script>
+			window.addEventListener('load', () => {document.getElementById('loadingScreen').classList.add('hidden'); document.getElementById('mainContent').classList.add('loaded');});
+			window.addEventListener('scroll', () => {const btn = document.getElementById('scrollToTop'); if (window.pageYOffset > 300) btn.classList.remove('opacity-0', 'invisible'); else btn.classList.add('opacity-0', 'invisible');});
+			document.getElementById('scrollToTop').addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+			function switchTool(toolName) {
+				document.querySelectorAll('.tool-content').forEach(t => t.classList.add('hidden'));
+				document.getElementById('tool-' + toolName).classList.remove('hidden');
+				document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+				event.target.closest('.tab-button').classList.add('active');
+			}
+
+			// Word Counter
+			function updateWordCount() {
+				const text = document.getElementById('counter-text').value;
+				const chars = text.length;
+				const words = text.trim().split(/\s+/).filter(w => w.length > 0).length;
+				const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0).length;
+				const readTime = Math.ceil(words / 200);
+
+				document.getElementById('char-count').textContent = chars;
+				document.getElementById('word-count').textContent = words;
+				document.getElementById('sentence-count').textContent = sentences;
+				document.getElementById('read-time').textContent = readTime || 0;
+			}
+
+			// Case Converter
+			function convertCase(type) {
+				const text = document.getElementById('case-text').value;
+				let result = '';
+
+				switch(type) {
+					case 'upper': result = text.toUpperCase(); break;
+					case 'lower': result = text.toLowerCase(); break;
+					case 'title': result = text.toLowerCase().replace(/\b\w/g, c => c.toUpperCase()); break;
+					case 'sentence': result = text.toLowerCase().replace(/(^\w|\.\s+\w)/g, c => c.toUpperCase()); break;
+				}
+
+				document.getElementById('case-result').value = result;
+			}
+
+			// JSON Formatter
+			function formatJSON() {
+				try {
+					const input = document.getElementById('json-input').value;
+					const parsed = JSON.parse(input);
+					const formatted = JSON.stringify(parsed, null, 2);
+					document.getElementById('json-output').textContent = syntaxHighlight(formatted);
+					document.getElementById('json-output-container').classList.remove('hidden');
+					document.getElementById('json-error').classList.add('hidden');
+				} catch (e) {
+					document.getElementById('json-error').textContent = 'خطأ في JSON: ' + e.message;
+					document.getElementById('json-error').classList.remove('hidden');
+					document.getElementById('json-output-container').classList.add('hidden');
+				}
+			}
+
+			function minifyJSON() {
+				try {
+					const input = document.getElementById('json-input').value;
+					const parsed = JSON.parse(input);
+					const minified = JSON.stringify(parsed);
+					document.getElementById('json-output').textContent = minified;
+					document.getElementById('json-output-container').classList.remove('hidden');
+					document.getElementById('json-error').classList.add('hidden');
+				} catch (e) {
+					document.getElementById('json-error').textContent = 'خطأ في JSON: ' + e.message;
+					document.getElementById('json-error').classList.remove('hidden');
+				}
+			}
+
+			function validateJSON() {
+				try {
+					const input = document.getElementById('json-input').value;
+					JSON.parse(input);
+					document.getElementById('json-error').textContent = '✓ JSON صحيح';
+					document.getElementById('json-error').className = 'bg-green-50 border border-green-200 rounded-lg p-4 text-green-600';
+					document.getElementById('json-error').classList.remove('hidden');
+				} catch (e) {
+					document.getElementById('json-error').textContent = 'خطأ: ' + e.message;
+					document.getElementById('json-error').className = 'bg-red-50 border border-red-200 rounded-lg p-4 text-red-600';
+					document.getElementById('json-error').classList.remove('hidden');
+				}
+			}
+
+			function syntaxHighlight(json) {
+				json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+				return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, match => {
+					let cls = 'json-number';
+					if (/^"/.test(match)) cls = /:$/.test(match) ? 'json-key' : 'json-string';
+					else if (/true|false/.test(match)) cls = 'json-boolean';
+					else if (/null/.test(match)) cls = 'json-null';
+					return '<span class="' + cls + '">' + match + '</span>';
+				});
+			}
+
+			// Base64
+			function encodeBase64() {
+				const text = document.getElementById('base64-input').value;
+				try {
+					const encoded = btoa(unescape(encodeURIComponent(text)));
+					document.getElementById('base64-output').value = encoded;
+				} catch(e) {
+					alert('حدث خطأ في التشفير');
+				}
+			}
+
+			function decodeBase64() {
+				const text = document.getElementById('base64-input').value;
+				try {
+					const decoded = decodeURIComponent(escape(atob(text)));
+					document.getElementById('base64-output').value = decoded;
+				} catch(e) {
+					alert('حدث خطأ في فك التشفير. تأكد من صحة Base64');
+				}
+			}
+
+			// Copy to clipboard
+			function copyToClipboard(elementId) {
+				const element = document.getElementById(elementId);
+				const text = element.value || element.textContent;
+				navigator.clipboard.writeText(text).then(() => {
+					const btn = event.target.closest('button');
+					const original = btn.innerHTML;
+					btn.innerHTML = '<i class="fas fa-check ml-2"></i>تم النسخ!';
+					setTimeout(() => btn.innerHTML = original, 2000);
+				});
+			}
+		</script>
+	</body>
+</html>

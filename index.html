@@ -374,7 +374,6 @@
 				height: 80px;
 				object-fit: contain;
 				border-radius: 50%;
-				animation: rotate-subtle 8s linear infinite;
 			}
 
 			.loading-text {
@@ -443,15 +442,6 @@
 				50% {
 					transform: scale(1.1);
 					opacity: 0.6;
-				}
-			}
-
-			@keyframes rotate-subtle {
-				0% {
-					transform: rotate(0deg);
-				}
-				100% {
-					transform: rotate(360deg);
 				}
 			}
 
@@ -856,7 +846,10 @@
 					bottom: 60px;
 				}
 				.floating-whatsapp {
-					bottom: 140px !important;
+					bottom: 80px !important;
+				}
+				#scrollToTop {
+					bottom: 80px !important;
 				}
 			}
 
@@ -1083,24 +1076,102 @@
 									<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
 								</a>
 
-								<div x-show="toolsOpen" x-transition class="absolute left-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50">
-									<div class="py-2">
-										<a href="ocr" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors duration-200">
-											<i class="fas fa-file-text text-cyan-500"></i>
-											<span>استخراج النصوص (OCR)</span>
+								<div x-show="toolsOpen" x-transition class="absolute left-0 mt-2 w-80 rounded-lg shadow-xl bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-[80vh] overflow-y-auto">
+									<div class="p-3">
+										<!-- View All Tools -->
+										<a href="tools" class="flex items-center gap-3 px-4 py-3 mb-2 text-sm font-semibold text-white bg-gradient-to-r from-cyan-500 to-orange-500 rounded-lg hover:from-cyan-600 hover:to-orange-600 transition-all duration-200">
+											<i class="fas fa-th text-lg"></i>
+											<span>عرض جميع الأدوات</span>
+											<i class="fas fa-arrow-left mr-auto"></i>
 										</a>
-										<a href="qr-generator" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors duration-200">
-											<i class="fas fa-qrcode text-cyan-500"></i>
-											<span>مولد رمز QR</span>
-										</a>
-										<a href="pdf-tools" class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 transition-colors duration-200">
-											<i class="fas fa-file-pdf text-cyan-500"></i>
-											<span>أدوات PDF</span>
-										</a>
-										<div class="flex items-center gap-3 px-4 py-3 text-sm text-gray-400 cursor-not-allowed">
-											<i class="fas fa-magic text-gray-300"></i>
-											<span>إزالة الخلفية</span>
-											<span class="mr-auto text-xs bg-gray-100 px-2 py-1 rounded">قريباً</span>
+
+										<!-- Divider -->
+										<div class="border-t border-gray-200 my-2"></div>
+
+										<!-- Category: Image Tools -->
+										<div class="mb-1">
+											<div class="px-3 py-2 text-xs font-semibold text-gray-400 uppercase">🖼️ أدوات الصور</div>
+											<a href="ocr" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors duration-200">
+												<i class="fas fa-file-text text-cyan-500 w-5"></i>
+												<div>
+													<div class="font-medium">استخراج النصوص (OCR)</div>
+													<div class="text-xs text-gray-400">تحويل الصور إلى نص</div>
+												</div>
+											</a>
+											<a href="image-tools" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors duration-200">
+												<i class="fas fa-image text-cyan-500 w-5"></i>
+												<div>
+													<div class="font-medium">أدوات معالجة الصور</div>
+													<div class="text-xs text-gray-400">ضغط، تحويل، تغيير الحجم</div>
+												</div>
+											</a>
+										</div>
+
+										<!-- Category: PDF Tools -->
+										<div class="mb-1">
+											<div class="px-3 py-2 text-xs font-semibold text-gray-400 uppercase">📄 أدوات PDF</div>
+											<a href="pdf-tools" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors duration-200">
+												<i class="fas fa-file-pdf text-red-500 w-5"></i>
+												<div>
+													<div class="font-medium">أدوات PDF</div>
+													<div class="text-xs text-gray-400">دمج، تقسيم، تحويل</div>
+												</div>
+											</a>
+										</div>
+
+										<!-- Category: Text Tools -->
+										<div class="mb-1">
+											<div class="px-3 py-2 text-xs font-semibold text-gray-400 uppercase">📝 أدوات النصوص</div>
+											<a href="text-tools" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors duration-200">
+												<i class="fas fa-align-left text-blue-500 w-5"></i>
+												<div>
+													<div class="font-medium">أدوات النصوص</div>
+													<div class="text-xs text-gray-400">عداد، محول، منسق JSON</div>
+												</div>
+											</a>
+										</div>
+
+										<!-- Category: Security Tools -->
+										<div class="mb-1">
+											<div class="px-3 py-2 text-xs font-semibold text-gray-400 uppercase">🔐 أدوات الأمان</div>
+											<a href="security-tools" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors duration-200">
+												<i class="fas fa-lock text-green-500 w-5"></i>
+												<div>
+													<div class="font-medium">أدوات الأمان</div>
+													<div class="text-xs text-gray-400">كلمات مرور، هاش، تشفير</div>
+												</div>
+											</a>
+										</div>
+
+										<!-- Category: Design Tools -->
+										<div class="mb-1">
+											<div class="px-3 py-2 text-xs font-semibold text-gray-400 uppercase">🎨 أدوات التصميم</div>
+											<a href="design-tools" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors duration-200">
+												<i class="fas fa-palette text-purple-500 w-5"></i>
+												<div>
+													<div class="font-medium">أدوات التصميم</div>
+													<div class="text-xs text-gray-400">ألوان، تدرجات، ظلال</div>
+												</div>
+											</a>
+										</div>
+
+										<!-- Category: QR & Barcode -->
+										<div class="mb-1">
+											<div class="px-3 py-2 text-xs font-semibold text-gray-400 uppercase">📱 الأكواد والرموز</div>
+											<a href="qr-generator" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors duration-200">
+												<i class="fas fa-qrcode text-orange-500 w-5"></i>
+												<div>
+													<div class="font-medium">مولد وماسح QR</div>
+													<div class="text-xs text-gray-400">إنشاء ومسح رموز QR</div>
+												</div>
+											</a>
+											<a href="barcode-generator" class="flex items-center gap-3 px-4 py-2.5 text-sm text-gray-700 hover:bg-cyan-50 hover:text-cyan-600 rounded-lg transition-colors duration-200">
+												<i class="fas fa-barcode text-orange-500 w-5"></i>
+												<div>
+													<div class="font-medium">مولد الباركود</div>
+													<div class="text-xs text-gray-400">جميع أنواع الباركود</div>
+												</div>
+											</a>
 										</div>
 									</div>
 								</div>
@@ -1141,19 +1212,53 @@
 										<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
 									</svg>
 								</button>
-								<div x-show="toolsSubmenuOpen" x-transition class="pr-4 space-y-2 mt-2">
+								<div x-show="toolsSubmenuOpen" x-transition class="pr-4 space-y-1 mt-2">
+									<!-- View All -->
+									<a href="tools" class="block text-white bg-gradient-to-r from-cyan-500 to-orange-500 font-semibold py-2 px-4 rounded-lg text-sm mb-2">
+										<i class="fas fa-th ml-2"></i> عرض جميع الأدوات
+									</a>
+
+									<!-- Image Tools -->
+									<div class="text-xs text-gray-400 px-4 pt-2 pb-1 font-semibold">🖼️ أدوات الصور</div>
 									<a href="ocr" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
 										<i class="fas fa-file-text text-cyan-500 ml-2"></i> استخراج النصوص (OCR)
 									</a>
-									<a href="qr-generator" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
-										<i class="fas fa-qrcode text-cyan-500 ml-2"></i> مولد رمز QR
+									<a href="image-tools" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-image text-cyan-500 ml-2"></i> أدوات معالجة الصور
 									</a>
+
+									<!-- PDF Tools -->
+									<div class="text-xs text-gray-400 px-4 pt-2 pb-1 font-semibold">📄 أدوات PDF</div>
 									<a href="pdf-tools" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
-										<i class="fas fa-file-pdf text-cyan-500 ml-2"></i> أدوات PDF
+										<i class="fas fa-file-pdf text-red-500 ml-2"></i> أدوات PDF
 									</a>
-									<div class="block text-gray-400 py-2 px-4 text-sm">
-										<i class="fas fa-magic text-gray-300 ml-2"></i> إزالة الخلفية <span class="text-xs">(قريباً)</span>
-									</div>
+
+									<!-- Text Tools -->
+									<div class="text-xs text-gray-400 px-4 pt-2 pb-1 font-semibold">📝 أدوات النصوص</div>
+									<a href="text-tools" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-align-left text-blue-500 ml-2"></i> أدوات النصوص
+									</a>
+
+									<!-- Security Tools -->
+									<div class="text-xs text-gray-400 px-4 pt-2 pb-1 font-semibold">🔐 أدوات الأمان</div>
+									<a href="security-tools" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-lock text-green-500 ml-2"></i> أدوات الأمان
+									</a>
+
+									<!-- Design Tools -->
+									<div class="text-xs text-gray-400 px-4 pt-2 pb-1 font-semibold">🎨 أدوات التصميم</div>
+									<a href="design-tools" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-palette text-purple-500 ml-2"></i> أدوات التصميم
+									</a>
+
+									<!-- QR & Barcode -->
+									<div class="text-xs text-gray-400 px-4 pt-2 pb-1 font-semibold">📱 الأكواد والرموز</div>
+									<a href="qr-generator" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-qrcode text-orange-500 ml-2"></i> مولد وماسح QR
+									</a>
+									<a href="barcode-generator" class="block text-gray-600 hover:text-cyan-600 py-2 px-4 rounded-lg hover:bg-cyan-50 text-sm">
+										<i class="fas fa-barcode text-orange-500 ml-2"></i> مولد الباركود
+									</a>
 								</div>
 							</div>
 							<a href="#about" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">من نحن</a>

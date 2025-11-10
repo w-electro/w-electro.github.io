@@ -605,7 +605,19 @@
 			}
 
 			/* Floating Buttons */
-			.floating-whatsapp, #scrollToTop {
+			.floating-whatsapp {
+				bottom: 24px;
+				right: 24px;
+				background: white !important;
+				color: var(--secondary-color) !important;
+				border: 2px solid var(--secondary-color) !important;
+				box-shadow: 0 8px 25px rgba(255, 110, 66, 0.3) !important;
+				transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+			}
+
+			#scrollToTop {
+				bottom: 24px;
+				right: 24px;
 				background: white !important;
 				color: var(--secondary-color) !important;
 				border: 2px solid var(--secondary-color) !important;
@@ -823,13 +835,17 @@
 					display: flex;
 				}
 				.floating-whatsapp {
-					bottom: 20px !important;
-					left: 20px !important;
+					bottom: 80px !important;
+					left: 16px !important;
 					right: auto !important;
+					width: 56px !important;
+					height: 56px !important;
 				}
 				#scrollToTop {
-					bottom: 20px !important;
-					right: 20px !important;
+					bottom: 80px !important;
+					right: 16px !important;
+					width: 50px !important;
+					height: 50px !important;
 				}
 			}
 
@@ -841,6 +857,7 @@
 				scrollbar-width: thin;
 				scrollbar-color: #0891b2 #f1f1f1;
 				-webkit-overflow-scrolling: touch;
+				scroll-snap-type: x mandatory;
 			}
 
 			.testimonials-carousel::-webkit-scrollbar {
@@ -864,26 +881,52 @@
 			.testimonial-slide {
 				min-width: 100%;
 				flex-shrink: 0;
+				scroll-snap-align: start;
+				padding: 0 8px;
+			}
+
+			.testimonial-slide > div {
+				height: 100%;
 			}
 
 			#testimonialsTrack {
 				direction: ltr;
 				transition: none;
+				display: flex;
+				gap: 0;
 			}
 
 			.testimonial-slide > * {
 				direction: rtl;
 			}
 
+			@media (max-width: 767px) {
+				.testimonial-slide .bg-white {
+					padding: 20px !important;
+				}
+				.testimonial-slide h4 {
+					font-size: 1rem !important;
+				}
+				.testimonial-slide p.text-lg {
+					font-size: 0.95rem !important;
+				}
+				.testimonial-slide .w-16 {
+					width: 48px !important;
+					height: 48px !important;
+				}
+			}
+
 			@media (min-width: 768px) {
 				.testimonial-slide {
 					min-width: 50%;
+					padding: 0 12px;
 				}
 			}
 
 			@media (min-width: 1024px) {
 				.testimonial-slide {
 					min-width: 33.333%;
+					padding: 0 16px;
 				}
 			}
 
@@ -1548,7 +1591,7 @@
 						<p class="text-xl text-gray-600">تجارب حقيقية من عملاء راضين عن خدماتنا</p>
 					</div>
 
-					<div class="max-w-5xl mx-auto">
+					<div class="max-w-6xl mx-auto px-0 md:px-4">
 						<div class="testimonials-carousel relative">
 							<div class="flex transition-transform duration-500" id="testimonialsTrack">
 								<!-- Testimonial 1 - Real Google Review -->
@@ -1991,12 +2034,12 @@
 			</footer>
 			
 			<!-- Floating WhatsApp Button -->
-			<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-24 right-6 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50" target="_blank" aria-label="تواصل معنا عبر واتساب">
+			<a href="https://wa.me/966540732077" class="floating-whatsapp fixed w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50" target="_blank" aria-label="تواصل معنا عبر واتساب">
 				<i class="fab fa-whatsapp text-2xl"></i>
 			</a>
-			
+
 			<!-- Scroll to top button -->
-			<button id="scrollToTop" class="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 transition-all duration-300 opacity-0 invisible" aria-label="العودة إلى أعلى الصفحة">
+			<button id="scrollToTop" class="fixed w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 transition-all duration-300 opacity-0 invisible" aria-label="العودة إلى أعلى الصفحة">
 				<i class="fas fa-arrow-up text-xl"></i>
 			</button>
 		</div>

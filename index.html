@@ -804,26 +804,6 @@
 				color: #ef4444;
 			}
 
-			/* Sticky CTA Bar */
-			.sticky-cta {
-				position: fixed;
-				bottom: 0;
-				left: 0;
-				right: 0;
-				background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-				color: white;
-				padding: 15px 20px;
-				z-index: 998;
-				transform: translateY(100%);
-				transition: transform 0.3s;
-				box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
-			}
-
-			.sticky-cta.show {
-				transform: translateY(0);
-			}
-
-
 			/* Quick Actions Menu (Mobile) */
 			.quick-actions {
 				position: fixed;
@@ -842,34 +822,69 @@
 				.quick-actions {
 					display: flex;
 				}
-				.sticky-cta {
-					bottom: 60px;
-				}
 				.floating-whatsapp {
-					bottom: 80px !important;
+					bottom: 20px !important;
+					left: 20px !important;
+					right: auto !important;
 				}
 				#scrollToTop {
-					bottom: 80px !important;
+					bottom: 20px !important;
+					right: 20px !important;
 				}
 			}
 
 			/* Testimonials Carousel */
 			.testimonials-carousel {
-				overflow: hidden;
+				overflow-x: auto;
+				overflow-y: hidden;
 				position: relative;
+				scrollbar-width: thin;
+				scrollbar-color: #0891b2 #f1f1f1;
+				-webkit-overflow-scrolling: touch;
+			}
+
+			.testimonials-carousel::-webkit-scrollbar {
+				height: 8px;
+			}
+
+			.testimonials-carousel::-webkit-scrollbar-track {
+				background: #f1f1f1;
+				border-radius: 10px;
+			}
+
+			.testimonials-carousel::-webkit-scrollbar-thumb {
+				background: linear-gradient(135deg, #0891b2, #ff6e42);
+				border-radius: 10px;
+			}
+
+			.testimonials-carousel::-webkit-scrollbar-thumb:hover {
+				background: linear-gradient(135deg, #0a7a8f, #e65a31);
 			}
 
 			.testimonial-slide {
 				min-width: 100%;
-				transition: transform 0.5s ease;
+				flex-shrink: 0;
 			}
 
 			#testimonialsTrack {
 				direction: ltr;
+				transition: none;
 			}
 
 			.testimonial-slide > * {
 				direction: rtl;
+			}
+
+			@media (min-width: 768px) {
+				.testimonial-slide {
+					min-width: 50%;
+				}
+			}
+
+			@media (min-width: 1024px) {
+				.testimonial-slide {
+					min-width: 33.333%;
+				}
 			}
 
 
@@ -995,20 +1010,6 @@
 						</a>
 						<p class="text-sm text-gray-500 mt-3">العرض ساري لمدة 24 ساعة فقط!</p>
 					</div>
-				</div>
-			</div>
-
-			<!-- Sticky CTA Bar -->
-			<div class="sticky-cta" id="stickyCTA">
-				<div class="container mx-auto flex items-center justify-between">
-					<div class="flex items-center gap-3">
-						<span class="text-lg font-bold">🔥 جاهز للبدء؟</span>
-						<span class="hidden md:inline">احصل على استشارة مجانية الآن!</span>
-					</div>
-					<a href="https://wa.me/966540732077?text=السلام عليكم، أريد استشارة مجانية" class="bg-white text-orange-500 px-6 py-2 rounded-full font-bold hover:bg-gray-100 transition-all">
-						<i class="fab fa-whatsapp ml-2"></i>
-						تواصل الآن
-					</a>
 				</div>
 			</div>
 
@@ -1623,11 +1624,12 @@
 								</div>
 							</div>
 
-							<!-- Navigation Dots -->
+							<!-- Scroll Hint -->
 							<div class="flex justify-center gap-2 mt-8">
-								<button class="testimonial-dot w-3 h-3 rounded-full bg-cyan-500" onclick="showTestimonial(0)"></button>
-								<button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300" onclick="showTestimonial(1)"></button>
-								<button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300" onclick="showTestimonial(2)"></button>
+								<p class="text-gray-600 text-sm">
+									<i class="fas fa-hand-pointer text-cyan-500"></i>
+									اسحب لعرض المزيد من التقييمات
+								</p>
 							</div>
 						</div>
 					</div>
@@ -2333,41 +2335,22 @@
 			// Sticky CTA and scroll tracking moved to consolidated scroll handler above
 
 
-			// 5. Testimonials Carousel
-			let currentTestimonial = 0;
+			// 5. Testimonials - Now scrollable instead of carousel
+			// Testimonials section is now manually scrollable by users
 			const testimonialsTrack = document.getElementById('testimonialsTrack');
-			const testimonialDots = document.querySelectorAll('.testimonial-dot');
 
-			function showTestimonial(index) {
-				currentTestimonial = index;
-				if (testimonialsTrack) {
-					// Use negative for LTR track direction
-					testimonialsTrack.style.transform = `translateX(-${index * 100}%)`;
-				}
-
-				testimonialDots.forEach((dot, i) => {
-					if (i === index) {
-						dot.classList.remove('bg-gray-300');
-						dot.classList.add('bg-cyan-500');
-					} else {
-						dot.classList.remove('bg-cyan-500');
-						dot.classList.add('bg-gray-300');
-					}
-				});
-
-				window.dataLayer.push({
-					'event': 'testimonial_view',
-					'testimonial_index': index
+			// Track scroll events for analytics
+			if (testimonialsTrack) {
+				let scrollTimeout;
+				testimonialsTrack.parentElement.addEventListener('scroll', function() {
+					clearTimeout(scrollTimeout);
+					scrollTimeout = setTimeout(() => {
+						window.dataLayer.push({
+							'event': 'testimonials_scrolled'
+						});
+					}, 500);
 				});
 			}
-
-			// Auto-rotate testimonials every 6 seconds
-			setInterval(() => {
-				showTestimonial((currentTestimonial + 1) % 3);
-			}, 6000);
-
-			// Make showTestimonial globally accessible
-			window.showTestimonial = showTestimonial;
 
 			// 6. Animated Statistics Counter
 			function animateCounter(element, target, duration = 2000) {

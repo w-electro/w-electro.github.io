@@ -26,7 +26,13 @@
 		<!-- Background Removal Library -->
 		<script type="module">
 			import { removeBackground } from 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/+esm';
-			window.removeBackground = removeBackground;
+			window.removeBackground = async (file) => {
+				return await removeBackground(file, {
+					publicPath: 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/',
+					debug: false
+				});
+			};
+			window.bgRemovalReady = true;
 		</script>
 		<style>
 			:root {
@@ -348,6 +354,12 @@
 				const file = document.getElementById('removebg-file').files[0];
 				if (!file) return alert('الرجاء اختيار صورة');
 
+				// Check if background removal library is loaded
+				if (!window.removeBackground) {
+					alert('المكتبة لم يتم تحميلها بعد. الرجاء الانتظار قليلاً وإعادة المحاولة.');
+					return;
+				}
+
 				const statusDiv = document.getElementById('removebg-status');
 				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري إزالة الخلفية... قد يستغرق دقيقة</p>';
 				statusDiv.classList.remove('hidden');
@@ -359,8 +371,13 @@
 					document.getElementById('removebg-result').classList.remove('hidden');
 					statusDiv.classList.add('hidden');
 				} catch (error) {
-					console.error(error);
-					statusDiv.innerHTML = '<p class="text-red-600">حدث خطأ أثناء إزالة الخلفية. جرب صورة أخرى.</p>';
+					console.error('Background removal error:', error);
+					let errorMsg = 'حدث خطأ أثناء إزالة الخلفية.';
+					if (error.message) {
+						errorMsg += ' ' + error.message;
+					}
+					errorMsg += ' جرب صورة أخرى أو حدّث الصفحة.';
+					statusDiv.innerHTML = '<p class="text-red-600">' + errorMsg + '</p>';
 				}
 			}
 

@@ -23,46 +23,26 @@
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		<!-- Image Compression Library -->
 		<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
-		<!-- Background Removal Library - Using unpkg CDN for better ESM compatibility -->
-		<script type="module">
-			// Initialize background removal library
-			let bgRemovalModule = null;
-			let isLoading = false;
-
-			async function initBackgroundRemoval() {
-				if (bgRemovalModule) return bgRemovalModule;
-				if (isLoading) {
-					// Wait for loading to complete
-					while (isLoading) {
-						await new Promise(resolve => setTimeout(resolve, 100));
-					}
-					return bgRemovalModule;
-				}
-
-				isLoading = true;
-				try {
-					console.log('Loading background removal library from unpkg (better ESM support)...');
-					const module = await import('https://cdn.skypack.dev/@imgly/background-removal@1.4.5');
-					bgRemovalModule = module;
-					console.log('Background removal library loaded successfully');
-					window.bgRemovalReady = true;
-					return module;
-				} catch (error) {
-					console.error('Failed to load background removal library:', error);
-					throw error;
-				} finally {
-					isLoading = false;
-				}
-			}
-
-			// Expose function to remove background
+		<!-- Background Removal Library - Using pre-bundled browser version -->
+		<script src="https://unpkg.com/@imgly/background-removal@1.4.5/dist/bundle.browser.min.js"></script>
+		<script>
+			// Simple wrapper for background removal
 			window.removeBackground = async (file) => {
 				console.log('removeBackground called with file:', file.name);
-				const module = await initBackgroundRemoval();
-				console.log('Module loaded, starting background removal...');
+
+				if (typeof imglyRemoveBackground === 'undefined') {
+					console.error('Background removal library not loaded');
+					throw new Error('مكتبة إزالة الخلفية غير متوفرة');
+				}
 
 				try {
-				const blob = await module.removeBackground(file);
+					console.log('Starting background removal...');
+					// Use the global imglyRemoveBackground function from the bundle
+					const blob = await imglyRemoveBackground(file, {
+						progress: (key, current, total) => {
+							console.log(`Progress ${key}: ${Math.round(current / total * 100)}%`);
+						}
+					});
 					console.log('Background removal complete, blob size:', blob.size);
 					return blob;
 				} catch (error) {
@@ -71,13 +51,8 @@
 				}
 			};
 
-			// Pre-initialize on page load
-			window.addEventListener('load', () => {
-				console.log('Page loaded, pre-initializing background removal...');
-				initBackgroundRemoval().catch(err => {
-					console.error('Pre-initialization failed:', err);
-				});
-			});
+			window.bgRemovalReady = true;
+			console.log('Background removal library ready');
 		</script>
 		<style>
 			:root {

@@ -183,6 +183,7 @@
 										<p class="text-gray-700 font-medium text-lg">اختر صورة أو أكثر للضغط</p>
 										<p class="text-gray-500 text-sm mt-2">JPG, PNG, WebP</p>
 									</label>
+									<div id="compress-preview" class="hidden"></div>
 								</div>
 								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 									<div><label class="block text-gray-700 font-medium mb-2">جودة الضغط</label><input type="range" id="compress-quality" min="0.1" max="1" step="0.1" value="0.8" class="w-full" oninput="document.getElementById('quality-value').textContent = Math.round(this.value * 100) + '%'" /><p class="text-center text-gray-600 mt-1"><span id="quality-value">80%</span></p></div>
@@ -203,6 +204,7 @@
 										<p class="text-gray-700 font-medium text-lg">اختر صورة لتحويل صيغتها</p>
 									</label>
 								</div>
+									<div id="convert-preview" class="hidden"></div>
 								<div><label class="block text-gray-700 font-medium mb-2">الصيغة المطلوبة</label><select id="target-format" class="w-full px-4 py-3 border border-gray-300 rounded-lg"><option value="image/png">PNG</option><option value="image/jpeg">JPG</option><option value="image/webp">WebP</option></select></div>
 								<div class="flex justify-center"><button onclick="convertImages()" class="btn-primary px-8 py-4"><i class="fas fa-exchange-alt ml-2"></i>تحويل الصيغة</button></div>
 								<div id="convert-result" class="hidden"><div id="convert-images-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6"></div></div>
@@ -219,6 +221,7 @@
 										<p class="text-gray-700 font-medium text-lg">اختر صورة لتغيير حجمها</p>
 									</label>
 								</div>
+									<div id="resize-preview" class="hidden"></div>
 								<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 									<div><label class="block text-gray-700 font-medium mb-2">العرض (px)</label><input type="number" id="resize-width" placeholder="مثال: 800" class="w-full px-4 py-3 border border-gray-300 rounded-lg" /></div>
 									<div><label class="block text-gray-700 font-medium mb-2">الارتفاع (px)</label><input type="number" id="resize-height" placeholder="مثال: 600" class="w-full px-4 py-3 border border-gray-300 rounded-lg" /></div>
@@ -239,6 +242,7 @@
 										<p class="text-gray-700 font-medium text-lg">اختر صورة لإزالة الخلفية</p>
 										<p class="text-gray-500 text-sm mt-2">يعمل بشكل أفضل مع صور الأشخاص والمنتجات</p>
 									</label>
+									<div id="removebg-preview-input" class="hidden"></div>
 								</div>
 								<div class="flex justify-center"><button onclick="removeImageBackground()" class="btn-primary px-8 py-4"><i class="fas fa-magic ml-2"></i>إزالة الخلفية</button></div>
 								<div id="removebg-status" class="text-center hidden"></div>
@@ -264,6 +268,51 @@
 		</div>
 
 		<script>
+			// ===== IMAGE PREVIEW FUNCTIONALITY =====
+			function setupImagePreview(inputId, previewId) {
+				const input = document.getElementById(inputId);
+				if (!input) return;
+				
+				input.addEventListener('change', function(e) {
+					const files = e.target.files;
+					const preview = document.getElementById(previewId);
+					
+					if (!files || files.length === 0) {
+						preview.innerHTML = '';
+						preview.classList.add('hidden');
+						return;
+					}
+
+					let gridHTML = '';
+					const filesToShow = Math.min(files.length, 6);
+					
+					for (let i = 0; i < filesToShow; i++) {
+						const file = files[i];
+						const reader = new FileReader();
+						
+						reader.onload = function(e) {
+							gridHTML += '<div class="relative group"><img src="' + e.target.result + '" class="w-full h-20 object-cover rounded-lg shadow-sm" alt="معاينة"><p class="text-xs text-gray-600 mt-1 truncate text-center">' + file.name + '</p></div>';
+							
+							if (i === filesToShow - 1) {
+								let extraText = files.length > 6 ? '<div class="flex items-center justify-center h-20 bg-gray-100 rounded-lg"><p class="text-gray-600 text-sm font-semibold">+' + (files.length - 6) + ' أخرى</p></div>' : '';
+								preview.innerHTML = '<div class="mt-4 p-4 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl border-2 border-cyan-200"><p class="text-sm font-bold text-cyan-700 mb-3 flex items-center gap-2"><i class="fas fa-images"></i> الصور المحددة (' + files.length + ')</p><div class="grid grid-cols-3 md:grid-cols-6 gap-3">' + gridHTML + extraText + '</div></div>';
+								preview.classList.remove('hidden');
+							}
+						};
+						
+						reader.readAsDataURL(file);
+					}
+				});
+			}
+
+			// Initialize all previews when DOM is ready
+			document.addEventListener('DOMContentLoaded', function() {
+				setupImagePreview('compress-file', 'compress-preview');
+				setupImagePreview('convert-file', 'convert-preview');
+				setupImagePreview('resize-file', 'resize-preview');
+				setupImagePreview('removebg-file', 'removebg-preview-input');
+			});
+
 			// Page initialization
 			window.addEventListener('load', () => {
 				document.getElementById('loadingScreen').classList.add('hidden');

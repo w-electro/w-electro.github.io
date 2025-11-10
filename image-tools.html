@@ -42,7 +42,7 @@
 				isLoading = true;
 				try {
 					console.log('Loading background removal library from unpkg (better ESM support)...');
-					const module = await import('https://unpkg.com/@imgly/background-removal@1.4.5/dist/index.mjs');
+					const module = await import('https://cdn.skypack.dev/@imgly/background-removal@1.4.5');
 					bgRemovalModule = module;
 					console.log('Background removal library loaded successfully');
 					window.bgRemovalReady = true;

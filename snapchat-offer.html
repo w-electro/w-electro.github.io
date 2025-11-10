@@ -178,52 +178,6 @@
 				}
 			}
 
-			/* Contact Form Styles */
-			.contact-form {
-				background: white;
-				border-radius: 20px;
-				padding: 2.5rem;
-				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-			}
-
-			.form-input, .form-textarea {
-				width: 100%;
-				padding: 14px 20px;
-				border: 2px solid #e5e7eb;
-				border-radius: 12px;
-				font-size: 1rem;
-				transition: all 0.3s ease;
-				font-family: 'Cairo', sans-serif;
-			}
-
-			.form-input:focus, .form-textarea:focus {
-				outline: none;
-				border-color: var(--primary-color);
-				box-shadow: 0 0 0 4px rgba(8, 145, 178, 0.1);
-			}
-
-			.form-textarea {
-				resize: vertical;
-				min-height: 120px;
-			}
-
-			.contact-info-box {
-				background: linear-gradient(135deg, #0891b2, #06b6d4);
-				color: white;
-				padding: 2rem;
-				border-radius: 20px;
-				text-align: center;
-				box-shadow: 0 8px 25px rgba(8, 145, 178, 0.3);
-			}
-
-			.phone-display {
-				font-size: 1.8rem;
-				font-weight: 700;
-				margin: 1rem 0;
-				letter-spacing: 1px;
-				direction: ltr;
-				text-align: center;
-			}
 
 			/* Feature Badge */
 			.feature-badge {
@@ -322,7 +276,7 @@
 
 				<!-- CTA Buttons -->
 				<div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-					<a href="#contact" class="btn-primary text-xl px-12 py-5">
+					<a href="index.html" class="btn-primary text-xl px-12 py-5">
 						<i class="fas fa-paper-plane ml-2"></i>
 						اطلب خدمتك الآن
 					</a>
@@ -353,7 +307,7 @@
 						<div class="price-tag mb-6">
 							50-250 <img src="Riyal.png" alt="ريال" loading="lazy" class="inline-block h-6 w-6 mr-1" />
 						</div>
-						<a href="#contact" class="btn-primary">
+						<a href="index.html" class="btn-primary">
 							<i class="fas fa-arrow-left ml-2"></i>
 							اطلب الآن
 						</a>
@@ -369,7 +323,7 @@
 						<div class="price-tag mb-6">
 							10 <img src="Riyal.png" alt="ريال" loading="lazy" class="inline-block h-6 w-6 mx-1" /> / شريحة
 						</div>
-						<a href="#contact" class="btn-primary">
+						<a href="index.html" class="btn-primary">
 							<i class="fas fa-arrow-left ml-2"></i>
 							اطلب الآن
 						</a>
@@ -385,7 +339,7 @@
 						<div class="price-tag mb-6">
 							150 <img src="Riyal.png" alt="ريال" loading="lazy" class="inline-block h-6 w-6 mr-1" />
 						</div>
-						<a href="#contact" class="btn-primary">
+						<a href="index.html" class="btn-primary">
 							<i class="fas fa-arrow-left ml-2"></i>
 							اطلب الآن
 						</a>
@@ -401,7 +355,7 @@
 						<div class="price-tag mb-6">
 							25 <img src="Riyal.png" alt="ريال" loading="lazy" class="inline-block h-6 w-6 mr-1" />
 						</div>
-						<a href="#contact" class="btn-primary">
+						<a href="index.html" class="btn-primary">
 							<i class="fas fa-arrow-left ml-2"></i>
 							اطلب الآن
 						</a>
@@ -431,7 +385,7 @@
 						<div class="price-tag mb-6">
 							حسب المشروع
 						</div>
-						<a href="#contact" class="btn-primary">
+						<a href="index.html" class="btn-primary">
 							<i class="fas fa-arrow-left ml-2"></i>
 							اطلب الآن
 						</a>
@@ -490,94 +444,27 @@
 				<h2 class="text-4xl md:text-5xl font-bold mb-6">عرض خاص! 🎉</h2>
 				<p class="text-2xl mb-8 leading-relaxed">احصل على خصم 10% على أول طلب لك</p>
 				<p class="text-xl mb-8">استخدم كود الخصم: <span class="font-bold text-3xl bg-white text-orange-600 px-6 py-2 rounded-full inline-block">FIRST10</span></p>
-				<a href="#contact" class="inline-flex items-center bg-white text-orange-600 px-10 py-4 rounded-full font-bold text-xl hover:bg-gray-100 transition-all shadow-2xl">
+				<a href="index.html" class="inline-flex items-center bg-white text-orange-600 px-10 py-4 rounded-full font-bold text-xl hover:bg-gray-100 transition-all shadow-2xl">
 					<i class="fas fa-gift ml-2"></i>
 					احصل على الخصم الآن
 				</a>
 			</div>
 		</section>
 
-		<!-- Contact Section -->
-		<section id="contact" class="py-20 px-4 bg-white">
-			<div class="max-w-6xl mx-auto">
-				<div class="text-center mb-16">
-					<h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">تواصل معنا</h2>
-					<p class="text-xl text-gray-600">املأ النموذج أو اتصل بنا مباشرة</p>
+		<!-- CTA Section -->
+		<section id="contact" class="py-20 px-4 bg-gradient-to-br from-cyan-500 to-cyan-600">
+			<div class="max-w-4xl mx-auto text-center text-white">
+				<div class="mb-8">
+					<i class="fas fa-rocket text-7xl mb-6 opacity-90"></i>
 				</div>
-
-				<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-					<!-- Contact Form -->
-					<div class="contact-form">
-						<h3 class="text-2xl font-bold text-gray-800 mb-6">أرسل طلبك</h3>
-						<form id="contactForm" class="space-y-5">
-							<div>
-								<label class="block text-gray-700 font-semibold mb-2">الاسم *</label>
-								<input type="text" name="name" required class="form-input" placeholder="أدخل اسمك">
-							</div>
-
-							<div>
-								<label class="block text-gray-700 font-semibold mb-2">رقم الهاتف *</label>
-								<input type="tel" name="phone" required class="form-input" placeholder="05XXXXXXXX">
-							</div>
-
-							<div>
-								<label class="block text-gray-700 font-semibold mb-2">البريد الإلكتروني</label>
-								<input type="email" name="email" class="form-input" placeholder="example@domain.com">
-							</div>
-
-							<div>
-								<label class="block text-gray-700 font-semibold mb-2">الخدمة المطلوبة *</label>
-								<select name="service" required class="form-input">
-									<option value="">اختر الخدمة</option>
-									<option value="مشاريع التخرج">مشاريع التخرج</option>
-									<option value="عروض بوربوينت">عروض بوربوينت</option>
-									<option value="مشاريع برمجة">مشاريع برمجة</option>
-									<option value="التسجيل الجامعي">التسجيل الجامعي</option>
-									<option value="خدمات التصميم">خدمات التصميم</option>
-									<option value="أخرى">أخرى</option>
-								</select>
-							</div>
-
-							<div>
-								<label class="block text-gray-700 font-semibold mb-2">تفاصيل الطلب *</label>
-								<textarea name="message" required class="form-textarea" placeholder="اكتب تفاصيل طلبك هنا..."></textarea>
-							</div>
-
-							<button type="submit" class="btn-primary w-full text-xl py-4">
-								<i class="fas fa-paper-plane ml-2"></i>
-								إرسال الطلب
-							</button>
-						</form>
-						<div id="formMessage" class="mt-4 text-center font-semibold hidden"></div>
-					</div>
-
-					<!-- Contact Info -->
-					<div class="space-y-8">
-						<!-- Phone Contact -->
-						<div class="contact-info-box">
-							<i class="fas fa-phone-alt text-5xl mb-4"></i>
-							<h3 class="text-2xl font-bold mb-3">اتصل بنا مباشرة</h3>
-							<p class="text-lg mb-4 opacity-90">للتواصل الفوري والاستفسارات</p>
-							<div class="phone-display">0540732077</div>
-							<p class="text-sm opacity-75 mt-2">من السبت إلى الخميس: 9 صباحاً - 10 مساءً</p>
-						</div>
-
-						<!-- Email Contact -->
-						<div class="bg-white p-8 rounded-2xl shadow-lg text-center border-2 border-gray-100">
-							<i class="fas fa-envelope text-5xl text-cyan-600 mb-4"></i>
-							<h3 class="text-2xl font-bold text-gray-800 mb-3">البريد الإلكتروني</h3>
-							<p class="text-gray-600 mb-4">للاستفسارات والطلبات التفصيلية</p>
-							<p class="text-lg font-semibold text-cyan-600 break-all">wforelectronicservices@gmail.com</p>
-						</div>
-
-						<!-- Quick Response -->
-						<div class="bg-gradient-to-br from-green-500 to-green-600 p-8 rounded-2xl shadow-lg text-white text-center">
-							<i class="fas fa-bolt text-5xl mb-4"></i>
-							<h3 class="text-2xl font-bold mb-3">استجابة سريعة</h3>
-							<p class="text-lg opacity-90">نرد على جميع الاستفسارات خلال 24 ساعة أو أقل</p>
-						</div>
-					</div>
-				</div>
+				<h2 class="text-4xl md:text-5xl font-bold mb-6">جاهز للبدء؟</h2>
+				<p class="text-xl md:text-2xl mb-12 leading-relaxed opacity-90">
+					اضغط على الزر أدناه لزيارة موقعنا الإلكتروني والتواصل معنا مباشرة
+				</p>
+				<a href="index.html" class="inline-flex items-center bg-white text-cyan-600 px-12 py-5 rounded-full font-bold text-2xl hover:bg-gray-100 transition-all shadow-2xl transform hover:scale-105">
+					<i class="fas fa-arrow-left ml-3"></i>
+					زيارة الموقع والطلب الآن
+				</a>
 			</div>
 		</section>
 
@@ -644,40 +531,6 @@
 		</div>
 
 		<script>
-			// Form Submission Handler
-			document.getElementById('contactForm').addEventListener('submit', function(e) {
-				e.preventDefault();
-
-				const formData = new FormData(e.target);
-				const data = {};
-				formData.forEach((value, key) => {
-					data[key] = value;
-				});
-
-				// Track form submission
-				if (window.dataLayer) {
-					window.dataLayer.push({
-						'event': 'form_submission',
-						'form_name': 'snapchat_contact_form',
-						'service_requested': data.service
-					});
-				}
-
-				// Show success message
-				const messageDiv = document.getElementById('formMessage');
-				messageDiv.textContent = 'شكراً لك! تم استلام طلبك وسنتواصل معك قريباً 🎉';
-				messageDiv.className = 'mt-4 text-center font-semibold text-green-600 bg-green-50 p-4 rounded-lg';
-				messageDiv.classList.remove('hidden');
-
-				// Reset form
-				e.target.reset();
-
-				// Hide message after 5 seconds
-				setTimeout(() => {
-					messageDiv.classList.add('hidden');
-				}, 5000);
-			});
-
 			// Scroll to Top Button
 			const scrollToTopBtn = document.getElementById('scrollToTop');
 

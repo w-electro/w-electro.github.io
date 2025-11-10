@@ -23,53 +23,72 @@
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		<!-- Image Compression Library -->
 		<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
-		<!-- Background Removal Library - Using pre-bundled browser version -->
-		<script src="https://unpkg.com/@imgly/background-removal@1.4.5/dist/bundle.browser.min.js" onload="console.log('Background removal library loaded'); console.log('Available:', typeof imglyRemoveBackground);"></script>
+		<!-- Background Removal Library - Using JSDELIVR for better reliability -->
+		<script src="https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/bundle.browser.min.js"></script>
 		<script>
-			// Wait for library to load and initialize
-			let bgRemovalInitialized = false;
+			// Background removal initialization
+			let bgRemovalReady = false;
+			let bgRemovalLib = null;
 
-			// Check if library loaded after page load
-			window.addEventListener('load', () => {
-				setTimeout(() => {
-					if (typeof imglyRemoveBackground !== 'undefined') {
-						bgRemovalInitialized = true;
-						window.bgRemovalReady = true;
-						console.log('Background removal library ready');
-					} else {
-						console.error('Background removal library failed to load');
-					}
-				}, 1000);
-			});
-
-			// Simple wrapper for background removal
-			window.removeBackground = async (file) => {
-				console.log('removeBackground called with file:', file.name);
-
-				// Wait a bit if library is still loading
-				if (!bgRemovalInitialized) {
-					console.log('Waiting for library to initialize...');
-					await new Promise(resolve => setTimeout(resolve, 2000));
+			// Wait for both DOM and library to be ready
+			(async function initBackgroundRemoval() {
+				// Wait for DOM
+				if (document.readyState === 'loading') {
+					await new Promise(resolve => document.addEventListener('DOMContentLoaded', resolve));
 				}
 
-				if (typeof imglyRemoveBackground === 'undefined') {
-					console.error('Background removal library not loaded');
-					throw new Error('عذراً، أداة إزالة الخلفية غير متوفرة حالياً. الرجاء المحاولة لاحقاً أو تحديث الصفحة.');
+				// Wait a bit for script to fully load
+				await new Promise(resolve => setTimeout(resolve, 1500));
+
+				// Try to access the library
+				if (typeof imglyRemoveBackground !== 'undefined') {
+					bgRemovalLib = imglyRemoveBackground;
+					bgRemovalReady = true;
+					console.log('✅ Background removal library loaded successfully');
+				} else if (typeof window.imglyRemoveBackground !== 'undefined') {
+					bgRemovalLib = window.imglyRemoveBackground;
+					bgRemovalReady = true;
+					console.log('✅ Background removal library loaded successfully (window)');
+				} else {
+					console.error('❌ Background removal library not found');
+				}
+			})();
+
+			// Background removal function
+			window.removeBackground = async (file) => {
+				console.log('🔄 Starting background removal for:', file.name);
+
+				// Wait for initialization with retry
+				let retries = 0;
+				while (!bgRemovalReady && retries < 20) {
+					console.log(`⏳ Waiting for library... (${retries + 1}/20)`);
+					await new Promise(resolve => setTimeout(resolve, 500));
+					retries++;
+				}
+
+				if (!bgRemovalReady || !bgRemovalLib) {
+					console.error('❌ Library timeout or not loaded');
+					throw new Error('عذراً، أداة إزالة الخلفية غير متوفرة حالياً. الرجاء تحديث الصفحة والمحاولة مرة أخرى.');
 				}
 
 				try {
-					console.log('Starting background removal...');
-					// Use the global imglyRemoveBackground function from the bundle
-					const blob = await imglyRemoveBackground(file, {
+					console.log('✨ Calling background removal API...');
+					const blob = await bgRemovalLib(file, {
 						progress: (key, current, total) => {
-							console.log(`Progress ${key}: ${Math.round(current / total * 100)}%`);
+							const percent = Math.round((current / total) * 100);
+							console.log(`📊 ${key}: ${percent}%`);
 						}
 					});
-					console.log('Background removal complete, blob size:', blob.size);
+
+					if (!blob || blob.size === 0) {
+						throw new Error('النتيجة فارغة');
+					}
+
+					console.log('✅ Background removed! Size:', blob.size, 'bytes');
 					return blob;
 				} catch (error) {
-					console.error('Error during background removal:', error);
-					throw new Error('حدث خطأ أثناء إزالة الخلفية. الرجاء المحاولة مرة أخرى أو جرب صورة أخرى.');
+					console.error('❌ Error during removal:', error);
+					throw new Error('حدث خطأ أثناء إزالة الخلفية. الرجاء المحاولة بصورة أخرى أو صورة أصغر حجماً.');
 				}
 			};
 		</script>

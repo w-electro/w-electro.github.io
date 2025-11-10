@@ -575,18 +575,6 @@
 					}
 				});
 			});
-
-			// Phone number click tracking
-			document.querySelectorAll('.phone-display').forEach(phone => {
-				phone.addEventListener('click', function() {
-					if (window.dataLayer) {
-						window.dataLayer.push({
-							'event': 'phone_number_click',
-							'page': 'snapchat-offer'
-						});
-					}
-				});
-			});
 		</script>
 	</body>
 </html>

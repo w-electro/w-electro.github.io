@@ -23,16 +23,70 @@
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		<!-- Image Compression Library -->
 		<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
-		<!-- Background Removal Library -->
+		<!-- Background Removal Library - Using imgly with proper initialization -->
 		<script type="module">
-			import { removeBackground } from 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/+esm';
+			// Initialize background removal library
+			let bgRemovalModule = null;
+			let isLoading = false;
+
+			async function initBackgroundRemoval() {
+				if (bgRemovalModule) return bgRemovalModule;
+				if (isLoading) {
+					// Wait for loading to complete
+					while (isLoading) {
+						await new Promise(resolve => setTimeout(resolve, 100));
+					}
+					return bgRemovalModule;
+				}
+
+				isLoading = true;
+				try {
+					console.log('Loading background removal library...');
+					const module = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/+esm');
+					bgRemovalModule = module;
+					console.log('Background removal library loaded successfully');
+					window.bgRemovalReady = true;
+					return module;
+				} catch (error) {
+					console.error('Failed to load background removal library:', error);
+					throw error;
+				} finally {
+					isLoading = false;
+				}
+			}
+
+			// Expose function to remove background
 			window.removeBackground = async (file) => {
-				return await removeBackground(file, {
-					publicPath: 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/',
-					debug: false
-				});
+				console.log('removeBackground called with file:', file.name);
+				const module = await initBackgroundRemoval();
+				console.log('Module loaded, starting background removal...');
+
+				try {
+					const blob = await module.removeBackground(file, {
+						model: 'medium',
+						output: {
+							format: 'image/png',
+							quality: 0.8
+						},
+						progress: (key, current, total) => {
+							console.log(`Progress: ${key} - ${current}/${total}`);
+						}
+					});
+					console.log('Background removal complete, blob size:', blob.size);
+					return blob;
+				} catch (error) {
+					console.error('Error during background removal:', error);
+					throw error;
+				}
 			};
-			window.bgRemovalReady = true;
+
+			// Pre-initialize on page load
+			window.addEventListener('load', () => {
+				console.log('Page loaded, pre-initializing background removal...');
+				initBackgroundRemoval().catch(err => {
+					console.error('Pre-initialization failed:', err);
+				});
+			});
 		</script>
 		<style>
 			:root {
@@ -354,30 +408,112 @@
 				const file = document.getElementById('removebg-file').files[0];
 				if (!file) return alert('الرجاء اختيار صورة');
 
-				// Check if background removal library is loaded
-				if (!window.removeBackground) {
-					alert('المكتبة لم يتم تحميلها بعد. الرجاء الانتظار قليلاً وإعادة المحاولة.');
+				// Validate file type
+				if (!file.type.startsWith('image/')) {
+					alert('الرجاء اختيار ملف صورة صحيح (JPG, PNG, etc)');
+					return;
+				}
+
+				// Validate file size (max 10MB)
+				if (file.size > 10 * 1024 * 1024) {
+					alert('حجم الصورة كبير جداً. الرجاء اختيار صورة أصغر من 10 ميجابايت.');
 					return;
 				}
 
 				const statusDiv = document.getElementById('removebg-status');
-				statusDiv.innerHTML = '<div class="inline-block animate-spin rounded-full h-8 w-8 border-t-2 border-cyan-600 mx-auto"></div><p class="mt-2">جاري إزالة الخلفية... قد يستغرق دقيقة</p>';
+				const resultDiv = document.getElementById('removebg-result');
+
+				// Show loading state
+				statusDiv.innerHTML = `
+					<div class="flex flex-col items-center justify-center gap-4">
+						<div class="inline-block animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-cyan-600"></div>
+						<div class="text-center">
+							<p class="text-lg font-semibold text-gray-700">جاري إزالة الخلفية...</p>
+							<p class="text-sm text-gray-500 mt-2">قد يستغرق الأمر من 30 ثانية إلى دقيقة حسب حجم الصورة</p>
+							<p class="text-xs text-gray-400 mt-2">الرجاء عدم إغلاق الصفحة</p>
+						</div>
+					</div>
+				`;
 				statusDiv.classList.remove('hidden');
+				resultDiv.classList.add('hidden');
 
 				try {
-					const blob = await window.removeBackground(file);
+					console.log('Starting background removal for:', file.name, 'Size:', file.size);
+
+					// Check if function exists
+					if (typeof window.removeBackground !== 'function') {
+						throw new Error('مكتبة إزالة الخلفية غير متوفرة. الرجاء تحديث الصفحة والمحاولة مرة أخرى.');
+					}
+
+					// Set timeout (2 minutes)
+					const timeoutPromise = new Promise((_, reject) => {
+						setTimeout(() => reject(new Error('انتهت مهلة المعالجة. الرجاء المحاولة بصورة أصغر حجماً.')), 120000);
+					});
+
+					// Race between background removal and timeout
+					const blob = await Promise.race([
+						window.removeBackground(file),
+						timeoutPromise
+					]);
+
+					if (!blob || blob.size === 0) {
+						throw new Error('فشلت عملية إزالة الخلفية. الرجاء المحاولة مرة أخرى.');
+					}
+
+					console.log('Background removal successful! Blob size:', blob.size);
+
+					// Create preview
 					const url = URL.createObjectURL(blob);
-					document.getElementById('removebg-preview').src = url;
-					document.getElementById('removebg-result').classList.remove('hidden');
-					statusDiv.classList.add('hidden');
+					const previewImg = document.getElementById('removebg-preview');
+					previewImg.src = url;
+					previewImg.onload = () => {
+						console.log('Image loaded successfully');
+						statusDiv.innerHTML = `
+							<div class="text-center text-green-600">
+								<i class="fas fa-check-circle text-4xl mb-2"></i>
+								<p class="font-semibold">تمت إزالة الخلفية بنجاح!</p>
+							</div>
+						`;
+						setTimeout(() => {
+							statusDiv.classList.add('hidden');
+							resultDiv.classList.remove('hidden');
+						}, 1500);
+					};
+
+					// Store blob for download
+					window.removedBgBlob = blob;
+
 				} catch (error) {
 					console.error('Background removal error:', error);
+					console.error('Error stack:', error.stack);
+
 					let errorMsg = 'حدث خطأ أثناء إزالة الخلفية.';
-					if (error.message) {
-						errorMsg += ' ' + error.message;
+
+					if (error.message.includes('timeout') || error.message.includes('مهلة')) {
+						errorMsg = error.message;
+					} else if (error.message.includes('مكتبة')) {
+						errorMsg = error.message;
+					} else if (error.message.includes('CORS') || error.message.includes('network')) {
+						errorMsg = 'خطأ في الاتصال. الرجاء التحقق من الإنترنت والمحاولة مرة أخرى.';
+					} else if (error.message) {
+						errorMsg += '<br><small class="text-xs">' + error.message + '</small>';
 					}
-					errorMsg += ' جرب صورة أخرى أو حدّث الصفحة.';
-					statusDiv.innerHTML = '<p class="text-red-600">' + errorMsg + '</p>';
+
+					statusDiv.innerHTML = `
+						<div class="text-center">
+							<i class="fas fa-exclamation-circle text-red-500 text-4xl mb-3"></i>
+							<p class="text-red-600 font-semibold mb-2">${errorMsg}</p>
+							<div class="mt-4 space-y-2 text-sm text-gray-600">
+								<p>💡 نصائح لإزالة ناجحة:</p>
+								<ul class="text-right list-disc list-inside space-y-1">
+									<li>استخدم صورة واضحة ذات دقة جيدة</li>
+									<li>تأكد من أن حجم الصورة أقل من 5 ميجابايت</li>
+									<li>الصور ذات الخلفية الواضحة تعطي نتائج أفضل</li>
+									<li>جرب تحديث الصفحة والمحاولة مرة أخرى</li>
+								</ul>
+							</div>
+						</div>
+					`;
 				}
 			}
 
@@ -390,11 +526,25 @@
 			}
 
 			function downloadResult(imgId) {
-				const img = document.getElementById(imgId);
-				const a = document.createElement('a');
-				a.href = img.src;
-				a.download = 'no-background.png';
-				a.click();
+				// Try to use stored blob first for better quality
+				if (window.removedBgBlob) {
+					const url = URL.createObjectURL(window.removedBgBlob);
+					const a = document.createElement('a');
+					a.href = url;
+					a.download = 'no-background.png';
+					document.body.appendChild(a);
+					a.click();
+					document.body.removeChild(a);
+					// Clean up after a short delay
+					setTimeout(() => URL.revokeObjectURL(url), 100);
+				} else {
+					// Fallback to image src
+					const img = document.getElementById(imgId);
+					const a = document.createElement('a');
+					a.href = img.src;
+					a.download = 'no-background.png';
+					a.click();
+				}
 			}
 		</script>
 	</body>

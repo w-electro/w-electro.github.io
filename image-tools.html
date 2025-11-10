@@ -23,7 +23,7 @@
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		<!-- Image Compression Library -->
 		<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
-		<!-- Background Removal Library - Using imgly with proper initialization -->
+		<!-- Background Removal Library - Using unpkg CDN for better ESM compatibility -->
 		<script type="module">
 			// Initialize background removal library
 			let bgRemovalModule = null;
@@ -41,8 +41,8 @@
 
 				isLoading = true;
 				try {
-					console.log('Loading background removal library...');
-					const module = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/+esm');
+					console.log('Loading background removal library from unpkg (better ESM support)...');
+					const module = await import('https://unpkg.com/@imgly/background-removal@1.4.5/dist/index.mjs');
 					bgRemovalModule = module;
 					console.log('Background removal library loaded successfully');
 					window.bgRemovalReady = true;
@@ -62,16 +62,7 @@
 				console.log('Module loaded, starting background removal...');
 
 				try {
-					const blob = await module.removeBackground(file, {
-						model: 'medium',
-						output: {
-							format: 'image/png',
-							quality: 0.8
-						},
-						progress: (key, current, total) => {
-							console.log(`Progress: ${key} - ${current}/${total}`);
-						}
-					});
+				const blob = await module.removeBackground(file);
 					console.log('Background removal complete, blob size:', blob.size);
 					return blob;
 				} catch (error) {

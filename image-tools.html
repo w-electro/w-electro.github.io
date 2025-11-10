@@ -23,71 +23,55 @@
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 		<!-- Image Compression Library -->
 		<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
-		<!-- Background Removal Library - Dynamic ES Module Loading -->
-		<script type="module">
-			// Use dynamic ES module import for better compatibility
-			let bgRemovalLib = null;
+
+		<!-- Background Removal Library - Static Script Tag for Reliability -->
+		<script src="https://unpkg.com/@imgly/background-removal@1.4.5/dist/bundle.browser.min.js"></script>
+		<script>
+			// Simple initialization that waits for page load
 			let bgRemovalReady = false;
 
-			(async function loadBackgroundRemoval() {
-				try {
-					console.log('🔄 Loading background removal library...');
-
-					// Try to import the ES module version
-					const module = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/+esm');
-
-					if (module && module.removeBackground) {
-						bgRemovalLib = module.removeBackground;
+			window.addEventListener('load', function() {
+				// Wait 2 seconds after page load for library to initialize
+				setTimeout(function() {
+					if (typeof imglyRemoveBackground !== 'undefined') {
 						bgRemovalReady = true;
-						window.bgRemovalLib = bgRemovalLib;
-						window.bgRemovalReady = true;
-						console.log('✅ Background removal library loaded via ES module!');
+						window.bgRemovalLib = imglyRemoveBackground;
+						console.log('✅ Background removal library ready!');
 					} else {
-						console.error('❌ Module loaded but removeBackground not found');
+						console.error('❌ Background removal library not found after page load');
+						// Try checking window scope
+						if (typeof window.imglyRemoveBackground !== 'undefined') {
+							bgRemovalReady = true;
+							window.bgRemovalLib = window.imglyRemoveBackground;
+							console.log('✅ Background removal library ready from window scope!');
+						}
 					}
-				} catch (error) {
-					console.error('❌ Failed to load background removal library:', error);
-					console.log('🔄 Falling back to script tag method...');
+				}, 2000);
+			});
 
-					// Fallback: load via script tag
-					const script = document.createElement('script');
-					script.src = 'https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/dist/bundle.browser.min.js';
-					script.onload = () => {
-						setTimeout(() => {
-							if (typeof imglyRemoveBackground !== 'undefined') {
-								bgRemovalLib = imglyRemoveBackground;
-								bgRemovalReady = true;
-								window.bgRemovalLib = bgRemovalLib;
-								window.bgRemovalReady = true;
-								console.log('✅ Background removal library loaded via script tag!');
-							}
-						}, 1000);
-					};
-					document.head.appendChild(script);
-				}
-			})();
-		</script>
-		<script>
-			// Background removal function (non-module)
+			// Background removal function
 			window.removeBackground = async (file) => {
 				console.log('🔄 Starting background removal for:', file.name);
 
-				// Wait for library with timeout
+				// Wait for library to be ready
 				let retries = 0;
-				while ((!window.bgRemovalReady || !window.bgRemovalLib) && retries < 30) {
+				while (!bgRemovalReady && retries < 40) {
 					if (retries === 0) {
-						console.log('⏳ Waiting for library to load...');
+						console.log('⏳ Waiting for library...');
 					}
-					if (retries % 5 === 0 && retries > 0) {
-						console.log(`⏳ Still waiting... (${retries}/30)`);
+					if (retries % 10 === 0 && retries > 0) {
+						console.log(`⏳ Still waiting... (${retries}/40 - ${retries * 0.5}s)`);
 					}
 					await new Promise(resolve => setTimeout(resolve, 500));
 					retries++;
 				}
 
-				if (!window.bgRemovalReady || !window.bgRemovalLib) {
-					console.error('❌ Library failed to load after 15 seconds');
-					throw new Error('عذراً، أداة إزالة الخلفية لم تتمكن من التحميل. الرجاء تحديث الصفحة أو جرب متصفح آخر.');
+				if (!bgRemovalReady || !window.bgRemovalLib) {
+					console.error('❌ Library not available after 20 seconds');
+					console.log('Debug: bgRemovalReady =', bgRemovalReady);
+					console.log('Debug: window.bgRemovalLib =', window.bgRemovalLib);
+					console.log('Debug: typeof imglyRemoveBackground =', typeof imglyRemoveBackground);
+					throw new Error('عذراً، أداة إزالة الخلفية غير متوفرة. الرجاء تحديث الصفحة والانتظار قليلاً قبل المحاولة.');
 				}
 
 				try {
@@ -95,7 +79,7 @@
 					const blob = await window.bgRemovalLib(file, {
 						progress: (key, current, total) => {
 							const percent = Math.round((current / total) * 100);
-							if (percent % 10 === 0 || percent === 100) {
+							if (percent % 20 === 0 || percent === 100) {
 								console.log(`📊 ${key}: ${percent}%`);
 							}
 						}
@@ -105,18 +89,17 @@
 						throw new Error('النتيجة فارغة');
 					}
 
-					console.log('✅ Background removed successfully! Size:', Math.round(blob.size / 1024), 'KB');
+					console.log('✅ Background removed! Size:', Math.round(blob.size / 1024), 'KB');
 					return blob;
 				} catch (error) {
 					console.error('❌ Error:', error);
 
-					// More specific error messages
 					if (error.message && error.message.includes('memory')) {
-						throw new Error('الصورة كبيرة جداً. الرجاء استخدام صورة أصغر حجماً (أقل من 2MB).');
+						throw new Error('الصورة كبيرة جداً. جرب صورة أصغر (أقل من 2MB).');
 					} else if (error.message && error.message.includes('network')) {
-						throw new Error('خطأ في الاتصال. الرجاء التحقق من الإنترنت والمحاولة مرة أخرى.');
+						throw new Error('خطأ في الاتصال. تحقق من الإنترنت.');
 					} else {
-						throw new Error('حدث خطأ أثناء إزالة الخلفية. الرجاء المحاولة بصورة أخرى.');
+						throw new Error('حدث خطأ. جرب صورة أخرى أو حدث الصفحة.');
 					}
 				}
 			};

@@ -849,86 +849,6 @@
 				}
 			}
 
-			/* Testimonials Carousel */
-			.testimonials-carousel {
-				overflow-x: auto;
-				overflow-y: hidden;
-				position: relative;
-				scrollbar-width: thin;
-				scrollbar-color: #0891b2 #f1f1f1;
-				-webkit-overflow-scrolling: touch;
-				scroll-snap-type: x mandatory;
-			}
-
-			.testimonials-carousel::-webkit-scrollbar {
-				height: 8px;
-			}
-
-			.testimonials-carousel::-webkit-scrollbar-track {
-				background: #f1f1f1;
-				border-radius: 10px;
-			}
-
-			.testimonials-carousel::-webkit-scrollbar-thumb {
-				background: linear-gradient(135deg, #0891b2, #ff6e42);
-				border-radius: 10px;
-			}
-
-			.testimonials-carousel::-webkit-scrollbar-thumb:hover {
-				background: linear-gradient(135deg, #0a7a8f, #e65a31);
-			}
-
-			.testimonial-slide {
-				min-width: 100%;
-				flex-shrink: 0;
-				scroll-snap-align: start;
-				padding: 0 8px;
-			}
-
-			.testimonial-slide > div {
-				height: 100%;
-			}
-
-			#testimonialsTrack {
-				direction: ltr;
-				transition: none;
-				display: flex;
-				gap: 0;
-			}
-
-			.testimonial-slide > * {
-				direction: rtl;
-			}
-
-			@media (max-width: 767px) {
-				.testimonial-slide .bg-white {
-					padding: 20px !important;
-				}
-				.testimonial-slide h4 {
-					font-size: 1rem !important;
-				}
-				.testimonial-slide p.text-lg {
-					font-size: 0.95rem !important;
-				}
-				.testimonial-slide .w-16 {
-					width: 48px !important;
-					height: 48px !important;
-				}
-			}
-
-			@media (min-width: 768px) {
-				.testimonial-slide {
-					min-width: 50%;
-					padding: 0 12px;
-				}
-			}
-
-			@media (min-width: 1024px) {
-				.testimonial-slide {
-					min-width: 33.333%;
-					padding: 0 16px;
-				}
-			}
 
 
 			/* Animated Counter */
@@ -1583,101 +1503,238 @@
 				</div>
 			</section>
 
-			<!-- Customer Testimonials Carousel -->
-			<section class="py-20 bg-gradient-to-br from-cyan-50 to-orange-50">
-				<div class="container mx-auto px-4">
-					<div class="text-center mb-16 animate-fadeInUp">
-						<h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">ماذا يقول عملاؤنا</h2>
-						<p class="text-xl text-gray-600">تجارب حقيقية من عملاء راضين عن خدماتنا</p>
-					</div>
-
-					<div class="max-w-6xl mx-auto px-0 md:px-4">
-						<div class="testimonials-carousel relative">
-							<div class="flex transition-transform duration-500" id="testimonialsTrack">
-								<!-- Testimonial 1 - Real Google Review -->
-								<div class="testimonial-slide px-4">
-									<div class="bg-white p-8 rounded-2xl shadow-lg">
-										<div class="flex items-center mb-6">
-											<div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-												ب
-											</div>
-											<div class="mr-4">
-												<h4 class="font-bold text-gray-800 text-lg">Bassam Alshammari</h4>
-												<p class="text-gray-600">Local Guide - خرائط جوجل</p>
-												<div class="flex text-yellow-400 text-sm mt-1">
-													★★★★★
-												</div>
-											</div>
-										</div>
-										<p class="text-gray-700 leading-relaxed text-lg">
-											"ما شاء الله من أفضل الخدمات الإلكترونية والطلابية الي في حائل. دقة في الأداء و سرعة في الانجاز. عسى الله يبارك لكم ويفتح عليكم أبواب الرزق الطيب يا رب"
-										</p>
-										<div class="mt-4 text-sm text-gray-500">
-											<i class="fas fa-map-marker-alt text-red-500"></i> مراجعة من خرائط جوجل
-										</div>
-									</div>
-								</div>
-
-								<!-- Testimonial 2 - Real Google Review -->
-								<div class="testimonial-slide px-4">
-									<div class="bg-white p-8 rounded-2xl shadow-lg">
-										<div class="flex items-center mb-6">
-											<div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-												ر
-											</div>
-											<div class="mr-4">
-												<h4 class="font-bold text-gray-800 text-lg">Roro Space</h4>
-												<p class="text-gray-600">عميل معتمد</p>
-												<div class="flex text-yellow-400 text-sm mt-1">
-													★★★★★
-												</div>
-											</div>
-										</div>
-										<p class="text-gray-700 leading-relaxed text-lg">
-											"خدمه رائعه جدًا وتعامل بطل وسريعين وفي احترافيه بالشغل انصح الكل يتعامل معهم"
-										</p>
-										<div class="mt-4 text-sm text-gray-500">
-											<i class="fas fa-map-marker-alt text-red-500"></i> مراجعة من خرائط جوجل
-										</div>
-									</div>
-								</div>
-
-								<!-- Testimonial 3 - Real Google Review -->
-								<div class="testimonial-slide px-4">
-									<div class="bg-white p-8 rounded-2xl shadow-lg">
-										<div class="flex items-center mb-6">
-											<div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
-												ب
-											</div>
-											<div class="mr-4">
-												<h4 class="font-bold text-gray-800 text-lg">بشرى العباسي</h4>
-												<p class="text-gray-600">عميل معتمد</p>
-												<div class="flex text-yellow-400 text-sm mt-1">
-													★★★★★
-												</div>
-											</div>
-										</div>
-										<p class="text-gray-700 leading-relaxed text-lg">
-											"تجربه ممتازه شغل مرتب ونموذجي وسرعه في تلبية الطلب واسعار ممتازه انصح بالتعامل معاهم وشكرا لليد العامله فيه🙏🏻🤍"
-										</p>
-										<div class="mt-4 text-sm text-gray-500">
-											<i class="fas fa-map-marker-alt text-red-500"></i> مراجعة من خرائط جوجل
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<!-- Scroll Hint -->
-							<div class="flex justify-center gap-2 mt-8">
-								<p class="text-gray-600 text-sm">
-									<i class="fas fa-hand-pointer text-cyan-500"></i>
-									اسحب لعرض المزيد من التقييمات
-								</p>
-							</div>
-						</div>
+		<!-- Customer Testimonials Grid -->
+		<section class="py-20 bg-gradient-to-br from-cyan-50 to-orange-50">
+			<div class="container mx-auto px-4">
+				<div class="text-center mb-12">
+					<h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">ماذا يقول عملاؤنا</h2>
+					<p class="text-lg text-gray-600 mb-2">تقييمات حقيقية من خرائط جوجل</p>
+					<div class="flex items-center justify-center gap-2 text-yellow-400 text-xl">
+						<span class="text-3xl font-bold text-gray-800">4.9</span>
+						<div>★★★★★</div>
+						<span class="text-gray-600 text-base">(16+ تقييم)</span>
 					</div>
 				</div>
-			</section>
+
+				<div class="max-w-7xl mx-auto">
+					<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+						<!-- Review 1 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center text-white text-lg font-bold">و</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">Waleed A.</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-500 text-xs mb-2">منذ 20 ساعة</p>
+						</div>
+
+						<!-- Review 2 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center text-white text-lg font-bold">س</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">ساره ال.</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-500 text-xs mb-2">منذ 26 أسبوع</p>
+						</div>
+
+						<!-- Review 3 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-full flex items-center justify-center text-white text-lg font-bold">R</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">Rimas T.</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-500 text-xs mb-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 4 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white text-lg font-bold">K</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">KhaliDo</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm leading-relaxed">"خدماتهم الطلابية والإلكترونية ممتازة وجودتها عالية وسريعة 👌🏻"</p>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 5 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white text-lg font-bold">B</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">bas.</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm leading-relaxed">"دقيقين واحترافيين وتعاملهم ممتاز 💯💯💯"</p>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 6 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-rose-500 to-rose-600 rounded-full flex items-center justify-center text-white text-lg font-bold">م</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">منى ال.</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm leading-relaxed">"ممتاز الشغل كامل👍"</p>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 7 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center text-white text-lg font-bold">R</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">Roro S.</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm leading-relaxed">"خدمه رائعه جدًا وتعامل بطل وسريعين وفي احترافيه بالشغل انصح الكل يتعامل معهم"</p>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 8 - Featured -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 md:col-span-2 lg:col-span-1">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center text-white text-lg font-bold">B</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">Bassam A.</h4>
+									<p class="text-xs text-gray-500">Local Guide</p>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm leading-relaxed">"ما شاء الله من أفضل الخدمات الإلكترونية والطلابية الي في حائل. دقة في الأداء و سرعة في الانجاز. عسى الله يبارك لكم ويفتح عليكم أبواب الرزق الطيب يا رب"</p>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 9 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 md:col-span-2 lg:col-span-1">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center text-white text-lg font-bold">ب</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">بشرى ال.</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm leading-relaxed">"تجربه ممتازه شغل مرتب ونموذجي وسرعه في تلبية الطلب واسعار ممتازه انصح بالتعامل معاهم وشكرا لليد العامله فيه🙏🏻🤍"</p>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 10 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center text-white text-lg font-bold">س</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">سليمان</h4>
+									<p class="text-xs text-gray-500">Local Guide</p>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm leading-relaxed">"متجر متكااامل من كل النواحي 👏🏼"</p>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 11 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center text-white text-lg font-bold">M</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">m7md a.</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm leading-relaxed">"سريع وشغله ممتاز"</p>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 12 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-lime-500 to-lime-600 rounded-full flex items-center justify-center text-white text-lg font-bold">م</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">مالك ال.</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm leading-relaxed">"خدمة مميزة و سريعه و اسلوب راقي 🤍🤍🤍🤍"</p>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 13 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-sky-500 to-sky-600 rounded-full flex items-center justify-center text-white text-lg font-bold">ي</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">ياسر</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 14 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-violet-500 to-violet-600 rounded-full flex items-center justify-center text-white text-lg font-bold">E</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">Ekhlas</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 15 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center text-white text-lg font-bold">M</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">Mohammed</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm leading-relaxed">"من اسرع واسهل الخدمات"</p>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+
+						<!-- Review 16 -->
+						<div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="w-12 h-12 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center text-white text-lg font-bold">H</div>
+								<div class="flex-1">
+									<h4 class="font-bold text-gray-800">hunter c.</h4>
+									<div class="flex text-yellow-400 text-xs">★★★★★</div>
+								</div>
+							</div>
+							<p class="text-gray-600 text-sm leading-relaxed">"مافي اسهل من خدمتهم الله يعطيهم العافيه"</p>
+							<p class="text-gray-500 text-xs mt-2">منذ 27 أسبوع</p>
+						</div>
+					</div>
+
+					<!-- View More Button -->
+					<div class="text-center mt-10">
+						<a href="https://www.google.com/maps" target="_blank" class="inline-flex items-center gap-2 bg-white text-gray-700 px-6 py-3 rounded-full font-semibold hover:bg-gray-50 transition-all duration-300 shadow-md hover:shadow-lg">
+							<i class="fab fa-google text-xl"></i>
+							<span>عرض جميع التقييمات على خرائط جوجل</span>
+							<i class="fas fa-external-link-alt text-sm"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
 
 			<!-- Money-Back Guarantee Section -->
 			<section class="py-12 bg-gradient-to-r from-green-500 to-green-600">
@@ -2378,23 +2435,6 @@
 			// Sticky CTA and scroll tracking moved to consolidated scroll handler above
 
 
-			// 5. Testimonials - Now scrollable instead of carousel
-			// Testimonials section is now manually scrollable by users
-			const testimonialsTrack = document.getElementById('testimonialsTrack');
-
-			// Track scroll events for analytics
-			if (testimonialsTrack) {
-				let scrollTimeout;
-				testimonialsTrack.parentElement.addEventListener('scroll', function() {
-					clearTimeout(scrollTimeout);
-					scrollTimeout = setTimeout(() => {
-						window.dataLayer.push({
-							'event': 'testimonials_scrolled'
-						});
-					}, 500);
-				});
-			}
-
 			// 6. Animated Statistics Counter
 			function animateCounter(element, target, duration = 2000) {
 				let start = 0;
@@ -2508,7 +2548,6 @@
 				console.log('✅ Live Chat: Active');
 				console.log('✅ Microsoft Clarity: Active');
 				console.log('✅ Exit Popup: Armed');
-					console.log('✅ Testimonials: Auto-rotating');
 				console.log('🎉 Website fully optimized!');
 			});
 

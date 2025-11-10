@@ -24,15 +24,37 @@
 		<!-- Image Compression Library -->
 		<script src="https://cdn.jsdelivr.net/npm/browser-image-compression@2.0.2/dist/browser-image-compression.js"></script>
 		<!-- Background Removal Library - Using pre-bundled browser version -->
-		<script src="https://unpkg.com/@imgly/background-removal@1.4.5/dist/bundle.browser.min.js"></script>
+		<script src="https://unpkg.com/@imgly/background-removal@1.4.5/dist/bundle.browser.min.js" onload="console.log('Background removal library loaded'); console.log('Available:', typeof imglyRemoveBackground);"></script>
 		<script>
+			// Wait for library to load and initialize
+			let bgRemovalInitialized = false;
+
+			// Check if library loaded after page load
+			window.addEventListener('load', () => {
+				setTimeout(() => {
+					if (typeof imglyRemoveBackground !== 'undefined') {
+						bgRemovalInitialized = true;
+						window.bgRemovalReady = true;
+						console.log('Background removal library ready');
+					} else {
+						console.error('Background removal library failed to load');
+					}
+				}, 1000);
+			});
+
 			// Simple wrapper for background removal
 			window.removeBackground = async (file) => {
 				console.log('removeBackground called with file:', file.name);
 
+				// Wait a bit if library is still loading
+				if (!bgRemovalInitialized) {
+					console.log('Waiting for library to initialize...');
+					await new Promise(resolve => setTimeout(resolve, 2000));
+				}
+
 				if (typeof imglyRemoveBackground === 'undefined') {
 					console.error('Background removal library not loaded');
-					throw new Error('مكتبة إزالة الخلفية غير متوفرة');
+					throw new Error('عذراً، أداة إزالة الخلفية غير متوفرة حالياً. الرجاء المحاولة لاحقاً أو تحديث الصفحة.');
 				}
 
 				try {
@@ -47,12 +69,9 @@
 					return blob;
 				} catch (error) {
 					console.error('Error during background removal:', error);
-					throw error;
+					throw new Error('حدث خطأ أثناء إزالة الخلفية. الرجاء المحاولة مرة أخرى أو جرب صورة أخرى.');
 				}
 			};
-
-			window.bgRemovalReady = true;
-			console.log('Background removal library ready');
 		</script>
 
 		<!-- FAQ Schema for Rich Results -->

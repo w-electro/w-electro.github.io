@@ -54,6 +54,51 @@
 			window.bgRemovalReady = true;
 			console.log('Background removal library ready');
 		</script>
+
+		<!-- FAQ Schema for Rich Results -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "FAQPage",
+			"mainEntity": [{
+				"@type": "Question",
+				"name": "هل أدوات الصور مجانية؟",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "نعم، جميع أدوات معالجة الصور مجانية تماماً بدون حدود. يمكنك ضغط، تحويل، تغيير حجم الصور، وإزالة الخلفية مجاناً."
+				}
+			},{
+				"@type": "Question",
+				"name": "كيف تعمل أداة إزالة الخلفية؟",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "أداة إزالة الخلفية تستخدم تقنية الذكاء الاصطناعي المتقدمة للتعرف على العنصر الرئيسي في الصورة وإزالة الخلفية تلقائياً بدقة عالية. العملية سريعة وسهلة."
+				}
+			},{
+				"@type": "Question",
+				"name": "ما هي صيغ الصور المدعومة؟",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "ندعم جميع صيغ الصور الشائعة: PNG, JPG, JPEG, WEBP, BMP, GIF. يمكنك رفع أي صورة وتحويلها للصيغة التي تريدها."
+				}
+			},{
+				"@type": "Question",
+				"name": "هل تفقد الصور جودتها بعد الضغط؟",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "لا، نستخدم خوارزميات ذكية للضغط تحافظ على الجودة البصرية. يمكنك التحكم بمستوى الضغط والجودة حسب احتياجك."
+				}
+			},{
+				"@type": "Question",
+				"name": "هل صوري آمنة؟",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "نعم تماماً. جميع العمليات (ماعدا إزالة الخلفية) تتم محلياً في متصفحك. إزالة الخلفية تستخدم AI لكن لا نحتفظ بأي صور. خصوصيتك مضمونة."
+				}
+			}]
+		}
+		</script>
+
 		<style>
 			:root {
 				--primary-color: #0891b2;

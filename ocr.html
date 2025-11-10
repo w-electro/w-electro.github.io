@@ -51,6 +51,50 @@
 		<!-- Alpine.js -->
 		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
+		<!-- FAQ Schema for Rich Results -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "FAQPage",
+			"mainEntity": [{
+				"@type": "Question",
+				"name": "هل أداة OCR مجانية؟",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "نعم، أداة استخراج النصوص OCR مجانية 100% بدون أي قيود على الاستخدام أو عدد الملفات. يمكنك استخدامها بدون تسجيل أو اشتراك."
+				}
+			},{
+				"@type": "Question",
+				"name": "ما هي دقة استخراج النصوص؟",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "تصل دقة استخراج النصوص إلى 99% باستخدام تقنية Google Cloud Vision المتقدمة. الأداة تدعم اللغة العربية والإنجليزية وتعمل بشكل ممتاز مع جميع أنواع الخطوط."
+				}
+			},{
+				"@type": "Question",
+				"name": "ما هي الصيغ المدعومة لاستخراج النصوص؟",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "نحن ندعم جميع صيغ الصور الشائعة مثل PNG, JPG, JPEG, BMP, GIF وكذلك ملفات PDF. يمكنك رفع أي صورة تحتوي على نصوص وسنقوم باستخراجها."
+				}
+			},{
+				"@type": "Question",
+				"name": "هل تحتفظون بالصور أو النصوص المرفوعة؟",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "لا، نحن لا نحتفظ بأي ملفات أو نصوص. جميع العمليات تتم بشكل آمن ويتم حذف الملفات فوراً بعد الانتهاء من استخراج النصوص. خصوصيتك مهمة لنا."
+				}
+			},{
+				"@type": "Question",
+				"name": "كيف أستخدم أداة OCR؟",
+				"acceptedAnswer": {
+					"@type": "Answer",
+					"text": "استخدام الأداة سهل جداً: 1) اضغط على زر 'اختر ملف' أو اسحب الصورة، 2) انتظر بضع ثوان لاستخراج النصوص، 3) انسخ النص أو حمّله كملف. الأمر بسيط وسريع!"
+				}
+			}]
+		}
+		</script>
+
 		<!-- Critical inline styles -->
 		<style>
 			:root {

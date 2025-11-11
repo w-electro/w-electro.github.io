@@ -67,7 +67,10 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 		<link rel="preconnect" href="https://cdn.tailwindcss.com">
-		
+
+		<!-- Preload Critical Images -->
+		<link rel="preload" as="image" href="wD.png" fetchpriority="high">
+
 		<!-- Structured Data -->
 		<script type="application/ld+json">
 		{
@@ -1066,7 +1069,7 @@
 		<!-- Loading Screen -->
 		<div id="loadingScreen" class="loading-screen">
 			<div class="loading-logo">
-				<img src="wD.png" alt="W للخدمات الإلكترونية" />
+				<img src="wD.png" alt="W للخدمات الإلكترونية" loading="lazy" />
 			</div>
 			<div class="loading-text">W للخدمات الإلكترونية</div>
 			<div class="loading-progress">
@@ -2122,7 +2125,7 @@
 						<!-- Logo and Description -->
 						<div class="text-center lg:text-right">
 							<div class="flex items-center justify-center lg:justify-start gap-3 mb-4">
-								<img src="wD.png" alt="W للخدمات الإلكترونية" class="w-12 h-12 rounded-full shadow-lg" width="48" height="48" />
+								<img src="wD.png" alt="W للخدمات الإلكترونية" class="w-12 h-12 rounded-full shadow-lg" width="48" height="48" loading="lazy" />
 								<h3 class="text-2xl lg:text-3xl font-bold">
 									<span class="text-cyan-400">W</span>
 									<span class="text-orange-400">للخدمات الإلكترونية</span>

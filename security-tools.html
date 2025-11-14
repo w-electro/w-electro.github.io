@@ -1,6 +1,16 @@
 <!DOCTYPE HTML>
 <html lang="ar" dir="rtl">
 	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-TJE91T4442"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'G-TJE91T4442');
+		</script>
+
 		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -9,7 +19,7 @@
 		<title>أدوات الأمان | الأدوات | W للخدمات الإلكترونية</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="أدوات الأمان المجانية - مولد كلمات المرور، مولد الهاش، ومشفر URL">
+		<meta name="description" content="أدوات الأمان المجانية - مولد كلمات المرور، مولد الهاش، مشفر URL، وBase64">
 		<link rel="icon" href="wD.png" type="image/png">
 		<link rel="canonical" href="https://www.w-electro.com/security-tools">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap">
@@ -75,7 +85,7 @@
 			<section class="py-16 bg-gradient-to-br from-cyan-50 via-blue-50 to-orange-50">
 				<div class="container mx-auto px-4 text-center">
 					<h1 class="text-3xl lg:text-5xl font-bold text-gray-800 mb-4"><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">أدوات الأمان</span></h1>
-					<p class="text-lg text-gray-600 max-w-2xl mx-auto">توليد كلمات مرور قوية، إنشاء هاش، وتشفير URL</p>
+					<p class="text-lg text-gray-600 max-w-2xl mx-auto">توليد كلمات مرور قوية، إنشاء هاش، تشفير URL، وBase64</p>
 				</div>
 			</section>
 
@@ -86,6 +96,7 @@
 							<button class="tab-button active" onclick="switchTool('password')"><i class="fas fa-key ml-2"></i>مولد كلمات المرور</button>
 							<button class="tab-button" onclick="switchTool('hash')"><i class="fas fa-hashtag ml-2"></i>مولد الهاش</button>
 							<button class="tab-button" onclick="switchTool('url')"><i class="fas fa-link ml-2"></i>مشفر URL</button>
+							<button class="tab-button" onclick="switchTool('base64')"><i class="fas fa-code ml-2"></i>Base64</button>
 						</div>
 
 						<!-- Password Generator -->
@@ -135,6 +146,19 @@
 								</div>
 								<textarea id="url-output" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none bg-gray-50" readonly dir="ltr"></textarea>
 								<div class="flex justify-center"><button onclick="copyToClipboard('url-output')" class="btn-primary"><i class="fas fa-copy ml-2"></i>نسخ النتيجة</button></div>
+							</div>
+						</div>
+
+						<!-- Base64 Encoder/Decoder -->
+						<div id="tool-base64" class="tool-content hidden">
+							<div class="space-y-6">
+								<textarea id="base64-input" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none" placeholder="اكتب النص للتشفير أو فك التشفير بـ Base64" dir="auto"></textarea>
+								<div class="flex flex-wrap justify-center gap-3">
+									<button onclick="encodeBase64()" class="btn-primary px-8 py-4"><i class="fas fa-lock ml-2"></i>تشفير Base64</button>
+									<button onclick="decodeBase64()" class="btn-primary px-8 py-4"><i class="fas fa-unlock ml-2"></i>فك تشفير Base64</button>
+								</div>
+								<textarea id="base64-output" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-lg resize-none bg-gray-50" readonly dir="ltr"></textarea>
+								<div class="flex justify-center"><button onclick="copyToClipboard('base64-output')" class="btn-primary"><i class="fas fa-copy ml-2"></i>نسخ النتيجة</button></div>
 							</div>
 						</div>
 					</div>
@@ -267,6 +291,29 @@
 					document.getElementById('url-output').value = decoded;
 				} catch(e) {
 					alert('حدث خطأ في فك التشفير');
+				}
+			}
+
+			// Base64 Encoder/Decoder
+			function encodeBase64() {
+				const input = document.getElementById('base64-input').value;
+				if (!input) return alert('الرجاء إدخال نص');
+				try {
+					const encoded = btoa(unescape(encodeURIComponent(input)));
+					document.getElementById('base64-output').value = encoded;
+				} catch(e) {
+					alert('حدث خطأ في التشفير');
+				}
+			}
+
+			function decodeBase64() {
+				const input = document.getElementById('base64-input').value;
+				if (!input) return alert('الرجاء إدخال نص');
+				try {
+					const decoded = decodeURIComponent(escape(atob(input)));
+					document.getElementById('base64-output').value = decoded;
+				} catch(e) {
+					alert('حدث خطأ في فك التشفير - تأكد من أن النص مشفر بـ Base64 صحيح');
 				}
 			}
 

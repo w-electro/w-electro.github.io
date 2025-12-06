@@ -3,103 +3,208 @@
       xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+      xmlns:xhtml="http://www.w3.org/1999/xhtml"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- W للخدمات الإلكترونية - Premium Electronic Services in Hail, Saudi Arabia -->
+<!-- W للخدمات الإلكترونية - خدمات طلابية وإلكترونية في السعودية -->
+<!-- Last Updated: 2025-12-06 - SEO Optimization Update -->
 
+<!-- ==================== HOMEPAGE ==================== -->
 <url>
   <loc>https://www.w-electro.com/</loc>
-  <lastmod>2025-11-11T00:00:00+00:00</lastmod>
-  <changefreq>weekly</changefreq>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <changefreq>daily</changefreq>
   <priority>1.0</priority>
   <image:image>
     <image:loc>https://www.w-electro.com/wD.png</image:loc>
-    <image:title>W للخدمات الإلكترونية</image:title>
+    <image:title>W للخدمات الإلكترونية - خدمات طلابية وأدوات مجانية في السعودية</image:title>
+    <image:caption>أفضل خدمات طلابية وإلكترونية في المملكة العربية السعودية</image:caption>
   </image:image>
 </url>
 
-<!-- Landing Pages - High Priority -->
+<!-- ==================== LANDING PAGES ==================== -->
 <url>
   <loc>https://www.w-electro.com/promo.html</loc>
-  <lastmod>2025-11-11T00:00:00+00:00</lastmod>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.95</priority>
   <image:image>
     <image:loc>https://www.w-electro.com/wD.png</image:loc>
-    <image:title>عرض خاص - W للخدمات الإلكترونية</image:title>
+    <image:title>عروض وخصومات - W للخدمات الإلكترونية</image:title>
   </image:image>
 </url>
 
-<!-- Free Tools - High Priority -->
+<!-- ==================== FREE TOOLS - HIGH PRIORITY ==================== -->
+<!-- OCR Tool - استخراج النصوص -->
 <url>
   <loc>https://www.w-electro.com/ocr</loc>
-  <lastmod>2025-11-11T00:00:00+00:00</lastmod>
-  <changefreq>monthly</changefreq>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
   <priority>0.95</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>استخراج النصوص من الصور OCR مجاناً - دقة 99%</image:title>
+  </image:image>
 </url>
 
+<!-- PDF Tools - أدوات PDF -->
 <url>
   <loc>https://www.w-electro.com/pdf-tools</loc>
-  <lastmod>2025-11-11T00:00:00+00:00</lastmod>
-  <changefreq>monthly</changefreq>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
   <priority>0.95</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>أدوات PDF مجانية - دمج وتقسيم وتحويل</image:title>
+  </image:image>
 </url>
 
+<!-- Image Tools - أدوات الصور -->
 <url>
   <loc>https://www.w-electro.com/image-tools</loc>
-  <lastmod>2025-11-11T00:00:00+00:00</lastmod>
-  <changefreq>monthly</changefreq>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
   <priority>0.95</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>أدوات معالجة الصور مجاناً - ضغط وتحويل</image:title>
+  </image:image>
 </url>
 
+<!-- QR Generator - مولد QR -->
 <url>
   <loc>https://www.w-electro.com/qr-generator</loc>
-  <lastmod>2025-11-11T00:00:00+00:00</lastmod>
-  <changefreq>monthly</changefreq>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
   <priority>0.90</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>مولد رمز QR مجاني - إنشاء باركود QR</image:title>
+  </image:image>
 </url>
 
+<!-- Barcode Generator - مولد الباركود -->
+<url>
+  <loc>https://www.w-electro.com/barcode-generator</loc>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>مولد الباركود مجاناً - جميع أنواع الباركود</image:title>
+  </image:image>
+</url>
+
+<!-- Text Tools - أدوات النصوص -->
+<url>
+  <loc>https://www.w-electro.com/text-tools</loc>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.85</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>أدوات النصوص مجاناً - عداد الكلمات ومنسق JSON</image:title>
+  </image:image>
+</url>
+
+<!-- Security Tools - أدوات الأمان -->
+<url>
+  <loc>https://www.w-electro.com/security-tools</loc>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.85</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>أدوات الأمان مجاناً - مولد كلمات مرور قوية</image:title>
+  </image:image>
+</url>
+
+<!-- Design Tools - أدوات التصميم -->
+<url>
+  <loc>https://www.w-electro.com/design-tools</loc>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.85</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>أدوات التصميم مجاناً - منتقي الألوان والتدرجات</image:title>
+  </image:image>
+</url>
+
+<!-- Tools Hub - صفحة الأدوات -->
 <url>
   <loc>https://www.w-electro.com/tools</loc>
-  <lastmod>2025-11-11T00:00:00+00:00</lastmod>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.90</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>جميع الأدوات المجانية - W للخدمات الإلكترونية</image:title>
+  </image:image>
 </url>
 
-<!-- Service Pages -->
+<!-- ==================== SERVICE PAGES ==================== -->
+<!-- Academic Services - خدمات طلابية -->
 <url>
   <loc>https://www.w-electro.com/academic-services</loc>
-  <lastmod>2025-11-11T00:00:00+00:00</lastmod>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
-  <priority>0.9</priority>
+  <priority>0.90</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>خدمات طلابية في السعودية - مشاريع تخرج وبحوث</image:title>
+  </image:image>
 </url>
 
+<!-- General Services - خدمات عامة -->
 <url>
   <loc>https://www.w-electro.com/general-services</loc>
-  <lastmod>2025-11-11T00:00:00+00:00</lastmod>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
-  <priority>0.9</priority>
+  <priority>0.90</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>خدمات إلكترونية عامة في السعودية</image:title>
+  </image:image>
 </url>
 
+<!-- Design Services - خدمات التصميم -->
 <url>
   <loc>https://www.w-electro.com/design-services</loc>
-  <lastmod>2025-11-11T00:00:00+00:00</lastmod>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
-  <priority>0.9</priority>
+  <priority>0.90</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>خدمات التصميم الاحترافي - شعارات وهويات بصرية</image:title>
+  </image:image>
 </url>
 
+<!-- Electronic Services - خدمات إلكترونية -->
+<url>
+  <loc>https://www.w-electro.com/electronic-services</loc>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.85</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>خدمات إلكترونية احترافية في السعودية</image:title>
+  </image:image>
+</url>
+
+<!-- ==================== LEGAL PAGES ==================== -->
 <url>
   <loc>https://www.w-electro.com/privacy-policy</loc>
-  <lastmod>2025-11-07T00:00:00+00:00</lastmod>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.5</priority>
+  <priority>0.4</priority>
 </url>
 
 <url>
   <loc>https://www.w-electro.com/terms-and-conditions</loc>
-  <lastmod>2025-11-07T00:00:00+00:00</lastmod>
+  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
   <changefreq>monthly</changefreq>
-  <priority>0.5</priority>
+  <priority>0.4</priority>
 </url>
 
 </urlset>

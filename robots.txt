@@ -1,27 +1,98 @@
+# =============================================================================
 # robots.txt for W للخدمات الإلكترونية
 # https://www.w-electro.com/robots.txt
+# Last Updated: 2025-12-06
+# =============================================================================
 
+# Default rules for all crawlers
 User-agent: *
 Allow: /
 
-# Disallow admin or backend directories if any
+# Disallow backend and development directories
 Disallow: /ocr-backend/
+Disallow: /.git/
+Disallow: /assets/sass/
+Disallow: /*.scss$
 
-# Allow all major search engines
+# Allow all static assets
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/webfonts/
+Allow: /images/
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# =============================================================================
+# Google Crawler - Primary Search Engine
+# =============================================================================
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Googlebot-Image
+Allow: /images/
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.webp$
+
+User-agent: Googlebot-News
 Allow: /
 
+User-agent: Googlebot-Video
+Allow: /
+
+# =============================================================================
+# Other Major Search Engines
+# =============================================================================
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Slurp
 Allow: /
+Crawl-delay: 2
 
-# Sitemap location
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+
+# =============================================================================
+# Social Media Crawlers
+# =============================================================================
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Pinterest
+Allow: /
+
+User-agent: Snapchat
+Allow: /
+
+# =============================================================================
+# Sitemap Location
+# =============================================================================
 Sitemap: https://www.w-electro.com/sitemap.xml
 
-# Crawl-delay for polite crawling
-Crawl-delay: 1
+# =============================================================================
+# Host Declaration
+# =============================================================================
+Host: https://www.w-electro.com

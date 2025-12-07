@@ -1,0 +1,627 @@
+<!DOCTYPE HTML>
+<html lang="ar" dir="rtl">
+	<head>
+		<style id="critical-hide">
+			body { visibility: hidden; }
+			.loading-screen {
+				visibility: visible !important;
+				position: fixed;
+				top: 0; left: 0; width: 100%; height: 100%;
+				background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #ff6e42 100%);
+				display: flex; flex-direction: column; justify-content: center; align-items: center;
+				z-index: 9999;
+			}
+			.loading-logo {
+				width: 120px; height: 120px; background: white; border-radius: 50%;
+				display: flex; align-items: center; justify-content: center;
+				animation: pulse 1.5s ease-in-out infinite;
+			}
+			.loading-logo img { width: 80px; height: 80px; border-radius: 50%; }
+			@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+		</style>
+
+		<script>
+		window.addEventListener('load', function() {
+			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','GTM-NH542DNT');
+		});
+		</script>
+
+		<title>أدوات المطورين المجانية | مولد UUID، Lorem Ipsum، ميتا تاجز، HTML</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="Content-Language" content="ar" />
+
+		<meta name="description" content="أدوات مطورين مجانية 100% | مولد UUID | مولد Lorem Ipsum | مولد Meta Tags | منسق HTML | بدون تسجيل - جرب الآن!">
+		<meta name="keywords" content="مولد UUID, Lorem Ipsum عربي, مولد ميتا تاجز, منسق HTML, أدوات مطورين مجانية">
+		<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+		<meta name="author" content="W للخدمات الإلكترونية">
+		<meta name="geo.region" content="SA">
+
+		<link rel="icon" href="wD.png" type="image/png">
+		<link rel="shortcut icon" href="wD.png" type="image/png">
+		<link rel="apple-touch-icon" href="wD.png">
+		<link rel="canonical" href="https://www.w-electro.com/dev-tools">
+
+		<meta property="og:title" content="أدوات المطورين المجانية | UUID، Lorem Ipsum، Meta Tags">
+		<meta property="og:description" content="أدوات مطورين مجانية 100% | UUID، نصوص وهمية، ميتا تاجز، تنسيق HTML">
+		<meta property="og:image" content="https://www.w-electro.com/wD.png">
+		<meta property="og:url" content="https://www.w-electro.com/dev-tools">
+		<meta property="og:type" content="website">
+		<meta property="og:site_name" content="W للخدمات الإلكترونية">
+		<meta property="og:locale" content="ar_SA">
+		<meta name="twitter:card" content="summary_large_image">
+
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "WebApplication",
+			"name": "أدوات المطورين المجانية",
+			"url": "https://www.w-electro.com/dev-tools",
+			"applicationCategory": "DeveloperApplication",
+			"operatingSystem": "Any",
+			"offers": {"@type": "Offer", "price": "0", "priceCurrency": "SAR"},
+			"author": {"@type": "Organization", "name": "W للخدمات الإلكترونية"},
+			"featureList": ["مولد UUID", "مولد Lorem Ipsum", "مولد Meta Tags", "منسق HTML"],
+			"inLanguage": ["ar", "en"]
+		}
+		</script>
+
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [{
+				"@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://www.w-electro.com/"
+			},{
+				"@type": "ListItem", "position": 2, "name": "الأدوات", "item": "https://www.w-electro.com/tools"
+			},{
+				"@type": "ListItem", "position": 3, "name": "أدوات المطورين", "item": "https://www.w-electro.com/dev-tools"
+			}]
+		}
+		</script>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preconnect" href="https://cdn.tailwindcss.com">
+		<link rel="preload" href="wD.png" as="image" type="image/png" fetchpriority="high">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<style>
+			:root {--primary-color: #0891b2; --secondary-color: #ff6e42;}
+			body {font-family: 'Cairo', system-ui, -apple-system, sans-serif;}
+			.main-content {opacity: 0; visibility: hidden; transition: opacity 0.5s;}
+			.main-content.loaded {opacity: 1; visibility: visible;}
+			.loading-screen {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #ff6e42 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s;}
+			.loading-screen.hidden {opacity: 0; visibility: hidden;}
+			.loading-logo {width: 120px; height: 120px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; animation: pulse-scale 2s ease-in-out infinite;}
+			.loading-logo img {width: 80px; height: 80px; border-radius: 50%;}
+			@keyframes pulse-scale {0%, 100% {transform: scale(1);} 50% {transform: scale(1.05);}}
+			.btn-primary {display: inline-flex !important; align-items: center; padding: 12px 24px !important; background: transparent !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; border-radius: 50px !important; font-weight: 600 !important; transition: all 0.3s !important; cursor: pointer !important; position: relative; overflow: hidden;}
+			.btn-primary::before {content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--secondary-color); transform: translateX(-100%); transition: transform 0.3s; z-index: -1;}
+			.btn-primary:hover {color: white !important; transform: translateY(-2px) !important; box-shadow: 0 10px 20px rgba(255, 110, 66, 0.3) !important;}
+			.btn-primary:hover::before {transform: translateX(0);}
+			.tab-button {padding: 12px 20px; border-radius: 12px; font-weight: 600; transition: all 0.3s; border: 2px solid transparent; font-size: 0.9rem;}
+			.tab-button:hover {background: rgba(8, 145, 178, 0.1);}
+			.tab-button.active {background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);}
+			.result-card {background: linear-gradient(135deg, rgba(8, 145, 178, 0.1), rgba(8, 145, 178, 0.05)); border-radius: 12px; padding: 1.5rem; text-align: center; border: 2px solid rgba(8, 145, 178, 0.2);}
+			.breadcrumbs {padding: 1rem 0; font-size: 0.9rem;}
+			.breadcrumbs ol {display: flex; list-style: none; padding: 0; margin: 0;}
+			.breadcrumbs li:not(:last-child)::after {content: ">"; margin: 0 10px; color: #ccc;}
+			.breadcrumbs a {color: var(--secondary-color); text-decoration: none; font-weight: 500;}
+			.breadcrumbs a:hover {color: var(--primary-color); text-decoration: underline;}
+			.floating-whatsapp, #scrollToTop {background: white !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; box-shadow: 0 8px 25px rgba(255, 110, 66, 0.3) !important; transition: all 0.3s !important;}
+			.floating-whatsapp:hover, #scrollToTop:hover {background: var(--secondary-color) !important; color: white !important; transform: translateY(-3px) scale(1.05) !important;}
+			textarea, input[type="text"], input[type="number"] {font-family: 'Cairo', monospace !important;}
+			.uuid-display {font-family: 'Courier New', monospace; font-size: 1.1rem; letter-spacing: 0.05em;}
+			.code-output {font-family: 'Courier New', monospace; direction: ltr; text-align: left; white-space: pre-wrap; word-break: break-all;}
+		</style>
+	</head>
+	<body>
+		<div id="loadingScreen" class="loading-screen"><div class="loading-logo"><img src="wD.png" alt="W" /></div></div>
+		<div id="mainContent" class="main-content">
+			<header class="bg-white shadow-lg sticky top-0 z-50">
+				<div class="container mx-auto px-4 py-4">
+					<div class="flex items-center justify-between">
+						<div class="flex items-center"><a href="/" class="text-2xl font-bold flex items-center gap-3"><img src="wD.png" alt="W" class="w-10 h-10 rounded-full shadow-md" /><span class="text-cyan-600">W</span><span class="text-orange-500">للخدمات الإلكترونية</span></a></div>
+						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse items-center">
+							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">الرئيسية</a>
+							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات عامة</a>
+							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات التصميم</a>
+							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات طلابية</a>
+							<a href="tools" class="text-cyan-600 font-medium">الأدوات</a>
+						</nav>
+					</div>
+				</div>
+			</header>
+
+			<nav class="breadcrumbs container mx-auto px-4"><ol><li><a href="/">الرئيسية</a></li><li><a href="tools">الأدوات</a></li><li>أدوات المطورين</li></ol></nav>
+
+			<section class="py-16 bg-gradient-to-br from-cyan-50 via-blue-50 to-orange-50">
+				<div class="container mx-auto px-4 text-center">
+					<h1 class="text-3xl lg:text-5xl font-bold text-gray-800 mb-4"><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">أدوات المطورين</span></h1>
+					<p class="text-lg text-gray-600 max-w-2xl mx-auto">مولد UUID، نصوص Lorem Ipsum، ميتا تاجز، ومنسق HTML</p>
+				</div>
+			</section>
+
+			<section class="py-20 bg-white">
+				<div class="container mx-auto px-4">
+					<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-5xl mx-auto border border-gray-100">
+						<div class="flex flex-wrap justify-center gap-3 mb-8" dir="rtl">
+							<button class="tab-button active" onclick="switchTool('uuid')"><i class="fas fa-fingerprint ml-2"></i>مولد UUID</button>
+							<button class="tab-button" onclick="switchTool('lorem')"><i class="fas fa-paragraph ml-2"></i>Lorem Ipsum</button>
+							<button class="tab-button" onclick="switchTool('meta')"><i class="fas fa-tags ml-2"></i>ميتا تاجز</button>
+							<button class="tab-button" onclick="switchTool('html')"><i class="fas fa-code ml-2"></i>منسق HTML</button>
+						</div>
+
+						<!-- UUID Generator -->
+						<div id="tool-uuid" class="tool-content">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">مولد UUID/GUID</h3>
+								<div class="max-w-2xl mx-auto space-y-4">
+									<div class="flex flex-wrap gap-4 justify-center">
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">العدد:</label>
+											<input type="number" id="uuid-count" class="w-24 px-3 py-2 border border-gray-300 rounded-lg" value="5" min="1" max="100">
+										</div>
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">الإصدار:</label>
+											<select id="uuid-version" class="px-4 py-2 border border-gray-300 rounded-lg">
+												<option value="4">UUID v4 (عشوائي)</option>
+												<option value="1">UUID v1 (وقت)</option>
+											</select>
+										</div>
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">التنسيق:</label>
+											<select id="uuid-format" class="px-4 py-2 border border-gray-300 rounded-lg">
+												<option value="standard">قياسي (مع شرطات)</option>
+												<option value="no-dash">بدون شرطات</option>
+												<option value="upper">أحرف كبيرة</option>
+											</select>
+										</div>
+									</div>
+									<button onclick="generateUUIDs()" class="btn-primary w-full justify-center"><i class="fas fa-random ml-2"></i>توليد UUID</button>
+									<div id="uuid-output" class="bg-gray-50 p-6 rounded-xl min-h-[200px]">
+										<div class="text-gray-400 text-center">اضغط الزر لتوليد UUIDs</div>
+									</div>
+									<button onclick="copyUUIDs()" class="btn-primary w-full justify-center"><i class="fas fa-copy ml-2"></i>نسخ الكل</button>
+								</div>
+							</div>
+						</div>
+
+						<!-- Lorem Ipsum Generator -->
+						<div id="tool-lorem" class="tool-content hidden">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">مولد نصوص Lorem Ipsum</h3>
+								<div class="max-w-2xl mx-auto space-y-4">
+									<div class="flex flex-wrap gap-4 justify-center">
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">النوع:</label>
+											<select id="lorem-type" class="px-4 py-2 border border-gray-300 rounded-lg">
+												<option value="paragraphs">فقرات</option>
+												<option value="sentences">جمل</option>
+												<option value="words">كلمات</option>
+											</select>
+										</div>
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">العدد:</label>
+											<input type="number" id="lorem-count" class="w-24 px-3 py-2 border border-gray-300 rounded-lg" value="3" min="1" max="50">
+										</div>
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">اللغة:</label>
+											<select id="lorem-lang" class="px-4 py-2 border border-gray-300 rounded-lg">
+												<option value="latin">لاتيني (Lorem Ipsum)</option>
+												<option value="arabic">عربي</option>
+											</select>
+										</div>
+									</div>
+									<button onclick="generateLorem()" class="btn-primary w-full justify-center"><i class="fas fa-align-right ml-2"></i>توليد النص</button>
+									<textarea id="lorem-output" class="w-full h-64 px-4 py-3 border border-gray-300 rounded-lg resize-none" readonly placeholder="اضغط الزر لتوليد نص وهمي..."></textarea>
+									<button onclick="copyLorem()" class="btn-primary w-full justify-center"><i class="fas fa-copy ml-2"></i>نسخ النص</button>
+								</div>
+							</div>
+						</div>
+
+						<!-- Meta Tags Generator -->
+						<div id="tool-meta" class="tool-content hidden">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">مولد Meta Tags للـ SEO</h3>
+								<div class="max-w-2xl mx-auto space-y-4">
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">عنوان الصفحة:</label>
+										<input type="text" id="meta-title" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="مثال: موقعي الإلكتروني - أفضل خدمات...">
+										<p class="text-sm text-gray-500 mt-1">يفضل 50-60 حرف | <span id="title-count">0</span> حرف</p>
+									</div>
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">الوصف:</label>
+										<textarea id="meta-desc" class="w-full px-4 py-3 border border-gray-300 rounded-lg h-24 resize-none" placeholder="وصف مختصر للصفحة..."></textarea>
+										<p class="text-sm text-gray-500 mt-1">يفضل 150-160 حرف | <span id="desc-count">0</span> حرف</p>
+									</div>
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">الكلمات المفتاحية:</label>
+										<input type="text" id="meta-keywords" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="كلمة1, كلمة2, كلمة3">
+									</div>
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">رابط الصفحة:</label>
+										<input type="text" id="meta-url" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="https://example.com/page">
+									</div>
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">رابط الصورة:</label>
+										<input type="text" id="meta-image" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="https://example.com/image.jpg">
+									</div>
+									<button onclick="generateMeta()" class="btn-primary w-full justify-center"><i class="fas fa-magic ml-2"></i>توليد Meta Tags</button>
+									<div class="bg-gray-900 p-4 rounded-xl">
+										<pre id="meta-output" class="code-output text-green-400 text-sm overflow-x-auto"><!-- Meta tags سيظهر هنا --></pre>
+									</div>
+									<button onclick="copyMeta()" class="btn-primary w-full justify-center"><i class="fas fa-copy ml-2"></i>نسخ الكود</button>
+								</div>
+							</div>
+						</div>
+
+						<!-- HTML Formatter -->
+						<div id="tool-html" class="tool-content hidden">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">منسق HTML</h3>
+								<div class="max-w-2xl mx-auto space-y-4">
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">كود HTML:</label>
+										<textarea id="html-input" class="w-full h-48 px-4 py-3 border border-gray-300 rounded-lg resize-none font-mono text-sm" dir="ltr" placeholder="الصق كود HTML هنا..."></textarea>
+									</div>
+									<div class="flex gap-3 flex-wrap justify-center">
+										<button onclick="formatHTML()" class="btn-primary"><i class="fas fa-indent ml-2"></i>تنسيق الكود</button>
+										<button onclick="minifyHTML()" class="btn-primary"><i class="fas fa-compress ml-2"></i>ضغط الكود</button>
+									</div>
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">النتيجة:</label>
+										<textarea id="html-output" class="w-full h-48 px-4 py-3 border border-gray-300 rounded-lg resize-none font-mono text-sm bg-gray-50" dir="ltr" readonly placeholder="النتيجة ستظهر هنا..."></textarea>
+									</div>
+									<button onclick="copyHTML()" class="btn-primary w-full justify-center"><i class="fas fa-copy ml-2"></i>نسخ النتيجة</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- How to Use Section -->
+			<section class="py-16 bg-gradient-to-br from-cyan-50 to-white">
+				<div class="container mx-auto px-4">
+					<div class="max-w-4xl mx-auto prose">
+						<h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">أدوات المطورين المجانية</h2>
+						<p class="text-gray-700 mb-6 text-center">
+							أدوات أساسية لكل مطور ومبرمج - توليد معرفات فريدة، نصوص وهمية، ميتا تاجز، وتنسيق الأكواد.
+						</p>
+
+						<h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">كيفية استخدام الأدوات:</h3>
+						<div class="space-y-4 mb-6">
+							<div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-cyan-500">
+								<h4 class="font-bold text-gray-900 mb-2">مولد UUID:</h4>
+								<ol class="text-gray-700 list-decimal mr-6">
+									<li>حدد عدد المعرفات المطلوبة</li>
+									<li>اختر إصدار UUID (v4 عشوائي أو v1 زمني)</li>
+									<li>اختر التنسيق المناسب</li>
+									<li>اضغط "توليد UUID" ثم انسخ النتائج</li>
+								</ol>
+							</div>
+							<div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-cyan-500">
+								<h4 class="font-bold text-gray-900 mb-2">مولد Lorem Ipsum:</h4>
+								<ol class="text-gray-700 list-decimal mr-6">
+									<li>اختر نوع النص (فقرات، جمل، أو كلمات)</li>
+									<li>حدد العدد المطلوب</li>
+									<li>اختر اللغة (لاتيني أو عربي)</li>
+									<li>اضغط "توليد النص" وانسخ النتيجة</li>
+								</ol>
+							</div>
+							<div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-cyan-500">
+								<h4 class="font-bold text-gray-900 mb-2">مولد Meta Tags:</h4>
+								<ol class="text-gray-700 list-decimal mr-6">
+									<li>أدخل عنوان الصفحة (50-60 حرف)</li>
+									<li>اكتب وصفاً موجزاً (150-160 حرف)</li>
+									<li>أضف الكلمات المفتاحية والروابط</li>
+									<li>اضغط "توليد" وانسخ الكود</li>
+								</ol>
+							</div>
+							<div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-cyan-500">
+								<h4 class="font-bold text-gray-900 mb-2">منسق HTML:</h4>
+								<ol class="text-gray-700 list-decimal mr-6">
+									<li>الصق كود HTML في المربع</li>
+									<li>اضغط "تنسيق" لتجميل الكود أو "ضغط" لتصغيره</li>
+									<li>انسخ النتيجة واستخدمها في مشروعك</li>
+								</ol>
+							</div>
+						</div>
+
+						<h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">أدوات مجانية أخرى قد تحتاجها:</h3>
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+							<a href="/text-tools" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow border-2 border-cyan-100 hover:border-cyan-500">
+								<div class="text-center">
+									<i class="fas fa-font text-3xl text-green-500 mb-2"></i>
+									<h4 class="font-bold text-gray-900">أدوات النصوص</h4>
+									<p class="text-sm text-gray-600">عداد كلمات ومنسق نصوص</p>
+								</div>
+							</a>
+							<a href="/security-tools" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow border-2 border-cyan-100 hover:border-cyan-500">
+								<div class="text-center">
+									<i class="fas fa-shield-alt text-3xl text-red-500 mb-2"></i>
+									<h4 class="font-bold text-gray-900">أدوات الأمان</h4>
+									<p class="text-sm text-gray-600">مولد كلمات مرور وتشفير</p>
+								</div>
+							</a>
+							<a href="/utility-tools" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow border-2 border-cyan-100 hover:border-cyan-500">
+								<div class="text-center">
+									<i class="fas fa-tools text-3xl text-purple-500 mb-2"></i>
+									<h4 class="font-bold text-gray-900">أدوات متنوعة</h4>
+									<p class="text-sm text-gray-600">أرقام عشوائية ومقارنة نصوص</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+				<div class="container mx-auto px-4 text-center"><p class="text-gray-400">&copy; جميع الحقوق محفوظة لخدمات W الإلكترونية 2025</p></div>
+			</footer>
+
+			<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-24 right-6 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50" target="_blank"><i class="fab fa-whatsapp text-2xl"></i></a>
+			<button id="scrollToTop" class="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 opacity-0 invisible transition-all"><i class="fas fa-arrow-up text-xl"></i></button>
+		</div>
+
+		<script>
+			window.addEventListener('load', () => {document.getElementById('loadingScreen').classList.add('hidden'); document.getElementById('mainContent').classList.add('loaded');});
+			window.addEventListener('scroll', () => {const btn = document.getElementById('scrollToTop'); if (window.pageYOffset > 300) btn.classList.remove('opacity-0', 'invisible'); else btn.classList.add('opacity-0', 'invisible');});
+			document.getElementById('scrollToTop').addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+			function switchTool(toolName, updateHash = true) {
+				document.querySelectorAll('.tool-content').forEach(t => t.classList.add('hidden'));
+				document.getElementById('tool-' + toolName).classList.remove('hidden');
+				document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+				document.querySelectorAll('.tab-button').forEach(b => {
+					if (b.onclick && b.onclick.toString().includes("'" + toolName + "'")) {
+						b.classList.add('active');
+					}
+				});
+				if (updateHash) {
+					history.replaceState(null, null, '#' + toolName);
+				}
+			}
+
+			document.addEventListener('DOMContentLoaded', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['uuid', 'lorem', 'meta', 'html'].includes(hash)) {
+					switchTool(hash, false);
+				}
+			});
+
+			window.addEventListener('hashchange', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['uuid', 'lorem', 'meta', 'html'].includes(hash)) {
+					switchTool(hash, false);
+				}
+			});
+
+			// UUID Generator
+			function generateUUID() {
+				return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+					const r = Math.random() * 16 | 0;
+					const v = c === 'x' ? r : (r & 0x3 | 0x8);
+					return v.toString(16);
+				});
+			}
+
+			function generateUUIDv1() {
+				const now = Date.now();
+				const uuid = 'xxxxxxxx-xxxx-1xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c, i) {
+					const r = (now + Math.random() * 16) % 16 | 0;
+					const v = c === 'x' ? r : (r & 0x3 | 0x8);
+					return v.toString(16);
+				});
+				return uuid;
+			}
+
+			function generateUUIDs() {
+				const count = parseInt(document.getElementById('uuid-count').value) || 5;
+				const version = document.getElementById('uuid-version').value;
+				const format = document.getElementById('uuid-format').value;
+
+				let uuids = [];
+				for (let i = 0; i < Math.min(count, 100); i++) {
+					let uuid = version === '1' ? generateUUIDv1() : generateUUID();
+
+					if (format === 'no-dash') uuid = uuid.replace(/-/g, '');
+					if (format === 'upper') uuid = uuid.toUpperCase();
+
+					uuids.push(uuid);
+				}
+
+				document.getElementById('uuid-output').innerHTML = uuids.map(u =>
+					`<div class="uuid-display py-2 px-4 bg-white rounded mb-2 flex justify-between items-center">
+						<span>${u}</span>
+						<button onclick="copyToClipboard('${u}')" class="text-cyan-500 hover:text-cyan-700"><i class="fas fa-copy"></i></button>
+					</div>`
+				).join('');
+			}
+
+			function copyUUIDs() {
+				const uuids = Array.from(document.querySelectorAll('.uuid-display span')).map(s => s.textContent).join('\n');
+				copyToClipboard(uuids);
+			}
+
+			// Lorem Ipsum Generator
+			const loremWords = ['lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit', 'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore', 'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud', 'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo', 'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate', 'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint', 'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia', 'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum'];
+
+			const arabicWords = ['هذا', 'نص', 'تجريبي', 'يستخدم', 'في', 'صناعة', 'الطباعة', 'والتنضيد', 'وكان', 'النص', 'منذ', 'القرن', 'الخامس', 'عشر', 'عندما', 'قامت', 'مطبعة', 'مجهولة', 'بأخذ', 'مجموعة', 'من', 'الأحرف', 'بشكل', 'عشوائي', 'أصبح', 'المعيار', 'للنصوص', 'الوهمية', 'استخدم', 'أيضاً', 'برنامج', 'النشر', 'المكتبي', 'يعتبر', 'أفضل', 'خيار', 'للمصممين', 'والمطورين', 'يحتوي', 'على', 'كلمات', 'مختلفة', 'تساعد', 'تصميم', 'صفحات', 'الويب', 'والتطبيقات'];
+
+			function generateLorem() {
+				const type = document.getElementById('lorem-type').value;
+				const count = parseInt(document.getElementById('lorem-count').value) || 3;
+				const lang = document.getElementById('lorem-lang').value;
+				const words = lang === 'arabic' ? arabicWords : loremWords;
+
+				let result = '';
+
+				if (type === 'words') {
+					let selectedWords = [];
+					for (let i = 0; i < count; i++) {
+						selectedWords.push(words[Math.floor(Math.random() * words.length)]);
+					}
+					result = selectedWords.join(' ');
+				} else if (type === 'sentences') {
+					for (let i = 0; i < count; i++) {
+						let sentenceLength = Math.floor(Math.random() * 10) + 8;
+						let sentence = [];
+						for (let j = 0; j < sentenceLength; j++) {
+							sentence.push(words[Math.floor(Math.random() * words.length)]);
+						}
+						sentence[0] = sentence[0].charAt(0).toUpperCase() + sentence[0].slice(1);
+						result += sentence.join(' ') + '. ';
+					}
+				} else {
+					for (let i = 0; i < count; i++) {
+						let paragraphLength = Math.floor(Math.random() * 3) + 4;
+						let paragraph = [];
+						for (let j = 0; j < paragraphLength; j++) {
+							let sentenceLength = Math.floor(Math.random() * 10) + 8;
+							let sentence = [];
+							for (let k = 0; k < sentenceLength; k++) {
+								sentence.push(words[Math.floor(Math.random() * words.length)]);
+							}
+							sentence[0] = sentence[0].charAt(0).toUpperCase() + sentence[0].slice(1);
+							paragraph.push(sentence.join(' ') + '.');
+						}
+						result += paragraph.join(' ') + '\n\n';
+					}
+				}
+
+				document.getElementById('lorem-output').value = result.trim();
+			}
+
+			function copyLorem() {
+				copyToClipboard(document.getElementById('lorem-output').value);
+			}
+
+			// Meta Tags Generator
+			document.getElementById('meta-title').addEventListener('input', function() {
+				document.getElementById('title-count').textContent = this.value.length;
+			});
+
+			document.getElementById('meta-desc').addEventListener('input', function() {
+				document.getElementById('desc-count').textContent = this.value.length;
+			});
+
+			function generateMeta() {
+				const title = document.getElementById('meta-title').value || 'عنوان الصفحة';
+				const desc = document.getElementById('meta-desc').value || 'وصف الصفحة';
+				const keywords = document.getElementById('meta-keywords').value;
+				const url = document.getElementById('meta-url').value;
+				const image = document.getElementById('meta-image').value;
+
+				let meta = `<!-- Primary Meta Tags -->
+<title>${title}</title>
+<meta name="title" content="${title}">
+<meta name="description" content="${desc}">`;
+
+				if (keywords) {
+					meta += `\n<meta name="keywords" content="${keywords}">`;
+				}
+
+				meta += `\n
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">`;
+
+				if (url) meta += `\n<meta property="og:url" content="${url}">`;
+				meta += `\n<meta property="og:title" content="${title}">
+<meta property="og:description" content="${desc}">`;
+				if (image) meta += `\n<meta property="og:image" content="${image}">`;
+
+				meta += `\n
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">`;
+				if (url) meta += `\n<meta property="twitter:url" content="${url}">`;
+				meta += `\n<meta property="twitter:title" content="${title}">
+<meta property="twitter:description" content="${desc}">`;
+				if (image) meta += `\n<meta property="twitter:image" content="${image}">`;
+
+				document.getElementById('meta-output').textContent = meta;
+			}
+
+			function copyMeta() {
+				copyToClipboard(document.getElementById('meta-output').textContent);
+			}
+
+			// HTML Formatter
+			function formatHTML() {
+				const input = document.getElementById('html-input').value;
+				if (!input.trim()) return alert('الرجاء إدخال كود HTML');
+
+				let formatted = '';
+				let indent = 0;
+				const tab = '  ';
+
+				// Simple HTML formatter
+				const lines = input.replace(/>\s*</g, '>\n<').split('\n');
+
+				lines.forEach(line => {
+					line = line.trim();
+					if (!line) return;
+
+					// Check for closing tags
+					if (line.match(/^<\/\w/)) {
+						indent = Math.max(0, indent - 1);
+					}
+
+					formatted += tab.repeat(indent) + line + '\n';
+
+					// Check for opening tags (not self-closing)
+					if (line.match(/^<\w[^>]*[^\/]>$/) && !line.match(/^<(img|br|hr|input|meta|link)/i)) {
+						indent++;
+					}
+				});
+
+				document.getElementById('html-output').value = formatted.trim();
+			}
+
+			function minifyHTML() {
+				const input = document.getElementById('html-input').value;
+				if (!input.trim()) return alert('الرجاء إدخال كود HTML');
+
+				const minified = input
+					.replace(/\n/g, '')
+					.replace(/\s+/g, ' ')
+					.replace(/>\s+</g, '><')
+					.replace(/\s+>/g, '>')
+					.replace(/<\s+/g, '<')
+					.trim();
+
+				document.getElementById('html-output').value = minified;
+			}
+
+			function copyHTML() {
+				copyToClipboard(document.getElementById('html-output').value);
+			}
+
+			// Utility function
+			function copyToClipboard(text) {
+				navigator.clipboard.writeText(text).then(() => {
+					alert('تم النسخ بنجاح!');
+				}).catch(() => {
+					// Fallback
+					const textarea = document.createElement('textarea');
+					textarea.value = text;
+					document.body.appendChild(textarea);
+					textarea.select();
+					document.execCommand('copy');
+					document.body.removeChild(textarea);
+					alert('تم النسخ بنجاح!');
+				});
+			}
+		</script>
+	</body>
+</html>

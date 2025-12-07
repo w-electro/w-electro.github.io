@@ -1,0 +1,509 @@
+<!DOCTYPE HTML>
+<html lang="ar" dir="rtl">
+	<head>
+		<style id="critical-hide">
+			body { visibility: hidden; }
+			.loading-screen {
+				visibility: visible !important;
+				position: fixed;
+				top: 0; left: 0; width: 100%; height: 100%;
+				background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #ff6e42 100%);
+				display: flex; flex-direction: column; justify-content: center; align-items: center;
+				z-index: 9999;
+			}
+			.loading-logo {
+				width: 120px; height: 120px; background: white; border-radius: 50%;
+				display: flex; align-items: center; justify-content: center;
+				animation: pulse 1.5s ease-in-out infinite;
+			}
+			.loading-logo img { width: 80px; height: 80px; border-radius: 50%; }
+			@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+		</style>
+
+		<script>
+		window.addEventListener('load', function() {
+			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','GTM-NH542DNT');
+		});
+		</script>
+
+		<title>أدوات التحويل المجانية | محول الوحدات، العملات، درجات الحرارة</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="Content-Language" content="ar" />
+
+		<meta name="description" content="أدوات تحويل مجانية 100% | محول الوحدات (طول، وزن، مساحة) | محول درجات الحرارة | محول العملات | محول وحدات البيانات | بدون تسجيل - جرب الآن!">
+		<meta name="keywords" content="محول الوحدات, محول العملات, محول درجات الحرارة, تحويل كيلومتر لميل, تحويل سيلسيوس فهرنهايت">
+		<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+		<meta name="author" content="W للخدمات الإلكترونية">
+		<meta name="geo.region" content="SA">
+
+		<link rel="icon" href="wD.png" type="image/png">
+		<link rel="shortcut icon" href="wD.png" type="image/png">
+		<link rel="apple-touch-icon" href="wD.png">
+		<link rel="canonical" href="https://www.w-electro.com/converter-tools">
+
+		<meta property="og:title" content="أدوات التحويل المجانية | وحدات، عملات، درجات حرارة">
+		<meta property="og:description" content="أدوات تحويل مجانية 100% | وحدات، عملات، درجات حرارة، بيانات">
+		<meta property="og:image" content="https://www.w-electro.com/wD.png">
+		<meta property="og:url" content="https://www.w-electro.com/converter-tools">
+		<meta property="og:type" content="website">
+		<meta property="og:site_name" content="W للخدمات الإلكترونية">
+		<meta property="og:locale" content="ar_SA">
+		<meta name="twitter:card" content="summary_large_image">
+
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "WebApplication",
+			"name": "أدوات التحويل المجانية",
+			"url": "https://www.w-electro.com/converter-tools",
+			"applicationCategory": "UtilitiesApplication",
+			"operatingSystem": "Any",
+			"offers": {"@type": "Offer", "price": "0", "priceCurrency": "SAR"},
+			"author": {"@type": "Organization", "name": "W للخدمات الإلكترونية"},
+			"featureList": ["محول الوحدات", "محول درجات الحرارة", "محول العملات", "محول وحدات البيانات"],
+			"inLanguage": ["ar", "en"]
+		}
+		</script>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<style>
+			:root {--primary-color: #0891b2; --secondary-color: #ff6e42;}
+			body {font-family: 'Cairo', system-ui, -apple-system, sans-serif;}
+			.main-content {opacity: 0; visibility: hidden; transition: opacity 0.5s;}
+			.main-content.loaded {opacity: 1; visibility: visible;}
+			.loading-screen {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #ff6e42 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s;}
+			.loading-screen.hidden {opacity: 0; visibility: hidden;}
+			.loading-logo {width: 120px; height: 120px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; animation: pulse-scale 2s ease-in-out infinite;}
+			.loading-logo img {width: 80px; height: 80px; border-radius: 50%;}
+			@keyframes pulse-scale {0%, 100% {transform: scale(1);} 50% {transform: scale(1.05);}}
+			.btn-primary {display: inline-flex !important; align-items: center; padding: 12px 24px !important; background: transparent !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; border-radius: 50px !important; font-weight: 600 !important; transition: all 0.3s !important; cursor: pointer !important; position: relative; overflow: hidden;}
+			.btn-primary::before {content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--secondary-color); transform: translateX(-100%); transition: transform 0.3s; z-index: -1;}
+			.btn-primary:hover {color: white !important; transform: translateY(-2px) !important; box-shadow: 0 10px 20px rgba(255, 110, 66, 0.3) !important;}
+			.btn-primary:hover::before {transform: translateX(0);}
+			.tab-button {padding: 12px 20px; border-radius: 12px; font-weight: 600; transition: all 0.3s; border: 2px solid transparent; font-size: 0.9rem;}
+			.tab-button:hover {background: rgba(8, 145, 178, 0.1);}
+			.tab-button.active {background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);}
+			.result-card {background: linear-gradient(135deg, rgba(8, 145, 178, 0.1), rgba(8, 145, 178, 0.05)); border-radius: 12px; padding: 1.5rem; text-align: center; border: 2px solid rgba(8, 145, 178, 0.2);}
+			.breadcrumbs {padding: 1rem 0; font-size: 0.9rem;}
+			.breadcrumbs ol {display: flex; list-style: none; padding: 0; margin: 0;}
+			.breadcrumbs li:not(:last-child)::after {content: ">"; margin: 0 10px; color: #ccc;}
+			.breadcrumbs a {color: var(--secondary-color); text-decoration: none; font-weight: 500;}
+			.breadcrumbs a:hover {color: var(--primary-color); text-decoration: underline;}
+			.floating-whatsapp, #scrollToTop {background: white !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; box-shadow: 0 8px 25px rgba(255, 110, 66, 0.3) !important; transition: all 0.3s !important;}
+			.floating-whatsapp:hover, #scrollToTop:hover {background: var(--secondary-color) !important; color: white !important; transform: translateY(-3px) scale(1.05) !important;}
+			select, input[type="number"] {font-family: 'Cairo', monospace !important;}
+		</style>
+	</head>
+	<body>
+		<div id="loadingScreen" class="loading-screen"><div class="loading-logo"><img src="wD.png" alt="W" /></div></div>
+		<div id="mainContent" class="main-content">
+			<header class="bg-white shadow-lg sticky top-0 z-50">
+				<div class="container mx-auto px-4 py-4">
+					<div class="flex items-center justify-between">
+						<div class="flex items-center"><a href="/" class="text-2xl font-bold flex items-center gap-3"><img src="wD.png" alt="W" class="w-10 h-10 rounded-full shadow-md" /><span class="text-cyan-600">W</span><span class="text-orange-500">للخدمات الإلكترونية</span></a></div>
+						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse items-center">
+							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">الرئيسية</a>
+							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات عامة</a>
+							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات التصميم</a>
+							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات طلابية</a>
+							<a href="tools" class="text-cyan-600 font-medium">الأدوات</a>
+						</nav>
+					</div>
+				</div>
+			</header>
+
+			<nav class="breadcrumbs container mx-auto px-4"><ol><li><a href="/">الرئيسية</a></li><li><a href="tools">الأدوات</a></li><li>أدوات التحويل</li></ol></nav>
+
+			<section class="py-16 bg-gradient-to-br from-cyan-50 via-blue-50 to-orange-50">
+				<div class="container mx-auto px-4 text-center">
+					<h1 class="text-3xl lg:text-5xl font-bold text-gray-800 mb-4"><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">أدوات التحويل</span></h1>
+					<p class="text-lg text-gray-600 max-w-2xl mx-auto">تحويل الوحدات، درجات الحرارة، العملات، ووحدات البيانات</p>
+				</div>
+			</section>
+
+			<section class="py-20 bg-white">
+				<div class="container mx-auto px-4">
+					<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-5xl mx-auto border border-gray-100">
+						<div class="flex flex-wrap justify-center gap-3 mb-8" dir="rtl">
+							<button class="tab-button active" onclick="switchTool('units')"><i class="fas fa-ruler-combined ml-2"></i>محول الوحدات</button>
+							<button class="tab-button" onclick="switchTool('temperature')"><i class="fas fa-thermometer-half ml-2"></i>درجات الحرارة</button>
+							<button class="tab-button" onclick="switchTool('currency')"><i class="fas fa-coins ml-2"></i>محول العملات</button>
+							<button class="tab-button" onclick="switchTool('data')"><i class="fas fa-database ml-2"></i>وحدات البيانات</button>
+						</div>
+
+						<!-- Units Converter -->
+						<div id="tool-units" class="tool-content">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">محول الوحدات</h3>
+								<div class="max-w-lg mx-auto space-y-4">
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">نوع الوحدة:</label>
+										<select id="unit-type" class="w-full px-4 py-3 border border-gray-300 rounded-lg" onchange="updateUnitOptions()">
+											<option value="length">الطول</option>
+											<option value="weight">الوزن</option>
+											<option value="area">المساحة</option>
+											<option value="volume">الحجم</option>
+										</select>
+									</div>
+									<div class="grid grid-cols-2 gap-4">
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">من:</label>
+											<select id="unit-from" class="w-full px-4 py-3 border border-gray-300 rounded-lg"></select>
+										</div>
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">إلى:</label>
+											<select id="unit-to" class="w-full px-4 py-3 border border-gray-300 rounded-lg"></select>
+										</div>
+									</div>
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">القيمة:</label>
+										<input type="number" id="unit-value" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="أدخل القيمة">
+									</div>
+									<button onclick="convertUnit()" class="btn-primary w-full justify-center"><i class="fas fa-exchange-alt ml-2"></i>تحويل</button>
+								</div>
+								<div id="unit-result" class="text-center mt-6"></div>
+							</div>
+						</div>
+
+						<!-- Temperature Converter -->
+						<div id="tool-temperature" class="tool-content hidden">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">محول درجات الحرارة</h3>
+								<div class="max-w-lg mx-auto space-y-4">
+									<div class="grid grid-cols-2 gap-4">
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">من:</label>
+											<select id="temp-from" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+												<option value="celsius">سيلسيوس (°C)</option>
+												<option value="fahrenheit">فهرنهايت (°F)</option>
+												<option value="kelvin">كلفن (K)</option>
+											</select>
+										</div>
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">إلى:</label>
+											<select id="temp-to" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+												<option value="fahrenheit">فهرنهايت (°F)</option>
+												<option value="celsius">سيلسيوس (°C)</option>
+												<option value="kelvin">كلفن (K)</option>
+											</select>
+										</div>
+									</div>
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">درجة الحرارة:</label>
+										<input type="number" id="temp-value" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="أدخل درجة الحرارة">
+									</div>
+									<button onclick="convertTemp()" class="btn-primary w-full justify-center"><i class="fas fa-thermometer-half ml-2"></i>تحويل</button>
+								</div>
+								<div id="temp-result" class="text-center mt-6"></div>
+							</div>
+						</div>
+
+						<!-- Currency Converter -->
+						<div id="tool-currency" class="tool-content hidden">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">محول العملات</h3>
+								<div class="max-w-lg mx-auto space-y-4">
+									<div class="grid grid-cols-2 gap-4">
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">من:</label>
+											<select id="currency-from" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+												<option value="SAR">ريال سعودي (SAR)</option>
+												<option value="USD">دولار أمريكي (USD)</option>
+												<option value="EUR">يورو (EUR)</option>
+												<option value="GBP">جنيه إسترليني (GBP)</option>
+												<option value="AED">درهم إماراتي (AED)</option>
+												<option value="EGP">جنيه مصري (EGP)</option>
+												<option value="KWD">دينار كويتي (KWD)</option>
+												<option value="QAR">ريال قطري (QAR)</option>
+												<option value="BHD">دينار بحريني (BHD)</option>
+												<option value="OMR">ريال عماني (OMR)</option>
+											</select>
+										</div>
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">إلى:</label>
+											<select id="currency-to" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+												<option value="USD">دولار أمريكي (USD)</option>
+												<option value="SAR">ريال سعودي (SAR)</option>
+												<option value="EUR">يورو (EUR)</option>
+												<option value="GBP">جنيه إسترليني (GBP)</option>
+												<option value="AED">درهم إماراتي (AED)</option>
+												<option value="EGP">جنيه مصري (EGP)</option>
+												<option value="KWD">دينار كويتي (KWD)</option>
+												<option value="QAR">ريال قطري (QAR)</option>
+												<option value="BHD">دينار بحريني (BHD)</option>
+												<option value="OMR">ريال عماني (OMR)</option>
+											</select>
+										</div>
+									</div>
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">المبلغ:</label>
+										<input type="number" id="currency-value" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="أدخل المبلغ">
+									</div>
+									<button onclick="convertCurrency()" class="btn-primary w-full justify-center"><i class="fas fa-coins ml-2"></i>تحويل</button>
+									<p class="text-xs text-gray-500 text-center">* أسعار الصرف تقريبية وقد تختلف عن الأسعار الفعلية</p>
+								</div>
+								<div id="currency-result" class="text-center mt-6"></div>
+							</div>
+						</div>
+
+						<!-- Data Units Converter -->
+						<div id="tool-data" class="tool-content hidden">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">محول وحدات البيانات</h3>
+								<div class="max-w-lg mx-auto space-y-4">
+									<div class="grid grid-cols-2 gap-4">
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">من:</label>
+											<select id="data-from" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+												<option value="B">بايت (B)</option>
+												<option value="KB">كيلوبايت (KB)</option>
+												<option value="MB">ميجابايت (MB)</option>
+												<option value="GB">جيجابايت (GB)</option>
+												<option value="TB">تيرابايت (TB)</option>
+											</select>
+										</div>
+										<div>
+											<label class="block text-gray-700 font-medium mb-2">إلى:</label>
+											<select id="data-to" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+												<option value="MB">ميجابايت (MB)</option>
+												<option value="B">بايت (B)</option>
+												<option value="KB">كيلوبايت (KB)</option>
+												<option value="GB">جيجابايت (GB)</option>
+												<option value="TB">تيرابايت (TB)</option>
+											</select>
+										</div>
+									</div>
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">القيمة:</label>
+										<input type="number" id="data-value" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="أدخل القيمة">
+									</div>
+									<button onclick="convertData()" class="btn-primary w-full justify-center"><i class="fas fa-database ml-2"></i>تحويل</button>
+								</div>
+								<div id="data-result" class="text-center mt-6"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- How to Use Section -->
+			<section class="py-16 bg-gradient-to-br from-cyan-50 to-white">
+				<div class="container mx-auto px-4">
+					<div class="max-w-4xl mx-auto prose">
+						<h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">🔄 أدوات التحويل المجانية</h2>
+						<p class="text-gray-700 mb-6 text-center">
+							محولات متعددة للوحدات والعملات ودرجات الحرارة ووحدات البيانات.
+						</p>
+
+						<h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">📝 كيفية استخدام الأدوات:</h3>
+						<div class="space-y-4 mb-6">
+							<div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-cyan-500">
+								<h4 class="font-bold text-gray-900 mb-2">📏 محول الوحدات:</h4>
+								<ol class="text-gray-700 list-decimal mr-6">
+									<li>اختر نوع الوحدة (طول، وزن، مساحة، حجم)</li>
+									<li>حدد وحدة القياس المصدر والهدف</li>
+									<li>أدخل القيمة واضغط "تحويل"</li>
+								</ol>
+							</div>
+							<div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-cyan-500">
+								<h4 class="font-bold text-gray-900 mb-2">🌡️ محول درجات الحرارة:</h4>
+								<ol class="text-gray-700 list-decimal mr-6">
+									<li>اختر وحدة الحرارة المصدر (سيلسيوس، فهرنهايت، كلفن)</li>
+									<li>اختر وحدة الهدف</li>
+									<li>أدخل درجة الحرارة واضغط "تحويل"</li>
+								</ol>
+							</div>
+							<div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-cyan-500">
+								<h4 class="font-bold text-gray-900 mb-2">💱 محول العملات:</h4>
+								<ol class="text-gray-700 list-decimal mr-6">
+									<li>اختر العملة المصدر والعملة الهدف</li>
+									<li>أدخل المبلغ</li>
+									<li>اضغط "تحويل" لرؤية النتيجة</li>
+								</ol>
+							</div>
+						</div>
+
+						<h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">🔗 أدوات مجانية أخرى قد تحتاجها:</h3>
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+							<a href="/calculator-tools" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow border-2 border-cyan-100 hover:border-cyan-500">
+								<div class="text-center">
+									<i class="fas fa-calculator text-3xl text-cyan-500 mb-2"></i>
+									<h4 class="font-bold text-gray-900">أدوات الحاسبة</h4>
+									<p class="text-sm text-gray-600">نسب، عمر، BMI</p>
+								</div>
+							</a>
+							<a href="/datetime-tools" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow border-2 border-cyan-100 hover:border-cyan-500">
+								<div class="text-center">
+									<i class="fas fa-calendar-alt text-3xl text-purple-500 mb-2"></i>
+									<h4 class="font-bold text-gray-900">أدوات التاريخ</h4>
+									<p class="text-sm text-gray-600">حساب الأيام والتحويل</p>
+								</div>
+							</a>
+							<a href="/text-tools" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow border-2 border-cyan-100 hover:border-cyan-500">
+								<div class="text-center">
+									<i class="fas fa-font text-3xl text-green-500 mb-2"></i>
+									<h4 class="font-bold text-gray-900">أدوات النصوص</h4>
+									<p class="text-sm text-gray-600">عداد كلمات ومنسق</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+				<div class="container mx-auto px-4 text-center"><p class="text-gray-400">&copy; جميع الحقوق محفوظة لخدمات W الإلكترونية 2025</p></div>
+			</footer>
+
+			<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-24 right-6 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50" target="_blank"><i class="fab fa-whatsapp text-2xl"></i></a>
+			<button id="scrollToTop" class="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 opacity-0 invisible transition-all"><i class="fas fa-arrow-up text-xl"></i></button>
+		</div>
+
+		<script>
+			window.addEventListener('load', () => {document.getElementById('loadingScreen').classList.add('hidden'); document.getElementById('mainContent').classList.add('loaded'); updateUnitOptions();});
+			window.addEventListener('scroll', () => {const btn = document.getElementById('scrollToTop'); if (window.pageYOffset > 300) btn.classList.remove('opacity-0', 'invisible'); else btn.classList.add('opacity-0', 'invisible');});
+			document.getElementById('scrollToTop').addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+			function switchTool(toolName, updateHash = true) {
+				document.querySelectorAll('.tool-content').forEach(t => t.classList.add('hidden'));
+				document.getElementById('tool-' + toolName).classList.remove('hidden');
+				document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+				document.querySelectorAll('.tab-button').forEach(b => {
+					if (b.onclick && b.onclick.toString().includes("'" + toolName + "'")) {
+						b.classList.add('active');
+					}
+				});
+				if (updateHash) history.replaceState(null, null, '#' + toolName);
+			}
+
+			document.addEventListener('DOMContentLoaded', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['units', 'temperature', 'currency', 'data'].includes(hash)) {
+					switchTool(hash, false);
+				}
+			});
+
+			window.addEventListener('hashchange', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['units', 'temperature', 'currency', 'data'].includes(hash)) {
+					switchTool(hash, false);
+				}
+			});
+
+			// Unit conversion data
+			const units = {
+				length: {
+					'متر': 1, 'كيلومتر': 1000, 'سنتيمتر': 0.01, 'ميليمتر': 0.001,
+					'ميل': 1609.344, 'ياردة': 0.9144, 'قدم': 0.3048, 'بوصة': 0.0254
+				},
+				weight: {
+					'كيلوجرام': 1, 'جرام': 0.001, 'طن': 1000, 'رطل': 0.453592, 'أونصة': 0.0283495
+				},
+				area: {
+					'متر مربع': 1, 'كيلومتر مربع': 1000000, 'هكتار': 10000, 'فدان': 4046.86, 'قدم مربع': 0.0929
+				},
+				volume: {
+					'لتر': 1, 'ميليلتر': 0.001, 'متر مكعب': 1000, 'جالون': 3.78541, 'كوب': 0.236588
+				}
+			};
+
+			function updateUnitOptions() {
+				const type = document.getElementById('unit-type').value;
+				const fromSelect = document.getElementById('unit-from');
+				const toSelect = document.getElementById('unit-to');
+				fromSelect.innerHTML = '';
+				toSelect.innerHTML = '';
+				for (let unit in units[type]) {
+					fromSelect.innerHTML += `<option value="${unit}">${unit}</option>`;
+					toSelect.innerHTML += `<option value="${unit}">${unit}</option>`;
+				}
+				if (toSelect.options.length > 1) toSelect.selectedIndex = 1;
+			}
+
+			function convertUnit() {
+				const type = document.getElementById('unit-type').value;
+				const from = document.getElementById('unit-from').value;
+				const to = document.getElementById('unit-to').value;
+				const value = parseFloat(document.getElementById('unit-value').value);
+				if (isNaN(value)) return alert('الرجاء إدخال قيمة صحيحة');
+				const inBase = value * units[type][from];
+				const result = inBase / units[type][to];
+				document.getElementById('unit-result').innerHTML = `
+					<div class="result-card">
+						<p class="text-lg text-gray-600">${value} ${from} =</p>
+						<p class="text-3xl font-bold text-cyan-600">${result.toFixed(6).replace(/\.?0+$/, '')} ${to}</p>
+					</div>
+				`;
+			}
+
+			function convertTemp() {
+				const from = document.getElementById('temp-from').value;
+				const to = document.getElementById('temp-to').value;
+				const value = parseFloat(document.getElementById('temp-value').value);
+				if (isNaN(value)) return alert('الرجاء إدخال قيمة صحيحة');
+				let celsius;
+				if (from === 'celsius') celsius = value;
+				else if (from === 'fahrenheit') celsius = (value - 32) * 5/9;
+				else celsius = value - 273.15;
+				let result;
+				if (to === 'celsius') result = celsius;
+				else if (to === 'fahrenheit') result = celsius * 9/5 + 32;
+				else result = celsius + 273.15;
+				const symbols = {celsius: '°C', fahrenheit: '°F', kelvin: 'K'};
+				document.getElementById('temp-result').innerHTML = `
+					<div class="result-card">
+						<p class="text-lg text-gray-600">${value} ${symbols[from]} =</p>
+						<p class="text-3xl font-bold text-cyan-600">${result.toFixed(2)} ${symbols[to]}</p>
+					</div>
+				`;
+			}
+
+			const exchangeRates = {
+				SAR: 1, USD: 0.2667, EUR: 0.2444, GBP: 0.2103, AED: 0.9793,
+				EGP: 13.33, KWD: 0.082, QAR: 0.9707, BHD: 0.1, OMR: 0.1026
+			};
+
+			function convertCurrency() {
+				const from = document.getElementById('currency-from').value;
+				const to = document.getElementById('currency-to').value;
+				const value = parseFloat(document.getElementById('currency-value').value);
+				if (isNaN(value)) return alert('الرجاء إدخال قيمة صحيحة');
+				const inSAR = value / exchangeRates[from];
+				const result = inSAR * exchangeRates[to];
+				document.getElementById('currency-result').innerHTML = `
+					<div class="result-card">
+						<p class="text-lg text-gray-600">${value.toFixed(2)} ${from} =</p>
+						<p class="text-3xl font-bold text-cyan-600">${result.toFixed(2)} ${to}</p>
+					</div>
+				`;
+			}
+
+			const dataUnits = {B: 1, KB: 1024, MB: 1048576, GB: 1073741824, TB: 1099511627776};
+
+			function convertData() {
+				const from = document.getElementById('data-from').value;
+				const to = document.getElementById('data-to').value;
+				const value = parseFloat(document.getElementById('data-value').value);
+				if (isNaN(value)) return alert('الرجاء إدخال قيمة صحيحة');
+				const inBytes = value * dataUnits[from];
+				const result = inBytes / dataUnits[to];
+				document.getElementById('data-result').innerHTML = `
+					<div class="result-card">
+						<p class="text-lg text-gray-600">${value} ${from} =</p>
+						<p class="text-3xl font-bold text-cyan-600">${result.toFixed(6).replace(/\.?0+$/, '')} ${to}</p>
+					</div>
+				`;
+			}
+		</script>
+	</body>
+</html>

@@ -1124,6 +1124,7 @@
 		<script>
 			// PAGE INITIALIZATION - Fixed loading pattern
 			window.addEventListener('load', function() {
+				document.body.style.visibility = 'visible';
 				document.getElementById('loadingScreen').classList.add('hidden');
 				document.getElementById('mainContent').classList.add('loaded');
 				initScrollAnimations();

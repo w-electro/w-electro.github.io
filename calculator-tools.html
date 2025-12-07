@@ -1,0 +1,526 @@
+<!DOCTYPE HTML>
+<html lang="ar" dir="rtl">
+	<head>
+		<style id="critical-hide">
+			body { visibility: hidden; }
+			.loading-screen {
+				visibility: visible !important;
+				position: fixed;
+				top: 0; left: 0; width: 100%; height: 100%;
+				background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #ff6e42 100%);
+				display: flex; flex-direction: column; justify-content: center; align-items: center;
+				z-index: 9999;
+			}
+			.loading-logo {
+				width: 120px; height: 120px; background: white; border-radius: 50%;
+				display: flex; align-items: center; justify-content: center;
+				animation: pulse 1.5s ease-in-out infinite;
+			}
+			.loading-logo img { width: 80px; height: 80px; border-radius: 50%; }
+			@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+		</style>
+
+		<script>
+		window.addEventListener('load', function() {
+			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer','GTM-NH542DNT');
+		});
+		</script>
+
+		<title>أدوات الحاسبة المجانية | حساب النسبة المئوية، العمر، BMI، الضريبة</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="Content-Language" content="ar" />
+
+		<meta name="description" content="أدوات حاسبة مجانية 100% | حاسبة النسبة المئوية | حاسبة العمر | حاسبة مؤشر كتلة الجسم BMI | حاسبة ضريبة القيمة المضافة VAT | بدون تسجيل - جرب الآن!">
+		<meta name="keywords" content="حاسبة النسبة المئوية, حاسبة العمر, حاسبة BMI, حاسبة الضريبة, حاسبة VAT, أدوات حساب مجانية">
+		<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+		<meta name="author" content="W للخدمات الإلكترونية">
+		<meta name="geo.region" content="SA">
+
+		<link rel="icon" href="wD.png" type="image/png">
+		<link rel="shortcut icon" href="wD.png" type="image/png">
+		<link rel="apple-touch-icon" href="wD.png">
+		<link rel="canonical" href="https://www.w-electro.com/calculator-tools">
+
+		<meta property="og:title" content="أدوات الحاسبة المجانية | النسبة المئوية، العمر، BMI">
+		<meta property="og:description" content="أدوات حاسبة مجانية 100% | حساب النسب، العمر، BMI، الضريبة">
+		<meta property="og:image" content="https://www.w-electro.com/wD.png">
+		<meta property="og:url" content="https://www.w-electro.com/calculator-tools">
+		<meta property="og:type" content="website">
+		<meta property="og:site_name" content="W للخدمات الإلكترونية">
+		<meta property="og:locale" content="ar_SA">
+		<meta name="twitter:card" content="summary_large_image">
+
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "WebApplication",
+			"name": "أدوات الحاسبة المجانية",
+			"url": "https://www.w-electro.com/calculator-tools",
+			"applicationCategory": "UtilitiesApplication",
+			"operatingSystem": "Any",
+			"offers": {"@type": "Offer", "price": "0", "priceCurrency": "SAR"},
+			"author": {"@type": "Organization", "name": "W للخدمات الإلكترونية"},
+			"featureList": ["حاسبة النسبة المئوية", "حاسبة العمر", "حاسبة BMI", "حاسبة الضريبة"],
+			"inLanguage": ["ar", "en"]
+		}
+		</script>
+
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [{
+				"@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://www.w-electro.com/"
+			},{
+				"@type": "ListItem", "position": 2, "name": "الأدوات", "item": "https://www.w-electro.com/tools"
+			},{
+				"@type": "ListItem", "position": 3, "name": "أدوات الحاسبة", "item": "https://www.w-electro.com/calculator-tools"
+			}]
+		}
+		</script>
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link rel="preconnect" href="https://cdn.tailwindcss.com">
+		<link rel="preload" href="wD.png" as="image" type="image/png" fetchpriority="high">
+
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+		<style>
+			:root {--primary-color: #0891b2; --secondary-color: #ff6e42;}
+			body {font-family: 'Cairo', system-ui, -apple-system, sans-serif;}
+			.main-content {opacity: 0; visibility: hidden; transition: opacity 0.5s;}
+			.main-content.loaded {opacity: 1; visibility: visible;}
+			.loading-screen {position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #ff6e42 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; transition: opacity 0.5s;}
+			.loading-screen.hidden {opacity: 0; visibility: hidden;}
+			.loading-logo {width: 120px; height: 120px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 2rem; animation: pulse-scale 2s ease-in-out infinite;}
+			.loading-logo img {width: 80px; height: 80px; border-radius: 50%;}
+			@keyframes pulse-scale {0%, 100% {transform: scale(1);} 50% {transform: scale(1.05);}}
+			.btn-primary {display: inline-flex !important; align-items: center; padding: 12px 24px !important; background: transparent !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; border-radius: 50px !important; font-weight: 600 !important; transition: all 0.3s !important; cursor: pointer !important; position: relative; overflow: hidden;}
+			.btn-primary::before {content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--secondary-color); transform: translateX(-100%); transition: transform 0.3s; z-index: -1;}
+			.btn-primary:hover {color: white !important; transform: translateY(-2px) !important; box-shadow: 0 10px 20px rgba(255, 110, 66, 0.3) !important;}
+			.btn-primary:hover::before {transform: translateX(0);}
+			.tab-button {padding: 12px 20px; border-radius: 12px; font-weight: 600; transition: all 0.3s; border: 2px solid transparent; font-size: 0.9rem;}
+			.tab-button:hover {background: rgba(8, 145, 178, 0.1);}
+			.tab-button.active {background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); color: white; box-shadow: 0 4px 15px rgba(8, 145, 178, 0.3);}
+			.result-card {background: linear-gradient(135deg, rgba(8, 145, 178, 0.1), rgba(8, 145, 178, 0.05)); border-radius: 12px; padding: 1.5rem; text-align: center; border: 2px solid rgba(8, 145, 178, 0.2);}
+			.breadcrumbs {padding: 1rem 0; font-size: 0.9rem;}
+			.breadcrumbs ol {display: flex; list-style: none; padding: 0; margin: 0;}
+			.breadcrumbs li:not(:last-child)::after {content: ">"; margin: 0 10px; color: #ccc;}
+			.breadcrumbs a {color: var(--secondary-color); text-decoration: none; font-weight: 500;}
+			.breadcrumbs a:hover {color: var(--primary-color); text-decoration: underline;}
+			.floating-whatsapp, #scrollToTop {background: white !important; color: var(--secondary-color) !important; border: 2px solid var(--secondary-color) !important; box-shadow: 0 8px 25px rgba(255, 110, 66, 0.3) !important; transition: all 0.3s !important;}
+			.floating-whatsapp:hover, #scrollToTop:hover {background: var(--secondary-color) !important; color: white !important; transform: translateY(-3px) scale(1.05) !important;}
+			input[type="number"], input[type="date"] {font-family: 'Cairo', monospace !important;}
+			.bmi-underweight {color: #3b82f6;}
+			.bmi-normal {color: #10b981;}
+			.bmi-overweight {color: #f59e0b;}
+			.bmi-obese {color: #ef4444;}
+		</style>
+	</head>
+	<body>
+		<div id="loadingScreen" class="loading-screen"><div class="loading-logo"><img src="wD.png" alt="W" /></div></div>
+		<div id="mainContent" class="main-content">
+			<header class="bg-white shadow-lg sticky top-0 z-50">
+				<div class="container mx-auto px-4 py-4">
+					<div class="flex items-center justify-between">
+						<div class="flex items-center"><a href="/" class="text-2xl font-bold flex items-center gap-3"><img src="wD.png" alt="W" class="w-10 h-10 rounded-full shadow-md" /><span class="text-cyan-600">W</span><span class="text-orange-500">للخدمات الإلكترونية</span></a></div>
+						<nav class="hidden md:flex space-x-8 rtl:space-x-reverse items-center">
+							<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">الرئيسية</a>
+							<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات عامة</a>
+							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات التصميم</a>
+							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">خدمات طلابية</a>
+							<a href="tools" class="text-cyan-600 font-medium">الأدوات</a>
+						</nav>
+					</div>
+				</div>
+			</header>
+
+			<nav class="breadcrumbs container mx-auto px-4"><ol><li><a href="/">الرئيسية</a></li><li><a href="tools">الأدوات</a></li><li>أدوات الحاسبة</li></ol></nav>
+
+			<section class="py-16 bg-gradient-to-br from-cyan-50 via-blue-50 to-orange-50">
+				<div class="container mx-auto px-4 text-center">
+					<h1 class="text-3xl lg:text-5xl font-bold text-gray-800 mb-4"><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-orange-500">أدوات الحاسبة</span></h1>
+					<p class="text-lg text-gray-600 max-w-2xl mx-auto">حساب النسبة المئوية، العمر، مؤشر كتلة الجسم، والضريبة</p>
+				</div>
+			</section>
+
+			<section class="py-20 bg-white">
+				<div class="container mx-auto px-4">
+					<div class="bg-white p-8 lg:p-12 rounded-3xl shadow-xl max-w-5xl mx-auto border border-gray-100">
+						<div class="flex flex-wrap justify-center gap-3 mb-8" dir="rtl">
+							<button class="tab-button active" onclick="switchTool('percentage')"><i class="fas fa-percent ml-2"></i>النسبة المئوية</button>
+							<button class="tab-button" onclick="switchTool('age')"><i class="fas fa-birthday-cake ml-2"></i>حاسبة العمر</button>
+							<button class="tab-button" onclick="switchTool('bmi')"><i class="fas fa-weight ml-2"></i>مؤشر كتلة الجسم</button>
+							<button class="tab-button" onclick="switchTool('vat')"><i class="fas fa-money-bill-wave ml-2"></i>حاسبة الضريبة</button>
+						</div>
+
+						<!-- Percentage Calculator -->
+						<div id="tool-percentage" class="tool-content">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">حاسبة النسبة المئوية</h3>
+
+								<div class="bg-gray-50 p-6 rounded-xl space-y-4">
+									<h4 class="font-semibold text-gray-700">ما هي نسبة X من Y؟</h4>
+									<div class="flex flex-wrap items-center gap-3">
+										<span>ما هي</span>
+										<input type="number" id="percent1" class="w-24 px-3 py-2 border border-gray-300 rounded-lg" placeholder="X">
+										<span>% من</span>
+										<input type="number" id="percent2" class="w-24 px-3 py-2 border border-gray-300 rounded-lg" placeholder="Y">
+										<span>؟</span>
+										<button onclick="calcPercentOf()" class="btn-primary px-4 py-2">احسب</button>
+									</div>
+									<div id="percent-result1" class="text-xl font-bold text-cyan-600"></div>
+								</div>
+
+								<div class="bg-gray-50 p-6 rounded-xl space-y-4">
+									<h4 class="font-semibold text-gray-700">X هي كم بالمئة من Y؟</h4>
+									<div class="flex flex-wrap items-center gap-3">
+										<input type="number" id="percent3" class="w-24 px-3 py-2 border border-gray-300 rounded-lg" placeholder="X">
+										<span>هي كم % من</span>
+										<input type="number" id="percent4" class="w-24 px-3 py-2 border border-gray-300 rounded-lg" placeholder="Y">
+										<span>؟</span>
+										<button onclick="calcWhatPercent()" class="btn-primary px-4 py-2">احسب</button>
+									</div>
+									<div id="percent-result2" class="text-xl font-bold text-cyan-600"></div>
+								</div>
+
+								<div class="bg-gray-50 p-6 rounded-xl space-y-4">
+									<h4 class="font-semibold text-gray-700">حساب الزيادة / النقصان</h4>
+									<div class="flex flex-wrap items-center gap-3">
+										<span>من</span>
+										<input type="number" id="percent5" class="w-24 px-3 py-2 border border-gray-300 rounded-lg" placeholder="القديم">
+										<span>إلى</span>
+										<input type="number" id="percent6" class="w-24 px-3 py-2 border border-gray-300 rounded-lg" placeholder="الجديد">
+										<button onclick="calcChange()" class="btn-primary px-4 py-2">احسب التغيير</button>
+									</div>
+									<div id="percent-result3" class="text-xl font-bold text-cyan-600"></div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Age Calculator -->
+						<div id="tool-age" class="tool-content hidden">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">حاسبة العمر</h3>
+								<div class="max-w-md mx-auto space-y-4">
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">تاريخ الميلاد:</label>
+										<input type="date" id="birthdate" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+									</div>
+									<button onclick="calculateAge()" class="btn-primary w-full justify-center"><i class="fas fa-calculator ml-2"></i>احسب العمر</button>
+								</div>
+								<div id="age-result" class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8"></div>
+							</div>
+						</div>
+
+						<!-- BMI Calculator -->
+						<div id="tool-bmi" class="tool-content hidden">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">حاسبة مؤشر كتلة الجسم (BMI)</h3>
+								<div class="max-w-md mx-auto space-y-4">
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">الوزن (كجم):</label>
+										<input type="number" id="weight" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="مثال: 70">
+									</div>
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">الطول (سم):</label>
+										<input type="number" id="height" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="مثال: 175">
+									</div>
+									<button onclick="calculateBMI()" class="btn-primary w-full justify-center"><i class="fas fa-calculator ml-2"></i>احسب BMI</button>
+								</div>
+								<div id="bmi-result" class="text-center mt-8"></div>
+								<div class="bg-gray-50 p-6 rounded-xl mt-6">
+									<h4 class="font-semibold text-gray-700 mb-4">تصنيف مؤشر كتلة الجسم:</h4>
+									<div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
+										<div class="p-3 bg-blue-100 rounded-lg"><span class="font-bold text-blue-600">أقل من 18.5</span><br>نحافة</div>
+										<div class="p-3 bg-green-100 rounded-lg"><span class="font-bold text-green-600">18.5 - 24.9</span><br>وزن طبيعي</div>
+										<div class="p-3 bg-yellow-100 rounded-lg"><span class="font-bold text-yellow-600">25 - 29.9</span><br>وزن زائد</div>
+										<div class="p-3 bg-red-100 rounded-lg"><span class="font-bold text-red-600">30 فأكثر</span><br>سمنة</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- VAT Calculator -->
+						<div id="tool-vat" class="tool-content hidden">
+							<div class="space-y-6">
+								<h3 class="text-xl font-bold text-gray-800 text-center mb-4">حاسبة ضريبة القيمة المضافة (VAT)</h3>
+								<div class="max-w-md mx-auto space-y-4">
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">المبلغ:</label>
+										<input type="number" id="vat-amount" class="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="أدخل المبلغ">
+									</div>
+									<div>
+										<label class="block text-gray-700 font-medium mb-2">نسبة الضريبة (%):</label>
+										<input type="number" id="vat-rate" class="w-full px-4 py-3 border border-gray-300 rounded-lg" value="15" placeholder="15">
+									</div>
+									<div class="flex gap-3">
+										<button onclick="addVAT()" class="btn-primary flex-1 justify-center"><i class="fas fa-plus ml-2"></i>إضافة الضريبة</button>
+										<button onclick="removeVAT()" class="btn-primary flex-1 justify-center"><i class="fas fa-minus ml-2"></i>إزالة الضريبة</button>
+									</div>
+								</div>
+								<div id="vat-result" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- How to Use Section -->
+			<section class="py-16 bg-gradient-to-br from-cyan-50 to-white">
+				<div class="container mx-auto px-4">
+					<div class="max-w-4xl mx-auto prose">
+						<h2 class="text-3xl font-bold text-gray-900 mb-6 text-center">🔢 أدوات الحاسبة المجانية</h2>
+						<p class="text-gray-700 mb-6 text-center">
+							مجموعة حاسبات مفيدة للحياة اليومية - حساب النسب، العمر، الوزن المثالي، والضرائب.
+						</p>
+
+						<h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">📝 كيفية استخدام الأدوات:</h3>
+						<div class="space-y-4 mb-6">
+							<div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-cyan-500">
+								<h4 class="font-bold text-gray-900 mb-2">📊 حاسبة النسبة المئوية:</h4>
+								<ol class="text-gray-700 list-decimal mr-6">
+									<li>اختر نوع الحساب (نسبة من رقم، نسبة رقم من آخر، أو التغيير)</li>
+									<li>أدخل الأرقام في الحقول المناسبة</li>
+									<li>اضغط "احسب" للحصول على النتيجة</li>
+								</ol>
+							</div>
+							<div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-cyan-500">
+								<h4 class="font-bold text-gray-900 mb-2">🎂 حاسبة العمر:</h4>
+								<ol class="text-gray-700 list-decimal mr-6">
+									<li>أدخل تاريخ ميلادك</li>
+									<li>اضغط "احسب العمر"</li>
+									<li>ستظهر لك عمرك بالسنوات والأشهر والأيام</li>
+								</ol>
+							</div>
+							<div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-cyan-500">
+								<h4 class="font-bold text-gray-900 mb-2">⚖️ حاسبة BMI:</h4>
+								<ol class="text-gray-700 list-decimal mr-6">
+									<li>أدخل وزنك بالكيلوجرام</li>
+									<li>أدخل طولك بالسنتيمتر</li>
+									<li>اضغط "احسب" لمعرفة مؤشر كتلة جسمك وتصنيفه</li>
+								</ol>
+							</div>
+							<div class="bg-white p-4 rounded-lg shadow-sm border-r-4 border-cyan-500">
+								<h4 class="font-bold text-gray-900 mb-2">💰 حاسبة الضريبة:</h4>
+								<ol class="text-gray-700 list-decimal mr-6">
+									<li>أدخل المبلغ ونسبة الضريبة (افتراضي 15%)</li>
+									<li>اختر "إضافة الضريبة" أو "إزالة الضريبة"</li>
+									<li>ستظهر لك تفاصيل المبلغ والضريبة والإجمالي</li>
+								</ol>
+							</div>
+						</div>
+
+						<h3 class="text-2xl font-bold text-gray-900 mb-4 mt-8">🔗 أدوات مجانية أخرى قد تحتاجها:</h3>
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+							<a href="/converter-tools" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow border-2 border-cyan-100 hover:border-cyan-500">
+								<div class="text-center">
+									<i class="fas fa-exchange-alt text-3xl text-cyan-500 mb-2"></i>
+									<h4 class="font-bold text-gray-900">أدوات التحويل</h4>
+									<p class="text-sm text-gray-600">وحدات، عملات، درجات حرارة</p>
+								</div>
+							</a>
+							<a href="/datetime-tools" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow border-2 border-cyan-100 hover:border-cyan-500">
+								<div class="text-center">
+									<i class="fas fa-calendar-alt text-3xl text-purple-500 mb-2"></i>
+									<h4 class="font-bold text-gray-900">أدوات التاريخ</h4>
+									<p class="text-sm text-gray-600">حساب الأيام والتحويل</p>
+								</div>
+							</a>
+							<a href="/text-tools" class="block p-4 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow border-2 border-cyan-100 hover:border-cyan-500">
+								<div class="text-center">
+									<i class="fas fa-font text-3xl text-green-500 mb-2"></i>
+									<h4 class="font-bold text-gray-900">أدوات النصوص</h4>
+									<p class="text-sm text-gray-600">عداد كلمات ومنسق</p>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+				<div class="container mx-auto px-4 text-center"><p class="text-gray-400">&copy; جميع الحقوق محفوظة لخدمات W الإلكترونية 2025</p></div>
+			</footer>
+
+			<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-24 right-6 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50" target="_blank"><i class="fab fa-whatsapp text-2xl"></i></a>
+			<button id="scrollToTop" class="fixed bottom-6 right-6 w-14 h-14 rounded-full flex items-center justify-center shadow-2xl z-50 opacity-0 invisible transition-all"><i class="fas fa-arrow-up text-xl"></i></button>
+		</div>
+
+		<script>
+			window.addEventListener('load', () => {document.getElementById('loadingScreen').classList.add('hidden'); document.getElementById('mainContent').classList.add('loaded');});
+			window.addEventListener('scroll', () => {const btn = document.getElementById('scrollToTop'); if (window.pageYOffset > 300) btn.classList.remove('opacity-0', 'invisible'); else btn.classList.add('opacity-0', 'invisible');});
+			document.getElementById('scrollToTop').addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
+
+			function switchTool(toolName, updateHash = true) {
+				document.querySelectorAll('.tool-content').forEach(t => t.classList.add('hidden'));
+				document.getElementById('tool-' + toolName).classList.remove('hidden');
+				document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+				document.querySelectorAll('.tab-button').forEach(b => {
+					if (b.onclick && b.onclick.toString().includes("'" + toolName + "'")) {
+						b.classList.add('active');
+					}
+				});
+				if (updateHash) {
+					history.replaceState(null, null, '#' + toolName);
+				}
+			}
+
+			document.addEventListener('DOMContentLoaded', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['percentage', 'age', 'bmi', 'vat'].includes(hash)) {
+					switchTool(hash, false);
+				}
+			});
+
+			window.addEventListener('hashchange', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['percentage', 'age', 'bmi', 'vat'].includes(hash)) {
+					switchTool(hash, false);
+				}
+			});
+
+			// Percentage Calculations
+			function calcPercentOf() {
+				const x = parseFloat(document.getElementById('percent1').value);
+				const y = parseFloat(document.getElementById('percent2').value);
+				if (isNaN(x) || isNaN(y)) return alert('الرجاء إدخال أرقام صحيحة');
+				const result = (x / 100) * y;
+				document.getElementById('percent-result1').innerHTML = `<i class="fas fa-check-circle text-green-500 ml-2"></i>النتيجة: ${result.toFixed(2)}`;
+			}
+
+			function calcWhatPercent() {
+				const x = parseFloat(document.getElementById('percent3').value);
+				const y = parseFloat(document.getElementById('percent4').value);
+				if (isNaN(x) || isNaN(y) || y === 0) return alert('الرجاء إدخال أرقام صحيحة');
+				const result = (x / y) * 100;
+				document.getElementById('percent-result2').innerHTML = `<i class="fas fa-check-circle text-green-500 ml-2"></i>النتيجة: ${result.toFixed(2)}%`;
+			}
+
+			function calcChange() {
+				const oldVal = parseFloat(document.getElementById('percent5').value);
+				const newVal = parseFloat(document.getElementById('percent6').value);
+				if (isNaN(oldVal) || isNaN(newVal) || oldVal === 0) return alert('الرجاء إدخال أرقام صحيحة');
+				const change = ((newVal - oldVal) / oldVal) * 100;
+				const direction = change >= 0 ? 'زيادة' : 'نقصان';
+				const color = change >= 0 ? 'text-green-600' : 'text-red-600';
+				document.getElementById('percent-result3').innerHTML = `<span class="${color}"><i class="fas fa-${change >= 0 ? 'arrow-up' : 'arrow-down'} ml-2"></i>${direction} بنسبة ${Math.abs(change).toFixed(2)}%</span>`;
+			}
+
+			// Age Calculator
+			function calculateAge() {
+				const birthdate = document.getElementById('birthdate').value;
+				if (!birthdate) return alert('الرجاء إدخال تاريخ الميلاد');
+
+				const birth = new Date(birthdate);
+				const today = new Date();
+
+				let years = today.getFullYear() - birth.getFullYear();
+				let months = today.getMonth() - birth.getMonth();
+				let days = today.getDate() - birth.getDate();
+
+				if (days < 0) {
+					months--;
+					days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+				}
+				if (months < 0) {
+					years--;
+					months += 12;
+				}
+
+				const totalDays = Math.floor((today - birth) / (1000 * 60 * 60 * 24));
+				const totalWeeks = Math.floor(totalDays / 7);
+				const totalMonths = years * 12 + months;
+
+				document.getElementById('age-result').innerHTML = `
+					<div class="result-card"><i class="fas fa-calendar-alt text-3xl text-cyan-500 mb-2"></i><p class="text-3xl font-bold text-gray-800">${years}</p><p class="text-sm text-gray-600">سنة</p></div>
+					<div class="result-card"><i class="fas fa-calendar-week text-3xl text-cyan-500 mb-2"></i><p class="text-3xl font-bold text-gray-800">${months}</p><p class="text-sm text-gray-600">شهر</p></div>
+					<div class="result-card"><i class="fas fa-calendar-day text-3xl text-cyan-500 mb-2"></i><p class="text-3xl font-bold text-gray-800">${days}</p><p class="text-sm text-gray-600">يوم</p></div>
+					<div class="result-card"><i class="fas fa-clock text-3xl text-cyan-500 mb-2"></i><p class="text-3xl font-bold text-gray-800">${totalDays.toLocaleString()}</p><p class="text-sm text-gray-600">إجمالي الأيام</p></div>
+				`;
+			}
+
+			// BMI Calculator
+			function calculateBMI() {
+				const weight = parseFloat(document.getElementById('weight').value);
+				const height = parseFloat(document.getElementById('height').value);
+
+				if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+					return alert('الرجاء إدخال قيم صحيحة');
+				}
+
+				const heightM = height / 100;
+				const bmi = weight / (heightM * heightM);
+
+				let category, colorClass, icon;
+				if (bmi < 18.5) {
+					category = 'نحافة';
+					colorClass = 'bmi-underweight';
+					icon = 'fa-arrow-down';
+				} else if (bmi < 25) {
+					category = 'وزن طبيعي';
+					colorClass = 'bmi-normal';
+					icon = 'fa-check-circle';
+				} else if (bmi < 30) {
+					category = 'وزن زائد';
+					colorClass = 'bmi-overweight';
+					icon = 'fa-exclamation-triangle';
+				} else {
+					category = 'سمنة';
+					colorClass = 'bmi-obese';
+					icon = 'fa-exclamation-circle';
+				}
+
+				document.getElementById('bmi-result').innerHTML = `
+					<div class="result-card">
+						<i class="fas ${icon} text-5xl ${colorClass} mb-4"></i>
+						<p class="text-4xl font-bold ${colorClass}">${bmi.toFixed(1)}</p>
+						<p class="text-xl font-semibold ${colorClass} mt-2">${category}</p>
+					</div>
+				`;
+			}
+
+			// VAT Calculator
+			function addVAT() {
+				const amount = parseFloat(document.getElementById('vat-amount').value);
+				const rate = parseFloat(document.getElementById('vat-rate').value);
+
+				if (isNaN(amount) || isNaN(rate)) return alert('الرجاء إدخال قيم صحيحة');
+
+				const vat = amount * (rate / 100);
+				const total = amount + vat;
+
+				document.getElementById('vat-result').innerHTML = `
+					<div class="result-card"><p class="text-sm text-gray-600 mb-2">المبلغ الأصلي</p><p class="text-2xl font-bold text-gray-800">${amount.toFixed(2)}</p></div>
+					<div class="result-card"><p class="text-sm text-gray-600 mb-2">الضريبة (${rate}%)</p><p class="text-2xl font-bold text-orange-500">${vat.toFixed(2)}</p></div>
+					<div class="result-card"><p class="text-sm text-gray-600 mb-2">الإجمالي</p><p class="text-2xl font-bold text-cyan-600">${total.toFixed(2)}</p></div>
+				`;
+			}
+
+			function removeVAT() {
+				const totalWithVat = parseFloat(document.getElementById('vat-amount').value);
+				const rate = parseFloat(document.getElementById('vat-rate').value);
+
+				if (isNaN(totalWithVat) || isNaN(rate)) return alert('الرجاء إدخال قيم صحيحة');
+
+				const originalAmount = totalWithVat / (1 + rate / 100);
+				const vat = totalWithVat - originalAmount;
+
+				document.getElementById('vat-result').innerHTML = `
+					<div class="result-card"><p class="text-sm text-gray-600 mb-2">المبلغ بدون ضريبة</p><p class="text-2xl font-bold text-gray-800">${originalAmount.toFixed(2)}</p></div>
+					<div class="result-card"><p class="text-sm text-gray-600 mb-2">الضريبة (${rate}%)</p><p class="text-2xl font-bold text-orange-500">${vat.toFixed(2)}</p></div>
+					<div class="result-card"><p class="text-sm text-gray-600 mb-2">المبلغ الكلي</p><p class="text-2xl font-bold text-cyan-600">${totalWithVat.toFixed(2)}</p></div>
+				`;
+			}
+		</script>
+	</body>
+</html>

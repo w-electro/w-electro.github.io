@@ -635,12 +635,36 @@
 			document.getElementById('scrollToTop').addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
 
 			// Tool switching
-			function switchTool(toolName) {
+			function switchTool(toolName, updateHash = true) {
 				document.querySelectorAll('.tool-content').forEach(t => t.classList.add('hidden'));
 				document.getElementById('tool-' + toolName).classList.remove('hidden');
 				document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-				event.target.closest('.tab-button').classList.add('active');
+				// Find the button with the matching tool name and activate it
+				document.querySelectorAll('.tab-button').forEach(b => {
+					if (b.onclick && b.onclick.toString().includes("'" + toolName + "'")) {
+						b.classList.add('active');
+					}
+				});
+				if (updateHash) {
+					history.replaceState(null, null, '#' + toolName);
+				}
 			}
+
+			// Handle URL hash on page load
+			document.addEventListener('DOMContentLoaded', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['compress', 'convert', 'resize', 'removebg'].includes(hash)) {
+					switchTool(hash, false);
+				}
+			});
+
+			// Handle hash change
+			window.addEventListener('hashchange', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['compress', 'convert', 'resize', 'removebg'].includes(hash)) {
+					switchTool(hash, false);
+				}
+			});
 
 			// Image Compressor
 			async function compressImages() {

@@ -7,12 +7,12 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- W للخدمات الإلكترونية - خدمات طلابية وإلكترونية في السعودية -->
-<!-- Last Updated: 2025-12-06 - SEO Optimization Update -->
+<!-- Last Updated: 2025-12-07 - Added 5 new tool pages -->
 
 <!-- ==================== HOMEPAGE ==================== -->
 <url>
   <loc>https://www.w-electro.com/</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>daily</changefreq>
   <priority>1.0</priority>
   <image:image>
@@ -25,7 +25,7 @@
 <!-- ==================== LANDING PAGES ==================== -->
 <url>
   <loc>https://www.w-electro.com/promo.html</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.95</priority>
   <image:image>
@@ -38,7 +38,7 @@
 <!-- OCR Tool - استخراج النصوص -->
 <url>
   <loc>https://www.w-electro.com/ocr</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.95</priority>
   <image:image>
@@ -50,7 +50,7 @@
 <!-- PDF Tools - أدوات PDF -->
 <url>
   <loc>https://www.w-electro.com/pdf-tools</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.95</priority>
   <image:image>
@@ -62,7 +62,7 @@
 <!-- Image Tools - أدوات الصور -->
 <url>
   <loc>https://www.w-electro.com/image-tools</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.95</priority>
   <image:image>
@@ -74,7 +74,7 @@
 <!-- QR Generator - مولد QR -->
 <url>
   <loc>https://www.w-electro.com/qr-generator</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.90</priority>
   <image:image>
@@ -86,7 +86,7 @@
 <!-- Barcode Generator - مولد الباركود -->
 <url>
   <loc>https://www.w-electro.com/barcode-generator</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.90</priority>
   <image:image>
@@ -98,7 +98,7 @@
 <!-- Text Tools - أدوات النصوص -->
 <url>
   <loc>https://www.w-electro.com/text-tools</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.85</priority>
   <image:image>
@@ -110,7 +110,7 @@
 <!-- Security Tools - أدوات الأمان -->
 <url>
   <loc>https://www.w-electro.com/security-tools</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.85</priority>
   <image:image>
@@ -122,7 +122,7 @@
 <!-- Design Tools - أدوات التصميم -->
 <url>
   <loc>https://www.w-electro.com/design-tools</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.85</priority>
   <image:image>
@@ -131,10 +131,70 @@
   </image:image>
 </url>
 
+<!-- Calculator Tools - أدوات الحاسبة -->
+<url>
+  <loc>https://www.w-electro.com/calculator-tools</loc>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>أدوات الحاسبة مجاناً - النسبة المئوية والعمر وBMI</image:title>
+  </image:image>
+</url>
+
+<!-- Converter Tools - أدوات التحويل -->
+<url>
+  <loc>https://www.w-electro.com/converter-tools</loc>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>أدوات التحويل مجاناً - وحدات وعملات ودرجات حرارة</image:title>
+  </image:image>
+</url>
+
+<!-- DateTime Tools - أدوات التاريخ والوقت -->
+<url>
+  <loc>https://www.w-electro.com/datetime-tools</loc>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>أدوات التاريخ والوقت مجاناً - حساب الأيام والتحويل الهجري</image:title>
+  </image:image>
+</url>
+
+<!-- Developer Tools - أدوات المطورين -->
+<url>
+  <loc>https://www.w-electro.com/dev-tools</loc>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>أدوات المطورين مجاناً - UUID وLorem Ipsum وMeta Tags</image:title>
+  </image:image>
+</url>
+
+<!-- Utility Tools - أدوات متنوعة -->
+<url>
+  <loc>https://www.w-electro.com/utility-tools</loc>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.90</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>أدوات متنوعة مجاناً - أرقام عشوائية ومقارنة نصوص</image:title>
+  </image:image>
+</url>
+
 <!-- Tools Hub - صفحة الأدوات -->
 <url>
   <loc>https://www.w-electro.com/tools</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.90</priority>
   <image:image>
@@ -147,7 +207,7 @@
 <!-- Academic Services - خدمات طلابية -->
 <url>
   <loc>https://www.w-electro.com/academic-services</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.90</priority>
   <image:image>
@@ -159,7 +219,7 @@
 <!-- General Services - خدمات عامة -->
 <url>
   <loc>https://www.w-electro.com/general-services</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.90</priority>
   <image:image>
@@ -171,7 +231,7 @@
 <!-- Design Services - خدمات التصميم -->
 <url>
   <loc>https://www.w-electro.com/design-services</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.90</priority>
   <image:image>
@@ -183,7 +243,7 @@
 <!-- Electronic Services - خدمات إلكترونية -->
 <url>
   <loc>https://www.w-electro.com/electronic-services</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>weekly</changefreq>
   <priority>0.85</priority>
   <image:image>
@@ -195,14 +255,14 @@
 <!-- ==================== LEGAL PAGES ==================== -->
 <url>
   <loc>https://www.w-electro.com/privacy-policy</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.4</priority>
 </url>
 
 <url>
   <loc>https://www.w-electro.com/terms-and-conditions</loc>
-  <lastmod>2025-12-06T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.4</priority>
 </url>

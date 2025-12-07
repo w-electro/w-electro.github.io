@@ -1164,7 +1164,7 @@
 			});
 
 			// PDF TOOL SWITCHING
-			function switchPdfTool(toolName) {
+			function switchPdfTool(toolName, updateHash = true) {
 				// Hide all PDF subtools
 				document.querySelectorAll('.pdf-subtool').forEach(tool => {
 					tool.style.display = 'none';
@@ -1182,11 +1182,33 @@
 				}
 
 				// Update tab buttons in PDF section
-				event.target.parentElement.querySelectorAll('.tab-button').forEach(btn => {
+				document.querySelectorAll('.tab-button').forEach(btn => {
 					btn.classList.remove('active');
+					if (btn.onclick && btn.onclick.toString().includes("'" + toolName + "'")) {
+						btn.classList.add('active');
+					}
 				});
-				event.target.classList.add('active');
+
+				if (updateHash) {
+					history.replaceState(null, null, '#' + toolName);
+				}
 			}
+
+			// Handle URL hash on page load
+			document.addEventListener('DOMContentLoaded', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['merge', 'split', 'pdf2img', 'img2pdf'].includes(hash)) {
+					switchPdfTool(hash, false);
+				}
+			});
+
+			// Handle hash change
+			window.addEventListener('hashchange', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['merge', 'split', 'pdf2img', 'img2pdf'].includes(hash)) {
+					switchPdfTool(hash, false);
+				}
+			});
 
 			// PDF MERGER
 			document.getElementById('pdf-merge-files').addEventListener('change', function() {

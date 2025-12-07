@@ -160,12 +160,35 @@
 			window.addEventListener('scroll', () => {const btn = document.getElementById('scrollToTop'); if (window.pageYOffset > 300) btn.classList.remove('opacity-0', 'invisible'); else btn.classList.add('opacity-0', 'invisible');});
 			document.getElementById('scrollToTop').addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
 
-			function switchTool(toolName) {
+			function switchTool(toolName, updateHash = true) {
 				document.querySelectorAll('.tool-content').forEach(t => t.classList.add('hidden'));
 				document.getElementById('tool-' + toolName).classList.remove('hidden');
 				document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-				event.target.closest('.tab-button').classList.add('active');
+				document.querySelectorAll('.tab-button').forEach(b => {
+					if (b.onclick && b.onclick.toString().includes("'" + toolName + "'")) {
+						b.classList.add('active');
+					}
+				});
+				if (updateHash) {
+					history.replaceState(null, null, '#' + toolName);
+				}
 			}
+
+			// Handle URL hash on page load
+			document.addEventListener('DOMContentLoaded', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['color', 'gradient', 'shadow'].includes(hash)) {
+					switchTool(hash, false);
+				}
+			});
+
+			// Handle hash change
+			window.addEventListener('hashchange', function() {
+				const hash = window.location.hash.substring(1);
+				if (hash && ['color', 'gradient', 'shadow'].includes(hash)) {
+					switchTool(hash, false);
+				}
+			});
 
 			// Color Picker
 			function initColorPicker() {

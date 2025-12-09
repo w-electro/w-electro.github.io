@@ -140,7 +140,9 @@ export function Header() {
                               : "hover:bg-accent"
                           )}
                         >
-                          {child.icon && <child.icon className="h-4 w-4" />}
+                          {"icon" in child && child.icon && (
+                            <child.icon className="h-4 w-4" />
+                          )}
                           {child.name}
                         </Link>
                       ))}

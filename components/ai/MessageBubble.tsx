@@ -104,7 +104,7 @@ export function MessageBubble({ message, onRegenerate }: MessageBubbleProps) {
 
                     return (
                       <SyntaxHighlighter
-                        style={oneDark}
+                        style={oneDark as any}
                         language={match[1]}
                         PreTag="div"
                         className="rounded-xl !bg-gray-900 !my-4"

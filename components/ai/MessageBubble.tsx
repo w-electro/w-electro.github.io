@@ -87,7 +87,7 @@ export function MessageBubble({ message, onRegenerate }: MessageBubbleProps) {
               <ReactMarkdown
                 remarkPlugins={[remarkGfm, remarkMath]}
                 components={{
-                  code({ node, className, children, ...props }) {
+                  code({ node, className, children, ref, ...props }) {
                     const match = /language-(\w+)/.exec(className || "");
                     const isInline = !match;
 
@@ -112,7 +112,6 @@ export function MessageBubble({ message, onRegenerate }: MessageBubbleProps) {
                           direction: "ltr",
                           textAlign: "left",
                         }}
-                        {...props}
                       >
                         {String(children).replace(/\n$/, "")}
                       </SyntaxHighlighter>

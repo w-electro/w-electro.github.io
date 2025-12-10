@@ -19,6 +19,8 @@ import {
   Clock,
   Shield,
   Award,
+  BadgeCheck,
+  ExternalLink,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -105,22 +107,46 @@ const stats = [
 
 const testimonials = [
   {
-    name: "أحمد محمد",
-    role: "طالب هندسة - جامعة الملك سعود",
-    content: "المساعد الذكي ساعدني كثيراً في حل مسائل الرياضيات. شرح خطوة بخطوة ممتاز!",
+    name: "Bassam A.",
+    role: "مرشد محلي - Google Maps",
+    content: "ما شاء الله من أفضل الخدمات الإلكترونية والطلابية. دقة في الأداء وسرعة في الانجاز",
     rating: 5,
+    verified: true,
   },
   {
-    name: "سارة العتيبي",
-    role: "طالبة إدارة أعمال",
-    content: "أدوات PDF وOCR وفرت علي ساعات من العمل. شكراً نجاح!",
+    name: "بشرى",
+    role: "عميل - Google Maps",
+    content: "تجربه ممتازه شغل مرتب ونموذجي وسرعه في تلبية الطلب",
     rating: 5,
+    verified: true,
   },
   {
-    name: "خالد الغامدي",
-    role: "صاحب مشروع صغير",
-    content: "خدمات التصميم ممتازة والأسعار منافسة. أنصح بهم بشدة.",
+    name: "Roro S.",
+    role: "عميل - Google Maps",
+    content: "خدمه رائعه جدًا وتعامل بطل وسريعين وفي احترافيه بالشغل انصح الكل يتعامل معهم",
     rating: 5,
+    verified: true,
+  },
+  {
+    name: "KhaliDo",
+    role: "عميل - Google Maps",
+    content: "خدماتهم الطلابية والإلكترونية ممتازة وجودتها عالية وسريعة",
+    rating: 5,
+    verified: true,
+  },
+  {
+    name: "hunter c.",
+    role: "عميل - Google Maps",
+    content: "مافي اسهل من خدمتهم الله يعطيهم العافيه",
+    rating: 5,
+    verified: true,
+  },
+  {
+    name: "مالك",
+    role: "عميل - Google Maps",
+    content: "خدمة مميزة وسريعه واسلوب راقي",
+    rating: 5,
+    verified: true,
   },
 ];
 
@@ -383,34 +409,72 @@ export default function HomePage() {
         <section className="py-20 bg-gradient-to-br from-cyan-50 to-orange-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-md mb-4">
+                <img
+                  src="https://www.gstatic.com/images/branding/product/2x/maps_96dp.png"
+                  alt="Google Maps"
+                  className="w-6 h-6"
+                />
+                <span className="text-sm font-medium text-gray-700">تقييمات حقيقية من Google Maps</span>
+              </div>
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                 ماذا يقول عملاؤنا؟
               </h2>
-              <p className="text-gray-600 text-lg">
-                تقييم 4.9/5 من أكثر من 523 عميل
-              </p>
+              <div className="flex items-center justify-center gap-2">
+                <div className="flex gap-0.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-6 w-6 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <span className="text-xl font-bold text-gray-900">4.9/5</span>
+                <span className="text-gray-600">من أكثر من 523+ عميل</span>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {/* Scrollable testimonials on mobile, grid on desktop */}
+            <div className="flex md:grid md:grid-cols-3 gap-6 max-w-6xl mx-auto overflow-x-auto pb-4 md:pb-0 snap-x snap-mandatory md:snap-none">
               {testimonials.map((testimonial, index) => (
-                <Card key={index} className="bg-white border-0 shadow-lg">
+                <Card key={index} className="bg-white border-0 shadow-lg min-w-[300px] md:min-w-0 snap-center flex-shrink-0">
                   <CardContent className="p-6">
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star
-                          key={i}
-                          className="h-5 w-5 fill-yellow-400 text-yellow-400"
-                        />
-                      ))}
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex gap-0.5">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                          />
+                        ))}
+                      </div>
+                      {testimonial.verified && (
+                        <div className="flex items-center gap-1 text-blue-600">
+                          <BadgeCheck className="h-4 w-4" />
+                          <span className="text-xs">موثق</span>
+                        </div>
+                      )}
                     </div>
-                    <p className="text-gray-700 mb-6">&quot;{testimonial.content}&quot;</p>
-                    <div>
-                      <p className="font-bold text-gray-900">{testimonial.name}</p>
-                      <p className="text-sm text-gray-500">{testimonial.role}</p>
+                    <p className="text-gray-700 mb-6 text-sm leading-relaxed">&quot;{testimonial.content}&quot;</p>
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="font-bold text-gray-900">{testimonial.name}</p>
+                        <p className="text-xs text-gray-500">{testimonial.role}</p>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
               ))}
+            </div>
+
+            {/* Google Maps Link */}
+            <div className="text-center mt-8">
+              <a
+                href="https://www.google.com/maps/place/W+For+Electronic+Services/@24.7312856,46.6547974,17z/data=!4m8!3m7!1s0x3e2f024e9dbe6a3f:0xb4aa5c3e09b6d5a2!8m2!3d24.7312856!4d46.6573723!9m1!1b1!16s%2Fg%2F11v_3dgb8s"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-cyan-600 hover:text-cyan-700 font-medium transition-colors"
+              >
+                عرض جميع التقييمات على Google Maps
+                <ExternalLink className="h-4 w-4" />
+              </a>
             </div>
           </div>
         </section>

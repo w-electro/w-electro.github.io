@@ -141,12 +141,36 @@ export function Footer() {
         </div>
       </div>
 
+      {/* W For ES Branding */}
+      <div className="border-t border-gray-800 bg-gray-950">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-center gap-3">
+            <span className="text-xs text-gray-500">مشروع تابع لـ</span>
+            <a
+              href="https://www.w-electro.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-cyan-600/20 to-orange-600/20 border border-gray-700 hover:border-gray-600 transition-colors"
+            >
+              <Image
+                src="/wD.png"
+                alt="W For ES"
+                width={20}
+                height={20}
+                className="rounded-full"
+              />
+              <span className="text-xs font-medium text-gray-300">W For Electronic Services</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       {/* Bottom Bar */}
       <div className="border-t border-gray-800">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-gray-500">
-              © {currentYear} نجاح. جميع الحقوق محفوظة.
+              © {currentYear} نجاح - W For Electronic Services. جميع الحقوق محفوظة.
             </p>
             <div className="flex items-center gap-6 text-sm text-gray-500">
               <Link href="/privacy" className="hover:text-white transition-colors">

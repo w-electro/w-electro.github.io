@@ -22,11 +22,27 @@ import {
   Calculator,
   ArrowLeftRight,
   Search,
+  LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const navigation = [
+interface NavChild {
+  name: string;
+  href: string;
+  icon: LucideIcon;
+}
+
+interface NavItem {
+  name: string;
+  href: string;
+  icon: LucideIcon;
+  badge?: string;
+  description?: string;
+  children?: NavChild[];
+}
+
+const navigation: NavItem[] = [
   {
     name: "الرئيسية",
     href: "/",

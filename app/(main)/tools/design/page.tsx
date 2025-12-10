@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
-import { Palette, Pipette, Blend, Box } from "lucide-react";
+import { Palette, Pipette, Droplet, Box } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const designTools = [
   { name: "منتقي الألوان", description: "اختر وحول بين صيغ الألوان", icon: Pipette, href: "/tools/design/color-picker", color: "from-pink-500 to-rose-500" },
-  { name: "مولد التدرجات", description: "أنشئ تدرجات لونية جميلة", icon: Blend, href: "/tools/design/gradient", color: "from-purple-500 to-pink-500" },
+  { name: "مولد التدرجات", description: "أنشئ تدرجات لونية جميلة", icon: Droplet, href: "/tools/design/gradient", color: "from-purple-500 to-pink-500" },
   { name: "مولد الظلال", description: "CSS box-shadow generator", icon: Box, href: "/tools/design/shadow", color: "from-blue-500 to-cyan-500" },
 ];
 

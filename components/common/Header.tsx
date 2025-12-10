@@ -119,7 +119,7 @@ export function Header() {
           <Link href="/" className="flex items-center gap-3">
             <div className="relative w-10 h-10 rounded-full overflow-hidden shadow-md">
               <Image
-                src="/wD.png"
+                src="/Najah.webp"
                 alt="نجاح"
                 fill
                 className="object-cover"

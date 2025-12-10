@@ -87,9 +87,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/wD.png",
-    shortcut: "/wD.png",
-    apple: "/wD.png",
+    icon: "/Najah.webp",
+    shortcut: "/Najah.webp",
+    apple: "/Najah.webp",
   },
   manifest: "/manifest.json",
   category: "education",

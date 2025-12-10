@@ -69,7 +69,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-3 mb-4">
               <div className="relative w-12 h-12 rounded-full overflow-hidden">
                 <Image
-                  src="/wD.png"
+                  src="/Najah.webp"
                   alt="نجاح"
                   fill
                   className="object-cover"

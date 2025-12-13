@@ -29,10 +29,10 @@ const calculators = [
     color: "from-green-500 to-emerald-500",
   },
   {
-    name: "حاسبة القروض",
-    description: "احسب الأقساط الشهرية",
+    name: "حاسبة ضريبة القيمة المضافة",
+    description: "احسب الضريبة - إضافة أو إزالة",
     icon: DollarSign,
-    href: "/tools/calculator/loan",
+    href: "/tools/calculator/vat",
     color: "from-orange-500 to-red-500",
   },
 ];

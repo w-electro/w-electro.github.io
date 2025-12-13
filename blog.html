@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>مدونة W للخدمات الإلكترونية | مقالات ونصائح تقنية</title>
+	<meta name="description" content="مدونة W للخدمات الإلكترونية - مقالات وأدلة شاملة حول الأدوات الإلكترونية، النجاح الأكاديمي، التصميم، والتقنية. نصائح عملية لتحسين إنتاجيتك الرقمية.">
+	<meta name="keywords" content="مدونة تقنية، أدوات إلكترونية، نصائح طلابية، تصميم، PDF، OCR، نجاح أكاديمي، إنتاجية">
+	<meta name="author" content="W للخدمات الإلكترونية">
+	<link rel="canonical" href="https://w-electro.com/blog.html">
+
+	<!-- Open Graph -->
+	<meta property="og:title" content="مدونة W للخدمات الإلكترونية">
+	<meta property="og:description" content="مقالات ونصائح تقنية لتحسين إنتاجيتك الرقمية">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="https://w-electro.com/blog.html">
+	<meta property="og:image" content="https://w-electro.com/wD.png">
+
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+	<link rel="icon" href="wD.png" type="image/png">
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap');
+		* { font-family: 'Cairo', sans-serif; }
+		.blog-card { transition: all 0.3s ease; }
+		.blog-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+		.category-badge { transition: all 0.2s ease; }
+		.category-badge:hover { transform: scale(1.05); }
+		.floating-whatsapp {
+			background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+			animation: pulse 2s infinite;
+		}
+		@keyframes pulse {
+			0%, 100% { transform: scale(1); }
+			50% { transform: scale(1.05); }
+		}
+		.gradient-text {
+			background: linear-gradient(135deg, #06b6d4 0%, #f97316 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+		}
+	</style>
+</head>
+<body class="bg-gray-50">
+	<!-- Loading Screen -->
+	<div id="loadingScreen" class="fixed inset-0 bg-white z-50 flex items-center justify-center">
+		<div class="text-center">
+			<div class="w-16 h-16 border-4 border-cyan-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+			<p class="text-gray-600 text-lg font-semibold">جاري التحميل...</p>
+		</div>
+	</div>
+
+	<div id="mainContent" class="opacity-0 transition-opacity duration-500" x-data="{ mobileMenuOpen: false }">
+		<!-- Header -->
+		<header class="bg-white shadow-md sticky top-0 z-40">
+			<div class="container mx-auto px-4">
+				<div class="flex items-center justify-between py-4">
+					<div class="flex items-center">
+						<a href="/" class="text-2xl font-bold flex items-center gap-3">
+							<img src="wD.png" alt="W" class="w-10 h-10 rounded-full shadow-md" />
+							<span class="text-cyan-600">W</span>
+							<span class="text-orange-500">للخدمات الإلكترونية</span>
+						</a>
+					</div>
+					<nav class="hidden md:flex space-x-8 rtl:space-x-reverse items-center">
+						<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+							الرئيسية
+							<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+						</a>
+						<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+							خدمات عامة
+							<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+						</a>
+						<a href="electronic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+							خدمات إلكترونية
+							<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+						</a>
+						<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+							خدمات التصميم
+							<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+						</a>
+						<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+							خدمات طلابية
+							<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+						</a>
+						<a href="blog.html" class="text-cyan-600 font-medium hover:text-cyan-700 transition-colors duration-200 relative group">
+							مدونة
+							<span class="absolute bottom-0 left-0 w-full h-0.5 bg-cyan-600"></span>
+						</a>
+						<a href="tools" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors">الأدوات</a>
+					</nav>
+					<!-- Mobile menu button -->
+					<div class="md:hidden">
+						<button @click="mobileMenuOpen = !mobileMenuOpen" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+							<svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+								<path x-show="!mobileMenuOpen" fill-rule="evenodd" clip-rule="evenodd" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"></path>
+								<path x-show="mobileMenuOpen" fill-rule="evenodd" clip-rule="evenodd" d="M6 18L18 6M6 6l12 12"></path>
+							</svg>
+						</button>
+					</div>
+				</div>
+				<!-- Mobile Navigation -->
+				<div x-show="mobileMenuOpen" x-transition class="md:hidden mt-4 py-4 border-t border-gray-200">
+					<nav class="flex flex-col space-y-3 pb-4">
+						<a href="/" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">الرئيسية</a>
+						<a href="general-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات عامة</a>
+						<a href="electronic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات إلكترونية</a>
+						<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات التصميم</a>
+						<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات طلابية</a>
+						<a href="blog.html" class="text-cyan-600 font-medium bg-cyan-50 py-2 px-4 rounded-lg">مدونة</a>
+						<a href="tools" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">الأدوات</a>
+					</nav>
+				</div>
+			</div>
+		</header>
+
+		<!-- Hero Section -->
+		<section class="py-20 bg-gradient-to-br from-cyan-50 via-blue-50 to-orange-50">
+			<div class="container mx-auto px-4 text-center">
+				<div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-cyan-500 to-orange-500 rounded-2xl mb-6 shadow-lg">
+					<i class="fas fa-blog text-3xl text-white"></i>
+				</div>
+				<h1 class="text-4xl lg:text-6xl font-bold text-gray-800 mb-6">
+					<span class="gradient-text">مدونة W للخدمات الإلكترونية</span>
+				</h1>
+				<p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+					مقالات وأدلة شاملة حول الأدوات الإلكترونية، النجاح الأكاديمي، التصميم، والتقنية
+				</p>
+
+				<!-- Category Filter -->
+				<div class="flex flex-wrap justify-center gap-3 mt-12" x-data="{ activeCategory: 'all' }">
+					<button @click="activeCategory = 'all'" :class="activeCategory === 'all' ? 'bg-gradient-to-r from-cyan-500 to-orange-500 text-white' : 'bg-white text-gray-700'" class="category-badge px-6 py-2.5 rounded-full font-semibold shadow-md hover:shadow-lg">
+						<i class="fas fa-layer-group ml-2"></i>الكل
+					</button>
+					<button @click="activeCategory = 'tools'" :class="activeCategory === 'tools' ? 'bg-gradient-to-r from-cyan-500 to-orange-500 text-white' : 'bg-white text-gray-700'" class="category-badge px-6 py-2.5 rounded-full font-semibold shadow-md hover:shadow-lg">
+						<i class="fas fa-tools ml-2"></i>الأدوات
+					</button>
+					<button @click="activeCategory = 'academic'" :class="activeCategory === 'academic' ? 'bg-gradient-to-r from-cyan-500 to-orange-500 text-white' : 'bg-white text-gray-700'" class="category-badge px-6 py-2.5 rounded-full font-semibold shadow-md hover:shadow-lg">
+						<i class="fas fa-graduation-cap ml-2"></i>طلابي
+					</button>
+					<button @click="activeCategory = 'design'" :class="activeCategory === 'design' ? 'bg-gradient-to-r from-cyan-500 to-orange-500 text-white' : 'bg-white text-gray-700'" class="category-badge px-6 py-2.5 rounded-full font-semibold shadow-md hover:shadow-lg">
+						<i class="fas fa-palette ml-2"></i>تصميم
+					</button>
+					<button @click="activeCategory = 'tech'" :class="activeCategory === 'tech' ? 'bg-gradient-to-r from-cyan-500 to-orange-500 text-white' : 'bg-white text-gray-700'" class="category-badge px-6 py-2.5 rounded-full font-semibold shadow-md hover:shadow-lg">
+						<i class="fas fa-laptop-code ml-2"></i>تقنية
+					</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- Blog Posts Grid -->
+		<section class="py-20 bg-white">
+			<div class="container mx-auto px-4">
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<!-- Blog Post 1 -->
+					<a href="blog/ocr-guide.html" class="blog-card bg-white rounded-2xl shadow-lg overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center">
+							<i class="fas fa-file-text text-6xl text-white opacity-80"></i>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center gap-2 mb-3">
+								<span class="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-semibold">أدوات</span>
+								<span class="text-sm text-gray-500"><i class="far fa-clock ml-1"></i>5 دقائق قراءة</span>
+							</div>
+							<h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-cyan-600 transition-colors">دليل شامل لاستخدام تقنية OCR لاستخراج النصوص</h3>
+							<p class="text-gray-600 mb-4">تعرف على كيفية استخدام تقنية التعرف الضوئي على الحروف لتحويل الصور إلى نصوص قابلة للتحرير بسهولة...</p>
+							<div class="flex items-center text-cyan-600 font-semibold">
+								اقرأ المزيد <i class="fas fa-arrow-left mr-2"></i>
+							</div>
+						</div>
+					</a>
+
+					<!-- Blog Post 2 -->
+					<a href="blog/pdf-tips.html" class="blog-card bg-white rounded-2xl shadow-lg overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-red-400 to-orange-500 flex items-center justify-center">
+							<i class="fas fa-file-pdf text-6xl text-white opacity-80"></i>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center gap-2 mb-3">
+								<span class="px-3 py-1 bg-red-100 text-red-600 rounded-full text-sm font-semibold">أدوات</span>
+								<span class="text-sm text-gray-500"><i class="far fa-clock ml-1"></i>7 دقائق قراءة</span>
+							</div>
+							<h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-cyan-600 transition-colors">10 نصائح احترافية للتعامل مع ملفات PDF</h3>
+							<p class="text-gray-600 mb-4">احترف التعامل مع ملفات PDF من خلال هذه النصائح العملية للدمج، التقسيم، الضغط، والتحويل...</p>
+							<div class="flex items-center text-cyan-600 font-semibold">
+								اقرأ المزيد <i class="fas fa-arrow-left mr-2"></i>
+							</div>
+						</div>
+					</a>
+
+					<!-- Blog Post 3 -->
+					<a href="blog/academic-success.html" class="blog-card bg-white rounded-2xl shadow-lg overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-purple-400 to-pink-500 flex items-center justify-center">
+							<i class="fas fa-graduation-cap text-6xl text-white opacity-80"></i>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center gap-2 mb-3">
+								<span class="px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-sm font-semibold">طلابي</span>
+								<span class="text-sm text-gray-500"><i class="far fa-clock ml-1"></i>8 دقائق قراءة</span>
+							</div>
+							<h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-cyan-600 transition-colors">7 خطوات لتحقيق النجاح الأكاديمي المتميز</h3>
+							<p class="text-gray-600 mb-4">استراتيجيات مثبتة علمياً لتحسين الأداء الدراسي وتحقيق التفوق الأكاديمي في الجامعة...</p>
+							<div class="flex items-center text-cyan-600 font-semibold">
+								اقرأ المزيد <i class="fas fa-arrow-left mr-2"></i>
+							</div>
+						</div>
+					</a>
+
+					<!-- Blog Post 4 -->
+					<a href="blog/qr-code-uses.html" class="blog-card bg-white rounded-2xl shadow-lg overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+							<i class="fas fa-qrcode text-6xl text-white opacity-80"></i>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center gap-2 mb-3">
+								<span class="px-3 py-1 bg-green-100 text-green-600 rounded-full text-sm font-semibold">أدوات</span>
+								<span class="text-sm text-gray-500"><i class="far fa-clock ml-1"></i>6 دقائق قراءة</span>
+							</div>
+							<h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-cyan-600 transition-colors">استخدامات مبتكرة لرموز QR في حياتك اليومية</h3>
+							<p class="text-gray-600 mb-4">اكتشف كيف يمكن أن تساعدك رموز QR في تنظيم حياتك، مشاركة المعلومات، وتسهيل التواصل...</p>
+							<div class="flex items-center text-cyan-600 font-semibold">
+								اقرأ المزيد <i class="fas fa-arrow-left mr-2"></i>
+							</div>
+						</div>
+					</a>
+
+					<!-- Blog Post 5 -->
+					<a href="blog/design-basics.html" class="blog-card bg-white rounded-2xl shadow-lg overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center">
+							<i class="fas fa-palette text-6xl text-white opacity-80"></i>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center gap-2 mb-3">
+								<span class="px-3 py-1 bg-indigo-100 text-indigo-600 rounded-full text-sm font-semibold">تصميم</span>
+								<span class="text-sm text-gray-500"><i class="far fa-clock ml-1"></i>10 دقائق قراءة</span>
+							</div>
+							<h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-cyan-600 transition-colors">أساسيات التصميم الجرافيكي للمبتدئين</h3>
+							<p class="text-gray-600 mb-4">دليل مبسط يشرح المبادئ الأساسية للتصميم الجرافيكي وكيفية إنشاء تصاميم جذابة واحترافية...</p>
+							<div class="flex items-center text-cyan-600 font-semibold">
+								اقرأ المزيد <i class="fas fa-arrow-left mr-2"></i>
+							</div>
+						</div>
+					</a>
+
+					<!-- Blog Post 6 -->
+					<a href="blog/productivity-tools.html" class="blog-card bg-white rounded-2xl shadow-lg overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center">
+							<i class="fas fa-rocket text-6xl text-white opacity-80"></i>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center gap-2 mb-3">
+								<span class="px-3 py-1 bg-yellow-100 text-yellow-600 rounded-full text-sm font-semibold">تقنية</span>
+								<span class="text-sm text-gray-500"><i class="far fa-clock ml-1"></i>9 دقائق قراءة</span>
+							</div>
+							<h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-cyan-600 transition-colors">أفضل الأدوات الرقمية لزيادة الإنتاجية في 2024</h3>
+							<p class="text-gray-600 mb-4">قائمة شاملة بأهم الأدوات والتطبيقات التي ستساعدك على تنظيم وقتك وزيادة إنتاجيتك...</p>
+							<div class="flex items-center text-cyan-600 font-semibold">
+								اقرأ المزيد <i class="fas fa-arrow-left mr-2"></i>
+							</div>
+						</div>
+					</a>
+
+					<!-- Blog Post 7 -->
+					<a href="blog/research-writing.html" class="blog-card bg-white rounded-2xl shadow-lg overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center">
+							<i class="fas fa-book-open text-6xl text-white opacity-80"></i>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center gap-2 mb-3">
+								<span class="px-3 py-1 bg-teal-100 text-teal-600 rounded-full text-sm font-semibold">طلابي</span>
+								<span class="text-sm text-gray-500"><i class="far fa-clock ml-1"></i>12 دقيقة قراءة</span>
+							</div>
+							<h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-cyan-600 transition-colors">دليلك الشامل لكتابة البحث العلمي المتميز</h3>
+							<p class="text-gray-600 mb-4">خطوات عملية ونصائح احترافية لكتابة بحث علمي أكاديمي متميز يحقق أعلى الدرجات...</p>
+							<div class="flex items-center text-cyan-600 font-semibold">
+								اقرأ المزيد <i class="fas fa-arrow-left mr-2"></i>
+							</div>
+						</div>
+					</a>
+
+					<!-- Blog Post 8 -->
+					<a href="blog/image-optimization.html" class="blog-card bg-white rounded-2xl shadow-lg overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-pink-400 to-rose-500 flex items-center justify-center">
+							<i class="fas fa-image text-6xl text-white opacity-80"></i>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center gap-2 mb-3">
+								<span class="px-3 py-1 bg-pink-100 text-pink-600 rounded-full text-sm font-semibold">أدوات</span>
+								<span class="text-sm text-gray-500"><i class="far fa-clock ml-1"></i>6 دقائق قراءة</span>
+							</div>
+							<h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-cyan-600 transition-colors">كيف تحسّن جودة صورك دون فقدان الجودة</h3>
+							<p class="text-gray-600 mb-4">تقنيات وأدوات احترافية لتحسين وضغط الصور مع الحفاظ على أعلى جودة ممكنة...</p>
+							<div class="flex items-center text-cyan-600 font-semibold">
+								اقرأ المزيد <i class="fas fa-arrow-left mr-2"></i>
+							</div>
+						</div>
+					</a>
+
+					<!-- Blog Post 9 -->
+					<a href="blog/time-management.html" class="blog-card bg-white rounded-2xl shadow-lg overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center">
+							<i class="fas fa-clock text-6xl text-white opacity-80"></i>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center gap-2 mb-3">
+								<span class="px-3 py-1 bg-amber-100 text-amber-600 rounded-full text-sm font-semibold">طلابي</span>
+								<span class="text-sm text-gray-500"><i class="far fa-clock ml-1"></i>8 دقائق قراءة</span>
+							</div>
+							<h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-cyan-600 transition-colors">فن إدارة الوقت: استراتيجيات فعالة للطلاب</h3>
+							<p class="text-gray-600 mb-4">تعلم كيف توازن بين الدراسة، الحياة الاجتماعية، والراحة من خلال تقنيات إدارة الوقت المثبتة...</p>
+							<div class="flex items-center text-cyan-600 font-semibold">
+								اقرأ المزيد <i class="fas fa-arrow-left mr-2"></i>
+							</div>
+						</div>
+					</a>
+
+					<!-- Blog Post 10 -->
+					<a href="blog/cybersecurity-basics.html" class="blog-card bg-white rounded-2xl shadow-lg overflow-hidden">
+						<div class="h-48 bg-gradient-to-br from-slate-400 to-gray-600 flex items-center justify-center">
+							<i class="fas fa-shield-alt text-6xl text-white opacity-80"></i>
+						</div>
+						<div class="p-6">
+							<div class="flex items-center gap-2 mb-3">
+								<span class="px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-sm font-semibold">تقنية</span>
+								<span class="text-sm text-gray-500"><i class="far fa-clock ml-1"></i>11 دقيقة قراءة</span>
+							</div>
+							<h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-cyan-600 transition-colors">أساسيات الأمن السيبراني لحماية بياناتك</h3>
+							<p class="text-gray-600 mb-4">نصائح عملية وسهلة التطبيق لحماية معلوماتك الشخصية وبياناتك الرقمية من التهديدات...</p>
+							<div class="flex items-center text-cyan-600 font-semibold">
+								اقرأ المزيد <i class="fas fa-arrow-left mr-2"></i>
+							</div>
+						</div>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- CTA Section -->
+		<section class="py-20 bg-gradient-to-br from-cyan-600 to-orange-500">
+			<div class="container mx-auto px-4 text-center">
+				<h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">هل تبحث عن أدوات مجانية لتسهيل عملك؟</h2>
+				<p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+					استكشف مجموعتنا الواسعة من الأدوات الإلكترونية المجانية - من OCR إلى PDF، QR، الحاسبات والمزيد
+				</p>
+				<a href="tools" class="inline-block bg-white text-cyan-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all shadow-xl hover:shadow-2xl hover:scale-105">
+					<i class="fas fa-tools ml-2"></i>
+					اكتشف الأدوات المجانية
+				</a>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer class="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16">
+			<div class="container mx-auto px-4">
+				<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+					<div>
+						<div class="flex items-center gap-3 mb-4">
+							<img src="wD.png" alt="W" class="w-12 h-12 rounded-full shadow-md" />
+							<div>
+								<h3 class="text-xl font-bold">W للخدمات الإلكترونية</h3>
+								<p class="text-sm text-gray-400">حلول رقمية متكاملة</p>
+							</div>
+						</div>
+						<p class="text-gray-400">نقدم أفضل الخدمات والأدوات الإلكترونية المجانية لتسهيل حياتك الرقمية.</p>
+					</div>
+					<div>
+						<h4 class="text-lg font-bold mb-4">روابط سريعة</h4>
+						<ul class="space-y-2">
+							<li><a href="/" class="text-gray-400 hover:text-cyan-400 transition-colors">الرئيسية</a></li>
+							<li><a href="tools" class="text-gray-400 hover:text-cyan-400 transition-colors">الأدوات</a></li>
+							<li><a href="blog.html" class="text-gray-400 hover:text-cyan-400 transition-colors">المدونة</a></li>
+						</ul>
+					</div>
+					<div>
+						<h4 class="text-lg font-bold mb-4">الخدمات</h4>
+						<ul class="space-y-2">
+							<li><a href="general-services" class="text-gray-400 hover:text-cyan-400 transition-colors">خدمات عامة</a></li>
+							<li><a href="design-services" class="text-gray-400 hover:text-cyan-400 transition-colors">خدمات التصميم</a></li>
+							<li><a href="academic-services" class="text-gray-400 hover:text-cyan-400 transition-colors">خدمات طلابية</a></li>
+						</ul>
+					</div>
+					<div>
+						<h4 class="text-lg font-bold mb-4">تواصل معنا</h4>
+						<div class="flex gap-3">
+							<a href="https://wa.me/966540732077" class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+								<i class="fab fa-whatsapp text-xl"></i>
+							</a>
+							<a href="#" class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+								<i class="fab fa-twitter text-xl"></i>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="border-t border-gray-700 pt-8 text-center">
+					<p class="text-gray-400">&copy; 2024 جميع الحقوق محفوظة لـ W للخدمات الإلكترونية</p>
+				</div>
+			</div>
+		</footer>
+
+		<!-- Floating WhatsApp Button -->
+		<a href="https://wa.me/966540732077" class="floating-whatsapp fixed bottom-6 left-6 w-16 h-16 rounded-full flex items-center justify-center shadow-2xl z-50" target="_blank">
+			<i class="fab fa-whatsapp text-3xl text-white"></i>
+		</a>
+
+		<!-- Scroll to Top Button -->
+		<button id="scrollToTop" class="fixed bottom-24 left-6 w-14 h-14 bg-gradient-to-r from-cyan-500 to-orange-500 rounded-full flex items-center justify-center shadow-2xl z-50 opacity-0 invisible transition-all hover:scale-110">
+			<i class="fas fa-arrow-up text-xl text-white"></i>
+		</button>
+	</div>
+
+	<script>
+		// Loading screen
+		window.addEventListener('load', () => {
+			document.getElementById('loadingScreen').classList.add('hidden');
+			document.getElementById('mainContent').classList.remove('opacity-0');
+		});
+
+		// Scroll to top
+		window.addEventListener('scroll', () => {
+			const btn = document.getElementById('scrollToTop');
+			if (window.pageYOffset > 300) {
+				btn.classList.remove('opacity-0', 'invisible');
+			} else {
+				btn.classList.add('opacity-0', 'invisible');
+			}
+		});
+
+		document.getElementById('scrollToTop').addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		});
+	</script>
+</body>
+</html>

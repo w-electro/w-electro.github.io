@@ -93,8 +93,9 @@ export default function UnitsConverterPage() {
       return;
     }
 
-    const fromFactor = unitCategories[category].units[from as keyof typeof unitCategories[typeof category]["units"]].factor;
-    const toFactor = unitCategories[category].units[to as keyof typeof unitCategories[typeof category]["units"]].factor;
+    const currentUnits = unitCategories[category].units as Record<string, { name: string; factor: number }>;
+    const fromFactor = currentUnits[from].factor;
+    const toFactor = currentUnits[to].factor;
     const result = (val * fromFactor) / toFactor;
     setToValue(result.toFixed(6).replace(/\.?0+$/, ""));
   };

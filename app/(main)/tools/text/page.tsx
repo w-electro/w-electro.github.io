@@ -3,41 +3,41 @@
 import Link from "next/link";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
-import { Clock, Calendar, Globe, CalendarDays } from "lucide-react";
+import { Type, Hash, Code, Binary } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
-const datetimeTools = [
+const textTools = [
   {
-    name: "حاسبة الأيام",
-    description: "احسب الفرق بين تاريخين",
-    icon: Calendar,
-    href: "/tools/datetime/days",
+    name: "عداد الكلمات",
+    description: "عد الكلمات والأحرف والأسطر",
+    icon: Hash,
+    href: "/tools/text/counter",
     color: "from-blue-500 to-cyan-500",
   },
   {
-    name: "العد التنازلي",
-    description: "عداد تنازلي لحدث معين",
-    icon: Clock,
-    href: "/tools/datetime/countdown",
+    name: "تحويل الحالة",
+    description: "حول بين الأحرف الكبيرة والصغيرة",
+    icon: Type,
+    href: "/tools/text/case",
     color: "from-purple-500 to-pink-500",
   },
   {
-    name: "محول المناطق الزمنية",
-    description: "حول بين المناطق الزمنية",
-    icon: Globe,
-    href: "/tools/datetime/timezone",
+    name: "منسق JSON",
+    description: "نسّق وتحقق من صحة JSON",
+    icon: Code,
+    href: "/tools/text/json",
     color: "from-green-500 to-emerald-500",
   },
   {
-    name: "التقويم الهجري",
-    description: "تحويل بين التقويمين الهجري والميلادي",
-    icon: CalendarDays,
-    href: "/tools/datetime/hijri",
+    name: "Base64",
+    description: "تشفير وفك تشفير Base64",
+    icon: Binary,
+    href: "/tools/text/base64",
     color: "from-orange-500 to-red-500",
   },
 ];
 
-export default function DateTimePage() {
+export default function TextToolsPage() {
   return (
     <>
       <Header />
@@ -45,18 +45,18 @@ export default function DateTimePage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-cyan-500 to-orange-500 rounded-2xl mb-6 shadow-lg">
-              <Clock className="h-10 w-10 text-white" />
+              <Type className="h-10 w-10 text-white" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-cyan-600 to-orange-500">
-              أدوات التاريخ والوقت
+              أدوات النصوص
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              أدوات لحساب الأيام والتواريخ والتوقيت
+              أدوات قوية لمعالجة وتحرير النصوص
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {datetimeTools.map((tool) => (
+            {textTools.map((tool) => (
               <Link key={tool.name} href={tool.href}>
                 <Card className="h-full hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer group">
                   <CardContent className="p-6">

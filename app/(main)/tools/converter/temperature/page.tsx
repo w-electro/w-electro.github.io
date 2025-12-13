@@ -139,7 +139,7 @@ export default function TemperatureConverterPage() {
                   <span>273.15 K</span>
                 </div>
                 <div className="grid grid-cols-3 gap-4 text-xs text-gray-600">
-                  <span colSpan={3}>نقطة تجمد الماء</span>
+                  <span className="col-span-3">نقطة تجمد الماء</span>
                 </div>
                 <div className="grid grid-cols-3 gap-4 mt-3">
                   <span>100°C</span>
@@ -147,7 +147,7 @@ export default function TemperatureConverterPage() {
                   <span>373.15 K</span>
                 </div>
                 <div className="grid grid-cols-3 gap-4 text-xs text-gray-600">
-                  <span colSpan={3}>نقطة غليان الماء</span>
+                  <span className="col-span-3">نقطة غليان الماء</span>
                 </div>
                 <div className="grid grid-cols-3 gap-4 mt-3">
                   <span>37°C</span>
@@ -155,7 +155,7 @@ export default function TemperatureConverterPage() {
                   <span>310.15 K</span>
                 </div>
                 <div className="grid grid-cols-3 gap-4 text-xs text-gray-600">
-                  <span colSpan={3}>درجة حرارة الجسم الطبيعية</span>
+                  <span className="col-span-3">درجة حرارة الجسم الطبيعية</span>
                 </div>
               </div>
             </CardContent>

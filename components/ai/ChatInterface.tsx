@@ -108,21 +108,87 @@ export function ChatInterface() {
     textareaRef.current?.focus();
 
     try {
-      // TODO: Replace with actual API call
-      // Simulating AI response for now
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Call the actual AI API
+      const response = await fetch("/api/ai/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: userMessage.content,
+          history: messages.map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
+        }),
+      });
 
-      const assistantMessage: Message = {
-        id: generateId(),
-        role: "assistant",
-        content: getSimulatedResponse(userMessage.content),
-        timestamp: new Date(),
-      };
+      if (!response.ok) {
+        throw new Error("Failed to get response");
+      }
 
-      setMessages((prev) => [...prev, assistantMessage]);
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
+
+      if (!reader) {
+        throw new Error("No response body");
+      }
+
+      let assistantContent = "";
+      const assistantId = generateId();
+
+      // Create empty assistant message
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: assistantId,
+          role: "assistant",
+          content: "",
+          timestamp: new Date(),
+        },
+      ]);
+
+      // Stream the response
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        const chunk = decoder.decode(value);
+        const lines = chunk.split("\n");
+
+        for (const line of lines) {
+          if (line.startsWith("data: ")) {
+            const data = line.slice(6);
+            if (data === "[DONE]") break;
+
+            try {
+              const parsed = JSON.parse(data);
+              if (parsed.content) {
+                assistantContent += parsed.content;
+                setMessages((prev) =>
+                  prev.map((m) =>
+                    m.id === assistantId
+                      ? { ...m, content: assistantContent }
+                      : m
+                  )
+                );
+              }
+            } catch (e) {
+              // Skip invalid JSON
+            }
+          }
+        }
+      }
     } catch (error) {
       console.error("Error sending message:", error);
-      // Show error toast
+      // Show error message
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: generateId(),
+          role: "assistant",
+          content: "عذراً، حدث خطأ. يرجى المحاولة مرة أخرى.",
+          timestamp: new Date(),
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
@@ -148,9 +214,9 @@ export function ChatInterface() {
   };
 
   return (
-    <div className="flex-1 flex flex-col h-[calc(100vh-4rem)] bg-gradient-to-b from-gray-50 to-white">
+    <div className="flex-1 flex flex-col h-[calc(100dvh-4rem)] md:h-[calc(100vh-4rem)] bg-gradient-to-b from-gray-50 to-white">
       {/* Chat Header */}
-      <div className="border-b bg-white/80 backdrop-blur-sm px-4 py-3">
+      <div className="border-b bg-white/80 backdrop-blur-sm px-2 md:px-4 py-3">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-orange-500 flex items-center justify-center shadow-lg">

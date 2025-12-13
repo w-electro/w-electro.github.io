@@ -81,12 +81,6 @@ const navigation: NavItem[] = [
       { name: "خدمات إلكترونية", href: "/services/electronic", icon: Zap },
     ],
   },
-  {
-    name: "المدونة",
-    href: "/blog",
-    icon: FileText,
-    description: "مقالات ونصائح مفيدة",
-  },
 ];
 
 export function Header() {

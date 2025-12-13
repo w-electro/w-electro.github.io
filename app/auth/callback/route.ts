@@ -11,6 +11,9 @@ export async function GET(request: NextRequest) {
     await supabase.auth.exchangeCodeForSession(code);
   }
 
+  // Use production URL from environment variable
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://najah.w-electro.com";
+
   // Redirect to home page after sign in
-  return NextResponse.redirect(new URL("/", requestUrl.origin));
+  return NextResponse.redirect(new URL("/", baseUrl));
 }

@@ -108,21 +108,96 @@ export function ChatInterface() {
     textareaRef.current?.focus();
 
     try {
-      // TODO: Replace with actual API call
-      // Simulating AI response for now
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Call the AI API
+      const response = await fetch("/api/ai/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          message: userMessage.content,
+          history: messages.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
 
-      const assistantMessage: Message = {
-        id: generateId(),
-        role: "assistant",
-        content: getSimulatedResponse(userMessage.content),
-        timestamp: new Date(),
-      };
+      if (!response.ok) {
+        throw new Error("API request failed");
+      }
 
-      setMessages((prev) => [...prev, assistantMessage]);
+      // Check if it's a streaming response
+      const contentType = response.headers.get("content-type");
+
+      if (contentType?.includes("text/event-stream")) {
+        // Handle streaming response
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
+
+        const assistantMessageId = generateId();
+        let fullContent = "";
+
+        // Add empty assistant message that we'll update
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: assistantMessageId,
+            role: "assistant",
+            content: "",
+            timestamp: new Date(),
+          },
+        ]);
+
+        if (reader) {
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+
+            const chunk = decoder.decode(value);
+            const lines = chunk.split("\n");
+
+            for (const line of lines) {
+              if (line.startsWith("data: ")) {
+                const data = line.slice(6);
+                if (data === "[DONE]") continue;
+
+                try {
+                  const parsed = JSON.parse(data);
+                  if (parsed.content) {
+                    fullContent += parsed.content;
+                    setMessages((prev) =>
+                      prev.map((m) =>
+                        m.id === assistantMessageId
+                          ? { ...m, content: fullContent }
+                          : m
+                      )
+                    );
+                  }
+                } catch {
+                  // Skip invalid JSON
+                }
+              }
+            }
+          }
+        }
+      } else {
+        // Handle non-streaming response (demo mode)
+        const data = await response.json();
+        const assistantMessage: Message = {
+          id: generateId(),
+          role: "assistant",
+          content: data.content || data.error || "حدث خطأ غير متوقع",
+          timestamp: new Date(),
+        };
+        setMessages((prev) => [...prev, assistantMessage]);
+      }
     } catch (error) {
       console.error("Error sending message:", error);
-      // Show error toast
+      const errorMessage: Message = {
+        id: generateId(),
+        role: "assistant",
+        content: "عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.",
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
     }

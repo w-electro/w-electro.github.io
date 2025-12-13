@@ -19,12 +19,11 @@ export const metadata: Metadata = {
 
 export default function AIPage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col h-screen overflow-hidden">
       <Header />
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 overflow-hidden">
         <ChatInterface />
       </main>
-      <Footer />
     </div>
   );
 }

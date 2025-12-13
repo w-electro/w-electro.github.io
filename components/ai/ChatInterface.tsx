@@ -214,9 +214,9 @@ export function ChatInterface() {
   };
 
   return (
-    <div className="flex-1 flex flex-col h-[calc(100dvh-4rem)] md:h-[calc(100vh-4rem)] bg-gradient-to-b from-gray-50 to-white">
+    <div className="flex flex-col h-full bg-gradient-to-b from-gray-50 to-white">
       {/* Chat Header */}
-      <div className="border-b bg-white/80 backdrop-blur-sm px-2 md:px-4 py-3">
+      <div className="border-b bg-white/80 backdrop-blur-sm px-2 md:px-4 py-2 md:py-3 flex-shrink-0">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-orange-500 flex items-center justify-center shadow-lg">
@@ -307,7 +307,7 @@ export function ChatInterface() {
       </AnimatePresence>
 
       {/* Input Area */}
-      <div className="border-t bg-white px-4 py-4">
+      <div className="border-t bg-white px-2 md:px-4 py-3 md:py-4 flex-shrink-0">
         <div className="container mx-auto max-w-3xl">
           <div className="relative flex items-end gap-2">
             {/* Action buttons */}

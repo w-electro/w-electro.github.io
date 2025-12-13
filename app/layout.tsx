@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cairo } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import { AuthProvider } from "@/contexts/AuthContext";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
@@ -112,15 +113,17 @@ export default function RootLayout({
         />
       </head>
       <body className={`${cairo.variable} font-sans antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-          <Toaster position="top-center" richColors closeButton />
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster position="top-center" richColors closeButton />
+          </ThemeProvider>
+        </AuthProvider>
 
         {/* Analytics - loaded after hydration */}
         <script

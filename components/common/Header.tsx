@@ -22,9 +22,21 @@ import {
   Calculator,
   ArrowLeftRight,
   Search,
+  User,
+  LogOut,
+  Settings,
   LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/contexts/AuthContext";
 import { cn } from "@/lib/utils";
 
 interface NavChild {
@@ -85,6 +97,7 @@ const navigation: NavItem[] = [
 
 export function Header() {
   const pathname = usePathname();
+  const { user, loading, signOut } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [activeDropdown, setActiveDropdown] = React.useState<string | null>(null);
   const [expandedMobileItem, setExpandedMobileItem] = React.useState<string | null>(null);
@@ -205,9 +218,45 @@ export function Header() {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/login">تسجيل الدخول</Link>
-            </Button>
+            {!loading && (
+              <>
+                {user ? (
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm" className="gap-2">
+                        <User className="h-4 w-4" />
+                        {user.user_metadata?.full_name || user.email?.split('@')[0] || 'المستخدم'}
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end" className="w-56">
+                      <DropdownMenuLabel>حسابي</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem asChild>
+                        <Link href="/profile" className="cursor-pointer">
+                          <User className="ml-2 h-4 w-4" />
+                          الملف الشخصي
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <Link href="/settings" className="cursor-pointer">
+                          <Settings className="ml-2 h-4 w-4" />
+                          الإعدادات
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem onClick={signOut} className="cursor-pointer text-red-600">
+                        <LogOut className="ml-2 h-4 w-4" />
+                        تسجيل الخروج
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                ) : (
+                  <Button variant="ghost" size="sm" asChild>
+                    <Link href="/login">تسجيل الدخول</Link>
+                  </Button>
+                )}
+              </>
+            )}
             <Button size="sm" className="gap-2" asChild>
               <Link href="/ai">
                 <Sparkles className="h-4 w-4" />
@@ -415,17 +464,55 @@ export function Header() {
               {/* Fixed Bottom Section */}
               <div className="border-t bg-background p-4 space-y-3">
                 {/* CTA Buttons */}
-                <div className="grid grid-cols-2 gap-3">
-                  <Button variant="outline" className="w-full h-12" asChild>
-                    <Link href="/login">تسجيل الدخول</Link>
-                  </Button>
-                  <Button className="w-full h-12 gap-2" asChild>
-                    <Link href="/ai">
-                      <Sparkles className="h-4 w-4" />
-                      المساعد الذكي
-                    </Link>
-                  </Button>
-                </div>
+                {!loading && (
+                  <>
+                    {user ? (
+                      <div className="space-y-3">
+                        <div className="flex items-center gap-3 p-3 bg-gradient-to-r from-cyan-50 to-orange-50 rounded-lg">
+                          <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-orange-500 rounded-full flex items-center justify-center">
+                            <User className="h-5 w-5 text-white" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-medium text-sm truncate">
+                              {user.user_metadata?.full_name || user.email?.split('@')[0] || 'المستخدم'}
+                            </p>
+                            <p className="text-xs text-muted-foreground truncate">{user.email}</p>
+                          </div>
+                        </div>
+                        <div className="grid grid-cols-2 gap-2">
+                          <Button variant="outline" size="sm" className="w-full" asChild>
+                            <Link href="/profile">
+                              <User className="ml-2 h-4 w-4" />
+                              الملف الشخصي
+                            </Link>
+                          </Button>
+                          <Button variant="outline" size="sm" className="w-full text-red-600" onClick={signOut}>
+                            <LogOut className="ml-2 h-4 w-4" />
+                            تسجيل الخروج
+                          </Button>
+                        </div>
+                        <Button className="w-full gap-2" asChild>
+                          <Link href="/ai">
+                            <Sparkles className="h-4 w-4" />
+                            المساعد الذكي
+                          </Link>
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="grid grid-cols-2 gap-3">
+                        <Button variant="outline" className="w-full h-12" asChild>
+                          <Link href="/login">تسجيل الدخول</Link>
+                        </Button>
+                        <Button className="w-full h-12 gap-2" asChild>
+                          <Link href="/ai">
+                            <Sparkles className="h-4 w-4" />
+                            المساعد الذكي
+                          </Link>
+                        </Button>
+                      </div>
+                    )}
+                  </>
+                )}
 
                 {/* Branding Footer */}
                 <div className="flex items-center justify-center gap-2 pt-2 border-t">

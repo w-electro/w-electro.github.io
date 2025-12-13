@@ -108,96 +108,87 @@ export function ChatInterface() {
     textareaRef.current?.focus();
 
     try {
-      // Call the AI API
+      // Call the actual AI API
       const response = await fetch("/api/ai/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           message: userMessage.content,
-          history: messages.map((m) => ({ role: m.role, content: m.content })),
+          history: messages.map((m) => ({
+            role: m.role,
+            content: m.content,
+          })),
         }),
       });
 
       if (!response.ok) {
-        throw new Error("API request failed");
+        throw new Error("Failed to get response");
       }
 
-      // Check if it's a streaming response
-      const contentType = response.headers.get("content-type");
+      const reader = response.body?.getReader();
+      const decoder = new TextDecoder();
 
-      if (contentType?.includes("text/event-stream")) {
-        // Handle streaming response
-        const reader = response.body?.getReader();
-        const decoder = new TextDecoder();
+      if (!reader) {
+        throw new Error("No response body");
+      }
 
-        const assistantMessageId = generateId();
-        let fullContent = "";
+      let assistantContent = "";
+      const assistantId = generateId();
 
-        // Add empty assistant message that we'll update
-        setMessages((prev) => [
-          ...prev,
-          {
-            id: assistantMessageId,
-            role: "assistant",
-            content: "",
-            timestamp: new Date(),
-          },
-        ]);
+      // Create empty assistant message
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: assistantId,
+          role: "assistant",
+          content: "",
+          timestamp: new Date(),
+        },
+      ]);
 
-        if (reader) {
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
+      // Stream the response
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
 
-            const chunk = decoder.decode(value);
-            const lines = chunk.split("\n");
+        const chunk = decoder.decode(value);
+        const lines = chunk.split("\n");
 
-            for (const line of lines) {
-              if (line.startsWith("data: ")) {
-                const data = line.slice(6);
-                if (data === "[DONE]") continue;
+        for (const line of lines) {
+          if (line.startsWith("data: ")) {
+            const data = line.slice(6);
+            if (data === "[DONE]") break;
 
-                try {
-                  const parsed = JSON.parse(data);
-                  if (parsed.content) {
-                    fullContent += parsed.content;
-                    setMessages((prev) =>
-                      prev.map((m) =>
-                        m.id === assistantMessageId
-                          ? { ...m, content: fullContent }
-                          : m
-                      )
-                    );
-                  }
-                } catch {
-                  // Skip invalid JSON
-                }
+            try {
+              const parsed = JSON.parse(data);
+              if (parsed.content) {
+                assistantContent += parsed.content;
+                setMessages((prev) =>
+                  prev.map((m) =>
+                    m.id === assistantId
+                      ? { ...m, content: assistantContent }
+                      : m
+                  )
+                );
               }
+            } catch (e) {
+              // Skip invalid JSON
             }
           }
         }
-      } else {
-        // Handle non-streaming response (demo mode)
-        const data = await response.json();
-        const assistantMessage: Message = {
-          id: generateId(),
-          role: "assistant",
-          content: data.content || data.error || "حدث خطأ غير متوقع",
-          timestamp: new Date(),
-        };
-        setMessages((prev) => [...prev, assistantMessage]);
       }
     } catch (error) {
       console.error("Error sending message:", error);
-      const errorMessage: Message = {
-        id: generateId(),
-        role: "assistant",
-        content: "عذراً، حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.",
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, errorMessage]);
+      // Show error message
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: generateId(),
+          role: "assistant",
+          content: "عذراً، حدث خطأ. يرجى المحاولة مرة أخرى.",
+          timestamp: new Date(),
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
@@ -223,9 +214,9 @@ export function ChatInterface() {
   };
 
   return (
-    <div className="flex-1 flex flex-col h-[calc(100vh-4rem)] bg-gradient-to-b from-gray-50 to-white">
+    <div className="flex flex-col h-full bg-gradient-to-b from-gray-50 to-white">
       {/* Chat Header */}
-      <div className="border-b bg-white/80 backdrop-blur-sm px-4 py-3">
+      <div className="border-b bg-white/80 backdrop-blur-sm px-2 md:px-4 py-2 md:py-3 flex-shrink-0">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-orange-500 flex items-center justify-center shadow-lg">
@@ -316,7 +307,7 @@ export function ChatInterface() {
       </AnimatePresence>
 
       {/* Input Area */}
-      <div className="border-t bg-white px-4 py-4">
+      <div className="border-t bg-white px-2 md:px-4 py-3 md:py-4 flex-shrink-0">
         <div className="container mx-auto max-w-3xl">
           <div className="relative flex items-end gap-2">
             {/* Action buttons */}

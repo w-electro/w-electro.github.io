@@ -69,7 +69,7 @@ export function Footer() {
             <Link href="/" className="flex items-center gap-3 mb-4">
               <div className="relative w-12 h-12 rounded-full overflow-hidden">
                 <Image
-                  src="/wD.png"
+                  src="/Najah.webp"
                   alt="نجاح"
                   fill
                   className="object-cover"
@@ -184,15 +184,15 @@ export function Footer() {
         </div>
       </div>
 
-      {/* WhatsApp Floating Button */}
+      {/* WhatsApp Floating Button - Hidden on mobile to avoid UI clutter */}
       <a
         href="https://wa.me/966540732077"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 left-6 z-50 flex items-center gap-2 px-4 py-3 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 transition-all hover:scale-105"
+        className="hidden md:flex fixed bottom-6 left-6 z-50 items-center gap-2 px-4 py-3 bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 transition-all hover:scale-105"
       >
         <MessageCircle className="h-5 w-5" />
-        <span className="hidden sm:inline text-sm font-medium">تواصل معنا</span>
+        <span className="text-sm font-medium">تواصل معنا</span>
       </a>
     </footer>
   );

@@ -68,9 +68,9 @@ export async function POST(req: NextRequest) {
       { role: "user", content: message },
     ];
 
-    // Create streaming response
+    // Create streaming response - using gpt-4o which is more reliable
     const response = await openai.chat.completions.create({
-      model: "gpt-4-turbo-preview",
+      model: "gpt-4o",
       messages,
       temperature: 0.7,
       max_tokens: 2000,

@@ -54,6 +54,7 @@ export default function PDFConvertPage() {
         await page.render({
           canvasContext: context,
           viewport: viewport,
+          canvas: canvas,
         }).promise;
 
         const imgData = canvas.toDataURL('image/png').split(',')[1];

@@ -121,12 +121,14 @@ export function ChatInterface() {
         }),
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to get response");
-      }
-
+      // Even if response is not ok, try to get the content
       const contentType = response.headers.get("content-type") || "";
       const assistantId = generateId();
+
+      // If response failed and it's not JSON, throw error
+      if (!response.ok && !contentType.includes("application/json")) {
+        throw new Error("Failed to get response");
+      }
 
       // Check if streaming response (text/event-stream) or JSON response (demo mode)
       if (contentType.includes("text/event-stream")) {
@@ -183,20 +185,25 @@ export function ChatInterface() {
           }
         }
       } else {
-        // Handle JSON response (demo mode)
-        const data = await response.json();
-        if (data.content) {
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: assistantId,
-              role: "assistant",
-              content: data.content,
-              timestamp: new Date(),
-            },
-          ]);
-        } else if (data.error) {
-          throw new Error(data.error);
+        // Handle JSON response (demo mode or error fallback)
+        try {
+          const data = await response.json();
+          if (data.content) {
+            setMessages((prev) => [
+              ...prev,
+              {
+                id: assistantId,
+                role: "assistant",
+                content: data.content,
+                timestamp: new Date(),
+              },
+            ]);
+          } else {
+            throw new Error("No content in response");
+          }
+        } catch (parseError) {
+          console.error("Error parsing response:", parseError);
+          throw new Error("Failed to parse response");
         }
       }
     } catch (error) {

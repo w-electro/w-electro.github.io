@@ -60,7 +60,7 @@ export default function PDFCompressPage() {
         addDefaultPage: false,
       });
 
-      const blob = new Blob([compressedBytes], { type: 'application/pdf' });
+      const blob = new Blob([new Uint8Array(compressedBytes)], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
       const originalSize = file.size;

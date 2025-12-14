@@ -1,7 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import OpenAI from "openai";
-
-export const runtime = "edge";
 
 const ARABIC_TUTOR_PROMPT = `أنت "مُهم" (Muhim)، مساعد ذكي للطلاب في المملكة العربية السعودية.
 
@@ -37,7 +34,8 @@ const ARABIC_TUTOR_PROMPT = `أنت "مُهم" (Muhim)، مساعد ذكي لل�
 
 export async function POST(req: NextRequest) {
   try {
-    const { message, history = [] } = await req.json();
+    const body = await req.json();
+    const { message, history = [] } = body;
 
     if (!message || typeof message !== "string") {
       return NextResponse.json(
@@ -48,27 +46,30 @@ export async function POST(req: NextRequest) {
 
     // Check if OpenAI API key is configured
     const apiKey = process.env.OPENAI_API_KEY;
+
     if (!apiKey) {
       // Return a demo response if API key is not configured
       return NextResponse.json({
         content: getDemoResponse(message),
-        usage: { totalTokens: 0 },
+        demo: true,
       });
     }
 
+    // Dynamically import OpenAI only when needed
+    const OpenAI = (await import("openai")).default;
     const openai = new OpenAI({ apiKey });
 
     // Build messages array
-    const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
-      { role: "system", content: ARABIC_TUTOR_PROMPT },
+    const messages = [
+      { role: "system" as const, content: ARABIC_TUTOR_PROMPT },
       ...history.slice(-10).map((msg: { role: string; content: string }) => ({
         role: msg.role as "user" | "assistant",
         content: msg.content,
       })),
-      { role: "user", content: message },
+      { role: "user" as const, content: message },
     ];
 
-    // Create streaming response - using gpt-4o which is more reliable
+    // Create streaming response
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
       messages,
@@ -93,6 +94,7 @@ export async function POST(req: NextRequest) {
           controller.enqueue(encoder.encode("data: [DONE]\n\n"));
           controller.close();
         } catch (error) {
+          console.error("Streaming error:", error);
           controller.error(error);
         }
       },
@@ -107,10 +109,13 @@ export async function POST(req: NextRequest) {
     });
   } catch (error) {
     console.error("Chat API error:", error);
-    return NextResponse.json(
-      { error: "Failed to process request" },
-      { status: 500 }
-    );
+
+    // Return demo response on error
+    return NextResponse.json({
+      content: getDemoResponse(""),
+      demo: true,
+      error: "API Error - showing demo response",
+    });
   }
 }
 
@@ -136,6 +141,24 @@ function getDemoResponse(input: string): string {
 💡 **ملاحظة:** هذا عرض توضيحي. للحصول على إجابات كاملة، يرجى تفعيل مفتاح OpenAI API.`;
   }
 
+  if (lowerInput.includes("فيثاغورس")) {
+    return `# نظرية فيثاغورس
+
+نظرية فيثاغورس هي إحدى أهم النظريات في الهندسة:
+
+> في المثلث القائم الزاوية، مربع طول الوتر يساوي مجموع مربعي طولي الضلعين الآخرين.
+
+## الصيغة الرياضية
+$$a² + b² = c²$$
+
+حيث:
+- **c** = الوتر (الضلع المقابل للزاوية القائمة)
+- **a** و **b** = الضلعان القائمان
+
+---
+💡 **ملاحظة:** هذا عرض توضيحي. للحصول على شرح كامل، يرجى تفعيل مفتاح OpenAI API.`;
+  }
+
   return `مرحباً! 👋
 
 أنا **مُهم**، مساعدك الذكي للدراسة.
@@ -148,7 +171,7 @@ function getDemoResponse(input: string): string {
 - ✅ الإجابة على أسئلتك الدراسية
 
 ---
-⚠️ **ملاحظة:** هذا عرض توضيحي. للحصول على ردود كاملة من الذكاء الاصطناعي، يرجى تكوين مفتاح OpenAI API.
+⚠️ **ملاحظة:** هذا الوضع التجريبي. للحصول على ردود كاملة من الذكاء الاصطناعي، يرجى إضافة مفتاح OpenAI API في إعدادات Vercel.
 
 اكتب سؤالك وسأبذل قصارى جهدي لمساعدتك! 🎓`;
 }

@@ -10,10 +10,9 @@ import { Label } from "@/components/ui/label";
 import { Calendar, Clock, Globe, CalendarDays } from "lucide-react";
 
 const datetimeTools = [
-  { name: "الأيام", href: "/tools/datetime/days", icon: Calendar },
-  { name: "العد التنازلي", href: "/tools/datetime/countdown", icon: Clock },
-  { name: "المناطق الزمنية", href: "/tools/datetime/timezone", icon: Globe },
+  { name: "حاسبة الأيام", href: "/tools/datetime/days", icon: Calendar },
   { name: "التقويم الهجري", href: "/tools/datetime/hijri", icon: CalendarDays },
+  { name: "ساعة العالم", href: "/tools/datetime/world-clock", icon: Globe },
 ];
 
 export default function DaysCalculatorPage() {

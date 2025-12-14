@@ -125,56 +125,78 @@ export function ChatInterface() {
         throw new Error("Failed to get response");
       }
 
-      const reader = response.body?.getReader();
-      const decoder = new TextDecoder();
-
-      if (!reader) {
-        throw new Error("No response body");
-      }
-
-      let assistantContent = "";
+      const contentType = response.headers.get("content-type") || "";
       const assistantId = generateId();
 
-      // Create empty assistant message
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: assistantId,
-          role: "assistant",
-          content: "",
-          timestamp: new Date(),
-        },
-      ]);
+      // Check if streaming response (text/event-stream) or JSON response (demo mode)
+      if (contentType.includes("text/event-stream")) {
+        // Handle streaming response
+        const reader = response.body?.getReader();
+        const decoder = new TextDecoder();
 
-      // Stream the response
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
+        if (!reader) {
+          throw new Error("No response body");
+        }
 
-        const chunk = decoder.decode(value);
-        const lines = chunk.split("\n");
+        let assistantContent = "";
 
-        for (const line of lines) {
-          if (line.startsWith("data: ")) {
-            const data = line.slice(6);
-            if (data === "[DONE]") break;
+        // Create empty assistant message
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: assistantId,
+            role: "assistant",
+            content: "",
+            timestamp: new Date(),
+          },
+        ]);
 
-            try {
-              const parsed = JSON.parse(data);
-              if (parsed.content) {
-                assistantContent += parsed.content;
-                setMessages((prev) =>
-                  prev.map((m) =>
-                    m.id === assistantId
-                      ? { ...m, content: assistantContent }
-                      : m
-                  )
-                );
+        // Stream the response
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          const chunk = decoder.decode(value);
+          const lines = chunk.split("\n");
+
+          for (const line of lines) {
+            if (line.startsWith("data: ")) {
+              const data = line.slice(6);
+              if (data === "[DONE]") break;
+
+              try {
+                const parsed = JSON.parse(data);
+                if (parsed.content) {
+                  assistantContent += parsed.content;
+                  setMessages((prev) =>
+                    prev.map((m) =>
+                      m.id === assistantId
+                        ? { ...m, content: assistantContent }
+                        : m
+                    )
+                  );
+                }
+              } catch (e) {
+                // Skip invalid JSON
               }
-            } catch (e) {
-              // Skip invalid JSON
             }
           }
+        }
+      } else {
+        // Handle JSON response (demo mode)
+        const data = await response.json();
+        if (data.content) {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: assistantId,
+              role: "assistant",
+              content: data.content,
+              timestamp: new Date(),
+            },
+          ]);
+        } else if (data.error) {
+          throw new Error(data.error);
         }
       }
     } catch (error) {

@@ -1,0 +1,43 @@
+{
+  "name": "نجاح - رفيقك الذكي في رحلة النجاح",
+  "short_name": "نجاح",
+  "description": "منصة تعليمية ذكية للطلاب السعوديين",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#06b6d4",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/Najah.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/Najah.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ],
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["education", "productivity"],
+  "shortcuts": [
+    {
+      "name": "مُهم AI",
+      "short_name": "AI",
+      "description": "المساعد الذكي للدراسة",
+      "url": "/ai",
+      "icons": [{ "src": "/Najah.webp", "sizes": "96x96" }]
+    },
+    {
+      "name": "الأدوات",
+      "short_name": "أدوات",
+      "description": "أدوات مجانية للطلاب",
+      "url": "/tools",
+      "icons": [{ "src": "/Najah.webp", "sizes": "96x96" }]
+    }
+  ]
+}

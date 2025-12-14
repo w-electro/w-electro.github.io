@@ -33,27 +33,34 @@ const ARABIC_TUTOR_PROMPT = `أنت "مُهم" (Muhim)، مساعد ذكي لل�
 ابدأ دائمًا بفهم سؤال الطالب قبل الإجابة.`;
 
 export async function POST(req: NextRequest) {
+  let userMessage = "";
+
   try {
     const body = await req.json();
     const { message, history = [] } = body;
+    userMessage = message || "";
 
     if (!message || typeof message !== "string") {
-      return NextResponse.json(
-        { error: "Message is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({
+        content: getDemoResponse(""),
+        demo: true,
+      });
     }
 
     // Check if OpenAI API key is configured
     const apiKey = process.env.OPENAI_API_KEY;
 
     if (!apiKey) {
+      console.log("OPENAI_API_KEY not found in environment variables");
       // Return a demo response if API key is not configured
       return NextResponse.json({
         content: getDemoResponse(message),
         demo: true,
       });
     }
+
+    // Log that we found the key (first 8 chars only for security)
+    console.log("OPENAI_API_KEY found:", apiKey.substring(0, 8) + "...");
 
     // Dynamically import OpenAI only when needed
     const OpenAI = (await import("openai")).default;
@@ -107,13 +114,31 @@ export async function POST(req: NextRequest) {
         Connection: "keep-alive",
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Chat API error:", error);
 
-    // Return demo response on error (without error field to avoid confusion)
+    // Get error message for debugging
+    const errorMessage = error instanceof Error ? error.message : String(error);
+
+    // Return error with details so user can see what went wrong
     return NextResponse.json({
-      content: getDemoResponse(""),
-      demo: true,
+      content: `# خطأ في الاتصال بالذكاء الاصطناعي ❌
+
+حدث خطأ أثناء الاتصال بـ OpenAI:
+
+\`\`\`
+${errorMessage}
+\`\`\`
+
+## الحلول المحتملة:
+1. تأكد من صحة مفتاح OpenAI API
+2. تأكد من وجود رصيد في حساب OpenAI
+3. أعد نشر المشروع في Vercel بعد إضافة المفتاح
+
+---
+إذا استمرت المشكلة، تحقق من سجلات Vercel للمزيد من التفاصيل.`,
+      error: true,
+      errorDetails: errorMessage,
     });
   }
 }
@@ -122,8 +147,32 @@ export async function POST(req: NextRequest) {
 function getDemoResponse(input: string): string {
   const lowerInput = input.toLowerCase();
 
+  // Check for quadratic equations (x² or x^2)
+  if (lowerInput.includes("x²") || lowerInput.includes("x^2") || (lowerInput.includes("معادلة") && lowerInput.includes("درجة ثانية"))) {
+    return `# حل المعادلة التربيعية 🧮
+
+لحل معادلة من الدرجة الثانية مثل: **ax² + bx + c = 0**
+
+## الطريقة: القانون العام (صيغة الجذور)
+$$x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$
+
+## خطوات الحل:
+1. **تحديد المعاملات**: حدد قيم a و b و c
+2. **حساب المميز (Δ)**: $Δ = b² - 4ac$
+3. **إيجاد الجذور**: طبق القانون العام
+
+### مثال: x² + 5x + 6 = 0
+- a = 1, b = 5, c = 6
+- Δ = 25 - 24 = 1
+- x₁ = (-5 + 1) / 2 = **-2**
+- x₂ = (-5 - 1) / 2 = **-3**
+
+---
+⚠️ **وضع تجريبي**: للحصول على حل كامل لمعادلتك المحددة، أضف مفتاح OpenAI API.`;
+  }
+
   if (lowerInput.includes("معادلة") || lowerInput.includes("حل") || lowerInput.includes("x")) {
-    return `# حل المعادلة
+    return `# حل المعادلة 🧮
 
 سأساعدك في حل هذه المعادلة خطوة بخطوة.
 
@@ -137,7 +186,7 @@ function getDemoResponse(input: string): string {
 نتحقق من صحة الحل بالتعويض.
 
 ---
-💡 **ملاحظة:** هذا عرض توضيحي. للحصول على إجابات كاملة، يرجى تفعيل مفتاح OpenAI API.`;
+⚠️ **وضع تجريبي**: للحصول على إجابات كاملة، أضف مفتاح OpenAI API.`;
   }
 
   if (lowerInput.includes("فيثاغورس")) {

@@ -126,6 +126,33 @@ export default function LoginPage() {
     }
   };
 
+  const handleMagicLink = async (email: string) => {
+    if (!email) {
+      setError("يرجى إدخال البريد الإلكتروني");
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const { error: magicLinkError } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+
+      if (magicLinkError) throw magicLinkError;
+
+      setSuccess("تم إرسال رابط تسجيل الدخول إلى بريدك الإلكتروني!");
+    } catch (err: any) {
+      setError(err.message || "حدث خطأ أثناء إرسال رابط الدخول");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-cyan-50 via-white to-orange-50">
       <div className="w-full max-w-md">
@@ -262,6 +289,17 @@ export default function LoginPage() {
                     />
                   </svg>
                   متابعة بواسطة جوجل
+                </Button>
+
+                <Button
+                  variant="outline"
+                  type="button"
+                  className="w-full"
+                  onClick={() => handleMagicLink(loginEmail)}
+                  disabled={isLoading || !loginEmail}
+                >
+                  <Mail className="ml-2 h-4 w-4" />
+                  إرسال رابط تسجيل الدخول
                 </Button>
               </CardContent>
             </Card>

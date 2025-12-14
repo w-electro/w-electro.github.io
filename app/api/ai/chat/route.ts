@@ -51,12 +51,16 @@ export async function POST(req: NextRequest) {
     const apiKey = process.env.OPENAI_API_KEY;
 
     if (!apiKey) {
+      console.log("OPENAI_API_KEY not found in environment variables");
       // Return a demo response if API key is not configured
       return NextResponse.json({
         content: getDemoResponse(message),
         demo: true,
       });
     }
+
+    // Log that we found the key (first 8 chars only for security)
+    console.log("OPENAI_API_KEY found:", apiKey.substring(0, 8) + "...");
 
     // Dynamically import OpenAI only when needed
     const OpenAI = (await import("openai")).default;
@@ -110,13 +114,31 @@ export async function POST(req: NextRequest) {
         Connection: "keep-alive",
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Chat API error:", error);
 
-    // Return demo response on error (without error field to avoid confusion)
+    // Get error message for debugging
+    const errorMessage = error instanceof Error ? error.message : String(error);
+
+    // Return error with details so user can see what went wrong
     return NextResponse.json({
-      content: getDemoResponse(userMessage),
-      demo: true,
+      content: `# خطأ في الاتصال بالذكاء الاصطناعي ❌
+
+حدث خطأ أثناء الاتصال بـ OpenAI:
+
+\`\`\`
+${errorMessage}
+\`\`\`
+
+## الحلول المحتملة:
+1. تأكد من صحة مفتاح OpenAI API
+2. تأكد من وجود رصيد في حساب OpenAI
+3. أعد نشر المشروع في Vercel بعد إضافة المفتاح
+
+---
+إذا استمرت المشكلة، تحقق من سجلات Vercel للمزيد من التفاصيل.`,
+      error: true,
+      errorDetails: errorMessage,
     });
   }
 }

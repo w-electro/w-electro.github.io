@@ -110,11 +110,10 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Chat API error:", error);
 
-    // Return demo response on error
+    // Return demo response on error (without error field to avoid confusion)
     return NextResponse.json({
       content: getDemoResponse(""),
       demo: true,
-      error: "API Error - showing demo response",
     });
   }
 }

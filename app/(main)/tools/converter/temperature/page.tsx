@@ -13,7 +13,7 @@ const converterTools = [
   { name: "درجات الحرارة", href: "/tools/converter/temperature", icon: Thermometer },
   { name: "الوحدات", href: "/tools/converter/units", icon: Ruler },
   { name: "العملات", href: "/tools/converter/currency", icon: DollarSign },
-  { name: "حجم البيانات", href: "/tools/converter/data", icon: HardDrive },
+  { name: "الأرقام", href: "/tools/converter/numbers", icon: Binary },
 ];
 
 export default function TemperatureConverterPage() {

@@ -15,6 +15,7 @@ const calculatorTools = [
   { name: "العمر", href: "/tools/calculator/age", icon: Calendar },
   { name: "BMI", href: "/tools/calculator/bmi", icon: Activity },
   { name: "نسبة", href: "/tools/calculator/percentage", icon: Percent },
+  { name: "القروض", href: "/tools/calculator/loan", icon: DollarSign },
 ];
 
 export default function BMICalculatorPage() {

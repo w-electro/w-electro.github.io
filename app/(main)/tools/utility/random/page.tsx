@@ -12,10 +12,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Shuffle, Copy, GitCompare, StickyNote } from "lucide-react";
 
 const utilityTools = [
-  { name: "مولد عشوائي", href: "/tools/utility/random", icon: Shuffle },
-  { name: "كاشف التكرار", href: "/tools/utility/duplicate", icon: Copy },
+  { name: "عداد الكلمات", href: "/tools/utility/word-count", icon: Copy },
   { name: "مقارنة النصوص", href: "/tools/utility/diff", icon: GitCompare },
-  { name: "ملاحظات", href: "/tools/utility/notes", icon: StickyNote },
+  { name: "أرقام عشوائية", href: "/tools/utility/random", icon: Shuffle },
 ];
 
 export default function RandomGeneratorPage() {

@@ -3,11 +3,19 @@
 import { useState } from "react";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
-import { Calendar } from "lucide-react";
+import { ToolNavigation } from "@/components/tools/ToolNavigation";
+import { Calendar, DollarSign, Activity, Percent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
+const calculatorTools = [
+  { name: "ضريبة", href: "/tools/calculator/vat", icon: DollarSign },
+  { name: "العمر", href: "/tools/calculator/age", icon: Calendar },
+  { name: "BMI", href: "/tools/calculator/bmi", icon: Activity },
+  { name: "نسبة", href: "/tools/calculator/percentage", icon: Percent },
+];
 
 export default function AgeCalculatorPage() {
   const [birthDate, setBirthDate] = useState("");
@@ -54,6 +62,8 @@ export default function AgeCalculatorPage() {
             </h1>
             <p className="text-gray-600 text-lg">احسب عمرك بالسنوات والشهور والأيام</p>
           </div>
+
+          <ToolNavigation tools={calculatorTools} category="الحاسبات" />
 
           <Card className="mb-8">
             <CardContent className="p-8">

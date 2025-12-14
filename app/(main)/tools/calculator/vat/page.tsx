@@ -3,11 +3,19 @@
 import { useState } from "react";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
-import { DollarSign } from "lucide-react";
+import { ToolNavigation } from "@/components/tools/ToolNavigation";
+import { DollarSign, Calendar, Activity, Percent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+
+const calculatorTools = [
+  { name: "ضريبة", href: "/tools/calculator/vat", icon: DollarSign },
+  { name: "العمر", href: "/tools/calculator/age", icon: Calendar },
+  { name: "BMI", href: "/tools/calculator/bmi", icon: Activity },
+  { name: "نسبة", href: "/tools/calculator/percentage", icon: Percent },
+];
 
 export default function VATCalculatorPage() {
   const [amount, setAmount] = useState("");
@@ -73,6 +81,8 @@ export default function VATCalculatorPage() {
             </h1>
             <p className="text-gray-600 text-lg">احسب الضريبة بسهولة - إضافة أو إزالة</p>
           </div>
+
+          <ToolNavigation tools={calculatorTools} category="الحاسبات" />
 
           <Card className="mb-8">
             <CardContent className="p-8">

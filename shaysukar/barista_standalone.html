@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barista Dashboard - Shay Sukar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Cairo:wght@700;900&family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #F5E6D3;
+            min-height: 100vh;
+            padding: 20px;
+            color: #1A4D5C;
+        }
+
+        .dashboard-container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .dashboard-header {
+            background-color: #1A4D5C;
+            color: #FAF4EA;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .header-logo {
+            width: 120px;
+            height: 120px;
+            padding: 15px;
+            background-color: rgba(250, 244, 234, 0.1);
+            border-radius: 8px;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            font-weight: 900;
+        }
+
+        .header-title p {
+            font-family: 'Great Vibes', 'Pacifico', cursive;
+            font-size: 1.5rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .sound-toggle {
+            background-color: rgba(250, 244, 234, 0.2);
+            color: #FAF4EA;
+            border: 2px solid #FAF4EA;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .sound-toggle:hover {
+            background-color: rgba(250, 244, 234, 0.3);
+            transform: scale(1.05);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: #FAF4EA;
+            border: 2px solid #1A4D5C;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(26, 77, 92, 0.2);
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1A4D5C;
+            margin-bottom: 10px;
+        }
+
+        .stat-card:nth-child(1) .stat-value { color: #f0ad4e; }
+        .stat-card:nth-child(2) .stat-value { color: #0275d8; }
+        .stat-card:nth-child(3) .stat-value { color: #5cb85c; }
+        .stat-card:nth-child(4) .stat-value { color: #5bc0de; }
+        .stat-card:nth-child(5) .stat-value { color: #1A4D5C; }
+
+        .stat-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1A4D5C;
+        }
+
+        .orders-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .order-card {
+            background-color: #FAF4EA;
+            color: #1A4D5C;
+            padding: 25px;
+            border: 2px solid #1A4D5C;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .order-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(26, 77, 92, 0.3);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #1A4D5C;
+        }
+
+        .order-id {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #1A4D5C;
+        }
+
+        .order-time {
+            font-size: 0.95rem;
+            opacity: 0.7;
+            font-weight: 600;
+        }
+
+        .order-info {
+            margin-bottom: 15px;
+            background-color: rgba(26, 77, 92, 0.05);
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .order-table {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #1A4D5C;
+        }
+
+        .order-customer {
+            font-size: 1rem;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .order-items {
+            margin: 15px 0;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background-color: rgba(26, 77, 92, 0.08);
+            margin-bottom: 6px;
+            border-radius: 6px;
+            border-right: 3px solid #1A4D5C;
+        }
+
+        .item-name {
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .item-quantity {
+            opacity: 0.7;
+            margin-left: 10px;
+            font-weight: 600;
+        }
+
+        .item-price {
+            font-weight: 700;
+            color: #1A4D5C;
+        }
+
+        .order-total {
+            font-size: 1.4rem;
+            font-weight: 700;
+            text-align: left;
+            padding-top: 12px;
+            border-top: 3px solid #1A4D5C;
+            margin-top: 10px;
+            color: #1A4D5C;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        .btn-preparing {
+            background-color: #f0ad4e;
+            color: white;
+        }
+
+        .btn-preparing:hover {
+            background-color: #ec971f;
+            transform: translateY(-2px);
+        }
+
+        .btn-ready {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .btn-ready:hover {
+            background-color: #4cae4c;
+            transform: translateY(-2px);
+        }
+
+        .btn-complete {
+            background-color: #0275d8;
+            color: white;
+        }
+
+        .btn-complete:hover {
+            background-color: #025aa5;
+            transform: translateY(-2px);
+        }
+
+        .btn-cancel {
+            background-color: #d9534f;
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background-color: #c9302c;
+            transform: translateY(-2px);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .status-pending {
+            background-color: #f0ad4e;
+            color: white;
+        }
+
+        .status-preparing {
+            background-color: #0275d8;
+            color: white;
+        }
+
+        .status-ready {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .status-completed {
+            background-color: #5bc0de;
+            color: white;
+        }
+
+        .status-cancelled {
+            background-color: #d9534f;
+            color: white;
+        }
+
+        .no-orders {
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 1.8rem;
+            opacity: 0.6;
+            grid-column: 1 / -1;
+            background-color: #FAF4EA;
+            border: 2px dashed #1A4D5C;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .header-logo {
+                margin: 0 auto;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .orders-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <div class="header-logo">
+                <img src="logo.png" alt="Shay Sukar Logo" class="logo-img">
+            </div>
+
+            <div class="header-content">
+                <div class="header-title">
+                    <h1>لوحة تحكم الباريستا</h1>
+                    <p>Barista Dashboard - Shay Sukar</p>
+                </div>
+                <button class="sound-toggle" id="soundToggle">🔔 تنبيه صوتي</button>
+            </div>
+        </div>
+
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-value" id="statPending">0</div>
+                <div class="stat-label">طلبات جديدة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statPreparing">0</div>
+                <div class="stat-label">قيد التحضير</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statReady">0</div>
+                <div class="stat-label">جاهزة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statCompleted">0</div>
+                <div class="stat-label">مكتملة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="statRevenue">0</div>
+                <div class="stat-label">الإيرادات (SR)</div>
+            </div>
+        </div>
+
+        <div class="orders-container" id="ordersContainer">
+            <div class="no-orders">لا توجد طلبات حاليًا</div>
+        </div>
+    </div>
+
+    <script>
+        let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
+        let orders = [];
+        let lastOrderCount = 0;
+
+        // Update sound toggle button
+        function updateSoundToggle() {
+            const btn = document.getElementById('soundToggle');
+            btn.textContent = soundEnabled ? '🔔 تنبيه صوتي' : '🔕 صامت';
+        }
+
+        // Play notification sound
+        function playNotificationSound() {
+            if (!soundEnabled) return;
+
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+
+        // Load orders from localStorage
+        function loadOrders() {
+            const savedOrders = localStorage.getItem('shaySukarOrders');
+            if (savedOrders) {
+                orders = JSON.parse(savedOrders);
+
+                // Check for new orders
+                const currentOrderCount = orders.filter(o => o.status === 'pending').length;
+                if (currentOrderCount > lastOrderCount) {
+                    playNotificationSound();
+                }
+                lastOrderCount = currentOrderCount;
+
+                renderOrders();
+                updateStats();
+            }
+        }
+
+        // Save orders to localStorage
+        function saveOrders() {
+            localStorage.setItem('shaySukarOrders', JSON.stringify(orders));
+        }
+
+        // Update statistics
+        function updateStats() {
+            const pending = orders.filter(o => o.status === 'pending').length;
+            const preparing = orders.filter(o => o.status === 'preparing').length;
+            const ready = orders.filter(o => o.status === 'ready').length;
+            const completed = orders.filter(o => o.status === 'completed').length;
+            const revenue = orders
+                .filter(o => o.status === 'completed')
+                .reduce((sum, o) => sum + o.total, 0);
+
+            document.getElementById('statPending').textContent = pending;
+            document.getElementById('statPreparing').textContent = preparing;
+            document.getElementById('statReady').textContent = ready;
+            document.getElementById('statCompleted').textContent = completed;
+            document.getElementById('statRevenue').textContent = revenue.toFixed(2);
+        }
+
+        // Render orders
+        function renderOrders() {
+            const container = document.getElementById('ordersContainer');
+
+            // Filter to show active orders
+            const activeOrders = orders.filter(o =>
+                o.status === 'pending' || o.status === 'preparing' || o.status === 'ready'
+            );
+
+            if (activeOrders.length === 0) {
+                container.innerHTML = '<div class="no-orders">لا توجد طلبات نشطة حاليًا</div>';
+                return;
+            }
+
+            container.innerHTML = activeOrders.map(order => {
+                const time = new Date(order.createdAt).toLocaleTimeString('ar-SA', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                return `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-id">طلب #${order.id}</div>
+                            <div class="order-time">${time}</div>
+                        </div>
+                        <div class="order-info">
+                            <div class="order-table">🪑 طاولة: ${order.tableNumber}</div>
+                            <div class="order-customer">👤 الزبون: ${order.customerName}</div>
+                            <span class="status-badge status-${order.status}">
+                                ${getStatusText(order.status)}
+                            </span>
+                        </div>
+                        <div class="order-items">
+                            ${order.items.map(item => `
+                                <div class="order-item">
+                                    <div>
+                                        <span class="item-name">${item.name}</span>
+                                        <span class="item-quantity">×${item.quantity}</span>
+                                    </div>
+                                    <span class="item-price">${(item.price * item.quantity).toFixed(2)} SR</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="order-total">
+                            💰 المجموع: ${order.total.toFixed(2)} SR
+                        </div>
+                        <div class="order-actions">
+                            ${getActionButtons(order.id, order.status)}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Get status text in Arabic
+        function getStatusText(status) {
+            const statusMap = {
+                'pending': 'جديد',
+                'preparing': 'قيد التحضير',
+                'ready': 'جاهز',
+                'completed': 'مكتمل',
+                'cancelled': 'ملغي'
+            };
+            return statusMap[status] || status;
+        }
+
+        // Get action buttons based on order status
+        function getActionButtons(orderId, status) {
+            switch (status) {
+                case 'pending':
+                    return `
+                        <button class="btn btn-preparing" onclick="updateOrderStatus(${orderId}, 'preparing')">بدء التحضير</button>
+                        <button class="btn btn-cancel" onclick="updateOrderStatus(${orderId}, 'cancelled')">إلغاء</button>
+                    `;
+                case 'preparing':
+                    return `
+                        <button class="btn btn-ready" onclick="updateOrderStatus(${orderId}, 'ready')">جاهز</button>
+                        <button class="btn btn-cancel" onclick="updateOrderStatus(${orderId}, 'cancelled')">إلغاء</button>
+                    `;
+                case 'ready':
+                    return `
+                        <button class="btn btn-complete" onclick="updateOrderStatus(${orderId}, 'completed')">تسليم</button>
+                    `;
+                default:
+                    return '';
+            }
+        }
+
+        // Update order status
+        function updateOrderStatus(orderId, newStatus) {
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                order.status = newStatus;
+                saveOrders();
+                renderOrders();
+                updateStats();
+
+                // Trigger storage event for customer view
+                window.dispatchEvent(new StorageEvent('storage', {
+                    key: 'shaySukarOrders',
+                    newValue: JSON.stringify(orders)
+                }));
+            }
+        }
+
+        // Toggle sound
+        document.getElementById('soundToggle').addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            localStorage.setItem('soundEnabled', soundEnabled);
+            updateSoundToggle();
+        });
+
+        // Listen for storage changes from other tabs
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'shaySukarOrders') {
+                loadOrders();
+            }
+        });
+
+        // Initialize
+        updateSoundToggle();
+        loadOrders();
+
+        // Refresh orders every 2 seconds
+        setInterval(loadOrders, 2000);
+    </script>
+</body>
+</html>

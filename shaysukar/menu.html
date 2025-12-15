@@ -2,9 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Shay Sukar - قائمة الطعام</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Cairo:wght@700;900&family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,78 +13,64 @@
         }
 
         body {
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Cairo', sans-serif;
             background-color: #F5E6D3;
             min-height: 100vh;
-            padding: 20px;
+            padding-bottom: 100px;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background-color: #F5E6D3;
-        }
-
-        .top-section {
-            display: grid;
-            grid-template-columns: 350px 1fr;
-            gap: 30px;
-            margin-bottom: 20px;
+        /* Header */
+        .header {
+            background: linear-gradient(145deg, #1A4D5C, #0f3540);
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(26, 77, 92, 0.3);
         }
 
         .logo-container {
-            background-color: #1A4D5C;
-            padding: 40px;
-            border-radius: 8px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 15px;
         }
 
         .logo-img {
-            width: 100%;
-            max-width: 200px;
+            max-width: 120px;
             height: auto;
-            object-fit: contain;
         }
 
-        .header-and-tea {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .header-title {
+            color: #FAF4EA;
+            font-size: 1.5rem;
+            font-weight: 700;
         }
 
-        .menu-header {
-            text-align: center;
-            position: relative;
+        .header-subtitle {
+            color: #FAF4EA;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
-        .menu-title {
-            font-size: 5rem;
-            font-weight: 900;
-            color: #1A4D5C;
-            letter-spacing: 0.15em;
-            font-family: 'Cairo', 'Tajawal', sans-serif;
-            text-transform: uppercase;
-        }
-
+        /* Order Status Banner */
         .order-status-banner {
             position: fixed;
-            top: 20px;
+            top: 80px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: #1A4D5C;
-            color: #FAF4EA;
-            padding: 15px 40px;
+            padding: 12px 30px;
             border-radius: 50px;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            box-shadow: 0 8px 25px rgba(26, 77, 92, 0.4);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             z-index: 1500;
             display: none;
             animation: statusPulse 2s infinite;
-            min-width: 250px;
             text-align: center;
+            color: white;
         }
 
         .order-status-banner.show {
@@ -92,138 +78,103 @@
         }
 
         @keyframes statusPulse {
-            0%, 100% {
-                transform: translateX(-50%) scale(1);
-            }
-            50% {
-                transform: translateX(-50%) scale(1.05);
-            }
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.03); }
         }
 
-        .order-status-banner.status-pending {
-            background-color: #f0ad4e;
-        }
-
-        .order-status-banner.status-preparing {
-            background-color: #0275d8;
-        }
-
+        .order-status-banner.status-pending { background: linear-gradient(145deg, #f0ad4e, #ec971f); }
+        .order-status-banner.status-preparing { background: linear-gradient(145deg, #5bc0de, #31b0d5); }
         .order-status-banner.status-ready {
-            background-color: #5cb85c;
-            animation: statusReady 1s infinite;
+            background: linear-gradient(145deg, #5cb85c, #449d44);
+            animation: statusReady 0.8s infinite;
         }
+        .order-status-banner.status-completed { background: linear-gradient(145deg, #1A4D5C, #0f3540); }
 
         @keyframes statusReady {
-            0%, 100% {
-                transform: translateX(-50%) scale(1);
-                box-shadow: 0 8px 25px rgba(92, 184, 92, 0.6);
-            }
-            50% {
-                transform: translateX(-50%) scale(1.08);
-                box-shadow: 0 12px 35px rgba(92, 184, 92, 0.8);
-            }
+            0%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0 8px 25px rgba(92, 184, 92, 0.5); }
+            50% { transform: translateX(-50%) scale(1.05); box-shadow: 0 12px 35px rgba(92, 184, 92, 0.7); }
         }
 
-        .order-status-banner.status-completed {
-            background-color: #5bc0de;
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
+        /* Menu Section */
         .menu-section {
             background-color: #FAF4EA;
-            border: 2px solid #1A4D5C;
-            border-radius: 8px;
+            border-radius: 15px;
+            margin-bottom: 20px;
             overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .menu-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(26, 77, 92, 0.2);
+            box-shadow: 0 4px 15px rgba(26, 77, 92, 0.15);
+            border: 2px solid rgba(26, 77, 92, 0.1);
         }
 
         .section-header {
-            background-color: #1A4D5C;
+            background: linear-gradient(145deg, #1A4D5C, #0f3540);
             color: #FAF4EA;
-            padding: 15px;
-            text-align: center;
-            font-size: 1.8rem;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
             font-weight: 700;
         }
 
-        .section-header .arabic {
-            font-family: 'Aref Ruqaa', 'Amiri', cursive;
-            display: block;
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-        }
-
-        .section-header .english {
-            font-family: 'Great Vibes', 'Pacifico', cursive;
-            font-size: 1.8rem;
-            display: block;
-            margin-top: 5px;
-            font-weight: 400;
+        .section-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            font-style: italic;
         }
 
         .menu-items {
-            padding: 20px;
+            padding: 10px;
         }
 
         .menu-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            transition: all 0.3s ease;
-            background-color: transparent;
-            position: relative;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 10px;
+            background-color: rgba(26, 77, 92, 0.03);
             border: 2px solid transparent;
+            transition: all 0.3s ease;
         }
 
         .menu-item:hover {
-            background-color: rgba(26, 77, 92, 0.05);
-            border-color: #1A4D5C;
+            background-color: rgba(26, 77, 92, 0.08);
+            border-color: rgba(26, 77, 92, 0.2);
         }
 
         .item-info {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
         }
 
         .item-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #1A4D5C;
-            font-family: 'Cairo', 'Tajawal', sans-serif;
-        }
-
-        .item-price {
             font-size: 1.1rem;
             font-weight: 700;
             color: #1A4D5C;
-            opacity: 0.8;
+            display: block;
         }
 
-        .currency {
-            font-size: 0.9rem;
+        .item-price {
+            font-size: 0.95rem;
+            color: #1A4D5C;
+            opacity: 0.7;
+            margin-top: 2px;
         }
 
         .item-controls {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .quantity-controls {
@@ -231,24 +182,24 @@
             align-items: center;
             gap: 8px;
             background-color: rgba(26, 77, 92, 0.1);
-            padding: 5px;
+            padding: 5px 8px;
             border-radius: 25px;
         }
 
         .qty-btn {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border: none;
             border-radius: 50%;
             background-color: #1A4D5C;
             color: #FAF4EA;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
         .qty-btn:hover {
@@ -261,179 +212,42 @@
         }
 
         .qty-display {
-            min-width: 35px;
+            min-width: 25px;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1rem;
             font-weight: 700;
             color: #1A4D5C;
         }
 
-        .add-to-cart-btn {
-            padding: 8px 20px;
-            background-color: #5cb85c;
+        .add-btn {
+            padding: 8px 16px;
+            background: linear-gradient(145deg, #5cb85c, #449d44);
             color: white;
             border: none;
-            border-radius: 25px;
-            font-size: 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: 700;
+            font-family: 'Cairo', sans-serif;
             cursor: pointer;
             transition: all 0.3s ease;
             white-space: nowrap;
         }
 
-        .add-to-cart-btn:hover {
-            background-color: #4cae4c;
+        .add-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(92, 184, 92, 0.3);
+            box-shadow: 0 4px 12px rgba(92, 184, 92, 0.4);
         }
 
-        .add-to-cart-btn:active {
+        .add-btn:active {
             transform: translateY(0);
         }
 
-        .add-to-cart-btn.in-cart {
-            background-color: #1A4D5C;
-        }
-
-        .quote-section {
-            background-color: #1A4D5C;
-            color: #FAF4EA;
-            text-align: center;
-            padding: 30px;
-            border-radius: 8px;
-            margin-top: 30px;
-        }
-
-        .quote-text {
-            font-size: 1.5rem;
-            font-style: italic;
-            direction: ltr;
-        }
-
-        .quote-word {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin: 0 10px;
-        }
-
-        .order-cart {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-color: #1A4D5C;
-            color: #FAF4EA;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            min-width: 320px;
-            max-width: 400px;
-            max-height: 500px;
-            overflow-y: auto;
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-
-        .order-cart.hidden {
-            transform: translateY(600px);
-        }
-
-        .cart-header {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #FAF4EA;
-            padding-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .order-status {
-            font-size: 0.9rem;
-            padding: 5px 12px;
-            border-radius: 15px;
-            background-color: rgba(250, 244, 234, 0.2);
-        }
-
-        .status-pending { background-color: #f0ad4e; }
-        .status-preparing { background-color: #0275d8; }
-        .status-ready { background-color: #5cb85c; }
-        .status-completed { background-color: #5bc0de; }
-
-        .cart-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(250, 244, 234, 0.3);
-        }
-
-        .cart-item-name {
-            flex: 1;
-        }
-
-        .cart-item-price {
-            margin: 0 10px;
-        }
-
-        .cart-item-remove {
-            background-color: #d9534f;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-
-        .cart-total {
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 2px solid #FAF4EA;
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
-
-        .cart-actions {
-            margin-top: 15px;
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            flex: 1;
-        }
-
-        .btn-order {
-            background-color: #5cb85c;
-            color: white;
-        }
-
-        .btn-order:hover {
-            background-color: #4cae4c;
-        }
-
-        .btn-clear {
-            background-color: #d9534f;
-            color: white;
-        }
-
-        .btn-clear:hover {
-            background-color: #c9302c;
-        }
-
+        /* Cart Toggle Button */
         .cart-toggle {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            background-color: #1A4D5C;
+            background: linear-gradient(145deg, #1A4D5C, #0f3540);
             color: #FAF4EA;
             width: 60px;
             height: 60px;
@@ -442,9 +256,10 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 20px rgba(26, 77, 92, 0.4);
             z-index: 999;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            font-size: 1.6rem;
         }
 
         .cart-toggle:hover {
@@ -453,9 +268,9 @@
 
         .cart-badge {
             position: absolute;
-            top: 0;
-            right: 0;
-            background-color: #d9534f;
+            top: -5px;
+            right: -5px;
+            background: linear-gradient(145deg, #d9534f, #c9302c);
             color: white;
             border-radius: 50%;
             width: 24px;
@@ -463,782 +278,1125 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
         }
 
+        /* Cart Panel */
+        .cart-panel {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(145deg, #1A4D5C, #0f3540);
+            color: #FAF4EA;
+            border-radius: 20px 20px 0 0;
+            padding: 20px;
+            max-height: 70vh;
+            overflow-y: auto;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cart-panel.show {
+            transform: translateY(0);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(250, 244, 234, 0.2);
+            margin-bottom: 15px;
+        }
+
+        .cart-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            color: #FAF4EA;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .cart-status {
+            font-size: 0.85rem;
+            padding: 5px 12px;
+            border-radius: 15px;
+            background-color: rgba(250, 244, 234, 0.2);
+        }
+
+        /* Customer Info Form */
+        .customer-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(250, 244, 234, 0.2);
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .input-group input {
+            padding: 10px 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
+            background-color: rgba(250, 244, 234, 0.95);
+            color: #1A4D5C;
+        }
+
+        .input-group input:focus {
+            outline: 2px solid #5cb85c;
+        }
+
+        .input-group input::placeholder {
+            color: #1A4D5C;
+            opacity: 0.5;
+        }
+
+        /* Cart Items */
+        .cart-items {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(250, 244, 234, 0.1);
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+        }
+
+        .cart-item-details {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .cart-item-remove {
+            background: linear-gradient(145deg, #d9534f, #c9302c);
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .cart-item-remove:hover {
+            transform: scale(1.05);
+        }
+
+        /* Cart Footer */
+        .cart-footer {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(250, 244, 234, 0.2);
+        }
+
+        .cart-total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .cart-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-order {
+            background: linear-gradient(145deg, #5cb85c, #449d44);
+            color: white;
+        }
+
+        .btn-order:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(92, 184, 92, 0.4);
+        }
+
+        .btn-order:disabled {
+            background: #888;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-clear {
+            background: linear-gradient(145deg, #d9534f, #c9302c);
+            color: white;
+        }
+
+        .btn-clear:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(217, 83, 79, 0.4);
+        }
+
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 30px;
+            opacity: 0.7;
+        }
+
+        .empty-cart-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        /* Notification */
         .notification {
             position: fixed;
-            top: 20px;
+            top: 100px;
             right: 20px;
-            background-color: #5cb85c;
+            background: linear-gradient(145deg, #5cb85c, #449d44);
             color: white;
             padding: 15px 25px;
-            border-radius: 6px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
             z-index: 2000;
-            animation: slideIn 0.3s ease, slideOut 0.3s ease 2.7s;
-            opacity: 0;
+            animation: slideInNotif 0.3s ease forwards;
+            max-width: 300px;
+            font-weight: 600;
         }
 
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
+        .notification.error {
+            background: linear-gradient(145deg, #d9534f, #c9302c);
         }
 
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
+        .notification.info {
+            background: linear-gradient(145deg, #5bc0de, #31b0d5);
         }
 
-        @media (max-width: 1024px) {
-            .top-section {
-                grid-template-columns: 1fr;
-            }
-
-            .logo-container {
-                max-height: 300px;
-            }
+        @keyframes slideInNotif {
+            from { transform: translateX(400px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
 
+        /* Responsive Design */
+        /* Desktop */
+        @media (min-width: 769px) {
+            .logo-img { max-width: 120px; }
+            .header { padding: 20px 30px; }
+        }
+
+        /* Tablet */
         @media (max-width: 768px) {
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
+            .logo-img { max-width: 100px; }
+            .header-title { font-size: 1.3rem; }
+            .section-title { font-size: 1.2rem; }
+            .item-name { font-size: 1rem; }
+        }
 
-            .menu-title {
-                font-size: 2.5rem;
-            }
-
-            .logo-container {
-                padding: 20px;
+        /* Phone */
+        @media (max-width: 480px) {
+            .header {
+                padding: 10px 15px;
             }
 
             .logo-img {
-                max-width: 120px;
+                max-width: 70px;
             }
 
-            .order-cart {
-                left: 10px;
-                right: 10px;
-                min-width: auto;
-                max-width: none;
+            .header-title {
+                font-size: 1.1rem;
+            }
+
+            .header-subtitle {
+                font-size: 0.8rem;
             }
 
             .container {
-                padding: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .menu-title {
-                font-size: 2rem;
+                padding: 15px 10px;
             }
 
-            .logo-container {
-                padding: 15px;
-            }
-
-            .logo-img {
-                max-width: 80px;
+            .menu-section {
+                border-radius: 12px;
+                margin-bottom: 15px;
             }
 
             .section-header {
-                font-size: 1.5rem;
+                padding: 12px 15px;
+            }
+
+            .section-title {
+                font-size: 1.1rem;
             }
 
             .menu-item {
-                padding: 12px;
+                padding: 10px 12px;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .item-info {
+                flex: 1;
+                min-width: 120px;
+            }
+
+            .item-name {
+                font-size: 0.95rem;
+            }
+
+            .item-price {
+                font-size: 0.85rem;
+            }
+
+            .item-controls {
+                gap: 8px;
+            }
+
+            .quantity-controls {
+                padding: 4px 6px;
+                gap: 5px;
+            }
+
+            .qty-btn {
+                width: 26px;
+                height: 26px;
+                font-size: 1rem;
+            }
+
+            .qty-display {
+                min-width: 20px;
                 font-size: 0.9rem;
+            }
+
+            .add-btn {
+                padding: 7px 12px;
+                font-size: 0.85rem;
+            }
+
+            .cart-toggle {
+                width: 55px;
+                height: 55px;
+                font-size: 1.4rem;
+            }
+
+            .cart-panel {
+                padding: 15px;
+                border-radius: 15px 15px 0 0;
+            }
+
+            .cart-title {
+                font-size: 1.1rem;
+            }
+
+            .customer-info {
+                grid-template-columns: 1fr;
+            }
+
+            .btn {
+                padding: 12px 15px;
+                font-size: 1rem;
+            }
+
+            .order-status-banner {
+                top: 70px;
+                font-size: 0.95rem;
+                padding: 10px 20px;
+                max-width: 90%;
+            }
+        }
+
+        /* Very small phones (iPhone SE) */
+        @media (max-width: 375px) {
+            .logo-img {
+                max-width: 60px;
+            }
+
+            .header-title {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1rem;
+            }
+
+            .section-subtitle {
+                font-size: 0.8rem;
+            }
+
+            .item-name {
+                font-size: 0.9rem;
+            }
+
+            .add-btn {
+                padding: 6px 10px;
+                font-size: 0.8rem;
+            }
+
+            .cart-toggle {
+                width: 50px;
+                height: 50px;
+                bottom: 15px;
+                left: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="top-section">
-            <!-- Logo Section -->
-            <div class="logo-container">
-                <img src="logo.png" alt="Shay Sukar Logo" class="logo-img">
-            </div>
-
-            <!-- Header and Tea Section -->
-            <div class="header-and-tea">
-                <div class="menu-header">
-                    <h1 class="menu-title">MENU</h1>
-                </div>
-
-                <!-- Tea Section -->
-                <div class="menu-section">
-                    <div class="section-header">
-                        <span class="arabic">شاي</span>
-                        <span class="english">Tea</span>
-                    </div>
-                    <div class="menu-items">
-                        <div class="menu-item" data-name="شاي قزاز" data-price="13" data-category="tea">
-                            <div class="item-info">
-                                <span class="item-name">شاي قزاز</span>
-                                <span class="item-price">13 <span class="currency">SR</span></span>
-                            </div>
-                            <div class="item-controls">
-                                <div class="quantity-controls">
-                                    <button class="qty-btn qty-minus">−</button>
-                                    <span class="qty-display">1</span>
-                                    <button class="qty-btn qty-plus">+</button>
-                                </div>
-                                <button class="add-to-cart-btn">إضافة</button>
-                            </div>
-                        </div>
-                        <div class="menu-item" data-name="شاي كبير" data-price="8" data-category="tea">
-                            <div class="item-info">
-                                <span class="item-name">شاي كبير</span>
-                                <span class="item-price">8 <span class="currency">SR</span></span>
-                            </div>
-                            <div class="item-controls">
-                                <div class="quantity-controls">
-                                    <button class="qty-btn qty-minus">−</button>
-                                    <span class="qty-display">1</span>
-                                    <button class="qty-btn qty-plus">+</button>
-                                </div>
-                                <button class="add-to-cart-btn">إضافة</button>
-                            </div>
-                        </div>
-                        <div class="menu-item" data-name="شاي صغير" data-price="6" data-category="tea">
-                            <div class="item-info">
-                                <span class="item-name">شاي صغير</span>
-                                <span class="item-price">6 <span class="currency">SR</span></span>
-                            </div>
-                            <div class="item-controls">
-                                <div class="quantity-controls">
-                                    <button class="qty-btn qty-minus">−</button>
-                                    <span class="qty-display">1</span>
-                                    <button class="qty-btn qty-plus">+</button>
-                                </div>
-                                <button class="add-to-cart-btn">إضافة</button>
-                            </div>
-                        </div>
-                        <div class="menu-item" data-name="شاي ابريق" data-price="20" data-category="tea">
-                            <div class="item-info">
-                                <span class="item-name">شاي ابريق</span>
-                                <span class="item-price">20 <span class="currency">SR</span></span>
-                            </div>
-                            <div class="item-controls">
-                                <div class="quantity-controls">
-                                    <button class="qty-btn qty-minus">−</button>
-                                    <span class="qty-display">1</span>
-                                    <button class="qty-btn qty-plus">+</button>
-                                </div>
-                                <button class="add-to-cart-btn">إضافة</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo-container">
+            <img src="logo.png" alt="Shay Sukar" class="logo-img">
         </div>
-
-        <div class="menu-grid">
-            <!-- Sweet Section -->
-            <div class="menu-section">
-                <div class="section-header">
-                    <span class="arabic">الحلو</span>
-                    <span class="english">Sweet</span>
-                </div>
-                <div class="menu-items">
-                    <div class="menu-item" data-name="تيشرز مجريند" data-price="19" data-category="sweet">
-                        <div class="item-info">
-                            <span class="item-name">تيشرز مجريند</span>
-                            <span class="item-price">19 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="حبة تمر" data-price="12" data-category="sweet">
-                        <div class="item-info">
-                            <span class="item-name">حبة تمر</span>
-                            <span class="item-price">12 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="حلا أوريسو" data-price="15" data-category="sweet">
-                        <div class="item-info">
-                            <span class="item-name">حلا أوريسو</span>
-                            <span class="item-price">15 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="جوبكز شوكو" data-price="7" data-category="sweet">
-                        <div class="item-info">
-                            <span class="item-name">جوبكز شوكو</span>
-                            <span class="item-price">7 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="كراشي" data-price="8" data-category="sweet">
-                        <div class="item-info">
-                            <span class="item-name">كراشي</span>
-                            <span class="item-price">8 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Karak Section -->
-            <div class="menu-section">
-                <div class="section-header">
-                    <span class="arabic">كرك</span>
-                    <span class="english">karak</span>
-                </div>
-                <div class="menu-items">
-                    <div class="menu-item" data-name="كرك قزاز" data-price="14" data-category="karak">
-                        <div class="item-info">
-                            <span class="item-name">كرك قزاز</span>
-                            <span class="item-price">14 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="كرك ابريق" data-price="30" data-category="karak">
-                        <div class="item-info">
-                            <span class="item-name">كرك ابريق</span>
-                            <span class="item-price">30 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="كرك كبير" data-price="9" data-category="karak">
-                        <div class="item-info">
-                            <span class="item-name">كرك كبير</span>
-                            <span class="item-price">9 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="كرك صغير" data-price="7" data-category="karak">
-                        <div class="item-info">
-                            <span class="item-name">كرك صغير</span>
-                            <span class="item-price">7 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Baked Section -->
-            <div class="menu-section">
-                <div class="section-header">
-                    <span class="arabic">مخبوزات</span>
-                    <span class="english">baked</span>
-                </div>
-                <div class="menu-items">
-                    <div class="menu-item" data-name="مسحن" data-price="18" data-category="baked">
-                        <div class="item-info">
-                            <span class="item-name">مسحن</span>
-                            <span class="item-price">18 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="خليبة" data-price="18" data-category="baked">
-                        <div class="item-info">
-                            <span class="item-name">خليبة</span>
-                            <span class="item-price">18 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="ورق عنب" data-price="15" data-category="baked">
-                        <div class="item-info">
-                            <span class="item-name">ورق عنب</span>
-                            <span class="item-price">15 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="سمبوسة" data-price="12" data-category="baked">
-                        <div class="item-info">
-                            <span class="item-name">سمبوسة</span>
-                            <span class="item-price">12 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Coffee Section -->
-            <div class="menu-section">
-                <div class="section-header">
-                    <span class="arabic">القهوة</span>
-                    <span class="english">coffee</span>
-                </div>
-                <div class="menu-items">
-                    <div class="menu-item" data-name="قهوة كبير" data-price="14" data-category="coffee">
-                        <div class="item-info">
-                            <span class="item-name">قهوة كبير</span>
-                            <span class="item-price">14 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="قهوة صغير" data-price="10" data-category="coffee">
-                        <div class="item-info">
-                            <span class="item-name">قهوة صغير</span>
-                            <span class="item-price">10 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                    <div class="menu-item" data-name="دلة سعودي" data-price="25" data-category="coffee">
-                        <div class="item-info">
-                            <span class="item-name">دلة سعودي</span>
-                            <span class="item-price">25 <span class="currency">SR</span></span>
-                        </div>
-                        <div class="item-controls">
-                            <div class="quantity-controls">
-                                <button class="qty-btn qty-minus">−</button>
-                                <span class="qty-display">1</span>
-                                <button class="qty-btn qty-plus">+</button>
-                            </div>
-                            <button class="add-to-cart-btn">إضافة</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div>
+            <div class="header-title">قائمة الطعام</div>
+            <div class="header-subtitle">Menu</div>
         </div>
-
-        <div class="quote-section">
-            <div class="quote-text">
-                <span>"</span>
-                <span class="quote-word">Tea</span>
-                <span>is a ritual, an art that nourishes the soul.</span>
-                <span>"</span>
-            </div>
-        </div>
-    </div>
+    </header>
 
     <!-- Order Status Banner -->
     <div class="order-status-banner" id="statusBanner"></div>
 
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Tea Section -->
+        <div class="menu-section">
+            <div class="section-header">
+                <span class="section-title">شاي</span>
+                <span class="section-subtitle">Tea</span>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item" data-name="شاي قزاز" data-price="13">
+                    <div class="item-info">
+                        <span class="item-name">شاي قزاز</span>
+                        <span class="item-price">13 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="شاي كبير" data-price="8">
+                    <div class="item-info">
+                        <span class="item-name">شاي كبير</span>
+                        <span class="item-price">8 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="شاي صغير" data-price="6">
+                    <div class="item-info">
+                        <span class="item-name">شاي صغير</span>
+                        <span class="item-price">6 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="شاي ابريق" data-price="20">
+                    <div class="item-info">
+                        <span class="item-name">شاي ابريق</span>
+                        <span class="item-price">20 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Coffee Section -->
+        <div class="menu-section">
+            <div class="section-header">
+                <span class="section-title">قهوة</span>
+                <span class="section-subtitle">Coffee</span>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item" data-name="قهوة قزاز" data-price="20">
+                    <div class="item-info">
+                        <span class="item-name">قهوة قزاز</span>
+                        <span class="item-price">20 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="قهوة صغير" data-price="10">
+                    <div class="item-info">
+                        <span class="item-name">قهوة صغير</span>
+                        <span class="item-price">10 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="دلة سعودي" data-price="25">
+                    <div class="item-info">
+                        <span class="item-name">دلة سعودي</span>
+                        <span class="item-price">25 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Juices Section -->
+        <div class="menu-section">
+            <div class="section-header">
+                <span class="section-title">عصائر</span>
+                <span class="section-subtitle">Juices</span>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item" data-name="عصير برتقال" data-price="12">
+                    <div class="item-info">
+                        <span class="item-name">عصير برتقال</span>
+                        <span class="item-price">12 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="عصير فراولة" data-price="12">
+                    <div class="item-info">
+                        <span class="item-name">عصير فراولة</span>
+                        <span class="item-price">12 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="عصير موز" data-price="10">
+                    <div class="item-info">
+                        <span class="item-name">عصير موز</span>
+                        <span class="item-price">10 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="عصير مانجو" data-price="15">
+                    <div class="item-info">
+                        <span class="item-name">عصير مانجو</span>
+                        <span class="item-price">15 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desserts Section -->
+        <div class="menu-section">
+            <div class="section-header">
+                <span class="section-title">حلويات</span>
+                <span class="section-subtitle">Desserts</span>
+            </div>
+            <div class="menu-items">
+                <div class="menu-item" data-name="كيك شوكولاتة" data-price="18">
+                    <div class="item-info">
+                        <span class="item-name">كيك شوكولاتة</span>
+                        <span class="item-price">18 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="تشيز كيك" data-price="20">
+                    <div class="item-info">
+                        <span class="item-name">تشيز كيك</span>
+                        <span class="item-price">20 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+                <div class="menu-item" data-name="براونيز" data-price="15">
+                    <div class="item-info">
+                        <span class="item-name">براونيز</span>
+                        <span class="item-price">15 SR</span>
+                    </div>
+                    <div class="item-controls">
+                        <div class="quantity-controls">
+                            <button class="qty-btn qty-minus">-</button>
+                            <span class="qty-display">1</span>
+                            <button class="qty-btn qty-plus">+</button>
+                        </div>
+                        <button class="add-btn">اضف</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Cart Toggle Button -->
     <div class="cart-toggle" id="cartToggle">
-        <span style="font-size: 1.8rem;">🛒</span>
+        <span>&#128722;</span>
         <span class="cart-badge" id="cartBadge">0</span>
     </div>
 
-    <!-- Order Cart -->
-    <div class="order-cart hidden" id="orderCart">
+    <!-- Cart Panel -->
+    <div class="cart-panel" id="cartPanel">
         <div class="cart-header">
-            <span>سلة الطلبات</span>
-            <span class="order-status" id="orderStatus"></span>
+            <span class="cart-title">سلة الطلبات</span>
+            <span class="cart-status" id="cartStatus"></span>
+            <button class="cart-close" id="cartClose">x</button>
         </div>
-        <div id="cartItems"></div>
-        <div class="cart-total">
-            المجموع: <span id="cartTotal">0</span> SR
+
+        <!-- Customer Info -->
+        <div class="customer-info">
+            <div class="input-group">
+                <label>رقم الطاولة *</label>
+                <input type="number" id="tableNumber" placeholder="مثال: 5" required min="1">
+            </div>
+            <div class="input-group">
+                <label>الاسم (اختياري)</label>
+                <input type="text" id="customerName" placeholder="زبون">
+            </div>
         </div>
-        <div class="cart-actions">
-            <button class="btn btn-order" id="sendOrder">إرسال الطلب</button>
-            <button class="btn btn-clear" id="clearCart">مسح الكل</button>
+
+        <!-- Cart Items -->
+        <div class="cart-items" id="cartItems">
+            <div class="empty-cart">
+                <div class="empty-cart-icon">&#128722;</div>
+                <div>السلة فارغة</div>
+            </div>
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="cart-footer">
+            <div class="cart-total">
+                المجموع: <span id="cartTotal">0</span> SR
+            </div>
+            <div class="cart-actions">
+                <button class="btn btn-order" id="submitOrder">ارسال الطلب</button>
+                <button class="btn btn-clear" id="clearCart">مسح</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Cart management
+        // ============================================
+        // SHAY SUKAR - CUSTOMER MENU
+        // Version 2.0 - Vercel REST API
+        // ============================================
+
+        console.log('[Menu] Initializing Shay Sukar Menu...');
+
+        // State
         let cart = [];
         let currentOrderId = null;
         let currentOrderStatus = null;
+        let lastOrdersJson = '';
+        let pollingInterval = null;
 
-        // Load cart from localStorage
-        function loadCart() {
-            const savedCart = localStorage.getItem('shaySukarCart');
-            if (savedCart) {
-                cart = JSON.parse(savedCart);
-                updateCartDisplay();
+        // API Base URL - auto-detect environment
+        const API_URL = '/api/orders';
+
+        // ============================================
+        // CART MANAGEMENT
+        // ============================================
+
+        function addToCart(name, price, quantity) {
+            console.log(`[Cart] Adding: ${name} x${quantity} @ ${price} SR`);
+
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ name, price: parseFloat(price), quantity });
             }
 
-            // Check for active order
-            const savedOrderId = localStorage.getItem('shaySukarCurrentOrderId');
-            if (savedOrderId) {
-                currentOrderId = parseInt(savedOrderId);
-                checkOrderStatus();
+            updateCartDisplay();
+            saveCartToStorage();
+            showNotification(`تم اضافة ${quantity}x ${name}`);
+        }
+
+        function removeFromCart(index) {
+            console.log(`[Cart] Removing item at index ${index}`);
+            cart.splice(index, 1);
+            updateCartDisplay();
+            saveCartToStorage();
+        }
+
+        function clearCart() {
+            console.log('[Cart] Clearing all items');
+            cart = [];
+            updateCartDisplay();
+            saveCartToStorage();
+        }
+
+        function updateCartDisplay() {
+            const cartItemsEl = document.getElementById('cartItems');
+            const cartTotalEl = document.getElementById('cartTotal');
+            const cartBadgeEl = document.getElementById('cartBadge');
+
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">&#128722;</div>
+                        <div>السلة فارغة</div>
+                    </div>
+                `;
+            } else {
+                cartItemsEl.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <div class="cart-item-name">${item.name}</div>
+                            <div class="cart-item-details">${item.quantity}x @ ${item.price} SR = ${(item.quantity * item.price).toFixed(2)} SR</div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart(${index})">حذف</button>
+                    </div>
+                `).join('');
+            }
+
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+            cartTotalEl.textContent = total.toFixed(2);
+            cartBadgeEl.textContent = totalItems;
+            cartBadgeEl.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+
+        function saveCartToStorage() {
+            localStorage.setItem('shaySukarCart', JSON.stringify(cart));
+            if (currentOrderId) {
+                localStorage.setItem('shaySukarOrderId', currentOrderId);
             }
         }
 
-        // Check order status from API
-        function checkOrderStatus() {
-            if (!currentOrderId) return;
+        function loadCartFromStorage() {
+            try {
+                const savedCart = localStorage.getItem('shaySukarCart');
+                if (savedCart) {
+                    cart = JSON.parse(savedCart);
+                    updateCartDisplay();
+                }
 
-            fetch('/api/orders')
-                .then(res => res.json())
-                .then(data => {
+                const savedOrderId = localStorage.getItem('shaySukarOrderId');
+                if (savedOrderId) {
+                    currentOrderId = parseInt(savedOrderId);
+                    console.log('[Menu] Loaded saved order ID:', currentOrderId);
+                    startPolling();
+                }
+            } catch (e) {
+                console.error('[Menu] Error loading from storage:', e);
+            }
+        }
+
+        // ============================================
+        // ORDER SUBMISSION - CRITICAL FIX
+        // API generates order ID, menu waits for response
+        // ============================================
+
+        async function submitOrder() {
+            const tableNumber = document.getElementById('tableNumber').value;
+            const customerName = document.getElementById('customerName').value || 'زبون';
+
+            // Validation
+            if (cart.length === 0) {
+                showNotification('السلة فارغة!', 'error');
+                return;
+            }
+
+            if (!tableNumber || tableNumber < 1) {
+                showNotification('يرجى إدخال رقم الطاولة', 'error');
+                document.getElementById('tableNumber').focus();
+                return;
+            }
+
+            // Disable button during submission
+            const submitBtn = document.getElementById('submitOrder');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري الارسال...';
+
+            const orderData = {
+                tableNumber: parseInt(tableNumber),
+                customerName: customerName,
+                items: cart.map(item => ({
+                    name: item.name,
+                    price: item.price,
+                    quantity: item.quantity
+                })),
+                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+            };
+
+            console.log('[Menu] Submitting order:', orderData);
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(orderData)
+                });
+
+                const data = await response.json();
+                console.log('[Menu] API Response:', data);
+
+                if (data.success && data.order) {
+                    // CRITICAL: Use the ID from API response, NOT generated locally
+                    currentOrderId = data.order.id;
+                    currentOrderStatus = data.order.status;
+
+                    console.log('[Menu] Order created with ID:', currentOrderId);
+
+                    // Save order ID to storage
+                    localStorage.setItem('shaySukarOrderId', currentOrderId);
+
+                    // Clear cart AFTER successful order
+                    cart = [];
+                    updateCartDisplay();
+                    saveCartToStorage();
+
+                    // Close cart panel
+                    document.getElementById('cartPanel').classList.remove('show');
+
+                    // Show success
+                    showNotification(`تم ارسال الطلب! رقم الطلب: ${currentOrderId}`, 'success');
+                    updateOrderStatusBanner();
+
+                    // Start polling for updates
+                    startPolling();
+                } else {
+                    throw new Error(data.error || 'Failed to create order');
+                }
+            } catch (error) {
+                console.error('[Menu] Order submission error:', error);
+                showNotification('خطأ في ارسال الطلب. حاول مرة أخرى', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'ارسال الطلب';
+            }
+        }
+
+        // ============================================
+        // ORDER STATUS POLLING
+        // ============================================
+
+        function startPolling() {
+            if (pollingInterval) {
+                clearInterval(pollingInterval);
+            }
+
+            console.log('[Menu] Starting status polling for order:', currentOrderId);
+
+            // Poll immediately, then every 3 seconds
+            checkOrderStatus();
+            pollingInterval = setInterval(checkOrderStatus, 3000);
+        }
+
+        function stopPolling() {
+            if (pollingInterval) {
+                clearInterval(pollingInterval);
+                pollingInterval = null;
+                console.log('[Menu] Stopped polling');
+            }
+        }
+
+        async function checkOrderStatus() {
+            if (!currentOrderId) {
+                stopPolling();
+                return;
+            }
+
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+
+                if (data.success) {
                     const order = data.orders.find(o => o.id === currentOrderId);
 
                     if (order) {
                         const oldStatus = currentOrderStatus;
                         currentOrderStatus = order.status;
-                        updateOrderStatusDisplay();
 
-                        // Show notifications on status change
+                        // Notify on status change
                         if (oldStatus !== currentOrderStatus) {
-                            if (order.status === 'preparing') {
-                                showNotification('جاري تحضير طلبك... 👨‍🍳');
-                            } else if (order.status === 'ready') {
-                                showNotification('طلبك جاهز! 🎉');
-                            } else if (order.status === 'completed') {
-                                showNotification('تم التسليم! شكراً لك 🙏');
+                            console.log(`[Menu] Status changed: ${oldStatus} -> ${currentOrderStatus}`);
+
+                            if (currentOrderStatus === 'preparing') {
+                                showNotification('جاري تحضير طلبك...', 'info');
+                            } else if (currentOrderStatus === 'ready') {
+                                showNotification('طلبك جاهز للاستلام!', 'success');
+                                playSound();
+                            } else if (currentOrderStatus === 'completed') {
+                                showNotification('شكرا لزيارتك!', 'success');
+                                // Clear order after 5 seconds
                                 setTimeout(() => {
                                     currentOrderId = null;
                                     currentOrderStatus = null;
-                                    updateOrderStatusDisplay();
+                                    localStorage.removeItem('shaySukarOrderId');
+                                    updateOrderStatusBanner();
+                                    stopPolling();
                                 }, 5000);
+                            } else if (currentOrderStatus === 'cancelled') {
+                                showNotification('تم الغاء الطلب', 'error');
+                                setTimeout(() => {
+                                    currentOrderId = null;
+                                    currentOrderStatus = null;
+                                    localStorage.removeItem('shaySukarOrderId');
+                                    updateOrderStatusBanner();
+                                    stopPolling();
+                                }, 3000);
                             }
                         }
+
+                        updateOrderStatusBanner();
+                    } else {
+                        // Order not found (might have been deleted)
+                        console.log('[Menu] Order not found in API');
                     }
-                })
-                .catch(err => console.error('Error checking status:', err));
+                }
+            } catch (error) {
+                console.error('[Menu] Error checking status:', error);
+            }
         }
 
-        // Update order status display
-        function updateOrderStatusDisplay() {
-            const statusEl = document.getElementById('orderStatus');
-            const bannerEl = document.getElementById('statusBanner');
+        function updateOrderStatusBanner() {
+            const banner = document.getElementById('statusBanner');
+            const cartStatus = document.getElementById('cartStatus');
 
-            const statusText = {
-                'pending': '⏱️ طلبك قيد الانتظار',
-                'preparing': '👨‍🍳 جاري تحضير طلبك',
-                'ready': '✅ طلبك جاهز!',
-                'completed': '🎉 تم التسليم',
-                'cancelled': '❌ تم إلغاء الطلب'
+            const statusConfig = {
+                'pending': { text: 'طلبك قيد الانتظار...', class: 'status-pending' },
+                'preparing': { text: 'جاري تحضير طلبك...', class: 'status-preparing' },
+                'ready': { text: 'طلبك جاهز!', class: 'status-ready' },
+                'completed': { text: 'شكرا لزيارتك!', class: 'status-completed' },
+                'cancelled': { text: 'تم الغاء الطلب', class: 'status-cancelled' }
             };
 
-            if (currentOrderStatus && bannerEl) {
-                bannerEl.textContent = statusText[currentOrderStatus] || '';
-                bannerEl.className = `order-status-banner show status-${currentOrderStatus}`;
-            } else if (bannerEl) {
-                bannerEl.classList.remove('show');
-            }
+            if (currentOrderStatus && statusConfig[currentOrderStatus]) {
+                const config = statusConfig[currentOrderStatus];
+                banner.textContent = `#${currentOrderId} - ${config.text}`;
+                banner.className = `order-status-banner show ${config.class}`;
 
-            if (statusEl) {
-                const cartStatusText = {
-                    'pending': 'جديد',
-                    'preparing': 'قيد التحضير',
-                    'ready': 'جاهز',
-                    'completed': 'مكتمل',
-                    'cancelled': 'ملغي'
-                };
-                statusEl.textContent = cartStatusText[currentOrderStatus] || '';
-                statusEl.className = `order-status status-${currentOrderStatus}`;
-                statusEl.style.display = currentOrderStatus ? 'block' : 'none';
-            }
-        }
-
-        // Save cart to localStorage
-        function saveCart() {
-            localStorage.setItem('shaySukarCart', JSON.stringify(cart));
-        }
-
-        // Remove item from cart
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartDisplay();
-            saveCart();
-        }
-
-        // Update cart display
-        function updateCartDisplay() {
-            const cartItemsDiv = document.getElementById('cartItems');
-            const cartTotalSpan = document.getElementById('cartTotal');
-            const cartBadge = document.getElementById('cartBadge');
-
-            cartItemsDiv.innerHTML = '';
-            let total = 0;
-            let totalItems = 0;
-
-            cart.forEach((item, index) => {
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'cart-item';
-                itemDiv.innerHTML = `
-                    <span class="cart-item-name">${item.name} x${item.quantity}</span>
-                    <span class="cart-item-price">${(item.price * item.quantity).toFixed(2)} SR</span>
-                    <button class="cart-item-remove" onclick="removeFromCart(${index})">حذف</button>
-                `;
-                cartItemsDiv.appendChild(itemDiv);
-                total += item.price * item.quantity;
-                totalItems += item.quantity;
-            });
-
-            cartTotalSpan.textContent = total.toFixed(2);
-            cartBadge.textContent = totalItems;
-
-            if (totalItems === 0) {
-                cartBadge.style.display = 'none';
+                if (cartStatus) {
+                    cartStatus.textContent = config.text;
+                    cartStatus.style.display = 'inline-block';
+                }
             } else {
-                cartBadge.style.display = 'flex';
+                banner.classList.remove('show');
+                if (cartStatus) {
+                    cartStatus.style.display = 'none';
+                }
             }
         }
 
-        // Show notification
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.className = 'notification';
-            notification.textContent = message;
-            document.body.appendChild(notification);
+        // ============================================
+        // UI HELPERS
+        // ============================================
+
+        function showNotification(message, type = 'success') {
+            const notif = document.createElement('div');
+            notif.className = `notification ${type}`;
+            notif.textContent = message;
+            document.body.appendChild(notif);
 
             setTimeout(() => {
-                notification.remove();
+                notif.style.animation = 'slideInNotif 0.3s ease reverse forwards';
+                setTimeout(() => notif.remove(), 300);
             }, 3000);
         }
 
-        // Send order to barista (localStorage version)
-        function sendOrderToBarista() {
-            if (cart.length === 0) {
-                showNotification('السلة فارغة!');
-                return;
+        function playSound() {
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+
+                oscillator.frequency.value = 880;
+                oscillator.type = 'sine';
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.5);
+            } catch (e) {
+                console.log('[Menu] Could not play sound');
             }
-
-            const tableNumber = prompt('ما هو رقم الطاولة؟');
-            if (!tableNumber) {
-                showNotification('يرجى إدخال رقم الطاولة');
-                return;
-            }
-
-            const customerName = prompt('الاسم (اختياري):') || 'زبون';
-
-            const order = {
-                items: cart,
-                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
-                tableNumber: tableNumber,
-                customerName: customerName,
-                createdAt: new Date().toISOString()
-            };
-
-            // Send to API
-            fetch('/api/orders', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(order)
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success && data.order) {
-                    currentOrderId = data.order.id;
-                    currentOrderStatus = 'pending';
-
-                    // Clear cart AFTER successful order
-                    cart = [];
-                    updateCartDisplay();
-                    saveCart();
-
-                    showNotification('تم إرسال الطلب بنجاح! رقم الطلب: ' + currentOrderId);
-                    updateOrderStatusDisplay();
-                    console.log('✅ Order created successfully! ID:', currentOrderId);
-
-                    // Close cart
-                    document.getElementById('orderCart').classList.add('hidden');
-                } else {
-                    throw new Error('Failed to create order');
-                }
-            })
-            .catch(err => {
-                console.error('❌ Error creating order:', err);
-                showNotification('خطأ في إرسال الطلب! حاول مرة أخرى');
-            });
         }
 
-        // Initialize quantity controls
-        function initializeQuantityControls() {
-            document.querySelectorAll('.menu-item').forEach(menuItem => {
-                const qtyDisplay = menuItem.querySelector('.qty-display');
-                const qtyPlus = menuItem.querySelector('.qty-plus');
-                const qtyMinus = menuItem.querySelector('.qty-minus');
-                const addBtn = menuItem.querySelector('.add-to-cart-btn');
+        // ============================================
+        // EVENT LISTENERS
+        // ============================================
 
-                let quantity = 1;
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[Menu] DOM loaded, initializing...');
 
-                // Plus button
-                qtyPlus.addEventListener('click', (e) => {
+            // Initialize quantity controls for each menu item
+            document.querySelectorAll('.menu-item').forEach(item => {
+                const qtyDisplay = item.querySelector('.qty-display');
+                const plusBtn = item.querySelector('.qty-plus');
+                const minusBtn = item.querySelector('.qty-minus');
+                const addBtn = item.querySelector('.add-btn');
+
+                let qty = 1;
+
+                plusBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    quantity++;
-                    qtyDisplay.textContent = quantity;
+                    qty++;
+                    qtyDisplay.textContent = qty;
                 });
 
-                // Minus button
-                qtyMinus.addEventListener('click', (e) => {
+                minusBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    if (quantity > 1) {
-                        quantity--;
-                        qtyDisplay.textContent = quantity;
+                    if (qty > 1) {
+                        qty--;
+                        qtyDisplay.textContent = qty;
                     }
                 });
 
-                // Add to cart button
                 addBtn.addEventListener('click', (e) => {
                     e.stopPropagation();
-                    const name = menuItem.dataset.name;
-                    const price = menuItem.dataset.price;
-                    const category = menuItem.dataset.category;
-
-                    addToCartWithQuantity(name, price, category, quantity);
-
-                    // Reset quantity to 1 after adding
-                    quantity = 1;
-                    qtyDisplay.textContent = quantity;
+                    const name = item.dataset.name;
+                    const price = item.dataset.price;
+                    addToCart(name, price, qty);
+                    qty = 1;
+                    qtyDisplay.textContent = qty;
                 });
             });
-        }
 
-        // Add item to cart with specific quantity
-        function addToCartWithQuantity(name, price, category, qty) {
-            const existingItem = cart.find(item => item.name === name);
-            if (existingItem) {
-                existingItem.quantity += qty;
-            } else {
-                cart.push({
-                    name: name,
-                    price: parseFloat(price),
-                    category: category,
-                    quantity: qty
+            // Cart toggle
+            document.getElementById('cartToggle').addEventListener('click', () => {
+                document.getElementById('cartPanel').classList.add('show');
+            });
+
+            // Cart close
+            document.getElementById('cartClose').addEventListener('click', () => {
+                document.getElementById('cartPanel').classList.remove('show');
+            });
+
+            // Submit order
+            document.getElementById('submitOrder').addEventListener('click', submitOrder);
+
+            // Clear cart
+            document.getElementById('clearCart').addEventListener('click', () => {
+                if (cart.length > 0 && confirm('هل تريد مسح السلة؟')) {
+                    clearCart();
+                    showNotification('تم مسح السلة');
+                }
+            });
+
+            // Load saved cart
+            loadCartFromStorage();
+
+            // Test API connection
+            fetch(API_URL)
+                .then(res => res.json())
+                .then(data => {
+                    console.log('[Menu] API connected. Orders:', data.count);
+                })
+                .catch(err => {
+                    console.error('[Menu] API connection error:', err);
                 });
-            }
-            updateCartDisplay();
-            saveCart();
-            showNotification(`تمت إضافة ${qty}× ${name} إلى السلة`);
-        }
 
-        // Initialize controls
-        initializeQuantityControls();
-
-        document.getElementById('cartToggle').addEventListener('click', function() {
-            const cart = document.getElementById('orderCart');
-            cart.classList.toggle('hidden');
+            console.log('[Menu] Initialization complete!');
         });
-
-        document.getElementById('sendOrder').addEventListener('click', sendOrderToBarista);
-
-        document.getElementById('clearCart').addEventListener('click', function() {
-            if (confirm('هل أنت متأكد من مسح جميع العناصر؟')) {
-                cart = [];
-                updateCartDisplay();
-                saveCart();
-                showNotification('تم مسح السلة');
-            }
-        });
-
-        // Poll for order status updates every 3 seconds
-        setInterval(checkOrderStatus, 3000);
-
-        // Load cart on page load
-        loadCart();
-
-        // Check order status periodically
-        setInterval(checkOrderStatus, 2000);
     </script>
 </body>
 </html>

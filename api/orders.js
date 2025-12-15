@@ -1,106 +1,176 @@
-// Vercel Serverless Function for Orders
-// This stores orders in memory (will reset on cold start)
-// For production, use a database like Vercel KV, Supabase, or MongoDB
+// Vercel Serverless Function for Shay Sukar Order Management
+// REST API with in-memory storage
 
+// In-memory orders storage (resets on cold start)
 let orders = [];
-let orderIdCounter = 1;
+let nextOrderId = 1;
 
-// Enable CORS
+// CORS headers for all responses
 const corsHeaders = {
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, Accept',
+  'Content-Type': 'application/json'
 };
 
-export default function handler(req, res) {
-    // Handle CORS preflight
-    if (req.method === 'OPTIONS') {
-        return res.status(200).json({});
-    }
+// Main handler
+export default async function handler(req, res) {
+  // Handle CORS preflight
+  if (req.method === 'OPTIONS') {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
+    res.status(200).end();
+    return;
+  }
 
-    // Add CORS headers to all responses
-    Object.entries(corsHeaders).forEach(([key, value]) => {
-        res.setHeader(key, value);
-    });
+  // Set CORS headers for all responses
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Accept');
+  res.setHeader('Content-Type', 'application/json');
 
-    // GET - Fetch all orders
-    if (req.method === 'GET') {
+  console.log(`[API] ${req.method} /api/orders - Orders count: ${orders.length}`);
+
+  try {
+    switch (req.method) {
+      case 'GET':
+        // Return all orders
+        console.log('[API] GET - Returning orders:', orders.length);
         return res.status(200).json({
-            success: true,
-            orders: orders,
-            count: orders.length
+          success: true,
+          orders: orders,
+          count: orders.length,
+          nextId: nextOrderId
         });
-    }
 
-    // POST - Create new order
-    if (req.method === 'POST') {
-        const orderData = req.body;
+      case 'POST':
+        // Create new order
+        const newOrderData = req.body;
 
+        if (!newOrderData || !newOrderData.items || newOrderData.items.length === 0) {
+          console.log('[API] POST - Invalid order data');
+          return res.status(400).json({
+            success: false,
+            error: 'Invalid order data - items required'
+          });
+        }
+
+        if (!newOrderData.tableNumber) {
+          console.log('[API] POST - Missing table number');
+          return res.status(400).json({
+            success: false,
+            error: 'Table number is required'
+          });
+        }
+
+        // API generates the order ID (auto-increment)
         const newOrder = {
-            id: orderIdCounter++,
-            ...orderData,
-            status: orderData.status || 'pending',
-            timestamp: new Date().toISOString()
+          id: nextOrderId++,
+          tableNumber: newOrderData.tableNumber,
+          customerName: newOrderData.customerName || 'زبون',
+          items: newOrderData.items,
+          total: newOrderData.total || 0,
+          status: 'pending',
+          timestamp: new Date().toISOString(),
+          createdAt: Date.now()
         };
 
         orders.push(newOrder);
+        console.log(`[API] POST - Created order #${newOrder.id} for table ${newOrder.tableNumber}`);
 
         return res.status(201).json({
-            success: true,
-            order: newOrder,
-            message: 'Order created successfully'
+          success: true,
+          order: newOrder,
+          message: 'Order created successfully'
         });
-    }
 
-    // PUT - Update order status
-    if (req.method === 'PUT') {
-        const { orderId, status } = req.body;
+      case 'PUT':
+        // Update order status
+        const updateData = req.body;
 
-        const orderIndex = orders.findIndex(o => o.id === parseInt(orderId));
-
-        if (orderIndex === -1) {
-            return res.status(404).json({
-                success: false,
-                message: 'Order not found'
-            });
+        if (!updateData || !updateData.orderId || !updateData.status) {
+          console.log('[API] PUT - Missing orderId or status');
+          return res.status(400).json({
+            success: false,
+            error: 'orderId and status are required'
+          });
         }
 
-        orders[orderIndex].status = status;
-        orders[orderIndex].updatedAt = new Date().toISOString();
-
-        return res.status(200).json({
-            success: true,
-            order: orders[orderIndex],
-            message: 'Order updated successfully'
-        });
-    }
-
-    // DELETE - Complete/remove order
-    if (req.method === 'DELETE') {
-        const orderId = parseInt(req.query.id || req.body.orderId);
-
-        const orderIndex = orders.findIndex(o => o.id === orderId);
-
-        if (orderIndex === -1) {
-            return res.status(404).json({
-                success: false,
-                message: 'Order not found'
-            });
+        const validStatuses = ['pending', 'preparing', 'ready', 'completed', 'cancelled'];
+        if (!validStatuses.includes(updateData.status)) {
+          console.log('[API] PUT - Invalid status:', updateData.status);
+          return res.status(400).json({
+            success: false,
+            error: `Invalid status. Must be one of: ${validStatuses.join(', ')}`
+          });
         }
 
-        const completedOrder = orders[orderIndex];
-        orders.splice(orderIndex, 1);
+        const orderIndex = orders.findIndex(o => o.id === updateData.orderId);
+
+        if (orderIndex === -1) {
+          console.log('[API] PUT - Order not found:', updateData.orderId);
+          return res.status(404).json({
+            success: false,
+            error: 'Order not found'
+          });
+        }
+
+        orders[orderIndex].status = updateData.status;
+        orders[orderIndex].updatedAt = Date.now();
+
+        console.log(`[API] PUT - Updated order #${updateData.orderId} to ${updateData.status}`);
 
         return res.status(200).json({
-            success: true,
-            order: completedOrder,
-            message: 'Order completed successfully'
+          success: true,
+          order: orders[orderIndex],
+          message: 'Order updated successfully'
+        });
+
+      case 'DELETE':
+        // Delete order by ID
+        const deleteId = parseInt(req.query.id);
+
+        if (!deleteId || isNaN(deleteId)) {
+          console.log('[API] DELETE - Missing or invalid id');
+          return res.status(400).json({
+            success: false,
+            error: 'Valid order id is required (use ?id=X)'
+          });
+        }
+
+        const deleteIndex = orders.findIndex(o => o.id === deleteId);
+
+        if (deleteIndex === -1) {
+          console.log('[API] DELETE - Order not found:', deleteId);
+          return res.status(404).json({
+            success: false,
+            error: 'Order not found'
+          });
+        }
+
+        const deletedOrder = orders.splice(deleteIndex, 1)[0];
+        console.log(`[API] DELETE - Removed order #${deleteId}`);
+
+        return res.status(200).json({
+          success: true,
+          deletedOrder: deletedOrder,
+          message: 'Order deleted successfully'
+        });
+
+      default:
+        console.log('[API] Method not allowed:', req.method);
+        return res.status(405).json({
+          success: false,
+          error: 'Method not allowed'
         });
     }
-
-    // Method not allowed
-    return res.status(405).json({
-        success: false,
-        message: 'Method not allowed'
+  } catch (error) {
+    console.error('[API] Error:', error);
+    return res.status(500).json({
+      success: false,
+      error: 'Internal server error',
+      details: error.message
     });
+  }
 }

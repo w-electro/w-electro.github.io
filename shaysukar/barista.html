@@ -448,25 +448,32 @@
             fetch('/api/orders')
                 .then(res => res.json())
                 .then(data => {
+                    console.log('📥 API Response:', data);
                     const newOrdersJSON = JSON.stringify(data.orders);
 
                     // ONLY update if orders actually changed (NO FLICKERING!)
                     if (newOrdersJSON !== previousOrdersJSON) {
+                        console.log('🔄 Orders changed! Updating UI...');
                         orders = data.orders;
                         previousOrdersJSON = newOrdersJSON;
 
                         // Check for new orders
                         const currentOrderCount = orders.filter(o => o.status === 'pending').length;
                         if (currentOrderCount > lastOrderCount) {
+                            console.log('🔔 New order detected! Playing sound...');
                             playNotificationSound();
                         }
                         lastOrderCount = currentOrderCount;
 
                         renderOrders();
                         updateStats();
+                    } else {
+                        console.log('✓ No changes detected');
                     }
                 })
-                .catch(err => console.error('Error loading orders:', err));
+                .catch(err => {
+                    console.error('❌ Error loading orders:', err);
+                });
         }
 
         // Update statistics
@@ -577,13 +584,20 @@
 
         // Update order status via API
         function updateOrderStatus(orderId, newStatus) {
+            console.log(`🔄 Updating order ${orderId} to ${newStatus}...`);
+
             if (newStatus === 'completed' || newStatus === 'cancelled') {
                 // Delete completed/cancelled orders
                 fetch(`/api/orders?id=${orderId}`, {
                     method: 'DELETE'
                 })
-                .then(() => loadOrders())
-                .catch(err => console.error('Error completing order:', err));
+                .then(() => {
+                    console.log(`✅ Order ${orderId} deleted successfully`);
+                    loadOrders();
+                })
+                .catch(err => {
+                    console.error('❌ Error completing order:', err);
+                });
             } else {
                 // Update status
                 fetch('/api/orders', {
@@ -591,8 +605,13 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ orderId, status: newStatus })
                 })
-                .then(() => loadOrders())
-                .catch(err => console.error('Error updating order:', err));
+                .then(() => {
+                    console.log(`✅ Order ${orderId} updated to ${newStatus}`);
+                    loadOrders();
+                })
+                .catch(err => {
+                    console.error('❌ Error updating order:', err);
+                });
             }
         }
 

@@ -43,7 +43,7 @@
 
         .logo-img {
             width: 100%;
-            max-width: 250px;
+            max-width: 200px;
             height: auto;
             object-fit: contain;
         }
@@ -519,7 +519,15 @@
             }
 
             .menu-title {
-                font-size: 3rem;
+                font-size: 2.5rem;
+            }
+
+            .logo-container {
+                padding: 20px;
+            }
+
+            .logo-img {
+                max-width: 120px;
             }
 
             .order-cart {
@@ -527,6 +535,33 @@
                 right: 10px;
                 min-width: auto;
                 max-width: none;
+            }
+
+            .container {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .menu-title {
+                font-size: 2rem;
+            }
+
+            .logo-container {
+                padding: 15px;
+            }
+
+            .logo-img {
+                max-width: 80px;
+            }
+
+            .section-header {
+                font-size: 1.5rem;
+            }
+
+            .menu-item {
+                padding: 12px;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -1076,14 +1111,11 @@
 
             const customerName = prompt('الاسم (اختياري):') || 'زبون';
 
-            const orderId = Date.now();
             const order = {
-                id: orderId,
                 items: cart,
                 total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
                 tableNumber: tableNumber,
                 customerName: customerName,
-                status: 'pending',
                 createdAt: new Date().toISOString()
             };
 
@@ -1095,22 +1127,29 @@
             })
             .then(res => res.json())
             .then(data => {
-                currentOrderId = data.order.id;
-                currentOrderStatus = 'pending';
-                showNotification('تم إرسال الطلب بنجاح! ✅');
-                updateOrderStatusDisplay();
+                if (data.success && data.order) {
+                    currentOrderId = data.order.id;
+                    currentOrderStatus = 'pending';
+
+                    // Clear cart AFTER successful order
+                    cart = [];
+                    updateCartDisplay();
+                    saveCart();
+
+                    showNotification('تم إرسال الطلب بنجاح! رقم الطلب: ' + currentOrderId);
+                    updateOrderStatusDisplay();
+                    console.log('✅ Order created successfully! ID:', currentOrderId);
+
+                    // Close cart
+                    document.getElementById('orderCart').classList.add('hidden');
+                } else {
+                    throw new Error('Failed to create order');
+                }
             })
             .catch(err => {
-                console.error(err);
-                showNotification('خطأ في إرسال الطلب!');
+                console.error('❌ Error creating order:', err);
+                showNotification('خطأ في إرسال الطلب! حاول مرة أخرى');
             });
-            cart = [];
-            updateCartDisplay();
-            saveCart();
-            updateOrderStatusDisplay();
-
-            // Close cart
-            document.getElementById('orderCart').classList.add('hidden');
         }
 
         // Initialize quantity controls

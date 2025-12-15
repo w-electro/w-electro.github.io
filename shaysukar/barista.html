@@ -2,9 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Barista Dashboard - Shay Sukar</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&family=Cairo:wght@700;900&family=Aref+Ruqaa:wght@400;700&family=Amiri:wght@400;700&family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,73 +13,63 @@
         }
 
         body {
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Cairo', sans-serif;
             background-color: #F5E6D3;
             min-height: 100vh;
-            padding: 20px;
             color: #1A4D5C;
         }
 
-        .dashboard-container {
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .dashboard-header {
-            background-color: #1A4D5C;
+        /* Header */
+        .header {
+            background: linear-gradient(145deg, #1A4D5C, #0f3540);
             color: #FAF4EA;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 30px;
+            padding: 20px;
+            display: flex;
             align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(26, 77, 92, 0.3);
         }
 
-        .header-logo {
-            width: 120px;
-            height: 120px;
-            padding: 15px;
-            background-color: rgba(250, 244, 234, 0.1);
-            border-radius: 8px;
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
         .logo-img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            max-width: 80px;
+            height: auto;
         }
 
         .header-title h1 {
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-            font-family: 'Cairo', 'Tajawal', sans-serif;
+            font-size: 1.5rem;
             font-weight: 900;
         }
 
         .header-title p {
-            font-family: 'Great Vibes', 'Pacifico', cursive;
-            font-size: 1.5rem;
-            opacity: 0.9;
-            font-weight: 400;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 10px;
         }
 
         .sound-toggle {
             background-color: rgba(250, 244, 234, 0.2);
             color: #FAF4EA;
             border: 2px solid #FAF4EA;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 25px;
             cursor: pointer;
-            font-weight: 600;
-            font-size: 1.1rem;
+            font-weight: 700;
+            font-size: 1rem;
+            font-family: 'Cairo', sans-serif;
             transition: all 0.3s ease;
         }
 
@@ -88,388 +78,654 @@
             transform: scale(1.05);
         }
 
-        .stats-container {
+        .sound-toggle.muted {
+            background-color: rgba(217, 83, 79, 0.3);
+            border-color: #d9534f;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(5, 1fr);
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
 
         .stat-card {
             background-color: #FAF4EA;
             border: 2px solid #1A4D5C;
-            padding: 25px;
-            border-radius: 8px;
+            padding: 20px;
+            border-radius: 12px;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(26, 77, 92, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 77, 92, 0.15);
         }
 
         .stat-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: #1A4D5C;
-            margin-bottom: 10px;
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 5px;
         }
-
-        .stat-card:nth-child(1) .stat-value { color: #f0ad4e; }
-        .stat-card:nth-child(2) .stat-value { color: #0275d8; }
-        .stat-card:nth-child(3) .stat-value { color: #5cb85c; }
-        .stat-card:nth-child(4) .stat-value { color: #5bc0de; }
-        .stat-card:nth-child(5) .stat-value { color: #1A4D5C; }
 
         .stat-label {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            color: #1A4D5C;
+            opacity: 0.8;
         }
 
-        .orders-container {
+        .stat-pending .stat-value { color: #f0ad4e; }
+        .stat-preparing .stat-value { color: #5bc0de; }
+        .stat-ready .stat-value { color: #5cb85c; }
+        .stat-completed .stat-value { color: #1A4D5C; }
+        .stat-revenue .stat-value { color: #d9534f; }
+
+        /* Orders Grid */
+        .orders-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
         }
 
         .order-card {
             background-color: #FAF4EA;
-            color: #1A4D5C;
-            padding: 25px;
             border: 2px solid #1A4D5C;
-            border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: slideIn 0.4s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .order-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(26, 77, 92, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(26, 77, 92, 0.2);
+        }
+
+        .order-card.status-pending {
+            border-color: #f0ad4e;
+            border-width: 3px;
+        }
+
+        .order-card.status-preparing {
+            border-color: #5bc0de;
+        }
+
+        .order-card.status-ready {
+            border-color: #5cb85c;
+            animation: readyPulse 1.5s infinite;
+        }
+
+        @keyframes readyPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(92, 184, 92, 0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(92, 184, 92, 0); }
         }
 
         .order-header {
+            background: linear-gradient(145deg, #1A4D5C, #0f3540);
+            color: #FAF4EA;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-id {
+            font-size: 1.3rem;
+            font-weight: 900;
+        }
+
+        .order-time {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .order-body {
+            padding: 15px;
+        }
+
+        .order-info {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #1A4D5C;
-        }
-
-        .order-id {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #1A4D5C;
-        }
-
-        .order-time {
-            font-size: 0.95rem;
-            opacity: 0.7;
-            font-weight: 600;
-        }
-
-        .order-info {
-            margin-bottom: 15px;
-            background-color: rgba(26, 77, 92, 0.05);
-            padding: 12px;
-            border-radius: 6px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(26, 77, 92, 0.1);
         }
 
         .order-table {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            margin-bottom: 5px;
-            color: #1A4D5C;
         }
 
         .order-customer {
-            font-size: 1rem;
-            opacity: 0.8;
-            margin-bottom: 8px;
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
 
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .status-badge.pending { background: linear-gradient(145deg, #f0ad4e, #ec971f); }
+        .status-badge.preparing { background: linear-gradient(145deg, #5bc0de, #31b0d5); }
+        .status-badge.ready { background: linear-gradient(145deg, #5cb85c, #449d44); }
+        .status-badge.completed { background: linear-gradient(145deg, #1A4D5C, #0f3540); }
+
         .order-items {
-            margin: 15px 0;
+            margin-bottom: 15px;
         }
 
         .order-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 10px 12px;
-            background-color: rgba(26, 77, 92, 0.08);
             margin-bottom: 6px;
-            border-radius: 6px;
+            background-color: rgba(26, 77, 92, 0.05);
+            border-radius: 8px;
             border-right: 3px solid #1A4D5C;
         }
 
         .item-name {
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
         }
 
-        .item-quantity {
+        .item-qty {
+            font-size: 0.85rem;
             opacity: 0.7;
-            margin-left: 10px;
-            font-weight: 600;
+            margin-right: 5px;
         }
 
         .item-price {
             font-weight: 700;
             color: #1A4D5C;
+            font-size: 0.9rem;
         }
 
         .order-total {
-            font-size: 1.4rem;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 900;
             text-align: left;
-            padding-top: 12px;
-            border-top: 3px solid #1A4D5C;
-            margin-top: 10px;
-            color: #1A4D5C;
+            padding: 12px;
+            background-color: rgba(26, 77, 92, 0.08);
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
         .order-actions {
             display: flex;
             gap: 10px;
-            margin-top: 15px;
         }
 
         .btn {
             flex: 1;
-            padding: 12px;
+            padding: 12px 15px;
             border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Tajawal', sans-serif;
-        }
-
-        .btn-preparing {
-            background-color: #f0ad4e;
-            color: white;
-        }
-
-        .btn-preparing:hover {
-            background-color: #ec971f;
-            transform: translateY(-2px);
-        }
-
-        .btn-ready {
-            background-color: #5cb85c;
-            color: white;
-        }
-
-        .btn-ready:hover {
-            background-color: #4cae4c;
-            transform: translateY(-2px);
-        }
-
-        .btn-complete {
-            background-color: #0275d8;
-            color: white;
-        }
-
-        .btn-complete:hover {
-            background-color: #025aa5;
-            transform: translateY(-2px);
-        }
-
-        .btn-cancel {
-            background-color: #d9534f;
-            color: white;
-        }
-
-        .btn-cancel:hover {
-            background-color: #c9302c;
-            transform: translateY(-2px);
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 20px;
+            border-radius: 8px;
             font-size: 0.95rem;
             font-weight: 700;
-            text-align: center;
-        }
-
-        .status-pending {
-            background-color: #f0ad4e;
+            font-family: 'Cairo', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
             color: white;
         }
 
-        .status-preparing {
-            background-color: #0275d8;
-            color: white;
+        .btn:hover {
+            transform: translateY(-2px);
         }
 
-        .status-ready {
-            background-color: #5cb85c;
-            color: white;
+        .btn:active {
+            transform: translateY(0);
         }
 
-        .status-completed {
-            background-color: #5bc0de;
-            color: white;
-        }
+        .btn-start { background: linear-gradient(145deg, #f0ad4e, #ec971f); }
+        .btn-start:hover { box-shadow: 0 5px 15px rgba(240, 173, 78, 0.4); }
 
-        .status-cancelled {
-            background-color: #d9534f;
-            color: white;
-        }
+        .btn-ready { background: linear-gradient(145deg, #5cb85c, #449d44); }
+        .btn-ready:hover { box-shadow: 0 5px 15px rgba(92, 184, 92, 0.4); }
 
-        .no-orders {
+        .btn-complete { background: linear-gradient(145deg, #5bc0de, #31b0d5); }
+        .btn-complete:hover { box-shadow: 0 5px 15px rgba(91, 192, 222, 0.4); }
+
+        .btn-cancel { background: linear-gradient(145deg, #d9534f, #c9302c); }
+        .btn-cancel:hover { box-shadow: 0 5px 15px rgba(217, 83, 79, 0.4); }
+
+        /* Empty State */
+        .empty-state {
+            grid-column: 1 / -1;
             text-align: center;
             padding: 60px 20px;
-            font-size: 1.8rem;
-            opacity: 0.6;
-            grid-column: 1 / -1;
             background-color: #FAF4EA;
             border: 2px dashed #1A4D5C;
-            border-radius: 10px;
+            border-radius: 15px;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+
+        .empty-state-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            opacity: 0.6;
+        }
+
+        .empty-state-subtext {
+            font-size: 0.95rem;
+            opacity: 0.5;
+            margin-top: 5px;
+        }
+
+        /* Connection Status */
+        .connection-status {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(145deg, #5cb85c, #449d44);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.85rem;
             font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .connection-status.error {
+            background: linear-gradient(145deg, #d9534f, #c9302c);
+        }
+
+        .connection-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Responsive */
+        @media (min-width: 769px) {
+            .logo-img { max-width: 100px; }
+            .header-title h1 { font-size: 1.8rem; }
         }
 
         @media (max-width: 768px) {
-            .dashboard-header {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .header-logo {
-                margin: 0 auto;
-            }
-
-            .header-content {
+            .header {
                 flex-direction: column;
+                text-align: center;
                 gap: 15px;
             }
 
-            .orders-container {
+            .header-left {
+                flex-direction: column;
+            }
+
+            .logo-img {
+                max-width: 70px;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .stat-card {
+                padding: 15px 10px;
+            }
+
+            .stat-value {
+                font-size: 1.6rem;
+            }
+
+            .stat-label {
+                font-size: 0.8rem;
+            }
+
+            .orders-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px 10px;
+            }
+
+            .header {
+                padding: 15px;
+            }
+
+            .logo-img {
+                max-width: 60px;
+            }
+
+            .header-title h1 {
+                font-size: 1.2rem;
+            }
+
+            .header-title p {
+                font-size: 0.8rem;
+            }
+
+            .sound-toggle {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .stat-card:last-child {
+                grid-column: span 2;
+            }
+
+            .stat-value {
+                font-size: 1.4rem;
+            }
+
+            .order-id {
+                font-size: 1.1rem;
+            }
+
+            .order-item {
+                padding: 8px 10px;
+            }
+
+            .btn {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+
+            .connection-status {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .logo-img {
+                max-width: 50px;
+            }
+
+            .header-title h1 {
+                font-size: 1.1rem;
+            }
+
+            .stat-value {
+                font-size: 1.2rem;
+            }
+
+            .stat-label {
+                font-size: 0.75rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="dashboard-container">
-        <div class="dashboard-header">
-            <div class="header-logo">
-                <img src="logo.png" alt="Shay Sukar Logo" class="logo-img">
-            </div>
-
-            <div class="header-content">
-                <div class="header-title">
-                    <h1>لوحة تحكم الباريستا</h1>
-                    <p>Barista Dashboard - Shay Sukar</p>
-                </div>
-                <button class="sound-toggle" id="soundToggle">🔔 تنبيه صوتي</button>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <img src="logo.png" alt="Shay Sukar" class="logo-img">
+            <div class="header-title">
+                <h1>لوحة تحكم الباريستا</h1>
+                <p>Barista Dashboard</p>
             </div>
         </div>
+        <div class="header-controls">
+            <button class="sound-toggle" id="soundToggle">صوت مفعل</button>
+        </div>
+    </header>
 
-        <div class="stats-container">
-            <div class="stat-card">
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card stat-pending">
                 <div class="stat-value" id="statPending">0</div>
                 <div class="stat-label">طلبات جديدة</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card stat-preparing">
                 <div class="stat-value" id="statPreparing">0</div>
                 <div class="stat-label">قيد التحضير</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card stat-ready">
                 <div class="stat-value" id="statReady">0</div>
                 <div class="stat-label">جاهزة</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card stat-completed">
                 <div class="stat-value" id="statCompleted">0</div>
                 <div class="stat-label">مكتملة</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card stat-revenue">
                 <div class="stat-value" id="statRevenue">0</div>
-                <div class="stat-label">الإيرادات (SR)</div>
+                <div class="stat-label">الايرادات SR</div>
             </div>
         </div>
 
-        <div class="orders-container" id="ordersContainer">
-            <div class="no-orders">لا توجد طلبات حاليًا</div>
+        <!-- Orders Grid -->
+        <div class="orders-grid" id="ordersGrid">
+            <div class="empty-state">
+                <div class="empty-state-icon">&#9749;</div>
+                <div class="empty-state-text">لا توجد طلبات نشطة</div>
+                <div class="empty-state-subtext">الطلبات الجديدة ستظهر هنا</div>
+            </div>
         </div>
     </div>
 
+    <!-- Connection Status -->
+    <div class="connection-status" id="connectionStatus">
+        <span class="connection-dot"></span>
+        <span id="connectionText">متصل</span>
+    </div>
+
     <script>
-        let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
+        // ============================================
+        // SHAY SUKAR - BARISTA DASHBOARD
+        // Version 2.0 - Vercel REST API with NO FLICKERING
+        // ============================================
+
+        console.log('[Barista] Initializing Dashboard...');
+
+        // State
         let orders = [];
-        let lastOrderCount = 0;
+        let lastOrdersJson = ''; // CRITICAL: For anti-flicker comparison
+        let soundEnabled = localStorage.getItem('baristaSound') !== 'false';
+        let lastPendingCount = 0;
+        let pollingInterval = null;
+        let completedOrdersCount = 0;
+        let totalRevenue = 0;
 
-        // Update sound toggle button
-        function updateSoundToggle() {
-            const btn = document.getElementById('soundToggle');
-            btn.textContent = soundEnabled ? '🔔 تنبيه صوتي' : '🔕 صامت';
-        }
+        // API URL
+        const API_URL = '/api/orders';
 
-        // Play notification sound
-        function playNotificationSound() {
-            if (!soundEnabled) return;
+        // ============================================
+        // ANTI-FLICKER: Only update DOM if data changed
+        // ============================================
 
-            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
+        async function loadOrders() {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
 
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+                if (data.success) {
+                    // CRITICAL: JSON comparison to prevent flickering
+                    const newOrdersJson = JSON.stringify(data.orders);
 
-            oscillator.frequency.value = 800;
-            oscillator.type = 'sine';
+                    if (newOrdersJson !== lastOrdersJson) {
+                        console.log('[Barista] Orders changed, updating UI...');
 
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
-
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.5);
-        }
-
-        // Load orders from API - SMART: only update if changed
-        let previousOrdersJSON = '';
-        function loadOrders() {
-            fetch('/api/orders')
-                .then(res => res.json())
-                .then(data => {
-                    const newOrdersJSON = JSON.stringify(data.orders);
-
-                    // ONLY update if orders actually changed (NO FLICKERING!)
-                    if (newOrdersJSON !== previousOrdersJSON) {
-                        orders = data.orders;
-                        previousOrdersJSON = newOrdersJSON;
-
-                        // Check for new orders
-                        const currentOrderCount = orders.filter(o => o.status === 'pending').length;
-                        if (currentOrderCount > lastOrderCount) {
+                        // Check for new pending orders (for sound)
+                        const newPendingCount = data.orders.filter(o => o.status === 'pending').length;
+                        if (newPendingCount > lastPendingCount && lastPendingCount !== 0) {
+                            console.log('[Barista] New order detected!');
                             playNotificationSound();
                         }
-                        lastOrderCount = currentOrderCount;
+                        lastPendingCount = newPendingCount;
 
+                        // Update state
+                        orders = data.orders;
+                        lastOrdersJson = newOrdersJson;
+
+                        // Update UI
                         renderOrders();
                         updateStats();
+                    } else {
+                        console.log('[Barista] No changes detected');
                     }
-                })
-                .catch(err => console.error('Error loading orders:', err));
+
+                    updateConnectionStatus(true);
+                }
+            } catch (error) {
+                console.error('[Barista] Error loading orders:', error);
+                updateConnectionStatus(false);
+            }
         }
 
-        // Update statistics
+        // ============================================
+        // RENDER ORDERS
+        // ============================================
+
+        function renderOrders() {
+            const container = document.getElementById('ordersGrid');
+
+            // Filter active orders (not completed)
+            const activeOrders = orders.filter(o =>
+                o.status === 'pending' || o.status === 'preparing' || o.status === 'ready'
+            );
+
+            if (activeOrders.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">&#9749;</div>
+                        <div class="empty-state-text">لا توجد طلبات نشطة</div>
+                        <div class="empty-state-subtext">الطلبات الجديدة ستظهر هنا</div>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort: pending first, then preparing, then ready
+            const sortOrder = { pending: 0, preparing: 1, ready: 2 };
+            activeOrders.sort((a, b) => sortOrder[a.status] - sortOrder[b.status]);
+
+            container.innerHTML = activeOrders.map(order => {
+                const time = formatTime(order.timestamp || order.createdAt);
+                const statusText = getStatusText(order.status);
+                const actionButtons = getActionButtons(order.id, order.status);
+
+                return `
+                    <div class="order-card status-${order.status}">
+                        <div class="order-header">
+                            <span class="order-id">طلب #${order.id}</span>
+                            <span class="order-time">${time}</span>
+                        </div>
+                        <div class="order-body">
+                            <div class="order-info">
+                                <div>
+                                    <div class="order-table">طاولة: ${order.tableNumber}</div>
+                                    <div class="order-customer">${order.customerName}</div>
+                                </div>
+                                <span class="status-badge ${order.status}">${statusText}</span>
+                            </div>
+                            <div class="order-items">
+                                ${order.items.map(item => `
+                                    <div class="order-item">
+                                        <div>
+                                            <span class="item-name">${item.name}</span>
+                                            <span class="item-qty">x${item.quantity}</span>
+                                        </div>
+                                        <span class="item-price">${(item.price * item.quantity).toFixed(2)} SR</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="order-total">
+                                المجموع: ${order.total.toFixed(2)} SR
+                            </div>
+                            <div class="order-actions">
+                                ${actionButtons}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function formatTime(timestamp) {
+            if (!timestamp) return '';
+            try {
+                const date = new Date(timestamp);
+                return date.toLocaleTimeString('ar-SA', {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            } catch (e) {
+                return '';
+            }
+        }
+
+        function getStatusText(status) {
+            const statusMap = {
+                pending: 'جديد',
+                preparing: 'قيد التحضير',
+                ready: 'جاهز',
+                completed: 'مكتمل',
+                cancelled: 'ملغي'
+            };
+            return statusMap[status] || status;
+        }
+
+        function getActionButtons(orderId, status) {
+            switch (status) {
+                case 'pending':
+                    return `
+                        <button class="btn btn-start" onclick="updateOrderStatus(${orderId}, 'preparing')">بدء التحضير</button>
+                        <button class="btn btn-cancel" onclick="cancelOrder(${orderId})">الغاء</button>
+                    `;
+                case 'preparing':
+                    return `
+                        <button class="btn btn-ready" onclick="updateOrderStatus(${orderId}, 'ready')">جاهز</button>
+                        <button class="btn btn-cancel" onclick="cancelOrder(${orderId})">الغاء</button>
+                    `;
+                case 'ready':
+                    return `
+                        <button class="btn btn-complete" onclick="completeOrder(${orderId})">تسليم</button>
+                    `;
+                default:
+                    return '';
+            }
+        }
+
+        // ============================================
+        // UPDATE STATS
+        // ============================================
+
         function updateStats() {
             const pending = orders.filter(o => o.status === 'pending').length;
             const preparing = orders.filter(o => o.status === 'preparing').length;
@@ -477,138 +733,191 @@
             const completed = orders.filter(o => o.status === 'completed').length;
             const revenue = orders
                 .filter(o => o.status === 'completed')
-                .reduce((sum, o) => sum + o.total, 0);
+                .reduce((sum, o) => sum + (o.total || 0), 0);
 
             document.getElementById('statPending').textContent = pending;
             document.getElementById('statPreparing').textContent = preparing;
             document.getElementById('statReady').textContent = ready;
-            document.getElementById('statCompleted').textContent = completed;
-            document.getElementById('statRevenue').textContent = revenue.toFixed(2);
+            document.getElementById('statCompleted').textContent = completed + completedOrdersCount;
+            document.getElementById('statRevenue').textContent = (revenue + totalRevenue).toFixed(0);
         }
 
-        // Render orders
-        function renderOrders() {
-            const container = document.getElementById('ordersContainer');
+        // ============================================
+        // ORDER ACTIONS
+        // ============================================
 
-            // Filter to show active orders
-            const activeOrders = orders.filter(o =>
-                o.status === 'pending' || o.status === 'preparing' || o.status === 'ready'
-            );
+        async function updateOrderStatus(orderId, newStatus) {
+            console.log(`[Barista] Updating order #${orderId} to ${newStatus}`);
 
-            if (activeOrders.length === 0) {
-                container.innerHTML = '<div class="no-orders">لا توجد طلبات نشطة حاليًا</div>';
-                return;
-            }
-
-            container.innerHTML = activeOrders.map(order => {
-                const time = new Date(order.createdAt).toLocaleTimeString('ar-SA', {
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-
-                return `
-                    <div class="order-card">
-                        <div class="order-header">
-                            <div class="order-id">طلب #${order.id}</div>
-                            <div class="order-time">${time}</div>
-                        </div>
-                        <div class="order-info">
-                            <div class="order-table">🪑 طاولة: ${order.tableNumber}</div>
-                            <div class="order-customer">👤 الزبون: ${order.customerName}</div>
-                            <span class="status-badge status-${order.status}">
-                                ${getStatusText(order.status)}
-                            </span>
-                        </div>
-                        <div class="order-items">
-                            ${order.items.map(item => `
-                                <div class="order-item">
-                                    <div>
-                                        <span class="item-name">${item.name}</span>
-                                        <span class="item-quantity">×${item.quantity}</span>
-                                    </div>
-                                    <span class="item-price">${(item.price * item.quantity).toFixed(2)} SR</span>
-                                </div>
-                            `).join('')}
-                        </div>
-                        <div class="order-total">
-                            💰 المجموع: ${order.total.toFixed(2)} SR
-                        </div>
-                        <div class="order-actions">
-                            ${getActionButtons(order.id, order.status)}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // Get status text in Arabic
-        function getStatusText(status) {
-            const statusMap = {
-                'pending': 'جديد',
-                'preparing': 'قيد التحضير',
-                'ready': 'جاهز',
-                'completed': 'مكتمل',
-                'cancelled': 'ملغي'
-            };
-            return statusMap[status] || status;
-        }
-
-        // Get action buttons based on order status
-        function getActionButtons(orderId, status) {
-            switch (status) {
-                case 'pending':
-                    return `
-                        <button class="btn btn-preparing" onclick="updateOrderStatus(${orderId}, 'preparing')">بدء التحضير</button>
-                        <button class="btn btn-cancel" onclick="updateOrderStatus(${orderId}, 'cancelled')">إلغاء</button>
-                    `;
-                case 'preparing':
-                    return `
-                        <button class="btn btn-ready" onclick="updateOrderStatus(${orderId}, 'ready')">جاهز</button>
-                        <button class="btn btn-cancel" onclick="updateOrderStatus(${orderId}, 'cancelled')">إلغاء</button>
-                    `;
-                case 'ready':
-                    return `
-                        <button class="btn btn-complete" onclick="updateOrderStatus(${orderId}, 'completed')">تسليم</button>
-                    `;
-                default:
-                    return '';
-            }
-        }
-
-        // Update order status via API
-        function updateOrderStatus(orderId, newStatus) {
-            if (newStatus === 'completed' || newStatus === 'cancelled') {
-                // Delete completed/cancelled orders
-                fetch(`/api/orders?id=${orderId}`, {
-                    method: 'DELETE'
-                })
-                .then(() => loadOrders())
-                .catch(err => console.error('Error completing order:', err));
-            } else {
-                // Update status
-                fetch('/api/orders', {
+            try {
+                const response = await fetch(API_URL, {
                     method: 'PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ orderId, status: newStatus })
-                })
-                .then(() => loadOrders())
-                .catch(err => console.error('Error updating order:', err));
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    console.log(`[Barista] Order #${orderId} updated successfully`);
+                    // Force refresh
+                    lastOrdersJson = '';
+                    loadOrders();
+                } else {
+                    console.error('[Barista] Update failed:', data.error);
+                    alert('خطأ في تحديث الطلب');
+                }
+            } catch (error) {
+                console.error('[Barista] Update error:', error);
+                alert('خطأ في الاتصال');
             }
         }
 
-        // Toggle sound
-        document.getElementById('soundToggle').addEventListener('click', () => {
-            soundEnabled = !soundEnabled;
-            localStorage.setItem('soundEnabled', soundEnabled);
+        async function completeOrder(orderId) {
+            console.log(`[Barista] Completing order #${orderId}`);
+
+            // Find order to add to revenue before deleting
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                totalRevenue += order.total || 0;
+                completedOrdersCount++;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}?id=${orderId}`, {
+                    method: 'DELETE'
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    console.log(`[Barista] Order #${orderId} completed and removed`);
+                    lastOrdersJson = '';
+                    loadOrders();
+                }
+            } catch (error) {
+                console.error('[Barista] Complete error:', error);
+            }
+        }
+
+        async function cancelOrder(orderId) {
+            if (!confirm('هل تريد الغاء هذا الطلب؟')) return;
+
+            console.log(`[Barista] Cancelling order #${orderId}`);
+
+            try {
+                // First update status to cancelled
+                await fetch(API_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ orderId, status: 'cancelled' })
+                });
+
+                // Then delete it
+                setTimeout(async () => {
+                    await fetch(`${API_URL}?id=${orderId}`, {
+                        method: 'DELETE'
+                    });
+                    lastOrdersJson = '';
+                    loadOrders();
+                }, 500);
+            } catch (error) {
+                console.error('[Barista] Cancel error:', error);
+            }
+        }
+
+        // ============================================
+        // SOUND & UI HELPERS
+        // ============================================
+
+        function playNotificationSound() {
+            if (!soundEnabled) return;
+
+            try {
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+                // Play two beeps
+                for (let i = 0; i < 2; i++) {
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+
+                    oscillator.frequency.value = 800;
+                    oscillator.type = 'sine';
+
+                    const startTime = audioContext.currentTime + (i * 0.3);
+                    gainNode.gain.setValueAtTime(0.4, startTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, startTime + 0.2);
+
+                    oscillator.start(startTime);
+                    oscillator.stop(startTime + 0.2);
+                }
+
+                console.log('[Barista] Sound played');
+            } catch (e) {
+                console.log('[Barista] Could not play sound:', e);
+            }
+        }
+
+        function updateSoundToggle() {
+            const btn = document.getElementById('soundToggle');
+            if (soundEnabled) {
+                btn.textContent = 'صوت مفعل';
+                btn.classList.remove('muted');
+            } else {
+                btn.textContent = 'صوت مغلق';
+                btn.classList.add('muted');
+            }
+        }
+
+        function updateConnectionStatus(connected) {
+            const statusEl = document.getElementById('connectionStatus');
+            const textEl = document.getElementById('connectionText');
+
+            if (connected) {
+                statusEl.classList.remove('error');
+                textEl.textContent = 'متصل';
+            } else {
+                statusEl.classList.add('error');
+                textEl.textContent = 'غير متصل';
+            }
+        }
+
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[Barista] DOM loaded, initializing...');
+
+            // Sound toggle
+            document.getElementById('soundToggle').addEventListener('click', () => {
+                soundEnabled = !soundEnabled;
+                localStorage.setItem('baristaSound', soundEnabled);
+                updateSoundToggle();
+                console.log('[Barista] Sound:', soundEnabled ? 'enabled' : 'disabled');
+            });
+
+            // Initialize
             updateSoundToggle();
+
+            // Load orders immediately
+            loadOrders();
+
+            // Poll every 5 seconds (less frequent than menu for performance)
+            pollingInterval = setInterval(loadOrders, 5000);
+
+            console.log('[Barista] Initialization complete!');
         });
 
-        // Initialize
-        updateSoundToggle();
-        loadOrders();
-
-        // Refresh orders every 5 seconds (less frequent = better performance)
-        setInterval(loadOrders, 5000);
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (pollingInterval) {
+                clearInterval(pollingInterval);
+            }
+        });
     </script>
 </body>
 </html>

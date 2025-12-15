@@ -2,9 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Shay Sukar - شاي سُكر</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #F5E6D3;
+            background: linear-gradient(135deg, #F5E6D3 0%, #FAF4EA 50%, #F5E6D3 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -25,126 +25,200 @@
 
         .container {
             text-align: center;
-            max-width: 600px;
+            max-width: 500px;
             width: 100%;
         }
 
         .logo-container {
-            margin-bottom: 40px;
-            background-color: #1A4D5C;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(26, 77, 92, 0.3);
+            margin-bottom: 30px;
+            background: linear-gradient(145deg, #1A4D5C, #0f3540);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(26, 77, 92, 0.4);
+            display: inline-block;
         }
 
         .logo-img {
-            width: 100%;
-            max-width: 180px;
+            max-width: 120px;
             height: auto;
             object-fit: contain;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
         }
 
         h1 {
             color: #1A4D5C;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
             font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(26, 77, 92, 0.1);
         }
 
         .subtitle {
             color: #1A4D5C;
-            font-size: 1.2rem;
-            margin-bottom: 50px;
-            opacity: 0.8;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            opacity: 0.7;
+            font-weight: 400;
         }
 
-        .buttons-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-bottom: 30px;
+        .btn-container {
+            margin-bottom: 40px;
         }
 
-        .btn {
-            padding: 25px 40px;
-            font-size: 1.5rem;
+        .btn-customer {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 50px;
+            font-size: 1.4rem;
             font-weight: 700;
+            font-family: 'Cairo', sans-serif;
             border: none;
             border-radius: 15px;
             cursor: pointer;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .btn-customer {
-            background-color: #5cb85c;
+            background: linear-gradient(145deg, #5cb85c, #4cae4c);
             color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(92, 184, 92, 0.4);
         }
 
         .btn-customer:hover {
-            background-color: #4cae4c;
             transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(92, 184, 92, 0.4);
+            box-shadow: 0 12px 35px rgba(92, 184, 92, 0.5);
         }
 
-        .btn-barista {
-            background-color: #1A4D5C;
-            color: #FAF4EA;
-        }
-
-        .btn-barista:hover {
-            background-color: #0f3540;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(26, 77, 92, 0.5);
+        .btn-customer:active {
+            transform: translateY(-2px);
         }
 
         .icon {
-            font-size: 2rem;
-        }
-
-        .version-selector {
-            width: 100%;
-        }
-
-        .version-card {
-            background-color: rgba(255, 255, 255, 0.5);
-            padding: 20px;
-            border-radius: 12px;
-            border: 2px solid #1A4D5C;
+            font-size: 1.8rem;
         }
 
         .quote {
-            margin-top: 50px;
-            padding: 20px;
-            background-color: rgba(26, 77, 92, 0.1);
-            border-radius: 10px;
+            padding: 25px;
+            background: linear-gradient(145deg, rgba(26, 77, 92, 0.08), rgba(26, 77, 92, 0.03));
+            border-radius: 15px;
             color: #1A4D5C;
             font-style: italic;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            border: 1px solid rgba(26, 77, 92, 0.1);
+            margin-bottom: 30px;
         }
 
-        @media (max-width: 600px) {
-            .logo-container {
-                padding: 10px;
-                margin-bottom: 20px;
-            }
+        .hidden-link {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: rgba(26, 77, 92, 0.03);
+            border-radius: 8px;
+            opacity: 0.5;
+        }
 
+        .hidden-link p {
+            font-size: 0.75rem;
+            color: #1A4D5C;
+        }
+
+        .hidden-link a {
+            color: #1A4D5C;
+            text-decoration: none;
+            opacity: 0.6;
+        }
+
+        .hidden-link a:hover {
+            text-decoration: underline;
+            opacity: 0.9;
+        }
+
+        /* Desktop - default */
+        @media (min-width: 769px) {
+            .logo-img {
+                max-width: 120px;
+            }
+            .logo-container {
+                padding: 35px;
+            }
+        }
+
+        /* Tablet */
+        @media (max-width: 768px) {
             .logo-img {
                 max-width: 100px;
             }
-
+            .logo-container {
+                padding: 25px;
+            }
             h1 {
-                font-size: 2rem;
+                font-size: 1.9rem;
+            }
+        }
+
+        /* Phone */
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
             }
 
-            .btn {
-                font-size: 1.3rem;
-                padding: 20px 30px;
+            .logo-container {
+                padding: 15px;
+                margin-bottom: 20px;
+                border-radius: 15px;
+            }
+
+            .logo-img {
+                max-width: 70px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+            }
+
+            .subtitle {
+                font-size: 0.95rem;
+                margin-bottom: 30px;
+            }
+
+            .btn-customer {
+                padding: 16px 35px;
+                font-size: 1.15rem;
+                gap: 10px;
+                border-radius: 12px;
+            }
+
+            .icon {
+                font-size: 1.4rem;
+            }
+
+            .quote {
+                padding: 18px;
+                font-size: 0.9rem;
+            }
+
+            .hidden-link p {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Very small phones */
+        @media (max-width: 375px) {
+            .logo-img {
+                max-width: 60px;
+            }
+
+            .logo-container {
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 1.35rem;
+            }
+
+            .btn-customer {
+                padding: 14px 28px;
+                font-size: 1.05rem;
             }
         }
     </style>
@@ -158,22 +232,28 @@
         <h1>مرحباً بك في شاي سُكر</h1>
         <p class="subtitle">Welcome to Shay Sukar</p>
 
-        <div class="buttons-container">
-            <a href="menu.html" class="btn btn-customer">
-                <span class="icon">☕</span>
-                <span>قائمة الطعام - Customer Menu</span>
+        <div class="btn-container">
+            <a href="menu.html" class="btn-customer">
+                <span class="icon">&#9749;</span>
+                <span>قائمة الطعام - Menu</span>
             </a>
         </div>
 
-        <div style="margin-top: 30px; padding: 15px; background-color: rgba(26, 77, 92, 0.05); border-radius: 10px;">
-            <p style="font-size: 0.85rem; color: #1A4D5C; text-align: center; opacity: 0.7;">
-                🔒 Barista dashboard: <a href="barista.html" style="color: #1A4D5C; text-decoration: underline; opacity: 0.8;">/barista.html</a>
-            </p>
+        <div class="quote">
+            "الشاي ليس مجرد مشروب، بل هو لحظة من السكينة"
+            <br>
+            <small style="opacity: 0.7;">"Tea is not just a drink, it's a moment of serenity"</small>
         </div>
 
-        <div class="quote">
-            "Tea is a ritual, an art that nourishes the soul."
+        <div class="hidden-link">
+            <p>Staff access: <a href="barista.html">/barista.html</a></p>
         </div>
     </div>
+
+    <script>
+        console.log('[Shay Sukar] Landing page loaded');
+        console.log('[Shay Sukar] Menu: menu.html');
+        console.log('[Shay Sukar] Barista: barista.html');
+    </script>
 </body>
 </html>

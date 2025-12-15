@@ -1,14 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "shaysukar/server/server.js",
-      "use": "@vercel/node",
-      "config": {
-        "maxDuration": 60
-      }
-    }
-  ],
   "routes": [
     {
       "src": "/shaysukar/menu",
@@ -19,15 +10,12 @@
       "dest": "/shaysukar/barista.html"
     },
     {
-      "src": "/shaysukar/api/(.*)",
-      "dest": "/shaysukar/server/server.js"
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     },
     {
       "src": "/shaysukar/(.*)",
       "dest": "/shaysukar/$1"
     }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }

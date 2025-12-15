@@ -919,7 +919,10 @@
 
     <script>
         // ===== SOCKET.IO CONFIGURATION =====
-        const SOCKET_URL = 'http://localhost:3000';
+        // Auto-detect server URL (works on Vercel, local, or any deployment)
+        const SOCKET_URL = window.location.hostname === 'localhost'
+            ? 'http://localhost:3000'
+            : window.location.origin;
         let socket = null;
 
         // Cart management

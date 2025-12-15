@@ -914,60 +914,75 @@
         </div>
     </div>
 
+    <!-- Socket.io CDN -->
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+
     <script>
+        // ===== SOCKET.IO CONFIGURATION =====
+        // Auto-detect server URL (works on Vercel, local, or any deployment)
+        const SOCKET_URL = window.location.hostname === 'localhost'
+            ? 'http://localhost:3000'
+            : window.location.origin;
+        let socket = null;
+
         // Cart management
         let cart = [];
         let currentOrderId = null;
         let currentOrderStatus = null;
 
-        // Load cart from localStorage
-        function loadCart() {
-            const savedCart = localStorage.getItem('shaySukarCart');
-            if (savedCart) {
-                cart = JSON.parse(savedCart);
-                updateCartDisplay();
-            }
+        // Initialize Socket.io connection
+        function initSocket() {
+            socket = io(SOCKET_URL);
 
-            // Check for active order
-            const savedOrderId = localStorage.getItem('shaySukarCurrentOrderId');
-            if (savedOrderId) {
-                currentOrderId = parseInt(savedOrderId);
-                checkOrderStatus();
-            }
-        }
+            socket.on('connect', () => {
+                console.log('Connected to server');
+            });
 
-        // Check order status from API
-        function checkOrderStatus() {
-            if (!currentOrderId) return;
+            socket.on('disconnect', () => {
+                console.log('Disconnected from server');
+            });
 
-            fetch('/api/orders')
-                .then(res => res.json())
-                .then(data => {
-                    const order = data.orders.find(o => o.id === currentOrderId);
+            // Listen for order created confirmation
+            socket.on('order-created', (order) => {
+                if (order.id === currentOrderId) {
+                    currentOrderStatus = order.status;
+                    updateOrderStatusDisplay();
+                    showNotification('تم إرسال الطلب بنجاح! ✅');
+                }
+            });
 
-                    if (order) {
-                        const oldStatus = currentOrderStatus;
-                        currentOrderStatus = order.status;
-                        updateOrderStatusDisplay();
+            // Listen for order status updates
+            socket.on('order-updated', (order) => {
+                if (order.id === currentOrderId) {
+                    currentOrderStatus = order.status;
+                    updateOrderStatusDisplay();
 
-                        // Show notifications on status change
-                        if (oldStatus !== currentOrderStatus) {
-                            if (order.status === 'preparing') {
-                                showNotification('جاري تحضير طلبك... 👨‍🍳');
-                            } else if (order.status === 'ready') {
-                                showNotification('طلبك جاهز! 🎉');
-                            } else if (order.status === 'completed') {
-                                showNotification('تم التسليم! شكراً لك 🙏');
-                                setTimeout(() => {
-                                    currentOrderId = null;
-                                    currentOrderStatus = null;
-                                    updateOrderStatusDisplay();
-                                }, 5000);
-                            }
-                        }
+                    if (order.status === 'ready') {
+                        showNotification('طلبك جاهز! 🎉');
                     }
-                })
-                .catch(err => console.error('Error checking status:', err));
+                }
+            });
+
+            // Listen for order completion
+            socket.on('order-completed', (order) => {
+                if (order.id === currentOrderId) {
+                    currentOrderStatus = 'completed';
+                    updateOrderStatusDisplay();
+                    showNotification('تم التسليم! شكراً لك 🎉');
+
+                    // Clear current order after 5 seconds
+                    setTimeout(() => {
+                        currentOrderId = null;
+                        currentOrderStatus = null;
+                        updateOrderStatusDisplay();
+                    }, 5000);
+                }
+            });
+
+            socket.on('connect_error', (error) => {
+                console.error('Connection error:', error);
+                showNotification('خطأ في الاتصال بالخادم');
+            });
         }
 
         // Update order status display
@@ -1004,16 +1019,10 @@
             }
         }
 
-        // Save cart to localStorage
-        function saveCart() {
-            localStorage.setItem('shaySukarCart', JSON.stringify(cart));
-        }
-
         // Remove item from cart
         function removeFromCart(index) {
             cart.splice(index, 1);
             updateCartDisplay();
-            saveCart();
         }
 
         // Update cart display
@@ -1061,10 +1070,15 @@
             }, 3000);
         }
 
-        // Send order to barista (localStorage version)
+        // Send order via Socket.io
         function sendOrderToBarista() {
             if (cart.length === 0) {
                 showNotification('السلة فارغة!');
+                return;
+            }
+
+            if (!socket || !socket.connected) {
+                showNotification('غير متصل بالخادم!');
                 return;
             }
 
@@ -1087,26 +1101,16 @@
                 createdAt: new Date().toISOString()
             };
 
-            // Send to API
-            fetch('/api/orders', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(order)
-            })
-            .then(res => res.json())
-            .then(data => {
-                currentOrderId = data.order.id;
-                currentOrderStatus = 'pending';
-                showNotification('تم إرسال الطلب بنجاح! ✅');
-                updateOrderStatusDisplay();
-            })
-            .catch(err => {
-                console.error(err);
-                showNotification('خطأ في إرسال الطلب!');
-            });
+            // Emit new order to server
+            socket.emit('new-order', order);
+
+            // Set current order ID
+            currentOrderId = orderId;
+            currentOrderStatus = 'pending';
+
+            // Clear cart
             cart = [];
             updateCartDisplay();
-            saveCart();
             updateOrderStatusDisplay();
 
             // Close cart
@@ -1169,37 +1173,29 @@
                 });
             }
             updateCartDisplay();
-            saveCart();
             showNotification(`تمت إضافة ${qty}× ${name} إلى السلة`);
         }
 
-        // Initialize controls
-        initializeQuantityControls();
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initSocket();
+            initializeQuantityControls();
 
-        document.getElementById('cartToggle').addEventListener('click', function() {
-            const cart = document.getElementById('orderCart');
-            cart.classList.toggle('hidden');
+            document.getElementById('cartToggle').addEventListener('click', function() {
+                const cart = document.getElementById('orderCart');
+                cart.classList.toggle('hidden');
+            });
+
+            document.getElementById('sendOrder').addEventListener('click', sendOrderToBarista);
+
+            document.getElementById('clearCart').addEventListener('click', function() {
+                if (confirm('هل أنت متأكد من مسح جميع العناصر؟')) {
+                    cart = [];
+                    updateCartDisplay();
+                    showNotification('تم مسح السلة');
+                }
+            });
         });
-
-        document.getElementById('sendOrder').addEventListener('click', sendOrderToBarista);
-
-        document.getElementById('clearCart').addEventListener('click', function() {
-            if (confirm('هل أنت متأكد من مسح جميع العناصر؟')) {
-                cart = [];
-                updateCartDisplay();
-                saveCart();
-                showNotification('تم مسح السلة');
-            }
-        });
-
-        // Poll for order status updates every 3 seconds
-        setInterval(checkOrderStatus, 3000);
-
-        // Load cart on page load
-        loadCart();
-
-        // Check order status periodically
-        setInterval(checkOrderStatus, 2000);
     </script>
 </body>
 </html>

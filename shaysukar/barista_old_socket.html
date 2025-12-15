@@ -345,6 +345,28 @@
             font-weight: 600;
         }
 
+        .connection-status {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .connection-status.connected {
+            background-color: #5cb85c;
+            color: white;
+        }
+
+        .connection-status.disconnected {
+            background-color: #d9534f;
+            color: white;
+        }
+
         @media (max-width: 768px) {
             .dashboard-header {
                 grid-template-columns: 1fr;
@@ -367,6 +389,9 @@
     </style>
 </head>
 <body>
+    <!-- Connection Status Indicator -->
+    <div class="connection-status disconnected" id="connectionStatus">Disconnected</div>
+
     <div class="dashboard-container">
         <div class="dashboard-header">
             <div class="header-logo">
@@ -410,10 +435,101 @@
         </div>
     </div>
 
+    <!-- Socket.io CDN -->
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+
     <script>
+        // ===== SOCKET.IO CONFIGURATION =====
+        // Auto-detect server URL (works on Vercel, local, or any deployment)
+        const SOCKET_URL = window.location.hostname === 'localhost'
+            ? 'http://localhost:3000'
+            : window.location.origin;
+        let socket = null;
+
+        // Dashboard state
         let soundEnabled = localStorage.getItem('soundEnabled') !== 'false';
         let orders = [];
-        let lastOrderCount = 0;
+
+        // Initialize Socket.io connection
+        function initSocket() {
+            socket = io(SOCKET_URL);
+
+            socket.on('connect', () => {
+                console.log('Connected to server');
+                updateConnectionStatus(true);
+            });
+
+            socket.on('disconnect', () => {
+                console.log('Disconnected from server');
+                updateConnectionStatus(false);
+            });
+
+            // Receive initial orders when connected
+            socket.on('initial-orders', (initialOrders) => {
+                console.log('Received initial orders:', initialOrders);
+                orders = initialOrders;
+                renderOrders();
+                updateStats();
+            });
+
+            // Listen for new orders
+            socket.on('order-created', (order) => {
+                console.log('New order received:', order);
+
+                // Add order to the beginning of the list
+                orders.unshift(order);
+
+                // Play notification sound
+                playNotificationSound();
+
+                // Re-render orders and update stats
+                renderOrders();
+                updateStats();
+            });
+
+            // Listen for order status updates
+            socket.on('order-updated', (updatedOrder) => {
+                console.log('Order updated:', updatedOrder);
+
+                // Find and update the order
+                const index = orders.findIndex(o => o.id === updatedOrder.id);
+                if (index !== -1) {
+                    orders[index] = updatedOrder;
+                    renderOrders();
+                    updateStats();
+                }
+            });
+
+            // Listen for order completion/removal
+            socket.on('order-completed', (completedOrder) => {
+                console.log('Order completed:', completedOrder);
+
+                // Update order status to completed
+                const index = orders.findIndex(o => o.id === completedOrder.id);
+                if (index !== -1) {
+                    orders[index] = completedOrder;
+                    renderOrders();
+                    updateStats();
+                }
+            });
+
+            socket.on('connect_error', (error) => {
+                console.error('Connection error:', error);
+                updateConnectionStatus(false);
+            });
+        }
+
+        // Update connection status indicator
+        function updateConnectionStatus(connected) {
+            const statusEl = document.getElementById('connectionStatus');
+            if (connected) {
+                statusEl.textContent = '● متصل';
+                statusEl.className = 'connection-status connected';
+            } else {
+                statusEl.textContent = '● غير متصل';
+                statusEl.className = 'connection-status disconnected';
+            }
+        }
 
         // Update sound toggle button
         function updateSoundToggle() {
@@ -442,33 +558,6 @@
             oscillator.stop(audioContext.currentTime + 0.5);
         }
 
-        // Load orders from API - SMART: only update if changed
-        let previousOrdersJSON = '';
-        function loadOrders() {
-            fetch('/api/orders')
-                .then(res => res.json())
-                .then(data => {
-                    const newOrdersJSON = JSON.stringify(data.orders);
-
-                    // ONLY update if orders actually changed (NO FLICKERING!)
-                    if (newOrdersJSON !== previousOrdersJSON) {
-                        orders = data.orders;
-                        previousOrdersJSON = newOrdersJSON;
-
-                        // Check for new orders
-                        const currentOrderCount = orders.filter(o => o.status === 'pending').length;
-                        if (currentOrderCount > lastOrderCount) {
-                            playNotificationSound();
-                        }
-                        lastOrderCount = currentOrderCount;
-
-                        renderOrders();
-                        updateStats();
-                    }
-                })
-                .catch(err => console.error('Error loading orders:', err));
-        }
-
         // Update statistics
         function updateStats() {
             const pending = orders.filter(o => o.status === 'pending').length;
@@ -490,7 +579,7 @@
         function renderOrders() {
             const container = document.getElementById('ordersContainer');
 
-            // Filter to show active orders
+            // Filter to show active orders (not completed or cancelled)
             const activeOrders = orders.filter(o =>
                 o.status === 'pending' || o.status === 'preparing' || o.status === 'ready'
             );
@@ -507,7 +596,7 @@
                 });
 
                 return `
-                    <div class="order-card">
+                    <div class="order-card" data-order-id="${order.id}">
                         <div class="order-header">
                             <div class="order-id">طلب #${order.id}</div>
                             <div class="order-time">${time}</div>
@@ -568,31 +657,43 @@
                     `;
                 case 'ready':
                     return `
-                        <button class="btn btn-complete" onclick="updateOrderStatus(${orderId}, 'completed')">تسليم</button>
+                        <button class="btn btn-complete" onclick="completeOrder(${orderId})">تسليم</button>
                     `;
                 default:
                     return '';
             }
         }
 
-        // Update order status via API
+        // Update order status
         function updateOrderStatus(orderId, newStatus) {
-            if (newStatus === 'completed' || newStatus === 'cancelled') {
-                // Delete completed/cancelled orders
-                fetch(`/api/orders?id=${orderId}`, {
-                    method: 'DELETE'
-                })
-                .then(() => loadOrders())
-                .catch(err => console.error('Error completing order:', err));
-            } else {
-                // Update status
-                fetch('/api/orders', {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ orderId, status: newStatus })
-                })
-                .then(() => loadOrders())
-                .catch(err => console.error('Error updating order:', err));
+            if (!socket || !socket.connected) {
+                alert('غير متصل بالخادم!');
+                return;
+            }
+
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                // Emit update-order-status event to server
+                socket.emit('update-order-status', {
+                    orderId: orderId,
+                    status: newStatus
+                });
+            }
+        }
+
+        // Complete order (remove from active list)
+        function completeOrder(orderId) {
+            if (!socket || !socket.connected) {
+                alert('غير متصل بالخادم!');
+                return;
+            }
+
+            const order = orders.find(o => o.id === orderId);
+            if (order) {
+                // Emit complete-order event to server
+                socket.emit('complete-order', {
+                    orderId: orderId
+                });
             }
         }
 
@@ -603,12 +704,11 @@
             updateSoundToggle();
         });
 
-        // Initialize
-        updateSoundToggle();
-        loadOrders();
-
-        // Refresh orders every 5 seconds (less frequent = better performance)
-        setInterval(loadOrders, 5000);
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateSoundToggle();
+            initSocket();
+        });
     </script>
 </body>
 </html>

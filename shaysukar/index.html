@@ -39,7 +39,7 @@
 
         .logo-img {
             width: 100%;
-            max-width: 300px;
+            max-width: 250px;
             height: auto;
             object-fit: contain;
         }
@@ -107,6 +107,17 @@
             font-size: 2rem;
         }
 
+        .version-selector {
+            width: 100%;
+        }
+
+        .version-card {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #1A4D5C;
+        }
+
         .quote {
             margin-top: 50px;
             padding: 20px;
@@ -119,12 +130,12 @@
 
         @media (max-width: 600px) {
             .logo-container {
-                padding: 20px;
-                margin-bottom: 30px;
+                padding: 15px;
+                margin-bottom: 25px;
             }
 
             .logo-img {
-                max-width: 200px;
+                max-width: 150px;
             }
 
             h1 {
@@ -147,16 +158,38 @@
         <h1>مرحباً بك في شاي سُكر</h1>
         <p class="subtitle">Welcome to Shay Sukar</p>
 
-        <div class="buttons-container">
-            <a href="menu_standalone.html" class="btn btn-customer">
-                <span class="icon">☕</span>
-                <span>قائمة الطعام - Customer Menu</span>
-            </a>
+        <div class="version-selector">
+            <h2 style="color: #1A4D5C; font-size: 1.8rem; margin-bottom: 20px;">اختر الإصدار - Choose Version</h2>
 
-            <a href="barista_standalone.html" class="btn btn-barista">
-                <span class="icon">👨‍🍳</span>
-                <span>لوحة الباريستا - Barista Dashboard</span>
-            </a>
+            <div class="version-card">
+                <h3 style="color: #5cb85c; margin-bottom: 10px;">🌟 Server Version (Recommended)</h3>
+                <p style="font-size: 0.95rem; margin-bottom: 15px; opacity: 0.8;">Real-time sync • Multi-device • No flickering</p>
+                <div class="buttons-container">
+                    <a href="menu.html" class="btn btn-customer">
+                        <span class="icon">☕</span>
+                        <span>قائمة الطعام - Customer Menu</span>
+                    </a>
+                    <a href="barista.html" class="btn btn-barista">
+                        <span class="icon">👨‍🍳</span>
+                        <span>لوحة الباريستا - Barista Dashboard</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="version-card" style="margin-top: 20px;">
+                <h3 style="color: #d9534f; margin-bottom: 10px;">📱 Standalone Version</h3>
+                <p style="font-size: 0.95rem; margin-bottom: 15px; opacity: 0.8;">No server needed • Single device only</p>
+                <div class="buttons-container">
+                    <a href="menu_standalone.html" class="btn btn-customer" style="background-color: #9cb89c;">
+                        <span class="icon">☕</span>
+                        <span>قائمة الطعام - Customer Menu</span>
+                    </a>
+                    <a href="barista_standalone.html" class="btn btn-barista" style="background-color: #0f3540;">
+                        <span class="icon">👨‍🍳</span>
+                        <span>لوحة الباريستا - Barista Dashboard</span>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="quote">

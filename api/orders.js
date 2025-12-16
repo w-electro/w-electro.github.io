@@ -1,20 +1,8 @@
-// Vercel Serverless Function for Shay Sukar Order Management
-// REST API with in-memory storage
-
 // In-memory orders storage (resets on cold start)
 let orders = [];
 let nextOrderId = 1;
 
-// CORS headers for all responses
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Accept',
-  'Content-Type': 'application/json'
-};
-
-// Main handler
-module.exports = async function handler(req, res) {
+export default function handler(req, res) {
   // Handle CORS preflight
   if (req.method === 'OPTIONS') {
     res.setHeader('Access-Control-Allow-Origin', '*');

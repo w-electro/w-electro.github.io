@@ -1,21 +1,8 @@
 {
-  "version": 2,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/shaysukar/menu",
-      "dest": "/shaysukar/menu.html"
-    },
-    {
-      "src": "/shaysukar/barista",
-      "dest": "/shaysukar/barista.html"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
-    {
-      "src": "/shaysukar/(.*)",
-      "dest": "/shaysukar/$1"
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
     }
   ]
 }

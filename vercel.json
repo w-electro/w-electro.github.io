@@ -1,14 +1,8 @@
 {
-  "version": 2,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/orders",
-      "dest": "/api/orders",
-      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
-    },
-    {
-      "src": "/shaysukar/(.*)",
-      "dest": "/shaysukar/$1"
+      "source": "/shaysukar/:path*",
+      "destination": "/shaysukar/:path*"
     }
   ]
 }

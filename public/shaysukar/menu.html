@@ -981,7 +981,7 @@
     <script>
         // ============================================
         // SHAY SUKAR - CUSTOMER MENU
-        // Version 2.0 - Vercel REST API
+        // Version 3.0 - Direct Supabase Integration
         // ============================================
 
         console.log('[Menu] Initializing Shay Sukar Menu...');
@@ -993,8 +993,18 @@
         let lastOrdersJson = '';
         let pollingInterval = null;
 
-        // API Base URL - auto-detect environment
-        const API_URL = '/api/orders';
+        // Supabase Configuration
+        const SUPABASE_URL = 'https://udjmhcamragjpufolzvw.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVkam1oY2FtcmFnanB1Zm9senZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMDY0MDksImV4cCI6MjA4MDg4MjQwOX0.8VQUKzAGVhIq61AnmciWqvUTQZ-6EVM7ZA7obUelyCU';
+        const API_URL = `${SUPABASE_URL}/rest/v1/orders`;
+
+        // Supabase headers
+        const supabaseHeaders = {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+        };
 
         // ============================================
         // CART MANAGEMENT
@@ -1113,33 +1123,41 @@
             submitBtn.disabled = true;
             submitBtn.textContent = 'جاري الارسال...';
 
+            // Supabase uses snake_case column names
             const orderData = {
-                tableNumber: parseInt(tableNumber),
-                customerName: customerName,
+                table_number: parseInt(tableNumber),
+                customer_name: customerName,
                 items: cart.map(item => ({
                     name: item.name,
                     price: item.price,
                     quantity: item.quantity
                 })),
-                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0),
+                status: 'pending'
             };
 
-            console.log('[Menu] Submitting order:', orderData);
+            console.log('[Menu] Submitting order to Supabase:', orderData);
 
             try {
                 const response = await fetch(API_URL, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: supabaseHeaders,
                     body: JSON.stringify(orderData)
                 });
 
-                const data = await response.json();
-                console.log('[Menu] API Response:', data);
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    console.error('[Menu] Supabase error:', errorText);
+                    throw new Error('Failed to create order');
+                }
 
-                if (data.success && data.order) {
-                    // CRITICAL: Use the ID from API response, NOT generated locally
-                    currentOrderId = data.order.id;
-                    currentOrderStatus = data.order.status;
+                const data = await response.json();
+                console.log('[Menu] Supabase Response:', data);
+
+                if (data && data.length > 0) {
+                    const order = data[0];
+                    currentOrderId = order.id;
+                    currentOrderStatus = order.status;
 
                     console.log('[Menu] Order created with ID:', currentOrderId);
 
@@ -1161,7 +1179,7 @@
                     // Start polling for updates
                     startPolling();
                 } else {
-                    throw new Error(data.error || 'Failed to create order');
+                    throw new Error('No order returned from Supabase');
                 }
             } catch (error) {
                 console.error('[Menu] Order submission error:', error);
@@ -1203,52 +1221,57 @@
             }
 
             try {
-                const response = await fetch(API_URL);
+                // Query Supabase for specific order by ID
+                const response = await fetch(`${API_URL}?id=eq.${currentOrderId}&select=*`, {
+                    headers: supabaseHeaders
+                });
                 const data = await response.json();
 
-                if (data.success) {
-                    const order = data.orders.find(o => o.id === currentOrderId);
+                if (data && data.length > 0) {
+                    const order = data[0];
+                    const oldStatus = currentOrderStatus;
+                    currentOrderStatus = order.status;
 
-                    if (order) {
-                        const oldStatus = currentOrderStatus;
-                        currentOrderStatus = order.status;
+                    // Notify on status change
+                    if (oldStatus !== currentOrderStatus) {
+                        console.log(`[Menu] Status changed: ${oldStatus} -> ${currentOrderStatus}`);
 
-                        // Notify on status change
-                        if (oldStatus !== currentOrderStatus) {
-                            console.log(`[Menu] Status changed: ${oldStatus} -> ${currentOrderStatus}`);
-
-                            if (currentOrderStatus === 'preparing') {
-                                showNotification('جاري تحضير طلبك...', 'info');
-                            } else if (currentOrderStatus === 'ready') {
-                                showNotification('طلبك جاهز للاستلام!', 'success');
-                                playSound();
-                            } else if (currentOrderStatus === 'completed') {
-                                showNotification('شكرا لزيارتك!', 'success');
-                                // Clear order after 5 seconds
-                                setTimeout(() => {
-                                    currentOrderId = null;
-                                    currentOrderStatus = null;
-                                    localStorage.removeItem('shaySukarOrderId');
-                                    updateOrderStatusBanner();
-                                    stopPolling();
-                                }, 5000);
-                            } else if (currentOrderStatus === 'cancelled') {
-                                showNotification('تم الغاء الطلب', 'error');
-                                setTimeout(() => {
-                                    currentOrderId = null;
-                                    currentOrderStatus = null;
-                                    localStorage.removeItem('shaySukarOrderId');
-                                    updateOrderStatusBanner();
-                                    stopPolling();
-                                }, 3000);
-                            }
+                        if (currentOrderStatus === 'preparing') {
+                            showNotification('جاري تحضير طلبك...', 'info');
+                        } else if (currentOrderStatus === 'ready') {
+                            showNotification('طلبك جاهز للاستلام!', 'success');
+                            playSound();
+                        } else if (currentOrderStatus === 'completed') {
+                            showNotification('شكرا لزيارتك!', 'success');
+                            // Clear order after 5 seconds
+                            setTimeout(() => {
+                                currentOrderId = null;
+                                currentOrderStatus = null;
+                                localStorage.removeItem('shaySukarOrderId');
+                                updateOrderStatusBanner();
+                                stopPolling();
+                            }, 5000);
+                        } else if (currentOrderStatus === 'cancelled') {
+                            showNotification('تم الغاء الطلب', 'error');
+                            setTimeout(() => {
+                                currentOrderId = null;
+                                currentOrderStatus = null;
+                                localStorage.removeItem('shaySukarOrderId');
+                                updateOrderStatusBanner();
+                                stopPolling();
+                            }, 3000);
                         }
-
-                        updateOrderStatusBanner();
-                    } else {
-                        // Order not found (might have been deleted)
-                        console.log('[Menu] Order not found in API');
                     }
+
+                    updateOrderStatusBanner();
+                } else {
+                    // Order not found (might have been deleted)
+                    console.log('[Menu] Order not found in Supabase');
+                    currentOrderId = null;
+                    currentOrderStatus = null;
+                    localStorage.removeItem('shaySukarOrderId');
+                    updateOrderStatusBanner();
+                    stopPolling();
                 }
             } catch (error) {
                 console.error('[Menu] Error checking status:', error);
@@ -1385,14 +1408,16 @@
             // Load saved cart
             loadCartFromStorage();
 
-            // Test API connection
-            fetch(API_URL)
+            // Test Supabase connection
+            fetch(`${API_URL}?select=count`, {
+                headers: supabaseHeaders
+            })
                 .then(res => res.json())
                 .then(data => {
-                    console.log('[Menu] API connected. Orders:', data.count);
+                    console.log('[Menu] Supabase connected successfully!');
                 })
                 .catch(err => {
-                    console.error('[Menu] API connection error:', err);
+                    console.error('[Menu] Supabase connection error:', err);
                 });
 
             console.log('[Menu] Initialization complete!');

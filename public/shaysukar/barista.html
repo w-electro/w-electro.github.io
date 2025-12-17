@@ -548,7 +548,7 @@
     <script>
         // ============================================
         // SHAY SUKAR - BARISTA DASHBOARD
-        // Version 2.0 - Vercel REST API with NO FLICKERING
+        // Version 3.0 - Direct Supabase Integration
         // ============================================
 
         console.log('[Barista] Initializing Dashboard...');
@@ -562,8 +562,18 @@
         let completedOrdersCount = 0;
         let totalRevenue = 0;
 
-        // API URL
-        const API_URL = '/api/orders';
+        // Supabase Configuration
+        const SUPABASE_URL = 'https://udjmhcamragjpufolzvw.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVkam1oY2FtcmFnanB1Zm9senZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjUzMDY0MDksImV4cCI6MjA4MDg4MjQwOX0.8VQUKzAGVhIq61AnmciWqvUTQZ-6EVM7ZA7obUelyCU';
+        const API_URL = `${SUPABASE_URL}/rest/v1/orders`;
+
+        // Supabase headers
+        const supabaseHeaders = {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=representation'
+        };
 
         // ============================================
         // ANTI-FLICKER: Only update DOM if data changed
@@ -571,26 +581,37 @@
 
         async function loadOrders() {
             try {
-                const response = await fetch(API_URL);
+                // Fetch all orders from Supabase, sorted by created_at descending
+                const response = await fetch(`${API_URL}?select=*&order=created_at.desc`, {
+                    headers: supabaseHeaders
+                });
                 const data = await response.json();
 
-                if (data.success) {
+                if (Array.isArray(data)) {
                     // CRITICAL: JSON comparison to prevent flickering
-                    const newOrdersJson = JSON.stringify(data.orders);
+                    const newOrdersJson = JSON.stringify(data);
 
                     if (newOrdersJson !== lastOrdersJson) {
                         console.log('[Barista] Orders changed, updating UI...');
 
                         // Check for new pending orders (for sound)
-                        const newPendingCount = data.orders.filter(o => o.status === 'pending').length;
+                        const newPendingCount = data.filter(o => o.status === 'pending').length;
                         if (newPendingCount > lastPendingCount && lastPendingCount !== 0) {
                             console.log('[Barista] New order detected!');
                             playNotificationSound();
                         }
                         lastPendingCount = newPendingCount;
 
-                        // Update state
-                        orders = data.orders;
+                        // Update state - normalize snake_case to camelCase for compatibility
+                        orders = data.map(o => ({
+                            id: o.id,
+                            tableNumber: o.table_number,
+                            customerName: o.customer_name,
+                            items: o.items,
+                            total: parseFloat(o.total) || 0,
+                            status: o.status,
+                            createdAt: o.created_at
+                        }));
                         lastOrdersJson = newOrdersJson;
 
                         // Update UI
@@ -750,21 +771,24 @@
             console.log(`[Barista] Updating order #${orderId} to ${newStatus}`);
 
             try {
-                const response = await fetch(API_URL, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ orderId, status: newStatus })
+                // Supabase uses PATCH for updates with query filter
+                const response = await fetch(`${API_URL}?id=eq.${orderId}`, {
+                    method: 'PATCH',
+                    headers: supabaseHeaders,
+                    body: JSON.stringify({
+                        status: newStatus,
+                        updated_at: new Date().toISOString()
+                    })
                 });
 
-                const data = await response.json();
-
-                if (data.success) {
+                if (response.ok) {
                     console.log(`[Barista] Order #${orderId} updated successfully`);
                     // Force refresh
                     lastOrdersJson = '';
                     loadOrders();
                 } else {
-                    console.error('[Barista] Update failed:', data.error);
+                    const errorText = await response.text();
+                    console.error('[Barista] Update failed:', errorText);
                     alert('خطأ في تحديث الطلب');
                 }
             } catch (error) {
@@ -784,13 +808,13 @@
             }
 
             try {
-                const response = await fetch(`${API_URL}?id=${orderId}`, {
-                    method: 'DELETE'
+                // Delete order from Supabase
+                const response = await fetch(`${API_URL}?id=eq.${orderId}`, {
+                    method: 'DELETE',
+                    headers: supabaseHeaders
                 });
 
-                const data = await response.json();
-
-                if (data.success) {
+                if (response.ok) {
                     console.log(`[Barista] Order #${orderId} completed and removed`);
                     lastOrdersJson = '';
                     loadOrders();
@@ -807,16 +831,17 @@
 
             try {
                 // First update status to cancelled
-                await fetch(API_URL, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ orderId, status: 'cancelled' })
+                await fetch(`${API_URL}?id=eq.${orderId}`, {
+                    method: 'PATCH',
+                    headers: supabaseHeaders,
+                    body: JSON.stringify({ status: 'cancelled' })
                 });
 
-                // Then delete it
+                // Then delete it after a short delay
                 setTimeout(async () => {
-                    await fetch(`${API_URL}?id=${orderId}`, {
-                        method: 'DELETE'
+                    await fetch(`${API_URL}?id=eq.${orderId}`, {
+                        method: 'DELETE',
+                        headers: supabaseHeaders
                     });
                     lastOrdersJson = '';
                     loadOrders();

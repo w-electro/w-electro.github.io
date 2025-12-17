@@ -7,7 +7,7 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- W للخدمات الإلكترونية - خدمات طلابية وإلكترونية في السعودية -->
-<!-- Last Updated: 2025-12-07 - Added 5 new tool pages -->
+<!-- Last Updated: 2025-12-17 - Added blog section with 12 comprehensive articles -->
 
 <!-- ==================== HOMEPAGE ==================== -->
 <url>
@@ -252,17 +252,174 @@
   </image:image>
 </url>
 
+<!-- ==================== BLOG - CONTENT PAGES ==================== -->
+<!-- Blog Main Page -->
+<url>
+  <loc>https://www.w-electro.com/blog.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>0.85</priority>
+  <image:image>
+    <image:loc>https://www.w-electro.com/wD.png</image:loc>
+    <image:title>مدونة W للخدمات الإلكترونية - مقالات تقنية</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - OCR Guide -->
+<url>
+  <loc>https://www.w-electro.com/blog/ocr-guide.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=400&fit=crop</image:loc>
+    <image:title>دليل شامل لاستخدام تقنية OCR لاستخراج النصوص</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - PDF Tips -->
+<url>
+  <loc>https://www.w-electro.com/blog/pdf-tips.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1633265486064-086b219458ec?w=800&h=400&fit=crop</image:loc>
+    <image:title>10 نصائح احترافية للتعامل مع ملفات PDF</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - Academic Success -->
+<url>
+  <loc>https://www.w-electro.com/blog/academic-success.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&h=400&fit=crop</image:loc>
+    <image:title>7 خطوات لتحقيق النجاح الأكاديمي المتميز</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - QR Code Uses -->
+<url>
+  <loc>https://www.w-electro.com/blog/qr-code-uses.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1640552435388-a54879e72b28?w=800&h=400&fit=crop</image:loc>
+    <image:title>استخدامات مبتكرة لرموز QR في حياتك اليومية</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - Design Basics -->
+<url>
+  <loc>https://www.w-electro.com/blog/design-basics.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=400&fit=crop</image:loc>
+    <image:title>أساسيات التصميم الجرافيكي للمبتدئين</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - Productivity Tools -->
+<url>
+  <loc>https://www.w-electro.com/blog/productivity-tools.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=400&fit=crop</image:loc>
+    <image:title>أفضل الأدوات الرقمية لزيادة الإنتاجية في 2026</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - Research Writing -->
+<url>
+  <loc>https://www.w-electro.com/blog/research-writing.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=400&fit=crop</image:loc>
+    <image:title>دليلك الشامل لكتابة البحث العلمي المتميز</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - Image Optimization -->
+<url>
+  <loc>https://www.w-electro.com/blog/image-optimization.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=400&fit=crop</image:loc>
+    <image:title>كيف تحسّن جودة صورك دون فقدان الجودة</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - Time Management -->
+<url>
+  <loc>https://www.w-electro.com/blog/time-management.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1501139083538-0139583c060f?w=800&h=400&fit=crop</image:loc>
+    <image:title>فن إدارة الوقت: استراتيجيات فعالة للطلاب</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - Cybersecurity Basics -->
+<url>
+  <loc>https://www.w-electro.com/blog/cybersecurity-basics.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.75</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=400&fit=crop</image:loc>
+    <image:title>أساسيات الأمن السيبراني لحماية بياناتك</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - AI Tools for Students (NEW) -->
+<url>
+  <loc>https://www.w-electro.com/blog/ai-tools-students.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.80</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop</image:loc>
+    <image:title>أفضل أدوات الذكاء الاصطناعي للطلاب في 2026</image:title>
+  </image:image>
+</url>
+
+<!-- Blog Post - Social Media Marketing (NEW) -->
+<url>
+  <loc>https://www.w-electro.com/blog/social-media-marketing.html</loc>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.80</priority>
+  <image:image>
+    <image:loc>https://images.unsplash.com/photo-1611926653458-09294b3142bf?w=800&h=400&fit=crop</image:loc>
+    <image:title>دليل التسويق عبر السوشيال ميديا للمبتدئين</image:title>
+  </image:image>
+</url>
+
 <!-- ==================== LEGAL PAGES ==================== -->
 <url>
   <loc>https://www.w-electro.com/privacy-policy</loc>
-  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.4</priority>
 </url>
 
 <url>
   <loc>https://www.w-electro.com/terms-and-conditions</loc>
-  <lastmod>2025-12-07T00:00:00+03:00</lastmod>
+  <lastmod>2025-12-17T00:00:00+03:00</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.4</priority>
 </url>

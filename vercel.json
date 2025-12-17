@@ -1,3 +1,14 @@
 {
-  "version": 2
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/orders",
+      "dest": "/api/orders",
+      "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+    },
+    {
+      "src": "/shaysukar/(.*)",
+      "dest": "/shaysukar/$1"
+    }
+  ]
 }

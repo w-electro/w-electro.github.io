@@ -1,8 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 // In-memory orders storage (resets on cold start)
+// NOTE: This works on Vercel but orders may be lost when functions cold start
+// For production, use a database like Supabase
 let orders: any[] = [];
 let nextOrderId = 1;
+
+// CORS headers for all responses
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type',
+};
+
+// OPTIONS /api/orders - Handle CORS preflight
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 200, headers: corsHeaders });
+}
 
 // GET /api/orders
 export async function GET() {
@@ -13,7 +27,7 @@ export async function GET() {
     orders: orders,
     count: orders.length,
     nextId: nextOrderId
-  });
+  }, { headers: corsHeaders });
 }
 
 // POST /api/orders
@@ -25,7 +39,7 @@ export async function POST(request: NextRequest) {
       console.log('[API] POST - Invalid order data');
       return NextResponse.json(
         { success: false, error: 'Invalid order data - items required' },
-        { status: 400 }
+        { status: 400, headers: corsHeaders }
       );
     }
 
@@ -33,7 +47,7 @@ export async function POST(request: NextRequest) {
       console.log('[API] POST - Missing table number');
       return NextResponse.json(
         { success: false, error: 'Table number is required' },
-        { status: 400 }
+        { status: 400, headers: corsHeaders }
       );
     }
 
@@ -56,12 +70,12 @@ export async function POST(request: NextRequest) {
       success: true,
       order: newOrder,
       message: 'Order created successfully'
-    }, { status: 201 });
+    }, { status: 201, headers: corsHeaders });
   } catch (error) {
     console.error('[API] POST error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to parse request body' },
-      { status: 400 }
+      { status: 400, headers: corsHeaders }
     );
   }
 }
@@ -75,7 +89,7 @@ export async function PUT(request: NextRequest) {
       console.log('[API] PUT - Missing orderId or status');
       return NextResponse.json(
         { success: false, error: 'orderId and status are required' },
-        { status: 400 }
+        { status: 400, headers: corsHeaders }
       );
     }
 
@@ -84,7 +98,7 @@ export async function PUT(request: NextRequest) {
       console.log('[API] PUT - Invalid status:', body.status);
       return NextResponse.json(
         { success: false, error: `Invalid status. Must be one of: ${validStatuses.join(', ')}` },
-        { status: 400 }
+        { status: 400, headers: corsHeaders }
       );
     }
 
@@ -94,7 +108,7 @@ export async function PUT(request: NextRequest) {
       console.log('[API] PUT - Order not found:', body.orderId);
       return NextResponse.json(
         { success: false, error: 'Order not found' },
-        { status: 404 }
+        { status: 404, headers: corsHeaders }
       );
     }
 
@@ -107,12 +121,12 @@ export async function PUT(request: NextRequest) {
       success: true,
       order: orders[orderIndex],
       message: 'Order updated successfully'
-    });
+    }, { headers: corsHeaders });
   } catch (error) {
     console.error('[API] PUT error:', error);
     return NextResponse.json(
       { success: false, error: 'Failed to parse request body' },
-      { status: 400 }
+      { status: 400, headers: corsHeaders }
     );
   }
 }
@@ -127,7 +141,7 @@ export async function DELETE(request: NextRequest) {
     console.log('[API] DELETE - Missing or invalid id');
     return NextResponse.json(
       { success: false, error: 'Valid order id is required (use ?id=X)' },
-      { status: 400 }
+      { status: 400, headers: corsHeaders }
     );
   }
 
@@ -137,7 +151,7 @@ export async function DELETE(request: NextRequest) {
     console.log('[API] DELETE - Order not found:', deleteId);
     return NextResponse.json(
       { success: false, error: 'Order not found' },
-      { status: 404 }
+      { status: 404, headers: corsHeaders }
     );
   }
 
@@ -148,5 +162,5 @@ export async function DELETE(request: NextRequest) {
     success: true,
     deletedOrder: deletedOrder,
     message: 'Order deleted successfully'
-  });
+  }, { headers: corsHeaders });
 }

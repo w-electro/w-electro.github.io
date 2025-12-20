@@ -1,22 +1,29 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Header } from "@/components/common/Header";
 import { Footer } from "@/components/common/Footer";
 import { useAuth } from "@/contexts/AuthContext";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { User, Mail, Calendar, Shield } from "lucide-react";
+import { User, Mail, Calendar, Shield, Wrench, MessageSquare, FileText } from "lucide-react";
+import { getStats } from "@/lib/activity-tracker";
 
 export default function ProfilePage() {
   const { user, loading } = useAuth();
   const router = useRouter();
+  const [stats, setStats] = useState({ toolsCount: 0, aiChatsCount: 0, savedFilesCount: 0 });
 
   useEffect(() => {
     if (!loading && !user) {
       router.push("/login");
     }
   }, [user, loading, router]);
+
+  useEffect(() => {
+    // Load activity stats from localStorage
+    setStats(getStats());
+  }, []);
 
   if (loading) {
     return (
@@ -39,8 +46,11 @@ export default function ProfilePage() {
     return null;
   }
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("ar-SA", {
+  const formatDate = (dateString: string | undefined) => {
+    if (!dateString) return "غير متوفر";
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) return "غير متوفر";
+    return date.toLocaleDateString("ar-SA", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -129,15 +139,24 @@ export default function ProfilePage() {
               <CardContent>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                   <div className="p-4 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-lg text-center">
-                    <p className="text-2xl font-bold text-cyan-600">قريباً</p>
+                    <div className="flex justify-center mb-2">
+                      <Wrench className="h-6 w-6 text-cyan-600" />
+                    </div>
+                    <p className="text-2xl font-bold text-cyan-600">{stats.toolsCount}</p>
                     <p className="text-sm text-gray-600 mt-1">الأدوات المستخدمة</p>
                   </div>
                   <div className="p-4 bg-gradient-to-br from-orange-50 to-red-50 rounded-lg text-center">
-                    <p className="text-2xl font-bold text-orange-600">قريباً</p>
+                    <div className="flex justify-center mb-2">
+                      <MessageSquare className="h-6 w-6 text-orange-600" />
+                    </div>
+                    <p className="text-2xl font-bold text-orange-600">{stats.aiChatsCount}</p>
                     <p className="text-sm text-gray-600 mt-1">المحادثات مع AI</p>
                   </div>
                   <div className="p-4 bg-gradient-to-br from-purple-50 to-pink-50 rounded-lg text-center">
-                    <p className="text-2xl font-bold text-purple-600">قريباً</p>
+                    <div className="flex justify-center mb-2">
+                      <FileText className="h-6 w-6 text-purple-600" />
+                    </div>
+                    <p className="text-2xl font-bold text-purple-600">{stats.savedFilesCount}</p>
                     <p className="text-sm text-gray-600 mt-1">الملفات المحفوظة</p>
                   </div>
                 </div>
@@ -148,7 +167,7 @@ export default function ProfilePage() {
             <Card className="bg-gradient-to-r from-cyan-50 to-orange-50 border-cyan-200">
               <CardContent className="p-6">
                 <p className="text-sm text-gray-700 text-center">
-                  💡 نعمل على إضافة المزيد من الميزات لملفك الشخصي قريباً! ستتمكن من تحديث معلوماتك، وحفظ الملفات، وتتبع نشاطك.
+                  💡 نتتبع نشاطك على المنصة تلقائياً! استخدم الأدوات وتحدث مع المساعد الذكي لرؤية إحصائياتك.
                 </p>
               </CardContent>
             </Card>

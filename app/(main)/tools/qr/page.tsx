@@ -24,6 +24,7 @@ import { Footer } from "@/components/common/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { useToolTracking } from "@/hooks/useToolTracking";
 
 type QRType = "url" | "text" | "phone" | "email" | "wifi" | "location";
 
@@ -60,6 +61,7 @@ const sizes = [
 ];
 
 export default function QRGeneratorPage() {
+  useToolTracking("qr-generator");
   const [activeType, setActiveType] = useState<QRType>("url");
   const [inputValue, setInputValue] = useState("");
   const [wifiPassword, setWifiPassword] = useState("");

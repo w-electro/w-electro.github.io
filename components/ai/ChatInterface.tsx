@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { MessageBubble } from "./MessageBubble";
+import { trackAiChat } from "@/lib/activity-tracker";
 
 interface Message {
   id: string;
@@ -184,6 +185,8 @@ export function ChatInterface() {
             }
           }
         }
+        // Track successful AI chat
+        trackAiChat();
       } else {
         // Handle JSON response (demo mode or error fallback)
         try {
@@ -198,6 +201,8 @@ export function ChatInterface() {
                 timestamp: new Date(),
               },
             ]);
+            // Track successful AI chat
+            trackAiChat();
           } else {
             throw new Error("No content in response");
           }

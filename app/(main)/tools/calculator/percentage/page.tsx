@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useToolTracking } from "@/hooks/useToolTracking";
 
 const calculatorTools = [
   { name: "ضريبة", href: "/tools/calculator/vat", icon: DollarSign },
@@ -19,6 +20,7 @@ const calculatorTools = [
 ];
 
 export default function PercentageCalculatorPage() {
+  useToolTracking("calculator-percentage");
   const [value, setValue] = useState("");
   const [percentage, setPercentage] = useState("");
   const [result, setResult] = useState<number | null>(null);

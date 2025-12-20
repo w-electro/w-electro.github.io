@@ -9,6 +9,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { StickyNote, Shuffle, Copy, GitCompare, Trash2, Plus } from "lucide-react";
+import { useToolTracking } from "@/hooks/useToolTracking";
+import { trackSavedFile } from "@/lib/activity-tracker";
 
 const utilityTools = [
   { name: "مولد عشوائي", href: "/tools/utility/random", icon: Shuffle },
@@ -25,6 +27,7 @@ interface Note {
 }
 
 export default function QuickNotesPage() {
+  useToolTracking("utility-notes");
   const [notes, setNotes] = useState<Note[]>([]);
   const [currentNote, setCurrentNote] = useState<Note | null>(null);
   const [title, setTitle] = useState("");
@@ -78,6 +81,8 @@ export default function QuickNotesPage() {
         timestamp: now,
       };
       setNotes([newNote, ...notes]);
+      // Track saved file for new notes
+      trackSavedFile();
     }
 
     createNewNote();

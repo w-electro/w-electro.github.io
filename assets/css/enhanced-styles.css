@@ -542,3 +542,98 @@ a:hover {
   transform: translateY(-3px);
   box-shadow: 0 7px 14px rgba(255, 110, 66, 0.2);
 }
+
+/* Digital Products Section Styles */
+#digital-products {
+  position: relative;
+}
+
+.digital-product-category {
+  transform: translateY(0);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.digital-product-category:hover {
+  transform: translateY(-8px);
+}
+
+.digital-download-item {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.digital-download-item:hover {
+  transform: translateX(-4px);
+}
+
+/* Animation for download button */
+.digital-download-item .fa-download {
+  transition: transform 0.3s ease;
+}
+
+.digital-download-item:hover .fa-download {
+  animation: bounce-down 0.5s ease infinite;
+}
+
+@keyframes bounce-down {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
+/* Purple color additions for novels section */
+.bg-purple-50 { background-color: #faf5ff; }
+.bg-purple-100 { background-color: #f3e8ff; }
+.bg-purple-200 { background-color: #e9d5ff; }
+.bg-purple-500 { background-color: #a855f7; }
+.bg-purple-600 { background-color: #9333ea; }
+.bg-purple-700 { background-color: #7e22ce; }
+.text-purple-600 { color: #9333ea; }
+.text-purple-700 { color: #7e22ce; }
+.border-purple-200 { border-color: #e9d5ff; }
+.from-purple-50 { --tw-gradient-from: #faf5ff; }
+.from-purple-100 { --tw-gradient-from: #f3e8ff; }
+.from-purple-500 { --tw-gradient-from: #a855f7; }
+.to-purple-700 { --tw-gradient-to: #7e22ce; }
+.hover\:bg-purple-50:hover { background-color: #faf5ff; }
+.hover\:bg-purple-200:hover { background-color: #e9d5ff; }
+.hover\:bg-purple-600:hover { background-color: #9333ea; }
+.hover\:border-purple-200:hover { border-color: #e9d5ff; }
+
+/* Responsive adjustments for digital products */
+@media (max-width: 768px) {
+  #digital-products .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .digital-product-category {
+    margin-bottom: 1.5rem;
+  }
+
+  .digital-download-item {
+    padding: 12px;
+  }
+
+  .digital-download-item h4 {
+    font-size: 0.85rem;
+  }
+
+  .digital-download-item p {
+    font-size: 0.7rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  #digital-products .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #digital-products .digital-product-category:last-child {
+    grid-column: span 2;
+    max-width: 50%;
+    margin: 0 auto;
+  }
+}

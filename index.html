@@ -1337,6 +1337,10 @@
 								مدونة
 								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
 							</a>
+							<a href="#digital-products" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group">
+								منتجات رقمية
+								<span class="absolute bottom-0 left-0 w-0 h-0.5 bg-cyan-600 transition-all duration-300 group-hover:w-full"></span>
+							</a>
 							<!-- Tools Dropdown -->
 							<div x-data="{ toolsOpen: false }" @mouseenter="toolsOpen = true" @mouseleave="toolsOpen = false" class="relative">
 								<a href="tools" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 relative group flex items-center gap-1">
@@ -1477,6 +1481,7 @@
 							<a href="design-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات التصميم</a>
 							<a href="academic-services" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">خدمات طلابية</a>
 							<a href="blog.html" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">مدونة</a>
+							<a href="#digital-products" class="text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50">منتجات رقمية</a>
 							<!-- Tools Menu with Submenu -->
 							<div x-data="{ toolsSubmenuOpen: false }">
 								<button @click="toolsSubmenuOpen = !toolsSubmenuOpen" class="w-full text-right text-gray-600 font-medium hover:text-cyan-600 transition-colors duration-200 py-2 px-4 rounded-lg hover:bg-gray-50 flex items-center justify-between">
@@ -1807,6 +1812,203 @@
 								<i class="fas fa-arrow-left ml-2"></i>
 								عرض التفاصيل
 							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- Digital Products Section - منتجات رقمية -->
+			<section id="digital-products" class="py-20 bg-gradient-to-br from-purple-50 via-cyan-50 to-orange-50 relative overflow-hidden">
+				<!-- Background decoration -->
+				<div class="absolute inset-0 overflow-hidden pointer-events-none">
+					<div class="absolute -top-20 -right-20 w-60 h-60 bg-purple-200/30 rounded-full blur-3xl"></div>
+					<div class="absolute -bottom-20 -left-20 w-60 h-60 bg-orange-200/30 rounded-full blur-3xl"></div>
+					<div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-200/20 rounded-full blur-3xl"></div>
+				</div>
+
+				<div class="container mx-auto px-4 relative z-10">
+					<!-- Section Header -->
+					<div class="text-center mb-16 animate-fadeInUp">
+						<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-100 to-orange-100 border border-purple-200 mb-6">
+							<i class="fas fa-download text-purple-600"></i>
+							<span class="text-sm font-medium text-purple-700">تحميل مجاني</span>
+						</div>
+						<h2 class="text-3xl lg:text-4xl font-bold text-gray-800 mb-4">منتجات رقمية</h2>
+						<p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">محتوى رقمي مجاني وحصري - ألعاب ذهنية، كتب تعليمية، وروايات ملهمة</p>
+					</div>
+
+					<!-- Products Categories -->
+					<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+						<!-- Games Category - ألعاب -->
+						<div class="digital-product-category bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+							<div class="bg-gradient-to-br from-orange-400 to-orange-600 p-6 text-white relative overflow-hidden">
+								<div class="absolute -top-4 -right-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+								<div class="relative z-10">
+									<div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+										<i class="fas fa-gamepad text-3xl"></i>
+									</div>
+									<h3 class="text-2xl font-bold mb-2">ألعاب</h3>
+									<p class="text-white/80 text-sm">ألعاب ذهنية وألغاز ممتعة</p>
+								</div>
+							</div>
+							<div class="p-6 space-y-4">
+								<a href="digital-products/games/brain-teasers-vol1.pdf" download class="digital-download-item flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-orange-50 border border-gray-100 hover:border-orange-200 transition-all duration-200 group/item">
+									<div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover/item:bg-orange-200 transition-colors">
+										<i class="fas fa-puzzle-piece text-orange-600"></i>
+									</div>
+									<div class="flex-1">
+										<h4 class="font-semibold text-gray-800 text-sm">Brain Teasers Vol.1</h4>
+										<p class="text-gray-500 text-xs">ألغاز وتحديات ذهنية</p>
+									</div>
+									<div class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center group-hover/item:bg-orange-600 transition-colors">
+										<i class="fas fa-download text-sm"></i>
+									</div>
+								</a>
+								<a href="digital-products/games/word-games-vol1.pdf" download class="digital-download-item flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-orange-50 border border-gray-100 hover:border-orange-200 transition-all duration-200 group/item">
+									<div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover/item:bg-orange-200 transition-colors">
+										<i class="fas fa-spell-check text-orange-600"></i>
+									</div>
+									<div class="flex-1">
+										<h4 class="font-semibold text-gray-800 text-sm">Word Games Vol.1</h4>
+										<p class="text-gray-500 text-xs">ألعاب كلمات وبحث</p>
+									</div>
+									<div class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center group-hover/item:bg-orange-600 transition-colors">
+										<i class="fas fa-download text-sm"></i>
+									</div>
+								</a>
+								<a href="digital-products/games/math-puzzles-vol1.pdf" download class="digital-download-item flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-orange-50 border border-gray-100 hover:border-orange-200 transition-all duration-200 group/item">
+									<div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover/item:bg-orange-200 transition-colors">
+										<i class="fas fa-calculator text-orange-600"></i>
+									</div>
+									<div class="flex-1">
+										<h4 class="font-semibold text-gray-800 text-sm">Math Puzzles Vol.1</h4>
+										<p class="text-gray-500 text-xs">تحديات رياضية</p>
+									</div>
+									<div class="w-10 h-10 rounded-full bg-orange-500 text-white flex items-center justify-center group-hover/item:bg-orange-600 transition-colors">
+										<i class="fas fa-download text-sm"></i>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<!-- Books Category - كتب -->
+						<div class="digital-product-category bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+							<div class="bg-gradient-to-br from-cyan-500 to-cyan-700 p-6 text-white relative overflow-hidden">
+								<div class="absolute -top-4 -right-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+								<div class="relative z-10">
+									<div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+										<i class="fas fa-book text-3xl"></i>
+									</div>
+									<h3 class="text-2xl font-bold mb-2">كتب</h3>
+									<p class="text-white/80 text-sm">كتب تعليمية ومراجع مفيدة</p>
+								</div>
+							</div>
+							<div class="p-6 space-y-4">
+								<a href="digital-products/books/intro-to-technology.pdf" download class="digital-download-item flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-cyan-50 border border-gray-100 hover:border-cyan-200 transition-all duration-200 group/item">
+									<div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover/item:bg-cyan-200 transition-colors">
+										<i class="fas fa-laptop text-cyan-600"></i>
+									</div>
+									<div class="flex-1">
+										<h4 class="font-semibold text-gray-800 text-sm">مقدمة في التقنية</h4>
+										<p class="text-gray-500 text-xs">دليل المبتدئين للعالم الرقمي</p>
+									</div>
+									<div class="w-10 h-10 rounded-full bg-cyan-500 text-white flex items-center justify-center group-hover/item:bg-cyan-600 transition-colors">
+										<i class="fas fa-download text-sm"></i>
+									</div>
+								</a>
+								<a href="digital-products/books/digital-skills-handbook.pdf" download class="digital-download-item flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-cyan-50 border border-gray-100 hover:border-cyan-200 transition-all duration-200 group/item">
+									<div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover/item:bg-cyan-200 transition-colors">
+										<i class="fas fa-graduation-cap text-cyan-600"></i>
+									</div>
+									<div class="flex-1">
+										<h4 class="font-semibold text-gray-800 text-sm">دليل المهارات الرقمية</h4>
+										<p class="text-gray-500 text-xs">مهارات أساسية للعصر الحديث</p>
+									</div>
+									<div class="w-10 h-10 rounded-full bg-cyan-500 text-white flex items-center justify-center group-hover/item:bg-cyan-600 transition-colors">
+										<i class="fas fa-download text-sm"></i>
+									</div>
+								</a>
+								<a href="digital-products/books/internet-safety-guide.pdf" download class="digital-download-item flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-cyan-50 border border-gray-100 hover:border-cyan-200 transition-all duration-200 group/item">
+									<div class="w-12 h-12 bg-cyan-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover/item:bg-cyan-200 transition-colors">
+										<i class="fas fa-shield-alt text-cyan-600"></i>
+									</div>
+									<div class="flex-1">
+										<h4 class="font-semibold text-gray-800 text-sm">دليل الأمان على الإنترنت</h4>
+										<p class="text-gray-500 text-xs">احمِ نفسك على الإنترنت</p>
+									</div>
+									<div class="w-10 h-10 rounded-full bg-cyan-500 text-white flex items-center justify-center group-hover/item:bg-cyan-600 transition-colors">
+										<i class="fas fa-download text-sm"></i>
+									</div>
+								</a>
+							</div>
+						</div>
+
+						<!-- Novels Category - روايات -->
+						<div class="digital-product-category bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden group">
+							<div class="bg-gradient-to-br from-purple-500 to-purple-700 p-6 text-white relative overflow-hidden">
+								<div class="absolute -top-4 -right-4 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+								<div class="relative z-10">
+									<div class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+										<i class="fas fa-feather-alt text-3xl"></i>
+									</div>
+									<h3 class="text-2xl font-bold mb-2">روايات</h3>
+									<p class="text-white/80 text-sm">قصص ملهمة ومؤثرة</p>
+								</div>
+							</div>
+							<div class="p-6 space-y-4">
+								<a href="digital-products/novels/the-digital-pioneer.pdf" download class="digital-download-item flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-purple-50 border border-gray-100 hover:border-purple-200 transition-all duration-200 group/item">
+									<div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover/item:bg-purple-200 transition-colors">
+										<i class="fas fa-rocket text-purple-600"></i>
+									</div>
+									<div class="flex-1">
+										<h4 class="font-semibold text-gray-800 text-sm">الرائد الرقمي</h4>
+										<p class="text-gray-500 text-xs">قصة عن تحدي التقنية</p>
+									</div>
+									<div class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center group-hover/item:bg-purple-600 transition-colors">
+										<i class="fas fa-download text-sm"></i>
+									</div>
+								</a>
+								<a href="digital-products/novels/connected-hearts.pdf" download class="digital-download-item flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-purple-50 border border-gray-100 hover:border-purple-200 transition-all duration-200 group/item">
+									<div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover/item:bg-purple-200 transition-colors">
+										<i class="fas fa-heart text-purple-600"></i>
+									</div>
+									<div class="flex-1">
+										<h4 class="font-semibold text-gray-800 text-sm">قلوب متصلة</h4>
+										<p class="text-gray-500 text-xs">قصة عن التقنية والعائلة</p>
+									</div>
+									<div class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center group-hover/item:bg-purple-600 transition-colors">
+										<i class="fas fa-download text-sm"></i>
+									</div>
+								</a>
+								<a href="digital-products/novels/the-last-typewriter.pdf" download class="digital-download-item flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-purple-50 border border-gray-100 hover:border-purple-200 transition-all duration-200 group/item">
+									<div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center flex-shrink-0 group-hover/item:bg-purple-200 transition-colors">
+										<i class="fas fa-keyboard text-purple-600"></i>
+									</div>
+									<div class="flex-1">
+										<h4 class="font-semibold text-gray-800 text-sm">آخر آلة كاتبة</h4>
+										<p class="text-gray-500 text-xs">قصة عن التغيير والتكيف</p>
+									</div>
+									<div class="w-10 h-10 rounded-full bg-purple-500 text-white flex items-center justify-center group-hover/item:bg-purple-600 transition-colors">
+										<i class="fas fa-download text-sm"></i>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Bottom CTA -->
+					<div class="text-center mt-12">
+						<p class="text-gray-600 mb-4">جميع المنتجات مجانية ومتاحة للتحميل الفوري</p>
+						<div class="inline-flex items-center gap-2 text-sm text-gray-500">
+							<i class="fas fa-file-pdf text-red-500"></i>
+							<span>ملفات PDF عالية الجودة</span>
+							<span class="mx-2">|</span>
+							<i class="fas fa-infinity text-cyan-500"></i>
+							<span>تحميل غير محدود</span>
+							<span class="mx-2">|</span>
+							<i class="fab fa-creative-commons text-orange-500"></i>
+							<span>محتوى حصري</span>
 						</div>
 					</div>
 				</div>
@@ -2443,6 +2645,10 @@
 								<a href="tools" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
 									<i class="fas fa-file-alt text-sm"></i>
 									أدوات مجانية
+								</a>
+								<a href="#digital-products" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
+									<i class="fas fa-download text-sm"></i>
+									منتجات رقمية
 								</a>
 								<a href="#about" class="text-gray-300 hover:text-orange-400 transition-colors duration-200 flex items-center gap-2">
 									<i class="fas fa-info-circle text-sm"></i>
